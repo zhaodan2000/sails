@@ -7,6 +7,7 @@
 var uuid = require('node-uuid');
 
 module.exports = {
+  connection: 'someMongodbServer',
   tableName: 'xd_autotest_interface',
   attributes: {
     id: {
