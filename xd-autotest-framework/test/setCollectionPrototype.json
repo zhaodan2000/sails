@@ -1,0 +1,60 @@
+{
+  "info": {
+    "id": "ba6cbc77-3bb3-48c6-90af-570c472ecb4d",
+    "name": "This is new info",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "tests[\"Status code is 200\"] = (responseCode.code === 200)"
+        ]
+      }
+    },
+    {
+      "listen": "test1",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "tests[\"Status code is 200\"] = (responseCode.code === 200)"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "apiBaseUrl",
+      "type": "string",
+      "value": "http://timeapi.org"
+    }
+  ],
+  "item": [
+    {
+      "id": "68294608-f056-419c-8f83-58fdc3025707",
+      "name": "GET Request",
+      "request": {
+        "url": "https://echo.getpostman.com/get?auth=basic",
+        "method": "GET"
+      }
+    },
+    {
+      "id": "c85efab4-3fea-4310-ae88-51877a0eb09a",
+      "name": "PUT Request",
+      "request": {
+        "url": "https://echo.getpostman.com/put?auth=basic",
+        "method": "GET"
+      }
+    },
+    {
+      "id": "utc-time-now",
+      "name": "Get the current time in UTC",
+      "request": {
+        "url": "{{apiBaseUrl}}/utc/now",
+        "method": "GET"
+      }
+    }
+  ]
+}

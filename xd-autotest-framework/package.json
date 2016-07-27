@@ -7,6 +7,7 @@
   "dependencies": {
     "async": "^2.0.0",
     "ejs": "2.3.4",
+    "eventproxy": "^0.3.5",
     "grunt": "0.4.5",
     "grunt-contrib-clean": "0.6.0",
     "grunt-contrib-coffee": "0.13.0",
@@ -21,8 +22,10 @@
     "grunt-sync": "0.2.4",
     "http-auth": "^2.4.4",
     "include-all": "~0.1.6",
+    "json5": "^0.5.0",
     "kerberos": "0.0.21",
     "node-uuid": "^1.4.7",
+    "postman-collection": "^0.4.3",
     "rc": "1.0.1",
     "sails": "~0.12.3",
     "sails-disk": "~0.10.9",

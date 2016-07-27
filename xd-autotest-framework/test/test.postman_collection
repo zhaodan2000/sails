@@ -1,0 +1,46 @@
+{
+	"variables": [],
+	"info": {
+		"name": "test",
+		"_postman_id": "b0b0fc25-f3f7-f55e-b566-4519a9bc97d6",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "test",
+			"request": {
+				"url": "http://www.baidu.com",
+				"method": "POST",
+				"header": [
+					{
+						"key": "clientIp",
+						"value": "127.0.0.1",
+						"description": ""
+					},
+					{
+						"key": "deviceId",
+						"value": "1",
+						"description": ""
+					},
+					{
+						"key": "sessionToken",
+						"value": "ec53b27d-91a1-4d0e-8c75-54277729b8e0",
+						"description": ""
+					},
+					{
+						"key": "module",
+						"value": "1",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,54 @@
+{
+  "info": {
+    "id": "8bedae34-9934-408f-b681-5a2cf3d1623f",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "event": [
+    {
+      "name": "name4",
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "tests[\"Status code is 200\"] = (responseCode.code === 200)"
+        ]
+      }
+    },
+    {
+      "listen": "test1",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "tests[\"Status code is 200\"] = (responseCode.code === 200)"
+        ]
+      }
+    },
+    {
+      "name": "name4",
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "tests[\"Status code is 200\"] = (responseCode.code === 200)"
+        ]
+      }
+    },
+    {
+      "name": "name4",
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "tests[\"Status code is 200\"] = (responseCode.code === 200)"
+        ]
+      }
+    },
+    {
+      "name": "name4",
+      "listen": "test",
+      "script": {
+        "exec": "tests[\"Status code is 200\"] = (responseCode.code === 200)"
+      }
+    }
+  ]
+}

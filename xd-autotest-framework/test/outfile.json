@@ -1,0 +1,129 @@
+{
+    "id": "",
+    "name": "Default",
+    "timestamp": 1469511752463,
+    "collection_id": "",
+    "folder_id": 0,
+    "target_type": "collection",
+    "count": 1,
+    "collection": {
+        "id": "",
+        "name": "",
+        "description": "",
+        "order": [
+            "c4499a77-d704-48b0-ae8e-64813c7c5ebe",
+            "4745a408-0840-4b3f-9838-9a6fb495f408"
+        ],
+        "folders": [],
+        "requests": [
+            {
+                "id": "c4499a77-d704-48b0-ae8e-64813c7c5ebe",
+                "name": "test",
+                "description": "",
+                "collectionId": "",
+                "method": "POST",
+                "headers": "res: res\nContent-Type: application/json",
+                "dataMode": "urlencoded",
+                "data": [
+                    {
+                        "key": "name",
+                        "value": "lll",
+                        "type": "text",
+                        "enabled": true
+                    },
+                    {
+                        "key": "",
+                        "value": "",
+                        "type": "text",
+                        "enabled": true
+                    }
+                ],
+                "rawModeData": "",
+                "url": "http://www.baidu.com",
+                "responses": []
+            },
+            {
+                "id": "4745a408-0840-4b3f-9838-9a6fb495f408",
+                "name": "test1",
+                "description": "test next llll",
+                "collectionId": "",
+                "method": "POST",
+                "headers": "Content-Type: application/json",
+                "dataMode": "urlencoded",
+                "data": [
+                    {
+                        "key": "name",
+                        "value": "lll",
+                        "type": "text",
+                        "enabled": true
+                    },
+                    {
+                        "key": "age",
+                        "value": "1",
+                        "type": "text",
+                        "enabled": true
+                    }
+                ],
+                "rawModeData": "",
+                "url": "http://www.iqiyi.com",
+                "responses": []
+            }
+        ]
+    },
+    "folder": null,
+    "globals": {
+        "values": []
+    },
+    "results": [
+        {
+            "id": "c4499a77-d704-48b0-ae8e-64813c7c5ebe",
+            "name": "test",
+            "url": "http://www.baidu.com",
+            "totalTime": 154,
+            "responseCode": {
+                "code": 200,
+                "name": "",
+                "detail": ""
+            },
+            "tests": {},
+            "totalPassFailCounts": {
+                "pass": 0,
+                "fail": 0
+            },
+            "testPassFailCounts": {},
+            "times": [],
+            "allTests": [
+                {}
+            ],
+            "time": 154,
+            "meanResponseTime": 154
+        },
+        {
+            "id": "4745a408-0840-4b3f-9838-9a6fb495f408",
+            "name": "test1",
+            "url": "http://www.iqiyi.com",
+            "totalTime": 40,
+            "responseCode": {
+                "code": 200,
+                "name": "",
+                "detail": ""
+            },
+            "tests": {},
+            "totalPassFailCounts": {
+                "pass": 0,
+                "fail": 0
+            },
+            "testPassFailCounts": {},
+            "times": [],
+            "allTests": [
+                {}
+            ],
+            "time": 40,
+            "meanResponseTime": 40
+        }
+    ],
+    "environment": {
+        "values": []
+    },
+    "delay": 0
+}
