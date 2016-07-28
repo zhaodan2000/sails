@@ -1,6 +1,6 @@
 {
   "info": {
-    "id": "ba6cbc77-3bb3-48c6-90af-570c472ecb4d",
+    "id": "31a4f6c3-0761-4434-b08f-c6b3f238ecb4",
     "name": "This is new info",
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
   },
@@ -33,26 +33,18 @@
   ],
   "item": [
     {
-      "id": "68294608-f056-419c-8f83-58fdc3025707",
+      "id": "d93de1bf-c17b-4f37-b58c-5a467ab42633",
       "name": "GET Request",
       "request": {
-        "url": "https://echo.getpostman.com/get?auth=basic",
+        "url": "http://www.baidu.com",
         "method": "GET"
       }
     },
     {
-      "id": "c85efab4-3fea-4310-ae88-51877a0eb09a",
+      "id": "ebeb4030-ff69-4f23-abfd-b8c12a84da4a",
       "name": "PUT Request",
       "request": {
-        "url": "https://echo.getpostman.com/put?auth=basic",
-        "method": "GET"
-      }
-    },
-    {
-      "id": "utc-time-now",
-      "name": "Get the current time in UTC",
-      "request": {
-        "url": "{{apiBaseUrl}}/utc/now",
+        "url": "http://www.baidu.com",
         "method": "GET"
       }
     }

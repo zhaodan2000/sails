@@ -1,46 +1,98 @@
 {
-	"variables": [],
-	"info": {
-		"name": "test",
-		"_postman_id": "b0b0fc25-f3f7-f55e-b566-4519a9bc97d6",
-		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
-	},
-	"item": [
+	"id": "caee65a9-1c72-80f4-28ab-5ef490082d8f",
+	"name": "消息",
+	"description": "",
+	"order": [
+		"422f8027-ccf7-bf63-86ed-fc7dd0d4f88e",
+		"18e55f71-ef67-2283-e827-7440b35ee65f",
+		"13cf4a96-15e7-a7c7-8788-9a982299de46"
+	],
+	"folders": [],
+	"timestamp": 1456997104429,
+	"owner": 0,
+	"remoteLink": "",
+	"public": false,
+	"requests": [
 		{
-			"name": "test",
-			"request": {
-				"url": "http://www.baidu.com",
-				"method": "POST",
-				"header": [
-					{
-						"key": "clientIp",
-						"value": "127.0.0.1",
-						"description": ""
-					},
-					{
-						"key": "deviceId",
-						"value": "1",
-						"description": ""
-					},
-					{
-						"key": "sessionToken",
-						"value": "ec53b27d-91a1-4d0e-8c75-54277729b8e0",
-						"description": ""
-					},
-					{
-						"key": "module",
-						"value": "1",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
-				"description": ""
-			},
-			"response": []
+			"id": "13cf4a96-15e7-a7c7-8788-9a982299de46",
+			"headers": "module: 2\nclientType: ios\nversion: 1.0\nclientIp: 192.168.0.1\ndeviceId: 888\nsessionToken: ce68abbb-9c76-42a5-a4e3-1ba179e79215\n",
+			"url": "http://192.168.31.101:8002/asyncMessage/my_message",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "req",
+					"value": "{\"size\":\"20\"}",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"sandboxFiles": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1458112563366,
+			"name": "我的消息(用户&系统) -MAPI",
+			"description": "",
+			"collectionId": "caee65a9-1c72-80f4-28ab-5ef490082d8f",
+			"responses": []
+		},
+		{
+			"id": "18e55f71-ef67-2283-e827-7440b35ee65f",
+			"headers": "module: 2\nclientType: ios\nversion: 1.0\nclientIp: 192.168.0.1\ndeviceId: 888\nsessionToken: ce68abbb-9c76-42a5-a4e3-1ba179e79215\n",
+			"url": "http://192.168.31.101:8002/asyncMessage/my_message",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "req",
+					"value": "{\"size\":\"20\"}",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"sandboxFiles": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1458112563366,
+			"name": "我的消息(用户&系统)",
+			"description": "",
+			"collectionId": "caee65a9-1c72-80f4-28ab-5ef490082d8f",
+			"responses": []
+		},
+		{
+			"id": "422f8027-ccf7-bf63-86ed-fc7dd0d4f88e",
+			"headers": "module: 1\nclientType: ios\nversion: 1.0\nclientIp: 192.168.31.254\ndeviceId: 38D68BD6-FBAB-4BCB-B07D-AFE690B11753\nsessionToken: 83941784-b0b3-4a4d-9693-60d916c4a1b8\n",
+			"url": "192.168.31.101:8002/asyncMessage/message_res",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "req",
+					"value": "{\"messageId\":\"730f93e6-c1da-499b-bdcb-c1ed04e15732\",\"result\":\"1\"}",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"sandboxFiles": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1461230004884,
+			"name": "消息反馈接口",
+			"description": "",
+			"collectionId": "caee65a9-1c72-80f4-28ab-5ef490082d8f",
+			"responses": []
 		}
 	]
 }

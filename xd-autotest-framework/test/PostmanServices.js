@@ -6,6 +6,7 @@
 
 var path = require('path');
 var fs = require('fs');
+var JSON5 = require('json5');
 
 
 
@@ -58,10 +59,10 @@ var  mycollection;
 
   //set items  能不能批量添加?
   mycollection.items.add(
-    { name: 'GET Request', request: 'https://echo.getpostman.com/get?auth=basic' }
+    { name: 'GET Request', request: 'http://www.baidu.com'}
   );
   mycollection.items.add(
-    { name: 'PUT Request', request: 'https://echo.getpostman.com/put?auth=basic' }
+    { name: 'PUT Request', request: 'http://www.baidu.com'}
   );
 
   //set auth 输出到文件时未显示?但是使用console.log可以打印
@@ -107,7 +108,8 @@ var  mycollection;
     type: 'string'
   });
 
-  //Add a request that uses the variable that we just added.
+
+  // Add a request that uses the variable that we just added.
   mycollection.items.add({
     id: 'utc-time-now',
     name: 'Get the current time in UTC',
@@ -211,11 +213,112 @@ function EventAbout() {
   });
 }
 
+//header
+
+//body  必须要有body中的mode,
+function setCollectionBody() {
+  var SDK = require('postman-collection');
+  var Collection = SDK.Collection;
+
+  var mycollection = new Collection();
+
+  mycollection.items.add(
+    {
+      id:'123',
+      name: 'GET Request', request: {
+      url:'http://www.baidu.com',
+      method:'GET',
+      body:{
+        mode:'urlencoded'
+      },
+    }}
+  );
+  mycollection.items.add(
+    {
+      id:'456',
+      name: 'POST Request', request: {
+      url:'http://www.iqiyi.com',
+      method:'GET',
+      body:{
+        mode:'urlencoded'
+      },
+    }}
+  );
+
+  newman(mycollection);
+  //把collection写入filename
+  fs.writeFile('bodytest.json', JSON.stringify(mycollection, null, 2), function (err) {
+    if (err) {
+      console.log('err ---------'+err);
+    } else {
+      console.log("JSON saved to " + 'bodytest.json');
+    }
+  });
+}
+
+//使用newman测试collection
+function newman(collection) {
+  var Newman = require('newman');
+
+// read the collectionjson file
+  var fsFile = fs.readFileSync('collection.json', 'utf8');
+  var testCollection = JSON.stringify(collection, null, 2);
+
+//选择使用fsfile还是传入的collection对象
+//   var collectionJson1 = JSON5.parse(fsFile);
+  var collectionJson1 = JSON5.parse(testCollection);
+  // console.log('fsflie:'+fsFile);
+  console.log('testCollection:'+collectionJson1);
+
+// define Newman options
+  var newmanOptions = {
+    iterationCount: 1,                    // define the number of times the runner should run
+    outputFile: "outfile.json",            // the file to export to
+    // responseHandler: "TestResponseHandler", // the response handler to use
+    asLibrary: true,         				// this makes sure the exit code is returned as an argument to the callback function
+    stopOnError: true
+  }
+
+// Optional Callback function which will be executed once Newman is done executing all its tasks.
+  Newman.execute(collectionJson1, newmanOptions, function(exitCode){
+    console.log("exitCode is " + exitCode);
+    console.log('callback');
+  });
+}
+
+//倒入outfile文件并展示response
+function getResponse(filename) {
+  var responsefile = fs.readFileSync(filename, 'utf8');
+  var responseJSON = JSON5.parse(responsefile);
+  // console.log(responseJSON);
+
+  var results = responseJSON.results;
+  // var item;
+
+  console.log(results.length);
+  var result = results[0];
+  console.log(result);
+  console.log(result['responseCode']['body']);
+  // var filePath = path.join(__dirname, '..', 'outfile.json');
+  // console.log(filePath);
+  // var len = responsefile.length,
+  //   i = 0;
+  //
+  // var respones;
+  // for (; i < len; ++i) {
+  //   var result = results[i];
+  //   // var body = result.body;
+  //   console.log(result);
+  // }
+}
+
 // readCollection();
 // writeCollectionToFile('file.json');
 // setCollectionPrototypeToFile('setCollectionPrototype.json');
 // cookieAbout();
-EventAbout();
+// EventAbout();
+// setCollectionBody();
+getResponse('outfile.json');
 
 module.exports.readCollection = readCollection;
 module.exports.writeCollectionToFile = writeCollectionToFile;
