@@ -34,7 +34,7 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  }
+  },
 
   /***************************************************************************
   *                                                                          *
@@ -46,4 +46,13 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+  '/apidoc':{
+    view:'apidoc'
+  },
+  'uitemplate':{
+    view:'uitemplate'
+  },
+  '/homeindex':{
+    view:'homeindex'
+  }
 };
