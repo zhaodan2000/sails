@@ -44,11 +44,7 @@ module.exports = {
     },
     //
     item:{
-      type: 'string',
-      requestInfo:{
-
-      },
-      response:'array',
+      type: 'array',
     },
     // req info
     url: {
