@@ -19,12 +19,9 @@ module.exports = {
       }
     },
     // base info
-    name: {
-      type: 'string',
-      required: true,
-      minLength: 1,
-      maxLength: 60
-    },
+    //在这里把测试用例需要的参数和不需要的参数区分开
+
+
     version: {
       type: 'string',
       required: true,
@@ -38,6 +35,21 @@ module.exports = {
       maxLength: 300
     },
 
+    //测试用例的name(collectionName)
+    name: {
+      type: 'string',
+      required: true,
+      minLength: 1,
+      maxLength: 60
+    },
+    //
+    item:{
+      type: 'string',
+      requestInfo:{
+
+      },
+      response:'array',
+    },
     // req info
     url: {
       type: 'string',
@@ -57,7 +69,7 @@ module.exports = {
       defaultsTo: 'POST',
       required: true
     },
-    headed: {
+    headers: {
       type: 'array'
     },
     bodyType: {

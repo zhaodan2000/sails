@@ -1,0 +1,30 @@
+{
+  "info": {
+    "id": "a22c888a-74c4-411f-815b-6777e628771b",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "id": "123",
+      "name": "GET Request",
+      "request": {
+        "url": "http://www.baidu.com",
+        "method": "GET",
+        "body": {
+          "mode": "urlencoded"
+        }
+      }
+    },
+    {
+      "id": "456",
+      "name": "POST Request",
+      "request": {
+        "url": "http://www.iqiyi.com",
+        "method": "GET",
+        "body": {
+          "mode": "urlencoded"
+        }
+      }
+    }
+  ]
+}

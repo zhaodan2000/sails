@@ -1,0 +1,82 @@
+{
+  "variables": [],
+  "info": {
+    "name": "",
+    "_postman_id": "",
+    "description": "",
+    "schema": "1"
+  },
+  "item": [
+    {
+      "name": "test",
+      "request": {
+        "url": "http://www.baidu.com",
+        "method": "POST",
+        "header": [
+          {
+            "key": "res",
+            "value": "res",
+            "description": ""
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "name",
+              "value": "lll",
+              "type": "text",
+              "enabled": true
+            },
+            {
+              "key": "",
+              "value": "",
+              "type": "text",
+              "enabled": true
+            }
+          ]
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "name": "test1",
+      "request": {
+        "url": "http://www.iqiyi.com",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "name",
+              "value": "lll",
+              "type": "text",
+              "enabled": true
+            },
+            {
+              "key": "age",
+              "value": "1",
+              "type": "text",
+              "enabled": true
+            }
+          ]
+        },
+        "description": "test next llll"
+      },
+      "response": []
+    }
+  ]
+}

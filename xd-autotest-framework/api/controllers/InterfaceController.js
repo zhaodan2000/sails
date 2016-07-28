@@ -23,12 +23,47 @@ module.exports = {
     Interface.findOne({name: "test"}).exec(function (err, articles) {
       if (!err) {
         // 刷新下一页
-        return res.send(articles);
+        return res.send(articles.name);
+
       }
       else {
         console.log(err);
       }
     });
+  },
+
+  createNewCollection: function (req, res) {
+    var iter = {name: "test", version: "1.0", description: "it's a desc", url: "192.168.88.89:8042", inputFile: "123", outputFile: "456"};
+    var model = Interface.create(iter);
+    
+    var collection = CollectionServices.creatCollection(model);
+    return res.send(collection);
+  },
+
+  testCollection: function (req, res) {
+    var iter = {name: "test", version: "1.0", description: "it's a desc", url: "192.168.88.89:8042", inputFile: "123", outputFile: "456"};
+
+    var model = Interface.create(iter);
+
+    var collection = CollectionServices.creatCollection(model);
+    res.send(collection);
+
+    //设置option, 待完善
+    var option = CollectionServices.optionMake();
+    CollectionServices.testCollectionWithCallBack(collection, option, function (exitCode) {
+
+      console.log(exitCode);
+    });
+  },
+
+  getResponse: function (req, res) {
+    var path = require('path');
+    var filePath = path.join(__dirname, '..', '..','outfile.json');
+    console.log(filePath);
+    var response =  CollectionServices.parseResponse(filePath);
+
+    return res.render('response', {data:response});
   }
+
 };
 
