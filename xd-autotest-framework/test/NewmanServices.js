@@ -3,7 +3,7 @@ var JSON5 = require('json5');
 var fs = require('fs');
 
 // read the collectionjson file
-var collectionJson = JSON5.parse(fs.readFileSync("myCollection.postman_collection", 'utf8'));
+var collectionJson = JSON5.parse(fs.readFileSync("test.postman_collection", 'utf8'));
 var envjson = JSON5.parse(fs.readFileSync("envjson.json", "utf-8"));
 var data = 'data.csv';
 

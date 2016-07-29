@@ -46,7 +46,16 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/postmanUI':{
-    view:'postman'
+  '/postmanUI': {
+    view: 'postman'
+  },
+  '/apidoc':{
+    view:'apidoc'
+  },
+  'uitemplate':{
+    view:'uitemplate'
+  },
+  '/homeindex':{
+    view:'homeindex'
   }
 };
