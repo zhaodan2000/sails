@@ -28,7 +28,8 @@ module.exports = {
       else {
         console.log(err);
       }
+
     });
-  }
+  },
 };
 
