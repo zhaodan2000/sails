@@ -47,9 +47,9 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/apidoc':{
-    view:'apidoc'
+    view:'APIdoc'
   },
-  'uitemplate':{
+  '/uitemplate':{
     view:'uitemplate'
   },
   '/homeindex':{
