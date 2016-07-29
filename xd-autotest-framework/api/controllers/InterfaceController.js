@@ -29,13 +29,14 @@ module.exports = {
       else {
         console.log(err);
       }
+
     });
   },
 
   createNewCollection: function (req, res) {
     var iter = {name: "test", version: "1.0", description: "it's a desc", url: "192.168.88.89:8042", inputFile: "123", outputFile: "456"};
     var model = Interface.create(iter);
-    
+
     var collection = CollectionServices.creatCollection(model);
     return res.send(collection);
   },
