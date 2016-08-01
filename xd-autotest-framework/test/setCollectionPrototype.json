@@ -1,6 +1,6 @@
 {
   "info": {
-    "id": "31a4f6c3-0761-4434-b08f-c6b3f238ecb4",
+    "id": "77c90aaa-6b9a-42ee-9f43-970fc0b9fc2f",
     "name": "This is new info",
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
   },
@@ -33,18 +33,31 @@
   ],
   "item": [
     {
-      "id": "d93de1bf-c17b-4f37-b58c-5a467ab42633",
-      "name": "GET Request",
+      "_": {
+        "postman_requiresId": true
+      },
+      "id": "my-get-request",
+      "name": "Send a GET request",
+      "disabled": false,
       "request": {
-        "url": "http://www.baidu.com",
-        "method": "GET"
+        "url": "www.hahha.com?members=members=,reference=[object Object],Type=function PostmanQueryParam(options) {\n        if (_.isString(options)) {\n            options = QueryParam.parseSingle(options);\n        }\n\n        this.key = _.get(options, 'key') || '';\n        this.value = _.get(options, 'value') || '';\n    },_postman_propertyIndexKey=id,_postman_propertyIndexCaseInsensitive=&reference=[object Object]&Type=function PostmanQueryParam(options) {\n        if (_.isString(options)) {\n            options = QueryParam.parseSingle(options);\n        }\n\n        this.key = _.get(options, 'key') || '';\n        this.value = _.get(options, 'value') || '';\n    }&_postman_propertyIndexKey=id&_postman_propertyIndexCaseInsensitive=",
+        "method": "POST",
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ]
+        }
       }
     },
     {
-      "id": "ebeb4030-ff69-4f23-abfd-b8c12a84da4a",
-      "name": "PUT Request",
+      "id": "utc-time-now",
+      "name": "Get the current time in UTC",
       "request": {
-        "url": "http://www.baidu.com",
+        "url": "{{apiBaseUrl}}/utc/now",
         "method": "GET"
       }
     }
