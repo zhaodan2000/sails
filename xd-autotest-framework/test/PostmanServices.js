@@ -23,6 +23,7 @@ function readCollection() {
   myCollection = new Collection(JSON.stringify(fs.readFileSync(path.join(__dirname,'collection.json')).toString()),null, 2);
 
   // log items at root level of the collection
+  console.log(myCollection.headers);
   console.log(pretty(myCollection));
   return pretty(myCollection);
 }
@@ -47,9 +48,15 @@ function writeCollectionToFile(fileName) {
 }
 
 function setCollectionPrototypeToFile(filename) {
-var  Collection = require('postman-collection').Collection;
-var  RequestAuth = require('postman-collection').RequestAuth;
-var  mycollection;
+  var  Collection = require('postman-collection').Collection;
+  var  RequestAuth = require('postman-collection').RequestAuth;
+  var  Request = require('postman-collection').Request;
+  var  Item = require('postman-collection').Item;
+  var Header = require('postman-collection').Header;
+  var Body = require('postman-collection').RequestBody;
+  var PList = require('postman-collection').PropertyList;
+
+  var  mycollection;
 
   //set info
   mycollection = new Collection({
@@ -57,13 +64,74 @@ var  mycollection;
     disabled:true
   });
 
+  //headers
+  var headerString = 'Content-Type: application/json\nUser-Agent: MyClientLibrary/2.0\n';
+  //
+  var rawHeaders = Header.parse(headerString);
+
+  var headers = rawHeaders.map(function (h) {
+    return new Header(h);
+  });
+  // var header = new Header({
+  //   key:'Content-Type',
+  //   value:'application/json'
+  // });
+  // var list = new PList(Header);
+  // list.add(header);
+  //
+  // console.log(headers);
+  // console.log(header.toString());
+
+  var header = Header.create('application/json', 'Content-Type');
+  // console.log(header);
+
+  //body
+  var requestBody = new Body({
+    mode:'urlencoded'
+  });
+
+  //request
+  var URL = require('url');
+
+  var request = new Request({
+    url:"www.hahha.com",
+    method:"POST",
+    body:requestBody,
+    header:headers
+  });
+  // console.log(headers);
+  //虽然在输出文档上没有显示, 但是可以打印出来
+  // console.log(request.headers);
+
+  //Url and Param
+  console.log(request.url);
+
+  //item
+  var item = new Item({
+    name: "Send a GET request",
+    id: "my-get-request",
+    request: request,
+  });
+
   //set items  能不能批量添加?
-  mycollection.items.add(
-    { name: 'GET Request', request: 'http://www.baidu.com'}
-  );
-  mycollection.items.add(
-    { name: 'PUT Request', request: 'http://www.baidu.com'}
-  );
+  mycollection.items.add(item);
+  // mycollection.items.add(
+  //   {
+  //     name: 'PUT item',
+  //     request: {
+  //       id:'requestName',
+  //       url:'http://www.baidu.com',
+  //       body:{
+  //         mode:'urlencoded'
+  //       },
+  //       header:[{
+  //         "key": "Content-Type",
+  //         "value": "application/json",
+  //       }]
+  //     },
+  //
+  //   }
+  // );
 
   //set auth 输出到文件时未显示?但是使用console.log可以打印
   mycollection.auth = new RequestAuth({
@@ -299,26 +367,43 @@ function getResponse(filename) {
   var result = results[0];
   console.log(result);
   console.log(result['responseCode']['body']);
-  // var filePath = path.join(__dirname, '..', 'outfile.json');
-  // console.log(filePath);
-  // var len = responsefile.length,
-  //   i = 0;
-  //
-  // var respones;
-  // for (; i < len; ++i) {
-  //   var result = results[i];
-  //   // var body = result.body;
-  //   console.log(result);
-  // }
+}
+
+function setHeader() {
+ var Header = require('postman-collection').Header,
+   Request = require('postman-collection').Request,
+   Item = require('postman-collection').Item;
+
+  var item = new Item();
+  var request = new Request();
+  item.request = request;
+
+  console.log(item);
+
+  headerString = 'Content-Type: application/json\nUser-Agent: MyClientLibrary/2.0\n';
+
+ var rawHeaders = Header.parse(headerString);
+ // console.log(rawHeaders); // [{ 'Content-Type': 'application/json', 'User-Agent': 'MyClientLibrary/2.0' }]
+
+ var headers = rawHeaders.map(function (h) {
+         return new Header(h);
+ });
+
+
+  // console.log(headers);
+  // return rawHeaders;
+ // assert.headerString === Header.unparse(headers);
+  // collection.hea
 }
 
 // readCollection();
 // writeCollectionToFile('file.json');
-// setCollectionPrototypeToFile('setCollectionPrototype.json');
+setCollectionPrototypeToFile('setCollectionPrototype.json');
 // cookieAbout();
 // EventAbout();
 // setCollectionBody();
-getResponse('outfile.json');
+// getResponse('outfile.json');
+// setHeader();
 
 module.exports.readCollection = readCollection;
 module.exports.writeCollectionToFile = writeCollectionToFile;
