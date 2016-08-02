@@ -63,6 +63,7 @@ module.exports = {
       minLength: 1,
       maxLength: 300
     },
+
     //param json
     queryParam:{
       type:'json',
