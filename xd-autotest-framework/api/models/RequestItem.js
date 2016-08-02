@@ -22,9 +22,16 @@ module.exports = {
       }
     },
     //auth 开发人员
-    auth:{
+    dev:{
       type:'string',
-      required: true,
+      required: true
+    },
+
+    //可用状态
+    disabled:{
+      type:'bool',
+      defaultsTo:false,
+      required: true
     },
 
     version: {
@@ -49,16 +56,16 @@ module.exports = {
       maxLength: 60
     },
 
-    //url    将被转化为Url对象进行配置
+    //url
     url: {
       type: 'string',
       required: true,
       minLength: 1,
       maxLength: 300
     },
-    //param json->jsonSting  param 将会添加到Url中
+    //param json
     queryParam:{
-      type:'string',
+      type:'json',
       required: true
     },
 
@@ -69,9 +76,9 @@ module.exports = {
       required: true
     },
 
-    //headerString = 'Content-Type: application/json\nUser-Agent: MyClientLibrary/2.0\n';存储时应该把JSON转化为JSONString
+    //header Json
     headers: {
-      type: 'string',
+      type: 'json',
       required: true
     },
 
