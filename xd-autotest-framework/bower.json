@@ -1,0 +1,21 @@
+{
+  "name": "xd-autotest-framework",
+  "description": "a Sails application",
+  "main": "app.js",
+  "authors": [
+    "zhaodan"
+  ],
+  "license": "XD Ltd.",
+  "homepage": "https://github.com/zhaodan2000/sails",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/xd-autotest-framework",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
