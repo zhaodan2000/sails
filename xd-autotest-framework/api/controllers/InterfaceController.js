@@ -12,8 +12,9 @@ module.exports = {
     // var iter = {name:'test'};
     RequestItem.create(iter).exec(function createCB(err, created) {
       if (err) {
+        console.log(err);
         // 如果有误，返回错误
-        Interface.find({name:'test'}).exec(function (err, records) {
+        Interface.find({name:'login'}).exec(function (err, records) {
           if (!err) {
             // 刷新下一页
             res.send("success");
@@ -26,7 +27,7 @@ module.exports = {
         //res.view('passport/register', {err: err});
       } else {
         // 否则，将新创建的用户登录
-        res.send("Ok");
+        res.send("Ok"+ JSON.stringify(created));
       }
     });
   },

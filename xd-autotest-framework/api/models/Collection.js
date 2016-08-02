@@ -1,4 +1,7 @@
 /**
+ * Created by xiaodou_chenxiaoxiang on 16/8/2.
+ */
+/**
  * Created by xiaodou_chenxiaoxiang on 16/7/28.
  */
 /**
@@ -11,7 +14,7 @@ var uuid = require('node-uuid');
 
 module.exports = {
   connection: 'someMongodbServer',
-  tableName: 'xd_autotest_request',
+  tableName: 'xd_autotest_collection',
   attributes: {
     id: {
       type: 'string',
