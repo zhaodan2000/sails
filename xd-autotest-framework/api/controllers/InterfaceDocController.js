@@ -16,21 +16,20 @@ module.exports = {
     console.log("testmyservice:%s",apiItem.id);
     RequestItem.create(apiItem).exec(function createItem(err,records){ */
 
-    var item={name:"Polly",wingspn:"168.5"};
-    
-    InterfaceDoc.create(item).exec(function createCB(err,records){
-      if (!err) {
-        // 刷新下一页
-        res.send("success");
-      }
-      else {
-        console.log(err);
-      }
-    });
-    var item=JSON.stringify(records);
+    var item={name:"Polly222",wingspn:"168.5000"};
 
-    //var item= DocService.writeAPItoDB(apiItem);
-    return res.send(item);
+    InterfaceDoc.create(item).exec(function(err,records){
+      if (err) {
+        return res.serverError(err);
+      }
+      console.log("records.name is: %s",records.name);
+
+      var item=JSON.stringify(records);
+
+      //var item= DocService.writeAPItoDB(apiItem);
+      return res.send(item);
+    });
+
   },
 
   testmydb: function(req,res){
