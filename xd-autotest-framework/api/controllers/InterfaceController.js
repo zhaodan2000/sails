@@ -12,13 +12,18 @@ module.exports = {
     Interface.create(iter).exec(function createCB(err, created) {
       if (err) {
         // 如果有误，返回错误
-        Interface.find({id:'123'}).exec(function (err, usersNamedFinn){
-          if (err) {
-            return res.serverError(err);
+        Interface.find({id:'123'}).exec(function (err, records) {
+          if (!err) {
+            // 刷新下一页
+            return res.json(records);
+            // res.send("success"+ records);
           }
-          sails.log('Wow, there are %d users named Finn.  Check it out:', usersNamedFinn.length, usersNamedFinn);
-          return res.json("wwwwwwww"+usersNamedFinn);
+          else {
+            console.log(err);
+            res.view('apidoc'); //输入route.js里的定义的路径名。
+          }
         });
+        //res.view('passport/register', {err: err});
       } else {
         // 否则，将新创建的用户登录
         res.send("Ok");

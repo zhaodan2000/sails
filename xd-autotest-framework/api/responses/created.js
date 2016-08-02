@@ -7,7 +7,7 @@
  * return res.created(data, 'auth/login');
  *
  * @param  {Object} data
- * @param  {String|Object} options
+ * @param  {String|Object} options 
  *          - pass string to render specified view
  */
 

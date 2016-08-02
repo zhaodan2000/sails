@@ -50,9 +50,9 @@ module.exports.routes = {
     view: 'showdoc'
   },
   '/apidoc':{
-    view:'apidoc'
+    view:'APIdoc'
   },
-  'uitemplate':{
+  '/uitemplate':{
     view:'uitemplate'
   },
   '/homeindex':{
