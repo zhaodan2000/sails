@@ -23,6 +23,7 @@ function readCollection() {
   myCollection = new Collection(JSON.stringify(fs.readFileSync(path.join(__dirname,'collection.json')).toString()),null, 2);
 
   // log items at root level of the collection
+  console.log(myCollection.headers);
   console.log(pretty(myCollection));
   return pretty(myCollection);
 }
@@ -30,6 +31,7 @@ function readCollection() {
 
 // 把创建的collection保存在本地
 function writeCollectionToFile(fileName) {
+  var Collection = require('postman-collection').Collection;
   var fileCollection;
   fileCollection = new Collection({
     info: {
@@ -47,23 +49,103 @@ function writeCollectionToFile(fileName) {
 }
 
 function setCollectionPrototypeToFile(filename) {
-var  Collection = require('postman-collection').Collection;
-var  RequestAuth = require('postman-collection').RequestAuth;
-var  mycollection;
+  var  Collection = require('postman-collection').Collection;
+  var  RequestAuth = require('postman-collection').RequestAuth;
+  var  Request = require('postman-collection').Request;
+  var  Item = require('postman-collection').Item;
+  var Header = require('postman-collection').Header;
+  var Body = require('postman-collection').RequestBody;
+  var Url = require('postman-collection').Url;
+  var QueryParam = require('postman-collection').QueryParam;
 
-  //set info
+  var  mycollection;
+
+  //mycollection set info
   mycollection = new Collection({
     name:'This is new info',
     disabled:true
   });
 
+  //request headers
+  var headerString = 'Content-Type: application/json\nUser-Agent: MyClientLibrary/2.0\n';
+  //
+  var rawHeaders = Header.parse(headerString);
+
+  var headers = rawHeaders.map(function (h) {
+    return new Header(h);
+  });
+
+  var header = Header.create('application/json', 'Content-Type');
+  // console.log(header);
+
+  //request Url
+  var requesturl = new Url({
+    port:"8888",
+    auth:"zhang",
+    protocol:"https",
+    path:"path",
+    hash:"null",
+    host:"www.baidu.com"
+});
+
+
+  //request QuetyParam
+  var queryParamString = 'phoneNum=18210191798&pwd=123456';
+  // var rawParam = QueryParam.parse(queryParamString);
+
+
+  //Url add QueryParam
+  requesturl.addQueryParams(queryParamString);
+
+  //request body
+  var requestBody = new Body({
+    mode:'urlencoded'
+  });
+
+  //request
+  var request = new Request({
+    url:requesturl,
+    method:"POST",
+    body:requestBody,
+    header:headers
+  });
+
+  // request.addQueryParams(queryParamString);
+
+  console.log(requesturl.getQueryString());
+  // console.log(headers);
+  //虽然在输出文档上没有显示, 但是可以打印出来
+  // console.log(request.getHeaders());
+
+  //Url and Param
+  // console.log(request.url);
+
+  //item
+  var item = new Item({
+    name: "Send a POST request",
+    id: "my-post-request",
+    request: request
+  });
+
   //set items  能不能批量添加?
-  mycollection.items.add(
-    { name: 'GET Request', request: 'http://www.baidu.com'}
-  );
-  mycollection.items.add(
-    { name: 'PUT Request', request: 'http://www.baidu.com'}
-  );
+  mycollection.items.add(item);
+  // mycollection.items.add(
+  //   {
+  //     name: 'PUT item',
+  //     request: {
+  //       id:'requestName',
+  //       url:'http://www.baidu.com',
+  //       body:{
+  //         mode:'urlencoded'
+  //       },
+  //       header:[{
+  //         "key": "Content-Type",
+  //         "value": "application/json",
+  //       }]
+  //     },
+  //
+  //   }
+  // );
 
   //set auth 输出到文件时未显示?但是使用console.log可以打印
   mycollection.auth = new RequestAuth({
@@ -230,7 +312,7 @@ function setCollectionBody() {
       method:'GET',
       body:{
         mode:'urlencoded'
-      },
+      }
     }}
   );
   mycollection.items.add(
@@ -241,11 +323,10 @@ function setCollectionBody() {
       method:'GET',
       body:{
         mode:'urlencoded'
-      },
+      }
     }}
   );
 
-  newman(mycollection);
   //把collection写入filename
   fs.writeFile('bodytest.json', JSON.stringify(mycollection, null, 2), function (err) {
     if (err) {
@@ -254,6 +335,7 @@ function setCollectionBody() {
       console.log("JSON saved to " + 'bodytest.json');
     }
   });
+  newman(mycollection);
 }
 
 //使用newman测试collection
@@ -299,26 +381,44 @@ function getResponse(filename) {
   var result = results[0];
   console.log(result);
   console.log(result['responseCode']['body']);
-  // var filePath = path.join(__dirname, '..', 'outfile.json');
-  // console.log(filePath);
-  // var len = responsefile.length,
-  //   i = 0;
-  //
-  // var respones;
-  // for (; i < len; ++i) {
-  //   var result = results[i];
-  //   // var body = result.body;
-  //   console.log(result);
-  // }
 }
+
+function setHeader() {
+ var Header = require('postman-collection').Header,
+   Request = require('postman-collection').Request,
+   Item = require('postman-collection').Item;
+
+  var item = new Item();
+  var request = new Request();
+  item.request = request;
+
+  console.log(item);
+
+  headerString = 'Content-Type: application/json\nUser-Agent: MyClientLibrary/2.0\n';
+
+ var rawHeaders = Header.parse(headerString);
+ // console.log(rawHeaders); // [{ 'Content-Type': 'application/json', 'User-Agent': 'MyClientLibrary/2.0' }]
+
+ var headers = rawHeaders.map(function (h) {
+         return new Header(h);
+ });
+
+
+  // console.log(headers);
+  // return rawHeaders;
+ // assert.headerString === Header.unparse(headers);
+  // collection.hea
+}
+
 
 // readCollection();
 // writeCollectionToFile('file.json');
-// setCollectionPrototypeToFile('setCollectionPrototype.json');
+setCollectionPrototypeToFile('setCollectionPrototype.json');
 // cookieAbout();
 // EventAbout();
 // setCollectionBody();
-getResponse('outfile.json');
+// getResponse('outfile.json');
+// setHeader();
 
 module.exports.readCollection = readCollection;
 module.exports.writeCollectionToFile = writeCollectionToFile;

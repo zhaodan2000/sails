@@ -30,9 +30,7 @@ module.exports = {
         name:interface.name
       }
     });
-
     
-
     return newCollection;
   },
   //生成Newman执行需要的option
@@ -75,7 +73,6 @@ module.exports = {
   exportResponse:function (responseData, filePath, fileName) {
     fs.writeFileSync(filePath+fileName, responseData.toString());
   }
-
 };
 
 
@@ -83,16 +80,17 @@ pretty = function (obj) { // function to neatly log the collection object to con
   return require('util').inspect(obj, {colors: true});
 }
 
-function collectionItemsWithModel(collection, model) {
+function collectionItemsWithRequest(collection, request) {
   //至少要有url,Method和body的mode
   collection.items.add(
-    { name: 'GET Request',
-      devP:'',
+    { name: request.name,
+      developer:request.developer,
       request: {
-        url:'http://www.baidu.com',
-        method:'POST',
+        url:request.url,
+        method:request.method,
+        // header:request.header,
         body:{
-          mode:'urlencoded'
+          mode:request.model,
         }
       }}
   );

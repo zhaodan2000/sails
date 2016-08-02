@@ -1,0 +1,70 @@
+{
+    "id": "",
+    "name": "Default",
+    "timestamp": 1470050312504,
+    "collection_id": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
+    "folder_id": 0,
+    "target_type": "collection",
+    "count": 1,
+    "collection": {
+        "id": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
+        "name": "This is new info",
+        "order": [
+            "1939b60f-0dce-4a78-8839-ac6a312ac15c"
+        ],
+        "folders": [],
+        "requests": [
+            {
+                "id": "1939b60f-0dce-4a78-8839-ac6a312ac15c",
+                "name": "Send a POST request",
+                "collectionId": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
+                "method": "POST",
+                "headers": "clientType: android\nmodule: 2\nversion: 1.0\nclientIp: 192.168.31.23\ndeviceId: MyTestDeviceID123\nContent-Type: application/x-www-form-urlencoded",
+                "dataMode": "urlencoded",
+                "data": [
+                    {
+                        "key": "req",
+                        "value": "{\"platform\":\"local\",\"phoneNum\":\"18210191798\",\"pwd\":\"123456\"}"
+                    }
+                ],
+                "rawModeData": "",
+                "tests": "",
+                "preRequestScript": "",
+                "url": "http://192.168.103.101:8002/user/newLogin"
+            }
+        ]
+    },
+    "folder": null,
+    "globals": {
+        "values": []
+    },
+    "results": [
+        {
+            "id": "1939b60f-0dce-4a78-8839-ac6a312ac15c",
+            "name": "Send a POST request",
+            "url": "http://192.168.103.101:8002/user/newLogin",
+            "totalTime": 153,
+            "responseCode": {
+                "code": 200,
+                "name": "",
+                "detail": ""
+            },
+            "tests": {},
+            "totalPassFailCounts": {
+                "pass": 0,
+                "fail": 0
+            },
+            "testPassFailCounts": {},
+            "times": [],
+            "allTests": [
+                {}
+            ],
+            "time": 153,
+            "meanResponseTime": 153
+        }
+    ],
+    "environment": {
+        "values": []
+    },
+    "delay": 0
+}

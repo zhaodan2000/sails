@@ -1,0 +1,65 @@
+{
+  "info": {
+    "id": "c8e9a929-7eea-4001-af95-d451a6c8a24a",
+    "name": "This is new info",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "tests[\"Status code is 200\"] = (responseCode.code === 200)"
+        ]
+      }
+    },
+    {
+      "listen": "test1",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "tests[\"Status code is 200\"] = (responseCode.code === 200)"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "apiBaseUrl",
+      "type": "string",
+      "value": "http://timeapi.org"
+    }
+  ],
+  "item": [
+    {
+      "_": {
+        "postman_requiresId": true
+      },
+      "id": "my-post-request",
+      "name": "Send a POST request",
+      "disabled": false,
+      "request": {
+        "url": "https://www.baidu.com:8888/path?members=members=members=phoneNum=18210191798,pwd=123456,reference=[object Object],Type=function PostmanQueryParam(options) {\n        if (_.isString(options)) {\n            options = QueryParam.parseSingle(options);\n        }\n\n        this.key = _.get(options, 'key') || '';\n        this.value = _.get(options, 'value') || '';\n    },_postman_propertyIndexKey=id,_postman_propertyIndexCaseInsensitive=,reference=[object Object],Type=function PostmanQueryParam(options) {\n        if (_.isString(options)) {\n            options = QueryParam.parseSingle(options);\n        }\n\n        this.key = _.get(options, 'key') || '';\n        this.value = _.get(options, 'value') || '';\n    },_postman_propertyIndexKey=id,_postman_propertyIndexCaseInsensitive=&reference=[object Object]&Type=function PostmanQueryParam(options) {\n        if (_.isString(options)) {\n            options = QueryParam.parseSingle(options);\n        }\n\n        this.key = _.get(options, 'key') || '';\n        this.value = _.get(options, 'value') || '';\n    }&_postman_propertyIndexKey=id&_postman_propertyIndexCaseInsensitive=#null",
+        "method": "POST",
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "utc-time-now",
+      "name": "Get the current time in UTC",
+      "request": {
+        "url": "{{apiBaseUrl}}/utc/now",
+        "method": "GET"
+      }
+    }
+  ]
+}
