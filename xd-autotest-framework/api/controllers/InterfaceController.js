@@ -8,8 +8,10 @@
 
 module.exports = {
   hello: function (req, res) {
-    var iter = {name: "test2222", version: "1.0.0", description: "it's a descddd", url: "192.168.88.89:8042"};//, inputFile: "123", outputFile: "456"};
-    Interface.create(iter).exec(function createCB(err, created) {
+    var iter = {name: "login", version: "1.0",dev: 'zhang', description: "it's a desc", url: "http://192.168.103.101:8002/user/newLogin", method: "POST", headers: {clientType: 'android',module: '2',version: '1.0',clientIp: '192.168.31.23',deviceId: 'MyTestDeviceID123'},mode:'urlencoded',queryParam:{req:'{\"platform\":\"local\",\"phoneNum\":\"18210191798\",\"pwd\":\"123456\"}'}};
+    // var iter = {name:'test'};
+    RequestItem.create(iter).exec(function createCB(err, created) {
+
       if (err) {
         // 如果有误，返回错误
         console.log(err);
@@ -31,10 +33,16 @@ module.exports = {
     });
   },
   hello2: function (req, res) {
-    Interface.findOne({name: "test"}).exec(function (err, articles) {
+    RequestItem.findOne({name: "login"}).exec(function (err, articles) {
       if (!err) {
         // 刷新下一页
-        return res.send(articles.name);
+        // return res.send(articles);
+        var request = RequestItemServices.configRequestItem(articles);
+        var item = RequestItemServices.configItem(request);
+        var collection = RequestItemServices.configCollection(item);
+        console.log(collection);
+        RequestItemServices.newmanTest(collection);
+        return res.send(collection);
 
       }
       else {
