@@ -1,58 +1,30 @@
 {
   "info": {
-    "_postman_id": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
+    "id": "397ea485-c66c-4e67-b0fd-0539a0463ace",
     "name": "This is new info",
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
   },
   "item": [
     {
+      "_": {
+        "postman_requiresId": true
+      },
+      "id": "my-post-request",
       "name": "Send a POST request",
+      "disabled": false,
       "request": {
-        "url": "http://192.168.103.101:8002/user/newLogin",
+        "url": "http://192.168.103.101:8002/user/newLogin?members=members=members=req={\"platform\":\"loacl\",\"phoneNum\":\"17701257566\",\"pwd\":\"123456\"},reference=[object Object],Type=function PostmanQueryParam(options) {\n        if (_.isString(options)) {\n            options = QueryParam.parseSingle(options);\n        }\n\n        this.key = _.get(options, 'key') || '';\n        this.value = _.get(options, 'value') || '';\n    },_postman_propertyIndexKey=id,_postman_propertyIndexCaseInsensitive=,reference=[object Object],Type=function PostmanQueryParam(options) {\n        if (_.isString(options)) {\n            options = QueryParam.parseSingle(options);\n        }\n\n        this.key = _.get(options, 'key') || '';\n        this.value = _.get(options, 'value') || '';\n    },_postman_propertyIndexKey=id,_postman_propertyIndexCaseInsensitive=&reference=[object Object]&Type=function PostmanQueryParam(options) {\n        if (_.isString(options)) {\n            options = QueryParam.parseSingle(options);\n        }\n\n        this.key = _.get(options, 'key') || '';\n        this.value = _.get(options, 'value') || '';\n    }&_postman_propertyIndexKey=id&_postman_propertyIndexCaseInsensitive=#null",
         "method": "POST",
-        "header": [
-          {
-            "key": "clientType",
-            "value": "android"
-          },
-          {
-            "key": "module",
-            "value": "2"
-          },
-          {
-            "key": "version",
-            "value": "1.0"
-          },
-          {
-            "key": "clientIp",
-            "value": "192.168.31.23"
-          },
-          {
-            "key": "deviceId",
-            "value": "MyTestDeviceID123"
-          }
-        ],
         "body": {
           "mode": "urlencoded",
           "urlencoded": [
             {
-              "key": "req",
-              "value": "{\"platform\":\"local\",\"phoneNum\":\"18210191798\",\"pwd\":\"123456\"}",
-              "type": "text",
-              "enabled": true
+              "key": "",
+              "value": ""
             }
           ]
         }
-      },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": "var jsonData = JSON.parse(responseBody);\ntests[\"retcode\"] = jsonData.retcode === \"0\";"
-          }
-        }
-      ]
+      }
     }
   ]
 }
