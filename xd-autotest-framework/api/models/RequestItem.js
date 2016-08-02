@@ -33,6 +33,7 @@ module.exports = {
       minLength: 1,
       maxLength: 20
     },
+
     description: {
       type: 'string',
       required: true,
@@ -57,7 +58,8 @@ module.exports = {
     },
     //param json->jsonSting  param 将会添加到Url中
     queryParam:{
-      type:'string'
+      type:'string',
+      required: true
     },
 
     method: {
@@ -69,7 +71,8 @@ module.exports = {
 
     //headerString = 'Content-Type: application/json\nUser-Agent: MyClientLibrary/2.0\n';存储时应该把JSON转化为JSONString
     headers: {
-      type: 'string'
+      type: 'string',
+      required: true
     },
 
     //body
@@ -80,6 +83,11 @@ module.exports = {
       required: true
     },
 
+    //response
+    response: {
+      response: 'json',
+      required: true
+    }
 
   }
 };

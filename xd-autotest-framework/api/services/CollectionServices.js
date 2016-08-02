@@ -30,9 +30,7 @@ module.exports = {
         name:interface.name
       }
     });
-
-
-
+    
     return newCollection;
   },
   //生成Newman执行需要的option

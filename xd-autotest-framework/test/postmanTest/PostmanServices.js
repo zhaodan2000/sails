@@ -31,6 +31,7 @@ function readCollection() {
 
 // 把创建的collection保存在本地
 function writeCollectionToFile(fileName) {
+  var Collection = require('postman-collection').Collection;
   var fileCollection;
   fileCollection = new Collection({
     info: {
@@ -54,17 +55,18 @@ function setCollectionPrototypeToFile(filename) {
   var  Item = require('postman-collection').Item;
   var Header = require('postman-collection').Header;
   var Body = require('postman-collection').RequestBody;
-  var PList = require('postman-collection').PropertyList;
+  var Url = require('postman-collection').Url;
+  var QueryParam = require('postman-collection').QueryParam;
 
   var  mycollection;
 
-  //set info
+  //mycollection set info
   mycollection = new Collection({
     name:'This is new info',
     disabled:true
   });
 
-  //headers
+  //request headers
   var headerString = 'Content-Type: application/json\nUser-Agent: MyClientLibrary/2.0\n';
   //
   var rawHeaders = Header.parse(headerString);
@@ -72,45 +74,57 @@ function setCollectionPrototypeToFile(filename) {
   var headers = rawHeaders.map(function (h) {
     return new Header(h);
   });
-  // var header = new Header({
-  //   key:'Content-Type',
-  //   value:'application/json'
-  // });
-  // var list = new PList(Header);
-  // list.add(header);
-  //
-  // console.log(headers);
-  // console.log(header.toString());
 
   var header = Header.create('application/json', 'Content-Type');
   // console.log(header);
 
-  //body
+  //request Url
+  var requesturl = new Url({
+    port:"8888",
+    auth:"zhang",
+    protocol:"https",
+    path:"path",
+    hash:"null",
+    host:"www.baidu.com"
+});
+
+
+  //request QuetyParam
+  var queryParamString = 'phoneNum=18210191798&pwd=123456';
+  // var rawParam = QueryParam.parse(queryParamString);
+
+
+  //Url add QueryParam
+  requesturl.addQueryParams(queryParamString);
+
+  //request body
   var requestBody = new Body({
     mode:'urlencoded'
   });
 
   //request
-  var URL = require('url');
-
   var request = new Request({
-    url:"www.hahha.com",
+    url:requesturl,
     method:"POST",
     body:requestBody,
     header:headers
   });
+
+  // request.addQueryParams(queryParamString);
+
+  console.log(requesturl.getQueryString());
   // console.log(headers);
   //虽然在输出文档上没有显示, 但是可以打印出来
-  // console.log(request.headers);
+  // console.log(request.getHeaders());
 
   //Url and Param
-  console.log(request.url);
+  // console.log(request.url);
 
   //item
   var item = new Item({
-    name: "Send a GET request",
-    id: "my-get-request",
-    request: request,
+    name: "Send a POST request",
+    id: "my-post-request",
+    request: request
   });
 
   //set items  能不能批量添加?
@@ -298,7 +312,7 @@ function setCollectionBody() {
       method:'GET',
       body:{
         mode:'urlencoded'
-      },
+      }
     }}
   );
   mycollection.items.add(
@@ -309,11 +323,10 @@ function setCollectionBody() {
       method:'GET',
       body:{
         mode:'urlencoded'
-      },
+      }
     }}
   );
 
-  newman(mycollection);
   //把collection写入filename
   fs.writeFile('bodytest.json', JSON.stringify(mycollection, null, 2), function (err) {
     if (err) {
@@ -322,6 +335,7 @@ function setCollectionBody() {
       console.log("JSON saved to " + 'bodytest.json');
     }
   });
+  newman(mycollection);
 }
 
 //使用newman测试collection
@@ -395,6 +409,7 @@ function setHeader() {
  // assert.headerString === Header.unparse(headers);
   // collection.hea
 }
+
 
 // readCollection();
 // writeCollectionToFile('file.json');
