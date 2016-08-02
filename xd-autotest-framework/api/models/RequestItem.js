@@ -56,7 +56,7 @@ module.exports = {
       minLength: 1,
       maxLength: 300
     },
-    //param json->jsonSting  param 将会添加到Url中
+    //param json->jsonString  param 将会添加到Url中
     queryParam:{
       type:'string',
       required: true

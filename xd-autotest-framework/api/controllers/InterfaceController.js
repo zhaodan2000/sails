@@ -12,7 +12,17 @@ module.exports = {
     Interface.create(iter).exec(function createCB(err, created) {
       if (err) {
         // 如果有误，返回错误
-        res.view('passport/register', {err: err});
+        Interface.find({name:'test'}).exec(function (err, records) {
+          if (!err) {
+            // 刷新下一页
+            res.send("success");
+          }
+          else {
+            console.log(err);
+            res.view('apidoc'); //输入route.js里的定义的路径名。
+          }
+        });
+        //res.view('passport/register', {err: err});
       } else {
         // 否则，将新创建的用户登录
         res.send("Ok");
