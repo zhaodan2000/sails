@@ -71,7 +71,7 @@ module.exports = {
     //设置option, 待完善
     var option = CollectionServices.optionMake();
     CollectionServices.testCollectionWithCallBack(collection, option, function (exitCode) {
-
+      
       console.log(exitCode);
     });
   },
