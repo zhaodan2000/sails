@@ -24,26 +24,26 @@ module.exports = {
     //auth 开发人员
     dev:{
       type:'string',
-      required: true
+      required: false
     },
 
     //可用状态
     disabled:{
-      type:'bool',
-      defaultsTo:false,
-      required: true
+      type:'boolean',
+      // defaultsTo:'false',
+      required: false
     },
 
     version: {
       type: 'string',
-      required: true,
+      required: false,
       minLength: 1,
       maxLength: 20
     },
 
     description: {
       type: 'string',
-      required: true,
+      required: false,
       minLength: 1,
       maxLength: 300
     },
@@ -67,36 +67,35 @@ module.exports = {
     //param json
     queryParam:{
       type:'json',
-      required: true
+      required: false
     },
 
     method: {
       type: 'string',
       enum: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COPY', 'HEAD', 'OPTIONS', 'LINK', 'UNLINK', 'PURGE', 'LOCK', 'UNLOCK', 'PROPFIND', 'VIEW'],
       defaultsTo: 'POST',
-      required: true
+      required: false
     },
 
     //header Json
     headers: {
       type: 'json',
-      required: true
+      required: false
     },
 
     //body
     mode: {
       type: 'string',
-      enum:['raw', 'formdata','urlencoded','file'],
-      defaultsTO: 'urlencoded',
-      required: true
+      enum:['raw', 'formdata', 'urlencoded','file'],
+      // defaultsTO: 'urlencoded',
+      required: false
     },
 
     //response
     response: {
       response: 'json',
-      required: true
+      required: false
     }
-
   }
 };
 

@@ -16,7 +16,7 @@ module.exports = {
     collection = new Collection(JSON.stringify(fs.readFileSync('sample-collection.json').toString()));
     //返回的collection, 需要进行JSON5解析之后才能在newman方法中使用
     return collection;
-  } ,
+  },
 
   //创建一个collection
   creatCollection: function(interface) {
@@ -30,7 +30,7 @@ module.exports = {
         name:interface.name
       }
     });
-    
+
     return newCollection;
   },
   //生成Newman执行需要的option

@@ -26,11 +26,12 @@
   <script type="text/javascript">
 
     function hello(){
-
+      for(var i = 0, l = data.length; i < l; i++) {
+        alert(data[i]);
+      }
     }
 
     function ha(){
-
       alert("bye");
     }
 
@@ -44,29 +45,48 @@
       var obj = document.getElementsByTagName("input");
       for(var i = 0;i < obj.length; i++){
         for(var i = 0;i < obj.length; i++){
-          alert(obj[i]);
+          var value
+          if (obj[i].name == "url"){
+            value = "url" + obj[i].value;
+          }else if(obj[i].name == "header-key"){
+            value = "header-key" + obj[i].value;
+          }else if(obj[i].name == "header-value"){
+            value = "header-value" + obj[i].value;
+          }else if(obj[i].name == "parameter-key"){
+            value = "parameter-key" + obj[i].value;
+          }else if(obj[i].name == "parameter-value"){
+            value = "parameter-value" + obj[i].value;
+          }
+          alert(value);
         }
       }
     }
   </script>
 </head>
-<body onload="hello();" >
+<body onload="hello()">
 
 <p>展示可编辑的接口文档</p>
 <br />
 <form>
-  <input type="text" name="url" id="url" tabindex="1" class="input-text-light" placeholder="目标URL" width = "20px" height="10px">
+  <input type="text" name="url" id="url" tabindex="1" class="input-text-light" placeholder="目标URL" width = "20px" height="10px" value="<%- data.url %>">
   <br />
   <p>header</p>
   <br />
-  <input type="text" name="url" id="url" tabindex="2" class="input-text-light" placeholder="key">
-  <input type="text" name="url" id="url" tabindex="3" class="input-text-light" placeholder="value">
+  <input type="text" name="header-key" id="url" tabindex="2" class="input-text-light" placeholder="key" value="<%- data.headerkey %>">
+  <input type="text" name="header-value" id="url" tabindex="3" class="input-text-light" placeholder="value">
   <p>parameter</p>
   <br />
-  <input type="text" name="url" id="url" tabindex="4" class="input-text-light" placeholder="key">
-  <input type="text" name="url" id="url" tabindex="5" class="input-text-light" placeholder="value">
+  <input type="text" name="parameter-key" id="url" tabindex="4" class="input-text-light" placeholder="key" value="<%- data.parameterkey %>">
+  <input type="text" name="parameter-value" id="url" tabindex="5" class="input-text-light" placeholder="value" >
   <br />
-  <button class="btn-save" type="button" id="save1" onclick="reSource();" style="width: 50px;height: 20px">保存</button>
+  <button class="btn-save" type="button" id="save" onclick="reSource();" style="width: 50px;height: 20px">保存</button>
+  <% if (data.length) { %>
+    <form class="form-inline">
+    <% data.forEach(function(name){ %>
+      <input type="text" class="input-small" placeholder="Email" value="<%- name %>">
+    <% }) %>
+    </form>
+  <% } %>
 </form>
 
 <script src="/postman/jquery.min.js" type="text/javascript"></script>
