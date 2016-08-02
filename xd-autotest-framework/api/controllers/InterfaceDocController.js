@@ -6,10 +6,40 @@
  */
 
 module.exports = {
+
+  testmyservice:function(req,res){
+    /**
+    var apiItem={id:"1",dev:"李德洪",disabled:false, version:"1.0.0",description:"登录接口newLogin",name:"登录接口newLogin",
+      url:'http://192.168.88.242:8002/user/newLogin', queryParam:"req={\"platform\":\"local\",\"phoneNum\":\"13600800800\", " +
+      "\"pwd\":\"123456\",\"registrationId\":\"testID123456\"}"};
+
+    console.log("testmyservice:%s",apiItem.id);
+    RequestItem.create(apiItem).exec(function createItem(err,records){ */
+
+    var item={name:"Polly",wingspn:"168.5"};
+    
+    InterfaceDoc.create(item).exec(function createCB(err,records){
+      if (!err) {
+        // 刷新下一页
+        res.send("success");
+      }
+      else {
+        console.log(err);
+      }
+    });
+    var item=JSON.stringify(records);
+
+    //var item= DocService.writeAPItoDB(apiItem);
+    return res.send(item);
+  },
+
   testmydb: function(req,res){
     var item={name:"Polly",wingspn:"168.5"};
     console.log('info.........');
 
+    var req={name:"Polly",wingspn:"168.5"};
+    hello(req,res);
+    console.log("invoke Interface.hello()function successfully!!");
     //
     InterfaceDoc.create(item).exec(function createCB(err,records){
       if(err){
@@ -29,11 +59,12 @@ module.exports = {
             res.view('apidoc'); //输入route.js里的定义的路径名。
           }
         });
-        /**
-        res.send("success"); */
+
       }
     });
-  }
+  },
+
+
 
 };
 

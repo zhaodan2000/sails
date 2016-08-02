@@ -8,14 +8,15 @@
 
 module.exports = {
   hello: function (req, res) {
-    var iter = {name: "test", version: "1.0", description: "it's a desc", url: "192.168.88.89:8042", inputFile: "123", outputFile: "456"};
+    var iter = {name: "test2222", version: "1.0.0", description: "it's a descddd", url: "192.168.88.89:8042"};//, inputFile: "123", outputFile: "456"};
     Interface.create(iter).exec(function createCB(err, created) {
       if (err) {
         // 如果有误，返回错误
-        Interface.find({name:'test'}).exec(function (err, records) {
+        console.log(err);
+        Interface.find({name:'test2222'}).exec(function (err, records) {
           if (!err) {
             // 刷新下一页
-            res.send("success");
+            res.send("found in db success....");
           }
           else {
             console.log(err);

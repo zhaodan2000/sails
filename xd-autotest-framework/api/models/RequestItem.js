@@ -96,7 +96,6 @@ module.exports = {
       response: 'json',
       required: true
     }
-
   }
 };
 
