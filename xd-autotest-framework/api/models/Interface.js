@@ -44,44 +44,43 @@ module.exports = {
     },
     //
     item:{
-      type:'array'
+      type: 'array',
     },
-    
     // req info
-    // url: {
-    //   type: 'string',
-    //   required: true,
-    //   minLength: 1,
-    //   maxLength: 300
-    // },
-    // protocol: {
-    //   type: 'string',
-    //   enum: ['http', 'https'],
-    //   defaultsTo: 'http',
-    //   required: true
-    // },
-    // method: {
-    //   type: 'string',
-    //   enum: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COPY', 'HEAD', 'OPTIONS', 'LINK', 'UNLINK', 'PURGE', 'LOCK', 'UNLOCK', 'PROPFIND', 'VIEW'],
-    //   defaultsTo: 'POST',
-    //   required: true
-    // },
-    // headers: {
-    //   type: 'array'
-    // },
-    // bodyType: {
-    //   type: 'string',
-    //   minLength: 1,
-    //   maxLength: 30
-    // },
-    // requestParam: {
-    //   type: 'string',
-    //   required: true
-    // },
-    // responseParam: {
-    //   type: 'string',
-    //   required: true
-    // },
+    url: {
+      type: 'string',
+      required: true,
+      minLength: 1,
+      maxLength: 300
+    },
+    protocol: {
+      type: 'string',
+      enum: ['http', 'https'],
+      defaultsTo: 'http',
+      required: true
+    },
+    method: {
+      type: 'string',
+      enum: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COPY', 'HEAD', 'OPTIONS', 'LINK', 'UNLINK', 'PURGE', 'LOCK', 'UNLOCK', 'PROPFIND', 'VIEW'],
+      defaultsTo: 'POST',
+      required: true
+    },
+    headers: {
+      type: 'array'
+    },
+    bodyType: {
+      type: 'string',
+      minLength: 1,
+      maxLength: 30
+    },
+    requestParam: {
+      type: 'string',
+      required: true
+    },
+    responseParam: {
+      type: 'string',
+      required: true
+    },
     inputFile: {
       type: 'longtext',
       required: true

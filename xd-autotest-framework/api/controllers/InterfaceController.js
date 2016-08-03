@@ -35,19 +35,17 @@ module.exports = {
     RequestItem.findOne({name: "login"}).exec(function (err, articles) {
       if (!err) {
         // 刷新下一页
-        // return res.send(articles);
+        return res.send(articles);
         var request = RequestItemServices.configRequestItem(articles);
         var item = RequestItemServices.configItem(request);
         var collection = RequestItemServices.configCollection(item);
         console.log(collection);
         RequestItemServices.newmanTest(collection);
-        return res.send(collection);
-
+        // return res.send(collection);
       }
       else {
         console.log(err);
       }
-
     });
   },
 
@@ -77,22 +75,88 @@ module.exports = {
 
   getResponse: function (req, res) {
     var path = require('path');
-    var filePath = path.join(__dirname, '..', '..','outfile.json');
+    var filePath = path.join(__dirname, '..', '..', 'outfile.json');
     console.log(filePath);
-    var response =  CollectionServices.parseResponse(filePath);
-    return res.render('response', {data:response});
-  },
+    var response = CollectionServices.parseResponse(filePath);
+    return res.render('response', {data: response});
 
-  showdoc:function (req,res) {
-    Interface.find({name:'login'}).exec(function (err, records) {
+    RequestItem.findOne({name: "login"}).exec(function (err, articles) {
       if (!err) {
         // 刷新下一页
-        var response = ["url", "www.baidu.com", "headerkey", "token", "parameterkey", "wlf" ];
-        res.view('showdoc', {data:response}); //输入route.js里的定义的路径名。
+        // return res.send(articles);
+        var request = RequestItemServices.configRequestItem(articles);
+        var item = RequestItemServices.configItem(request);
+        var collection = RequestItemServices.configCollection(item);
+        // var collectionJson = JSON.parse(collection);
+        // console.log(collection);
+        // RequestItemServices.newmanTest(collection);
+
+        var path = require('path');
+        var filePath = path.join(__dirname, '..', '..', 'outfile.json');
+        // console.log(filePath);
+        var response = CollectionServices.parseResponse(filePath);
+
+        var responseJson = JSON.parse(response);
+        // console.log(JSON.stringify(responseJson));
+        return res.render('response', {
+          data: JSON.stringify(responseJson, null, 4),
+          collection: JSON.stringify(collection, null, 4)
+        });
       }
       else {
         console.log(err);
-        res.send("no found in db success....");
+      }
+
+    });
+  },
+  showdoc:function (req,res) {
+    DocService.testcallback('newLogin_API', res, function (records) {
+      res.view('showdoc', {data:records});
+    })
+  },
+
+  showreq:function (req, res) {
+    console.log(req.body);
+    var item = {name: req.body.name, version: req.body.version,dev: req.body.dev, description: req.body.description, url: req.body.url, method: req.body.method, headers: {clientType: req.body.clientType,module: req.body.module,version: req.body.version,clientIp: req.body.clientIp,deviceId: req.body.deviceId},mode:req.body.mode,queryParam:{req:req.body.req}};
+    RequestItem.update({name:req.body.name}, item, function (err, records) {
+      if(err){
+        console.log(err);
+      }else {
+        console.log('OK');
+        return res.send('OK');
+      }
+    })
+
+    // return res.send(req.body);
+  },
+
+  showResponse: function (req, res) {
+    RequestItem.findOne({name: 'newLogin_API'}).exec(function (err, articles) {
+      if (!err) {
+        // 刷新下一页
+        // return res.send(articles);
+        var request = RequestItemServices.configRequestItem(articles);
+        var item = RequestItemServices.configItem(request);
+        var collection = RequestItemServices.configCollection(item);
+        // var collectionJson = JSON.parse(collection);
+        // console.log(collection);
+        // RequestItemServices.newmanTest(collection);
+
+        var path = require('path');
+        var filePath = path.join(__dirname, '..', '..', 'outfile.json');
+        // console.log(filePath);
+        var response = CollectionServices.parseResponse(filePath);
+
+        var responseJson = JSON.parse(response);
+        console.log(JSON.stringify(responseJson));
+        return res.view('response', {
+          data: JSON.stringify(responseJson, null, 4),
+          collection: JSON.stringify(collection, null, 4)
+        });
+        // return res.view('homeindex');
+      }
+      else {
+        console.log(err);
       }
     });
   }
