@@ -10,6 +10,7 @@ module.exports = {
   //根据item生成collection 并返回
   configCollection: function (item) {
     var collection = {
+      variables: [],
       info:{
         _postman_id:'eaa77b0b-8bab-616c-f866-a76fa867c19c',
         name:'new Collection',
@@ -34,13 +35,13 @@ module.exports = {
       name : request.name,
       disabled : request.disabled,
       request : request,
-      event:[{
+      event:{
         listen: 'test',
         script: {
           type: "text/javascript",
           exec: "var jsonData = JSON.parse(responseBody);\ntests[\"retcode\"] = jsonData.retcode === \"0\";"
         }
-      }]
+      }
     }
     return item;
   },
