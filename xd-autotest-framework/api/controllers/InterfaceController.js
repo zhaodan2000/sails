@@ -81,8 +81,9 @@ module.exports = {
     console.log(filePath);
     var response =  CollectionServices.parseResponse(filePath);
 
-    return res.render('response', {data:response});
+    var responseJson = JSON.parse(response);
+    console.log(JSON.stringify(responseJson));
+    return res.render('response', {data:JSON.stringify(responseJson, null, 4)});
   }
-
 };
 

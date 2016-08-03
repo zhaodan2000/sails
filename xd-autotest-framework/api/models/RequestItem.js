@@ -94,6 +94,14 @@ module.exports = {
       response: 'json',
       required: false
     }
+  },
+
+  before: function () {
+
+  },
+  after: function () {
+
   }
+
 };
 

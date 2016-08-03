@@ -58,7 +58,7 @@ module.exports = {
   //解析项目目录下outflie.json文件,获取测试的response
   parseResponse: function (filePath) {
     var responsefile = fs.readFileSync(filePath, 'utf8');
-    var responseJSON = JSON5.parse(responsefile);
+    var responseJSON = JSON5.parse(responsefile, null, 2);
 
     //获取results数组,此处应该遍历数组,并返回另一个只含有body的数组
     var results = responseJSON.results;
