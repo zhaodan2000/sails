@@ -7,13 +7,19 @@
 
 module.exports = {
 
-    testCallback:function(req,res, callbackFnc){
-      //Request
+  /**
+   * 根据入参的name, 来查找mongodb里的符合条件的记录。
+   **/
+    findRequestItemByName:function(req,res){
+      var requestName="newLogin_API";
+      DocService.testcallback(requestName,res,function (records) {
+        if(records){
+          var retres={retcode:0,retdesc:"success",data:records};
+          res.send(retres);}
+          else
+          res.send({retcode:-1,retdesc:"syserror"})
+      });
 
-    },
-
-    callbackFnc:function(req){
-      return req;
     },
 
     testRequestService:function(req,res){
@@ -28,7 +34,7 @@ module.exports = {
 
 
     //var apiItem = {name: "login", version: "1.0",dev: 'zhang', description: "it's a desc", url: "http://192.168.103.101:8002/user/newLogin", method: "POST", headers: {clientType: 'android',module: '2',version: '1.0',clientIp: '192.168.31.23',deviceId: 'MyTestDeviceID123'},mode:'urlencoded',queryParam:{req:'{\"platform\":\"local\",\"phoneNum\":\"18210191798\",\"pwd\":\"123456\"}'}};
-
+    //if(mongoDb.contains(apiItem.id)) return err.existRecord.
     RequestItem.create(apiItem).exec(function(err,records){
       if(err){
         return res.serverError(err);

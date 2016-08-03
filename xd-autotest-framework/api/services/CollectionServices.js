@@ -33,6 +33,7 @@ module.exports = {
 
     return newCollection;
   },
+  
   //生成Newman执行需要的option
   optionMake : function () {
     return {
