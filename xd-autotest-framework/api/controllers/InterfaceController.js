@@ -11,14 +11,13 @@ module.exports = {
     var iter = {name: "login", version: "1.0",dev: 'zhang', description: "it's a desc", url: "http://192.168.103.101:8002/user/newLogin", method: "POST", headers: {clientType: 'android',module: '2',version: '1.0',clientIp: '192.168.31.23',deviceId: 'MyTestDeviceID123'},mode:'urlencoded',queryParam:{req:'{\"platform\":\"local\",\"phoneNum\":\"18210191798\",\"pwd\":\"123456\"}'}};
     // var iter = {name:'test'};
     RequestItem.create(iter).exec(function createCB(err, created) {
-
       if (err) {
-        // 如果有误，返回错误
         console.log(err);
-        Interface.find({name:'test2222'}).exec(function (err, records) {
+        // 如果有误，返回错误
+        RequestItem.find({name:'login'}).exec(function (err, records) {
           if (!err) {
             // 刷新下一页
-            res.send("found in db success....");
+            res.send("success");
           }
           else {
             console.log(err);
@@ -28,7 +27,7 @@ module.exports = {
         //res.view('passport/register', {err: err});
       } else {
         // 否则，将新创建的用户登录
-        res.send("Ok");
+        res.send("Ok"+ JSON.stringify(created));
       }
     });
   },
@@ -81,7 +80,6 @@ module.exports = {
     var filePath = path.join(__dirname, '..', '..','outfile.json');
     console.log(filePath);
     var response =  CollectionServices.parseResponse(filePath);
-
     return res.render('response', {data:response});
   },
 
