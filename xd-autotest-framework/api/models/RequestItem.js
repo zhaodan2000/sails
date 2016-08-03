@@ -22,20 +22,27 @@ module.exports = {
       }
     },
     //auth 开发人员
-    auth:{
+    dev:{
       type:'string',
-      required: true,
+      required: false
+    },
+
+    //可用状态
+    disabled:{
+      type:'boolean',
+      required: false
     },
 
     version: {
       type: 'string',
-      required: true,
+      required: false,
       minLength: 1,
       maxLength: 20
     },
+
     description: {
       type: 'string',
-      required: true,
+      required: false,
       minLength: 1,
       maxLength: 300
     },
@@ -48,39 +55,53 @@ module.exports = {
       maxLength: 60
     },
 
-    //url    将被转化为Url对象进行配置
+    //url
     url: {
       type: 'string',
       required: true,
       minLength: 1,
       maxLength: 300
     },
-    //param json->jsonSting  param 将会添加到Url中
+
+    //param json
     queryParam:{
-      type:'string'
+      type:'json',
+      required: false
     },
 
     method: {
       type: 'string',
       enum: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COPY', 'HEAD', 'OPTIONS', 'LINK', 'UNLINK', 'PURGE', 'LOCK', 'UNLOCK', 'PROPFIND', 'VIEW'],
       defaultsTo: 'POST',
-      required: true
+      required: false
     },
 
-    //headerString = 'Content-Type: application/json\nUser-Agent: MyClientLibrary/2.0\n';存储时应该把JSON转化为JSONString
+    //header Json
     headers: {
-      type: 'string'
+      type: 'json',
+      required: false
     },
 
     //body
     mode: {
       type: 'string',
-      enum:['raw', 'formdata','urlencoded','file'],
-      defaultsTO: 'urlencoded',
-      required: true
+      enum:['raw', 'formdata', 'urlencoded','file'],
+      required: false
     },
 
+    //response
+    response: {
+      response: 'json',
+      required: false
+    }
+  },
+
+  before: function () {
+
+  },
+  after: function () {
 
   }
+
 };
 

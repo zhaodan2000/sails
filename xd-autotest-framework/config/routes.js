@@ -33,7 +33,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    view: 'homepage'
+    view: 'index'
   },
 
   /***************************************************************************
@@ -50,9 +50,9 @@ module.exports.routes = {
     view: 'postman'
   },
   '/apidoc':{
-    view:'apidoc'
+    view:'APIdoc'
   },
-  'uitemplate':{
+  '/uitemplate':{
     view:'uitemplate'
   },
   '/homeindex':{
