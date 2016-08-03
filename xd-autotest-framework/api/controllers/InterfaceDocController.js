@@ -22,14 +22,22 @@ module.exports = {
 
     },
 
+    deleteRecordsByID:function(req,res){
+        //var name="";
+      RequestItem.destroy({name:"home"}).exec(function(err){
+          //console.log("删除，ID："+name);
+          //cb(null);
+        });
+
+      },
+
     testRequestService:function(req,res){
 
-    var apiItem={id:"100000",dev:"lidehong",disabled:false,name:"newLogin_API",
-      url:"http://192.168.103.101:8002/user/newLogin",
-      queryParam:{req:"{\"platform\":\"local\",\"phoneNum\":\"13600800800\", "+
-      "\"pwd\":\"123456\",\"registrationId\":\"testID123456\"}"},
+    var apiItem={id:"4",dev:"lidehong",disabled:false,name:"HOME3",
+      url:"http://192.168.103.101:8020/selftaught/home",
+      queryParam:{req:""},
       version:"1.0.0",description:"test !!!",method:"POST",headers:{module:"2",
-        clientType:"ios",version:"1.0.0",clientIp:"127.0.0.1",deviceId:"testDeviceId123456"},
+        clientType:"ios",version:"1.0.0",clientIp:"127.0.0.1",deviceId:"testDeviceId123456",sessionToken:"token123"},
       mode:"urlencoded",response:""};
 
 

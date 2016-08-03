@@ -11,13 +11,8 @@ module.exports= {
     RequestItem.find({name: requestName}).exec(function (err, records) {
       if (!err) {
         console.log("find records success!");
-
         callback(records);
-        //res.render("homeindex", {data: JSON.stringify(records)});
-
-
-
-        }
+      }
       else {
         console.log("find records failure!");
         callback(null);
