@@ -35,19 +35,17 @@ module.exports = {
     RequestItem.findOne({name: "login"}).exec(function (err, articles) {
       if (!err) {
         // 刷新下一页
-        // return res.send(articles);
+        return res.send(articles);
         var request = RequestItemServices.configRequestItem(articles);
         var item = RequestItemServices.configItem(request);
         var collection = RequestItemServices.configCollection(item);
         console.log(collection);
         RequestItemServices.newmanTest(collection);
-        return res.send(collection);
-
+        // return res.send(collection);
       }
       else {
         console.log(err);
       }
-
     });
   },
 
@@ -70,20 +68,40 @@ module.exports = {
     //设置option, 待完善
     var option = CollectionServices.optionMake();
     CollectionServices.testCollectionWithCallBack(collection, option, function (exitCode) {
-      
+
       console.log(exitCode);
     });
   },
 
   getResponse: function (req, res) {
-    var path = require('path');
-    var filePath = path.join(__dirname, '..', '..','outfile.json');
-    console.log(filePath);
-    var response =  CollectionServices.parseResponse(filePath);
 
-    var responseJson = JSON.parse(response);
-    console.log(JSON.stringify(responseJson));
-    return res.render('response', {data:JSON.stringify(responseJson, null, 4)});
+    RequestItem.findOne({name: "login"}).exec(function (err, articles) {
+      if (!err) {
+        // 刷新下一页
+        // return res.send(articles);
+        var request = RequestItemServices.configRequestItem(articles);
+        var item = RequestItemServices.configItem(request);
+        var collection = RequestItemServices.configCollection(item);
+        // var collectionJson = JSON.parse(collection);
+        // console.log(collection);
+        // RequestItemServices.newmanTest(collection);
+
+        var path = require('path');
+        var filePath = path.join(__dirname, '..', '..','outfile.json');
+        // console.log(filePath);
+        var response =  CollectionServices.parseResponse(filePath);
+
+        var responseJson = JSON.parse(response);
+        // console.log(JSON.stringify(responseJson));
+        return res.render('response', {data:JSON.stringify(responseJson, null, 4), collection:JSON.stringify(collection, null, 4)});
+      }
+      else {
+        console.log(err);
+      }
+
+    });
+
+
   }
 };
 

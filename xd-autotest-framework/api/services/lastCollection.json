@@ -47,15 +47,13 @@
           ]
         }
       },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": "var jsonData = JSON.parse(responseBody);\ntests[\"retcode\"] = jsonData.retcode === \"0\";"
-          }
+      "event": {
+        "listen": "test",
+        "script": {
+          "type": "text/javascript",
+          "exec": "var jsonData = JSON.parse(responseBody);\ntests[\"retcode\"] = jsonData.retcode === \"0\";"
         }
-      ]
+      }
     }
   ]
 }
