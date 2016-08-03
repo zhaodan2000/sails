@@ -1,0 +1,9 @@
+svn
+username lixuefeng
+password lxf@xiaodou
+公共服务端目录
+svn://211.157.137.248/repos/pub
+小逗教资代码目录
+svn://211.157.137.248/repos/xdjz
+APP代码提交在
+svn://211.157.137.248/repos/xdjz/App/Trunk下面

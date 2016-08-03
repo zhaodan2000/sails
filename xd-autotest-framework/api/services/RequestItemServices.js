@@ -10,6 +10,7 @@ module.exports = {
   //根据item生成collection 并返回
   configCollection: function (item) {
     var collection = {
+      variables: [],
       info:{
         _postman_id:'eaa77b0b-8bab-616c-f866-a76fa867c19c',
         name:'new Collection',
@@ -17,11 +18,11 @@ module.exports = {
       },
       item: [item]
     }
-    fs.writeFile("itemCollection.json", JSON.stringify(collection, null, 2), function (err) {
+    fs.writeFile("./api/services/lastCollection.json", JSON.stringify(collection, null, 2), function (err) {
       if (err) {
         console.log('err ---------'+err);
       } else {
-        console.log("JSON saved to itemCollection.json" );
+        console.log("JSON saved to lastCollection.json" );
       }
     });
     return collection;
@@ -34,13 +35,13 @@ module.exports = {
       name : request.name,
       disabled : request.disabled,
       request : request,
-      event:[{
+      event:{
         listen: 'test',
         script: {
           type: "text/javascript",
           exec: "var jsonData = JSON.parse(responseBody);\ntests[\"retcode\"] = jsonData.retcode === \"0\";"
         }
-      }]
+      }
     }
     return item;
   },
@@ -72,7 +73,7 @@ module.exports = {
     // define Newman options
     var newmanOptions = {
       iterationCount: 1,                    // define the number of times the runner should run
-      outputFile: "outfile.json",            // the file to export to
+      outputFile: "./api/services/outfile.json",            // the file to export to
       responseHandler: "TestResponseHandler", // the response handler to use
       asLibrary: true,         				// this makes sure the exit code is returned as an argument to the callback function
       stopOnError: true
@@ -85,28 +86,6 @@ module.exports = {
     });
   }
 }
-
-
-// function parseHeaderString(headerString) {
-//   var headers = [],
-//     regexes = {
-//       header: /^(\S+):(.*)$/gm,
-//       fold: /\r\n([ \t])/g,
-//       trim: /^\s*(.*\S)?\s*$/
-//     },
-//     match = regexes.header.exec(headerString);
-//   headerString = headerString.toString().replace(regexes.fold, '$1');
-//
-//   while (match) {
-//     headers.push({
-//       key: match[1],
-//       value: match[2].replace(regexes.trim, '$1')
-//     });
-//     match = regexes.header.exec(headerString);
-//   }
-//   console.log(headers);
-//   return headers;
-// }
 
 function getHeaderWithJson(headerJson) {
   var headerArray = new Array;
