@@ -17,6 +17,7 @@ $(function(){
   $.each($(".side-nav>li"), function () {
     var node = $(this);
     node.click(function () {
+      $(".active").removeClass("active");
       var target = node.children();
       $.main.refreshRight(target.attr("target"));
     });
