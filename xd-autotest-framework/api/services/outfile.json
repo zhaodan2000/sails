@@ -1,23 +1,24 @@
 {
     "id": "",
     "name": "Default",
-    "timestamp": 1470205996966,
-    "collection_id": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
+    "timestamp": 1470296393748,
+    "collection_id": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
     "folder_id": 0,
     "target_type": "collection",
     "count": 1,
     "collection": {
-        "id": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
-        "name": "new Collection",
+        "id": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
+        "name": "testCollection",
+        "description": "This is a description",
         "order": [
-            "ba1c8684-d9b1-43b2-9ae2-b22e71806c68"
+            "83509941-cb61-44f8-85d4-cb9225747b2c"
         ],
         "folders": [],
         "requests": [
             {
-                "id": "ba1c8684-d9b1-43b2-9ae2-b22e71806c68",
+                "id": "83509941-cb61-44f8-85d4-cb9225747b2c",
                 "name": "login",
-                "collectionId": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
+                "collectionId": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
                 "method": "POST",
                 "headers": "clientType: android\nmodule: 2\nversion: 1.0\nclientIp: 192.168.31.23\ndeviceId: MyTestDeviceID123",
                 "dataMode": "urlencoded",
@@ -30,7 +31,7 @@
                     }
                 ],
                 "rawModeData": "",
-                "tests": "",
+                "tests": "var jsonData = JSON.parse(responseBody);\ntests[\"retcode = 0 pass\"] = jsonData.retcode === \"0\";",
                 "preRequestScript": "",
                 "url": "http://192.168.103.101:8002/user/newLogin"
             }
@@ -42,28 +43,37 @@
     },
     "results": [
         {
-            "id": "ba1c8684-d9b1-43b2-9ae2-b22e71806c68",
+            "id": "83509941-cb61-44f8-85d4-cb9225747b2c",
             "name": "login",
             "url": "http://192.168.103.101:8002/user/newLogin",
-            "totalTime": 128,
+            "totalTime": 138,
             "responseCode": {
                 "code": 200,
                 "name": "",
                 "detail": "",
-                "body": "{\"moduleInfo\":{\"admissionCardCode\":\"\",\"age\":\"0\",\"bePraiseNum\":\"0\",\"createTime\":\"2016-07-07 10:57:59.0\",\"credit\":\"53\",\"degreeLevel\":\"\",\"gender\":\"1\",\"id\":\"208\",\"identificationCardCode\":\"\",\"latestDeviceIp\":\"192.168.31.23\",\"major\":\"01B0402\",\"majorName\":\"\",\"medalId\":\"1 \",\"medalImg\":\"http://7xigj3.com1.z0.glb.clouddn.com/image_2015_11_13_15_59_230f0054d4-e12a-41ee-b88d-ad67d728a263  \",\"medalName\":\"无名的旅人 \",\"merchant\":\"\",\"module\":\"2\",\"nickName\":\"姬丝秀忒\",\"officialGender\":\"\",\"picList\":[],\"platform\":\"local\",\"portrait\":\"http://7xigj3.com1.z0.glb.clouddn.com/DE9B75CD-CFCE-4BCE-831E-F1064631466B\",\"realName\":\"\",\"salt\":\"HnRx6n\",\"sign\":\"\",\"token\":\"b50ffa76-e94b-4b6a-a551-d61ea4574c2d\",\"tokenTime\":\"2016-08-03 14:34:38.848\",\"uniqueId\":\"\",\"usedDeviceId\":\"MyTestDeviceID123\",\"userId\":\"208\",\"userName\":\"18210191798\",\"userType\":\"1\"},\"retOk\":true,\"retcode\":\"0\",\"retdesc\":\"操作成功\",\"serverIp\":\"127.0.1.1\",\"token\":\"b50ffa76-e94b-4b6a-a551-d61ea4574c2d\"}"
+                "body": "{\"moduleInfo\":{\"admissionCardCode\":\"\",\"age\":\"0\",\"bePraiseNum\":\"0\",\"createTime\":\"2016-07-07 10:57:59.0\",\"credit\":\"53\",\"degreeLevel\":\"\",\"gender\":\"1\",\"id\":\"208\",\"identificationCardCode\":\"\",\"latestDeviceIp\":\"192.168.31.23\",\"major\":\"01B0402\",\"majorName\":\"\",\"medalId\":\"1 \",\"medalImg\":\"http://7xigj3.com1.z0.glb.clouddn.com/image_2015_11_13_15_59_230f0054d4-e12a-41ee-b88d-ad67d728a263  \",\"medalName\":\"无名的旅人 \",\"merchant\":\"\",\"module\":\"2\",\"nickName\":\"姬丝秀忒\",\"officialGender\":\"\",\"picList\":[],\"platform\":\"local\",\"portrait\":\"http://7xigj3.com1.z0.glb.clouddn.com/DE9B75CD-CFCE-4BCE-831E-F1064631466B\",\"realName\":\"\",\"salt\":\"HnRx6n\",\"sign\":\"\",\"token\":\"a454ad1f-67fe-4d9e-a4ba-19c80be66a90\",\"tokenTime\":\"2016-08-04 15:41:18.437\",\"uniqueId\":\"\",\"usedDeviceId\":\"MyTestDeviceID123\",\"userId\":\"208\",\"userName\":\"18210191798\",\"userType\":\"1\"},\"retOk\":true,\"retcode\":\"0\",\"retdesc\":\"操作成功\",\"serverIp\":\"127.0.1.1\",\"token\":\"a454ad1f-67fe-4d9e-a4ba-19c80be66a90\"}"
             },
-            "tests": {},
+            "tests": {
+                "retcode = 0 pass": true
+            },
             "totalPassFailCounts": {
-                "pass": 0,
+                "pass": 1,
                 "fail": 0
             },
-            "testPassFailCounts": {},
+            "testPassFailCounts": {
+                "retcode = 0 pass": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
             "times": [],
             "allTests": [
-                {}
+                {
+                    "retcode = 0 pass": true
+                }
             ],
-            "time": 128,
-            "meanResponseTime": 128
+            "time": 138,
+            "meanResponseTime": 138
         }
     ],
     "environment": {

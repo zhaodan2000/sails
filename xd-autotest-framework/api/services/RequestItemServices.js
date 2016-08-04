@@ -18,6 +18,7 @@ module.exports = {
       },
       item: [item]
     }
+
     fs.writeFile("./api/services/lastCollection.json", JSON.stringify(collection, null, 2), function (err) {
       if (err) {
         console.log('err ---------'+err);
@@ -29,19 +30,20 @@ module.exports = {
   },
 
   //根据request生成item
-  configItem: function (request) {
+  configItem: function (request, event) {
     var item = {
       id : request.id,
       name : request.name,
       disabled : request.disabled,
       request : request,
-      event:{
-        listen: 'test',
-        script: {
-          type: "text/javascript",
-          exec: "var jsonData = JSON.parse(responseBody);\ntests[\"retcode\"] = jsonData.retcode === \"0\";"
-        }
-      }
+      event:event
+      // event:[{
+      //   listen: 'test',
+      //   script: {
+      //     type: "text/javascript",
+      //     exec: "var jsonData = JSON.parse(responseBody);\ntests[\"retcode\"] = jsonData.retcode === \"0\";"
+      //   }
+      // }]
     }
     return item;
   },
@@ -63,13 +65,13 @@ module.exports = {
         urlencoded:getQueryParamWithJson(queryParam)
       }
     }
-
     return request;
   },
 
   newmanTest: function (collection) {
     var Newman = require('newman');
     var fs = require('fs');
+
     // define Newman options
     var newmanOptions = {
       iterationCount: 1,                    // define the number of times the runner should run
@@ -100,7 +102,6 @@ function getHeaderWithJson(headerJson) {
       headerArray.push(header);
     }
   }
-
   // console.log(headerArray);
   return headerArray;
 }
@@ -120,8 +121,6 @@ function getQueryParamWithJson(paramJson) {
       paramArray.push(param);
     }
   }
-
-
   // console.log(paramArray);
   return paramArray;
 }

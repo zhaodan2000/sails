@@ -110,14 +110,15 @@ module.exports = {
     });
   },
   showdoc:function (req,res) {
-    DocService.testcallback('newLogin_API', res, function (records) {
+    DocService.testcallback('HOME2', res, function (records) {
       res.view('showdoc', {data:records});
     })
   },
 
   showreq:function (req, res) {
     console.log(req.body);
-    var item = {name: req.body.name, version: req.body.version,dev: req.body.dev, description: req.body.description, url: req.body.url, method: req.body.method, headers: {clientType: req.body.clientType,module: req.body.module,version: req.body.version,clientIp: req.body.clientIp,deviceId: req.body.deviceId},mode:req.body.mode,queryParam:{req:req.body.req}};
+
+    var item = {name: req.body.name, version: req.body.version,dev: req.body.dev, description: req.body.description, url: req.body.url, method: req.body.method, headers: {sessionToken:req.body.sessionToken,clientType: req.body.clientType,module: req.body.module,version: req.body.version,clientIp: req.body.clientIp,deviceId: req.body.deviceId},mode:req.body.mode,queryParam:{req:req.body.req}};
     RequestItem.update({name:req.body.name}, item, function (err, records) {
       if(err){
         console.log(err);
@@ -131,7 +132,8 @@ module.exports = {
   },
 
   showResponse: function (req, res) {
-    RequestItem.findOne({name: 'newLogin_API'}).exec(function (err, articles) {
+
+    RequestItem.findOne({name: 'HOME2'}).exec(function (err, articles) {
       if (!err) {
         // 刷新下一页
         // return res.send(articles);
@@ -140,14 +142,18 @@ module.exports = {
         var collection = RequestItemServices.configCollection(item);
         // var collectionJson = JSON.parse(collection);
         // console.log(collection);
-        // RequestItemServices.newmanTest(collection);
+        RequestItemServices.newmanTest(collection);
 
         var path = require('path');
-        var filePath = path.join(__dirname, '..', '..', 'outfile.json');
+        var filePath = path.join(__dirname, '..', 'services', 'outfile.json');
         // console.log(filePath);
         var response = CollectionServices.parseResponse(filePath);
+        console.log(response);
+        var responseJson;
+        if (response){
+          responseJson = JSON.parse(response);
+        }
 
-        var responseJson = JSON.parse(response);
         console.log(JSON.stringify(responseJson));
         return res.view('response', {
           data: JSON.stringify(responseJson, null, 4),
