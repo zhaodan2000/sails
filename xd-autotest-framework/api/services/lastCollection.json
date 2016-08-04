@@ -7,35 +7,35 @@
   },
   "item": [
     {
-      "id": "4",
-      "name": "HOME2",
+      "id": "100000",
+      "name": "newLogin_API",
       "disabled": false,
       "request": {
-        "id": "4",
-        "name": "HOME2",
+        "id": "100000",
+        "name": "newLogin_API",
         "disabled": false,
-        "url": "http://192.168.103.101:8020/selftaught/home",
+        "url": "http://192.168.103.101:8002/user/newLogin",
         "method": "POST",
         "header": [
           {
             "key": "clientType",
-            "value": null
+            "value": "iOS"
           },
           {
             "key": "module",
-            "value": null
+            "value": "iOS"
           },
           {
             "key": "version",
-            "value": null
+            "value": "iOS"
           },
           {
             "key": "clientIp",
-            "value": null
+            "value": "iOS"
           },
           {
             "key": "deviceId",
-            "value": null
+            "value": "iOS"
           }
         ],
         "body": {
@@ -43,22 +43,13 @@
           "urlencoded": [
             {
               "key": "req",
-              "value": "qqqqqqqqqqqq",
+              "value": "iOS",
               "type": "text",
               "enabled": true
             }
           ]
         }
-      },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": "var jsonData = JSON.parse(responseBody);\ntests[\"retcode\"] = jsonData.retcode === \"0\";"
-          }
-        }
-      ]
+      }
     }
   ]
 }
