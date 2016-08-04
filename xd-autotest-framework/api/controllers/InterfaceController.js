@@ -148,6 +148,7 @@ module.exports = {
   },
 
   showResponse: function (req, res) {
+
     RequestItem.findOne({name: 'newLogin_API'}).exec(function (err, articles) {
       if (!err) {
         // 刷新下一页
@@ -157,14 +158,18 @@ module.exports = {
         var collection = RequestItemServices.configCollection(item);
         // var collectionJson = JSON.parse(collection);
         // console.log(collection);
-        // RequestItemServices.newmanTest(collection);
+        RequestItemServices.newmanTest(collection);
 
         var path = require('path');
-        var filePath = path.join(__dirname, '..', '..', 'outfile.json');
+        var filePath = path.join(__dirname, '..', 'services', 'outfile.json');
         // console.log(filePath);
         var response = CollectionServices.parseResponse(filePath);
+        console.log(response);
+        var responseJson;
+        if (response){
+          responseJson = JSON.parse(response);
+        }
 
-        var responseJson = JSON.parse(response);
         console.log(JSON.stringify(responseJson));
         return res.view('response', {
           data: JSON.stringify(responseJson, null, 4),

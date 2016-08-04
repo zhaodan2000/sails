@@ -13,6 +13,7 @@ module.exports = {
   connection: 'someMongodbServer',
   tableName: 'xd_autotest_request',
   attributes: {
+
     id: {
       type: 'string',
       required: true,
@@ -21,6 +22,16 @@ module.exports = {
         return uuid.v4();
       }
     },
+
+    //request name
+    name: {
+      type: 'string',
+      required: true,
+      minLength: 1,
+      // unique:true,
+      maxLength: 60
+    },
+
     //auth 开发人员
     dev:{
       type:'string',
@@ -45,14 +56,6 @@ module.exports = {
       required: false,
       minLength: 1,
       maxLength: 300
-    },
-
-    //request name
-    name: {
-      type: 'string',
-      required: true,
-      minLength: 1,
-      maxLength: 60
     },
 
     //url
@@ -91,17 +94,21 @@ module.exports = {
 
     //response
     response: {
-      response: 'json',
+      type: 'json',
       required: false
+    },
+
+    //preScript 前置脚本
+    prescript:{
+      type:'string',
+      required:false
+    },
+
+    //testscript  后置脚本
+    testscript:{
+      type:'string',
+      required:false
     }
-  },
-
-  before: function () {
-
-  },
-  after: function () {
-
   }
-
 };
 

@@ -24,6 +24,7 @@
     "include-all": "~0.1.6",
     "json5": "^0.5.0",
     "kerberos": "0.0.21",
+    "mathjs": "^3.3.0",
     "node-uuid": "^1.4.7",
     "postman-collection": "^0.4.3",
     "rc": "1.0.1",
