@@ -62,7 +62,7 @@ module.exports = {
 
     item:{
       type:'array',
-      required:true
+      required:false
     }
   }
 };
