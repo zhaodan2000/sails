@@ -9,9 +9,11 @@ module.exports={
   attributes:{
     name:{
       type:'string'
+      //unique:true
     },
     wingspn:{
       type:'float',
+
       required:true
     },
     wingspanUnits:{

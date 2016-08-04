@@ -4,6 +4,7 @@
 
 var JSON5 = require('json5');
 
+
 module.exports= {
 
   testcallback: function (requestName, res, callback) {
@@ -13,7 +14,7 @@ module.exports= {
         console.log("find records success!");
         callback(records);
       }
-      else {
+      else{
         console.log("find records failure!");
         callback(null);
       }

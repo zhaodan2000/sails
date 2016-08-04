@@ -7,33 +7,9 @@
 
 module.exports = {
 
-  /**
-   * 根据入参的name, 来查找mongodb里的符合条件的记录。
-   **/
-    findRequestItemByName:function(req,res){
-      var requestName="newLogin_API";
-      DocService.testcallback(requestName,res,function (records) {
-        if(records){
-          var retres={retcode:0,retdesc:"success",data:records};
-          res.send(retres);}
-          else
-          res.send({retcode:-1,retdesc:"syserror"})
-      });
+  testSerivce:function(req,res){
 
-    },
-
-    deleteRecordsByID:function(req,res){
-        //var name="";
-      RequestItem.destroy({name:"home"}).exec(function(err){
-          //console.log("删除，ID："+name);
-          //cb(null);
-        });
-
-      },
-
-    testRequestService:function(req,res){
-
-    var apiItem={id:"4",dev:"lidehong",disabled:false,name:"HOME3",
+    var apiItem={id:"5",dev:"lidehong",disabled:false,name:"HOME5",
       url:"http://192.168.103.101:8020/selftaught/home",
       queryParam:{req:""},
       version:"1.0.0",description:"test !!!",method:"POST",headers:{module:"2",
@@ -41,30 +17,125 @@ module.exports = {
       mode:"urlencoded",response:""};
 
 
-    //var apiItem = {name: "login", version: "1.0",dev: 'zhang', description: "it's a desc", url: "http://192.168.103.101:8002/user/newLogin", method: "POST", headers: {clientType: 'android',module: '2',version: '1.0',clientIp: '192.168.31.23',deviceId: 'MyTestDeviceID123'},mode:'urlencoded',queryParam:{req:'{\"platform\":\"local\",\"phoneNum\":\"18210191798\",\"pwd\":\"123456\"}'}};
-    //if(mongoDb.contains(apiItem.id)) return err.existRecord.
-    RequestItem.create(apiItem).exec(function(err,records){
-      if(err){
-        return res.serverError(err);
-      }
-      console.log("records.name is: %s",records.name);
-      return res.send(JSON.stringify(records));
-    });
-
-    //var item=  //JSON.stringify(records);
-
-    //var item= DocService.writeAPItoDB(apiItem);
+    mongoService.findRequestItemByName("HOME5");
+    mongoService.insertRequestItemRecord(requestItem);
 
   },
 
+  handleFileWrite:function(req,res) {
+    var fs=require('fs');
+    var path=require('path');
+
+    console.log("current path:"+__dirname);
+
+   /**
+    * 读取文件目录是否存在。
+    * */
+    var mdFiledir=__dirname+'/mdFiles';
+    var isDirExisted;
+    fs.fs.exists(mdFiledir,function(exists) {
+      isDirExisted=exists;
+    });
+
+    /**
+     * 创建目录,如果目录不存在的话。
+     * */
+    if(!isDirExisted){fs.mkdir(mdFiledir);}
+
+  },
+
+  /**
+   * 根据入参的name, 来查找mongodb里的符合条件的记录。
+   **/
+    findRequestItemByName:function(req,res) {
+    var requestName = "HOME6";
+    /**
+     DocService.testcallback(requestName,res,function (records) {
+        if(records){
+          var retres={retcode:0,retdesc:"success",data:records};
+          res.send(retres);}
+          else
+          res.send({retcode:-1,retdesc:"syserror"})
+      });
+     */
+    mongoService.findRequestItemByName(requestName, function (records) {
+      if (records) {
+        var retres = {retcode: 0, retdesc: "success", data: records};
+        res.send(retres);
+      }
+      else
+        res.send({retcode: -1, retdesc: "syserror"})
+    });
+  },
+
+  /**
+   * 删除MongoDB中的记录。
+   * @param req
+   * @param res
+     */
+    deleteRecordsByID:function(req,res){
+        //var name="";
+      RequestItem.destroy({name:'home'}).exec(function(err){
+          //console.log("删除，ID："+name);
+          //cb(null);
+        });
+
+      },
+
+  /**
+    * 删除所有MongoDB中的requestItem记录。
+    * */
+  deleteAllRequestItemRecords:function(req,res){
+    RequestItem.destroy().exec(function(err){
+      if(!err){
+        console.log("删除所有requestItem records成功!");
+      }else{
+        console.log("删除所有requestItem records失败。。。");
+      }
+    });
+
+},
+
+
+  /***
+   * 生成一个接口MongoDB记录。
+   * @param req
+   * @param res
+     */
+  insertRequestItemService:function(req,res){
+      var apiItem={id:"6",dev:"lidehong",disabled:false,name:"HOME6",
+        url:"http://192.168.103.101:8020/selftaught/home",
+        queryParam:{req:""},
+        version:"1.0.0",description:"test !!!",method:"POST",headers:{module:"2",
+          clientType:"ios",version:"1.0.0",clientIp:"127.0.0.1",deviceId:"testDeviceId123456",sessionToken:"token123"},
+        mode:"urlencoded",response:""};
+
+      mongoService.insertRequestItemRecord(apiItem,function(records){
+        return ;
+    });
+
+  },
+
+  /**
+   * 根据ID来更新记录内容。
+   * @param req
+   * @param
+   * */
+  updateRequestItemByName: function(req,res){
+    mongoService.updateRequestItem();
+  },
+
+  /***
+   * 写入自定义
+   * @param req
+   * @param res
+     */
   testmyservice:function(req,res){
     /**
     var apiItem={id:"1",dev:"李德洪",disabled:false, version:"1.0.0",description:"登录接口newLogin",name:"登录接口newLogin",
       url:'http://192.168.88.242:8002/user/newLogin', queryParam:"req={\"platform\":\"local\",\"phoneNum\":\"13600800800\", " +
       "\"pwd\":\"123456\",\"registrationId\":\"testID123456\"}"};
-
-    console.log("testmyservice:%s",apiItem.id);
-    RequestItem.create(apiItem).exec(function createItem(err,records){ */
+    */
 
     var item={name:"Polly222",wingspn:"168.5000"};
 
