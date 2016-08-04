@@ -4,15 +4,21 @@
 
 
 $(document).ready(function () {
-  var options = {
-    success: function (data) {
-      console.log(data);
-      window.location.href='showResponse';
+  var option_run = { success: function(data) { 
+    console.log(data); window.location.href = 'showResponse';
+    }
+  };
+  var option_save = { success: function(data) {
+       console.log(data);
     }
   };
 
-  // ajaxSubmit
-  $("#saveBtn").click(function () {
-    $("#form").ajaxSubmit(options);
+  // ajaxSubmit 
+  $("#runBtn").click(function () {
+    $("#form").ajaxSubmit(option_run);
+  });
+
+    $("#saveBtn").click(function () {  
+    $("#form").ajaxSubmit(option_save); 
   });
 });

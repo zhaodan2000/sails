@@ -44,7 +44,7 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/postmanUI': {
+  '/postmanUI/{id}': {
     view: 'showdoc'
   },
   '/apidoc':{

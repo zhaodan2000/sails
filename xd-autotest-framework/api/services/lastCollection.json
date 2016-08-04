@@ -19,23 +19,23 @@
         "header": [
           {
             "key": "clientType",
-            "value": "ios"
+            "value": "iOS"
           },
           {
             "key": "module",
-            "value": "2"
+            "value": "iOS"
           },
           {
             "key": "version",
-            "value": "2.0"
+            "value": "iOS"
           },
           {
             "key": "clientIp",
-            "value": "127.0.0.1"
+            "value": "iOS"
           },
           {
             "key": "deviceId",
-            "value": "testDeviceId123456"
+            "value": "iOS"
           }
         ],
         "body": {
@@ -43,7 +43,7 @@
           "urlencoded": [
             {
               "key": "req",
-              "value": "{\"platform\":\"local\",\"phoneNum\":\"13600800800\", \"pwd\":\"123456\",\"registrationId\":\"testID123456\"}",
+              "value": "iOS",
               "type": "text",
               "enabled": true
             }
