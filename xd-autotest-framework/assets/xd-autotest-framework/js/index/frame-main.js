@@ -1,9 +1,9 @@
 /**
  * Created by zhaodan on 16/8/4.
  */
-$(function () {
-  var main = {
-    refresh: function (url) {
+;(function ($) {
+  $.main = {
+    refreshRight: function (url) {
       $.ajax({
         url: url,
         success: function (data) {
@@ -12,12 +12,13 @@ $(function () {
       });
     }
   };
+})(jQuery);
+$(function(){
   $.each($(".side-nav>li"), function () {
     var node = $(this);
     node.click(function () {
       var target = node.children();
-      main.refresh(target.attr("target"));
+      $.main.refreshRight(target.attr("target"));
     });
   });
-
 });
