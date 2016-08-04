@@ -35,13 +35,13 @@ module.exports = {
       name : request.name,
       disabled : request.disabled,
       request : request,
-      event:{
+      event:[{
         listen: 'test',
         script: {
           type: "text/javascript",
           exec: "var jsonData = JSON.parse(responseBody);\ntests[\"retcode\"] = jsonData.retcode === \"0\";"
         }
-      }
+      }]
     }
     return item;
   },
@@ -70,6 +70,7 @@ module.exports = {
   newmanTest: function (collection) {
     var Newman = require('newman');
     var fs = require('fs');
+
     // define Newman options
     var newmanOptions = {
       iterationCount: 1,                    // define the number of times the runner should run
@@ -100,7 +101,6 @@ function getHeaderWithJson(headerJson) {
       headerArray.push(header);
     }
   }
-
   // console.log(headerArray);
   return headerArray;
 }
@@ -120,8 +120,6 @@ function getQueryParamWithJson(paramJson) {
       paramArray.push(param);
     }
   }
-
-
   // console.log(paramArray);
   return paramArray;
 }

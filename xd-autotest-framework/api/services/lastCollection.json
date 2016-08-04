@@ -7,35 +7,35 @@
   },
   "item": [
     {
-      "id": "100000",
-      "name": "newLogin_API",
+      "id": "4",
+      "name": "HOME2",
       "disabled": false,
       "request": {
-        "id": "100000",
-        "name": "newLogin_API",
+        "id": "4",
+        "name": "HOME2",
         "disabled": false,
-        "url": "http://192.168.103.101:8002/user/newLogin",
+        "url": "http://192.168.103.101:8020/selftaught/home",
         "method": "POST",
         "header": [
           {
             "key": "clientType",
-            "value": "ios"
+            "value": null
           },
           {
             "key": "module",
-            "value": "2"
+            "value": null
           },
           {
             "key": "version",
-            "value": "2.0"
+            "value": null
           },
           {
             "key": "clientIp",
-            "value": "127.0.0.1"
+            "value": null
           },
           {
             "key": "deviceId",
-            "value": "testDeviceId123456"
+            "value": null
           }
         ],
         "body": {
@@ -43,20 +43,22 @@
           "urlencoded": [
             {
               "key": "req",
-              "value": "{\"platform\":\"local\",\"phoneNum\":\"13600800800\", \"pwd\":\"123456\",\"registrationId\":\"testID123456\"}",
+              "value": "qqqqqqqqqqqq",
               "type": "text",
               "enabled": true
             }
           ]
         }
       },
-      "event": {
-        "listen": "test",
-        "script": {
-          "type": "text/javascript",
-          "exec": "var jsonData = JSON.parse(responseBody);\ntests[\"retcode\"] = jsonData.retcode === \"0\";"
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": "var jsonData = JSON.parse(responseBody);\ntests[\"retcode\"] = jsonData.retcode === \"0\";"
+          }
         }
-      }
+      ]
     }
   ]
 }
