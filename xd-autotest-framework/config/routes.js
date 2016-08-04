@@ -44,11 +44,11 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  'overview': 'Home.overview',
-  'doc': 'Home.doc',
-  'task': 'Home.task',
-  'case': 'Home.testcase',
-  'schedule': 'Home.schedule',
+  '/overview': 'Home.overview',
+  '/doc': 'Home.doc',
+  '/task': 'Home.task',
+  '/case': 'Home.testcase',
+  '/schedule': 'Home.schedule',
 
 
   '/postmanUI': {
