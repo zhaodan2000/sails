@@ -1,7 +1,7 @@
 {
     "id": "",
     "name": "Default",
-    "timestamp": 1470303286451,
+    "timestamp": 1470303521441,
     "collection_id": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
     "folder_id": 0,
     "target_type": "collection",
@@ -43,7 +43,7 @@
             "id": "100000",
             "name": "newLogin_API",
             "url": "http://192.168.103.101:8002/user/newLogin",
-            "totalTime": 115,
+            "totalTime": 103,
             "responseCode": {
                 "code": 200,
                 "name": "",
@@ -57,10 +57,11 @@
             "testPassFailCounts": {},
             "times": [],
             "allTests": [
+                {},
                 {}
             ],
-            "time": 115,
-            "meanResponseTime": 115
+            "time": 9,
+            "meanResponseTime": 103
         }
     ],
     "environment": {
