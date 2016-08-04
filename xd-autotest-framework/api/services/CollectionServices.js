@@ -3,7 +3,7 @@
  */
 
 var fs = require('fs');
-var SDK = require('postman-collection');
+// var SDK = require('postman-collection');
 var Newman = require('newman');
 var JSON5 = require('json5');
 
@@ -19,26 +19,25 @@ module.exports = {
   },
 
   //创建一个collection
-  creatCollection: function(interface) {
-    var Collection = SDK.Collection;
-
-    var newCollection = Collection();
-    var newCollection = new Collection({
-      //collection的info信息(id和schema为系统生成, 但是name可以自己写)
+  creatCollection: function(collection) {
+    var collectionObj = {
+      variables:collection.variables,
       info:{
-        id:interface.id,
-        name:interface.name
-      }
-    });
-
-    return newCollection;
+        name:collection.name,
+        _postman_id:collection.id,
+        schema:collection.schema,
+        description:collection.description
+      },
+      item:collection.item
+    };
+    return collectionObj;
   },
 
   //生成Newman执行需要的option
   optionMake : function () {
     return {
       iterationCount: 1,                    // define the number of times the runner should run
-      outputFile: "outfile.json",            // the file to export to
+      outputFile: "./api/services/outfile.json",            // the file to export to
       responseHandler: "TestResponseHandler", // the response handler to use
       asLibrary: true,         				// this makes sure the exit code is returned as an argument to the callback function
       stopOnError: true
@@ -81,19 +80,4 @@ pretty = function (obj) { // function to neatly log the collection object to con
   return require('util').inspect(obj, {colors: true});
 }
 
-function collectionItemsWithRequest(collection, request) {
-  //至少要有url,Method和body的mode
-  collection.items.add(
-    { name: request.name,
-      developer:request.developer,
-      request: {
-        url:request.url,
-        method:request.method,
-        // header:request.header,
-        body:{
-          mode:request.model,
-        }
-      }}
-  );
-}
 
