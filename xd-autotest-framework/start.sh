@@ -1,4 +1,5 @@
 #!/bin/bash
+PRO_NAME=xd-autotest-framework
 DIR_TMP=.runtime
 PID_FILE=$DIR_TMP/pid.file
 RETVAL=0
@@ -20,7 +21,7 @@ function start
 {
     status > /dev/null 2>&1
     if [ $RETVAL -ne 0 ];then
-        sails lift 1>logs/editor.log 2>logs/error.log &
+        sails lift 1>logs/info_$PRO_NAME.log 2>logs/error_$PRO_NAME.log &
         echo $! > $PID_FILE
         echo "Instance is [STARTED]."
         RETVAL=$?
