@@ -156,6 +156,41 @@ function parseHeaderString(headerString) {
   return headers;
 }
 
-newmanTest(testCollection());
+//将传入的prescript语句转化为event中prescript需要的语法
+  function parseInputPreString(prestring) {
+
+  var prescriptObj={global:{},evn:{}};
+  eval(prestring);
+  var returnString = String();
+
+    //第一层遍历prescriptObj
+  for (var prop in prescriptObj) {
+    if (prescriptObj.hasOwnProperty(prop) && prop === 'global') {
+      var global = prescriptObj[prop];
+      //当属性名为global时,再次遍历
+      for (var key in global) {
+        if (global.hasOwnProperty(key)){
+          var tmpString = 'postman.setGlobalVariable(' + key + ',' + global[key] + ');';
+          returnString = returnString.concat(tmpString + '\n');
+        }
+      }
+    }else if(prescriptObj.hasOwnProperty(prop) && prop === 'evn'){
+      var evn = prescriptObj[prop];
+      //当属性名为evn时,再次遍历
+      for (var key in evn) {
+        if (evn.hasOwnProperty(key)){
+          var tmpString = 'postman.setEnvironmentVariable('+key+','+ evn[key]+');';
+          returnString = returnString.concat(tmpString+'\n');
+        }
+      }
+    }
+  }
+    console.log(returnString);
+  return returnString;
+}
+
+
+parseInputPreString('prescriptObj.global.req=1;prescriptObj.evn.index=2');
+// newmanTest(testCollection());
 // testCollection()
 // readdishCollection()

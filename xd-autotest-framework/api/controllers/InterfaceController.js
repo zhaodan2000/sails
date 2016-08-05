@@ -138,6 +138,9 @@ module.exports = {
     var request = RequestItemServices.configRequestItem(item);
 
     //配置前置脚本和后置脚本 ----- 根据item是不是输入了文本来判断是否添加脚本
+    // RequestItemServices.
+    
+    
     var event =[];
     var test = {
       listen: 'test',
@@ -150,9 +153,10 @@ module.exports = {
       listen: 'prerequest',
       script: {
         type: "text/javascript",
-        exec: "postman.setGlobalVariable(\"req\", '{\"platform\":\"local\",\"phoneNum\":\"18210191798\",\"pwd\":\"123456\"}');\n"
+        exec: item.prescript
       }
     };
+    event.push(preScript);
     event.push(test);
     //根据request配置item
     var item = RequestItemServices.configItem(request, event);
@@ -168,7 +172,7 @@ module.exports = {
       var collectionOBJ = CollectionServices.creatCollection(collection);
 
       // console.log(collectionOBJ);
-      // res.send(collectionOBJ);
+
       //配置测试需要的option(以后应该添加入参,根据入参进行配置)
       var option = CollectionServices.optionMake();
 
@@ -177,7 +181,9 @@ module.exports = {
         //测试完成的回调,这里应该把测试结果返回才对
         console.log("exitCode is " + exitcode);
         console.log('callback');
-      })
+
+      });
+      return res.send(collectionOBJ);
     })
   },
   showResponseOnView:function (req, res) {
@@ -195,8 +201,8 @@ module.exports = {
 
     console.log(JSON.stringify(responseJson));
     return res.view('response', {
-      data: JSON.stringify(responseJson, null, 4)
-      // collection: JSON.stringify(collection, null, 4)
+      data: JSON.stringify(responseJson, null, 4),
+      collection: JSON.stringify(req.body.collection, null, 4)
     });
   }
 };

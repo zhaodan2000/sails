@@ -64,7 +64,7 @@ module.exports = {
     var results = responseJSON.results;
 
     console.log(results.length);
-    var result = results[0];
+    var result = results.pop();
     // console.log(result);
     console.log(result['responseCode']['body']);
     return result['responseCode']['body'];
