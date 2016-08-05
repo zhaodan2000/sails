@@ -49,11 +49,9 @@ module.exports.routes = {
   '/task': 'Home.task',
   '/case': 'Home.testcase',
   '/schedule': 'Home.schedule',
-
-
-  '/postmanUI': {
-    view: 'showdoc'
-  },
+  'get /doc/findRequestItemByName':'InterfaceDoc.findRequestItemByName',
+  
+  /*
   '/apidoc':{
     view:'APIdoc'
   },
@@ -62,5 +60,9 @@ module.exports.routes = {
   },
   '/homeindex':{
     view:'homeindex'
-  }
+  },
+  */
+  '/response': {
+    view: 'response'
+  },
 };

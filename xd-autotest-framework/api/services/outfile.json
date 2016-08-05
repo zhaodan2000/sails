@@ -1,64 +1,53 @@
 {
     "id": "",
     "name": "Default",
-    "timestamp": 1470370746594,
-    "collection_id": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
+    "timestamp": 1470362557902,
+    "collection_id": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
     "folder_id": 0,
     "target_type": "collection",
     "count": 1,
     "collection": {
-        "id": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
-        "name": "testCollection",
-        "description": "This is a description",
+        "id": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
+        "name": "new Collection",
         "order": [
-            "c89601eb-0263-4c8c-af32-7b49ea5d847a"
+            "100000"
         ],
         "folders": [],
         "requests": [
             {
-                "id": "c89601eb-0263-4c8c-af32-7b49ea5d847a",
-                "name": "login",
-                "collectionId": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
+                "id": "100000",
+                "name": "newLogin_API",
+                "collectionId": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
                 "method": "POST",
-                "headers": "clientType: android\nmodule: 2\nversion: 1.0\nclientIp: 192.168.31.23\ndeviceId: MyTestDeviceID123",
+                "headers": "clientType: iOS\nmodule: iOS\nversion: iOS\nclientIp: iOS\ndeviceId: iOS",
                 "dataMode": "urlencoded",
                 "data": [
                     {
                         "key": "req",
-                        "value": "{{req}}",
+                        "value": "iOS",
                         "type": "text",
                         "enabled": true
                     }
                 ],
                 "rawModeData": "",
-                "tests": "",
-                "preRequestScript": "postman.setGlobalVariable(\"req\", '{\"platform\":\"local\",\"phoneNum\":\"18210199276\",\"pwd\":\"123456\"}')",
                 "url": "http://192.168.103.101:8002/user/newLogin"
             }
         ]
     },
     "folder": null,
     "globals": {
-        "values": [
-            {
-                "key": "req",
-                "value": "{\"platform\":\"local\",\"phoneNum\":\"18210199276\",\"pwd\":\"123456\"}",
-                "type": "text",
-                "name": "req"
-            }
-        ]
+        "values": []
     },
     "results": [
         {
-            "id": "b3bad8e6-74f6-4132-9023-bc9b17711ba5",
-            "name": "login",
+            "id": "100000",
+            "name": "newLogin_API",
             "url": "http://192.168.103.101:8002/user/newLogin",
-            "totalTime": 69,
+            "totalTime": 236,
             "responseCode": {
                 "code": 200,
                 "name": "",
-                "detail": "",
-                "body": "{\"moduleInfo\":{\"admissionCardCode\":\"\",\"age\":\"0\",\"bePraiseNum\":\"0\",\"createTime\":\"2016-07-07 10:57:59.0\",\"credit\":\"53\",\"degreeLevel\":\"\",\"gender\":\"1\",\"id\":\"208\",\"identificationCardCode\":\"\",\"latestDeviceIp\":\"192.168.31.23\",\"major\":\"01B0402\",\"majorName\":\"\",\"medalId\":\"1 \",\"medalImg\":\"http://7xigj3.com1.z0.glb.clouddn.com/image_2015_11_13_15_59_230f0054d4-e12a-41ee-b88d-ad67d728a263  \",\"medalName\":\"无名的旅人 \",\"merchant\":\"\",\"module\":\"2\",\"nickName\":\"姬丝秀忒\",\"officialGender\":\"\",\"picList\":[],\"platform\":\"local\",\"portrait\":\"http://7xigj3.com1.z0.glb.clouddn.com/DE9B75CD-CFCE-4BCE-831E-F1064631466B\",\"realName\":\"\",\"salt\":\"HnRx6n\",\"sign\":\"\",\"token\":\"cbbd722a-42c1-4cbe-bceb-dabc0598a12c\",\"tokenTime\":\"2016-08-05 12:19:11.451\",\"uniqueId\":\"\",\"usedDeviceId\":\"MyTestDeviceID123\",\"userId\":\"208\",\"userName\":\"18210191798\",\"userType\":\"1\"},\"retOk\":true,\"retcode\":\"0\",\"retdesc\":\"操作成功\",\"serverIp\":\"127.0.1.1\",\"token\":\"cbbd722a-42c1-4cbe-bceb-dabc0598a12c\"}"
+                "detail": ""
             },
             "tests": {},
             "totalPassFailCounts": {
@@ -70,58 +59,12 @@
             "allTests": [
                 {}
             ],
-            "time": 69,
-            "meanResponseTime": 69
-        },
-        {
-            "id": "c902964d-f832-4234-93d9-2b78be3fd250",
-            "name": "login",
-            "url": "http://192.168.103.101:8002/user/newLogin",
-            "totalTime": 76,
-            "responseCode": {
-                "code": 200,
-                "name": "",
-                "detail": "",
-                "body": "{\"moduleInfo\":{\"admissionCardCode\":\"\",\"age\":\"0\",\"bePraiseNum\":\"0\",\"createTime\":\"2016-07-07 10:57:59.0\",\"credit\":\"53\",\"degreeLevel\":\"\",\"gender\":\"1\",\"id\":\"208\",\"identificationCardCode\":\"\",\"latestDeviceIp\":\"192.168.31.23\",\"major\":\"01B0402\",\"majorName\":\"\",\"medalId\":\"1 \",\"medalImg\":\"http://7xigj3.com1.z0.glb.clouddn.com/image_2015_11_13_15_59_230f0054d4-e12a-41ee-b88d-ad67d728a263  \",\"medalName\":\"无名的旅人 \",\"merchant\":\"\",\"module\":\"2\",\"nickName\":\"姬丝秀忒\",\"officialGender\":\"\",\"picList\":[],\"platform\":\"local\",\"portrait\":\"http://7xigj3.com1.z0.glb.clouddn.com/DE9B75CD-CFCE-4BCE-831E-F1064631466B\",\"realName\":\"\",\"salt\":\"HnRx6n\",\"sign\":\"\",\"token\":\"fdc616ca-780c-4e5a-8135-2d370b3ee8ee\",\"tokenTime\":\"2016-08-05 12:19:19.508\",\"uniqueId\":\"\",\"usedDeviceId\":\"MyTestDeviceID123\",\"userId\":\"208\",\"userName\":\"18210191798\",\"userType\":\"1\"},\"retOk\":true,\"retcode\":\"0\",\"retdesc\":\"操作成功\",\"serverIp\":\"127.0.1.1\",\"token\":\"fdc616ca-780c-4e5a-8135-2d370b3ee8ee\"}"
-            },
-            "tests": {},
-            "totalPassFailCounts": {
-                "pass": 0,
-                "fail": 0
-            },
-            "testPassFailCounts": {},
-            "times": [],
-            "allTests": [
-                {}
-            ],
-            "time": 76,
-            "meanResponseTime": 76
-        },
-        {
-            "id": "c89601eb-0263-4c8c-af32-7b49ea5d847a",
-            "name": "login",
-            "url": "http://192.168.103.101:8002/user/newLogin",
-            "totalTime": 136,
-            "responseCode": {
-                "code": 200,
-                "name": "",
-                "detail": "",
-                "body": "{\"moduleInfo\":{\"admissionCardCode\":\"\",\"age\":\"0\",\"bePraiseNum\":\"4\",\"createTime\":\"2016-04-26 17:10:06.0\",\"credit\":\"240\",\"degreeLevel\":\"\",\"gender\":\"1\",\"id\":\"1\",\"identificationCardCode\":\"\",\"latestDeviceIp\":\"192.168.31.23\",\"major\":\"01B0401\",\"majorName\":\"\",\"medalId\":\"1 \",\"medalImg\":\"http://7xigj3.com1.z0.glb.clouddn.com/image_2015_11_13_15_59_230f0054d4-e12a-41ee-b88d-ad67d728a263  \",\"medalName\":\"无名的旅人 \",\"merchant\":\"\",\"module\":\"2\",\"nickName\":\"李易峰\",\"officialGender\":\"\",\"picList\":[\"http://7xigj3.com1.z0.glb.clouddn.com/763590A6-D385-4E02-B1B9-1300A133DCC3\",\"http://7xigj3.com1.z0.glb.clouddn.com/9BC9EA14-69B2-45AA-9675-8BB228C5CFEF\",\"http://7xigj3.com1.z0.glb.clouddn.com/1CB9B34D-2D80-42FC-A5A3-DE286F8B751F\",\"http://7xigj3.com1.z0.glb.clouddn.com/96D7F043-FFB3-4EF0-A872-2901F21F9C88\",\"http://7xigj3.com1.z0.glb.clouddn.com/60A6B906-CE76-46C3-B0E6-5B61084251EF\"],\"platform\":\"local\",\"portrait\":\"https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=4154880707,1154847422&fm=58\",\"realName\":\"\",\"salt\":\"aIPTep\",\"sign\":\"您是兔兔Nimrod外婆哦去老婆咯人快怕咯啦哦婆婆家JSP路了加Q家里急急急理解\",\"token\":\"440ceca3-2195-485f-954b-46be4026df87\",\"tokenTime\":\"2016-08-05 12:20:33.614\",\"uniqueId\":\"\",\"usedDeviceId\":\"MyTestDeviceID123\",\"userId\":\"1\",\"userName\":\"18210199276\",\"userType\":\"1\"},\"retOk\":true,\"retcode\":\"0\",\"retdesc\":\"操作成功\",\"serverIp\":\"127.0.1.1\",\"token\":\"440ceca3-2195-485f-954b-46be4026df87\"}"
-            },
-            "tests": {},
-            "totalPassFailCounts": {
-                "pass": 0,
-                "fail": 0
-            },
-            "testPassFailCounts": {},
-            "times": [],
-            "allTests": [
-                {}
-            ],
-            "time": 136,
-            "meanResponseTime": 136
+            "time": 236,
+            "meanResponseTime": 236
         }
     ],
-    "environment": {},
+    "environment": {
+        "values": []
+    },
     "delay": 0
 }
