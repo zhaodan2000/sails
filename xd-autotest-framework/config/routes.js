@@ -50,10 +50,13 @@ module.exports.routes = {
   '/case': 'Home.testcase',
   '/schedule': 'Home.schedule',
 
+  'get /doc/findRequestItemByName':'InterfaceDoc.findRequestItemByName',
+
 
   '/postmanUI': {
     view: 'showdoc'
   },
+  /*
   '/apidoc':{
     view:'APIdoc'
   },
@@ -63,6 +66,7 @@ module.exports.routes = {
   '/homeindex':{
     view:'homeindex'
   },
+  */
   '/response': {
     view: 'response'
   },

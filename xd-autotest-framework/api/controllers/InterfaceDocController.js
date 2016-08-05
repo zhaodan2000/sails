@@ -68,7 +68,7 @@ module.exports = {
    * 根据入参的name, 来查找mongodb里的符合条件的记录。
    **/
     findRequestItemByName:function(req,res) {
-    var requestName = "HOME6";
+    //var requestName = "HOME6";
     /**
      DocService.testcallback(requestName,res,function (records) {
         if(records){
@@ -78,7 +78,18 @@ module.exports = {
           res.send({retcode:-1,retdesc:"syserror"})
       });
      */
-    mongoService.findRequestItemByName(requestName, function (records) {
+
+    console.log("req.param()="+req.param());
+    console.log("req.url="+req.url);
+    console.log("req.method="+req.method);
+    console.log("req.host="+req.host);
+    var response={requestName:'newLogin',url:'http://192.168.103.101:8002/user/newLogin'};
+    var retres = {retcode: 0, retdesc: "success", data: response};
+    res.send(retres);
+    //return response;
+
+   /**
+    mongoService.findRequestItemByName(req['data']['requestName'], function (records) {
       if (records) {
         var retres = {retcode: 0, retdesc: "success", data: records};
         res.send(retres);
@@ -86,6 +97,8 @@ module.exports = {
       else
         res.send({retcode: -1, retdesc: "syserror"})
     });
+
+    */
   },
 
   /**
