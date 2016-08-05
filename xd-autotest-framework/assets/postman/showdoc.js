@@ -4,15 +4,18 @@
 
 
 $(document).ready(function () {
-  var option_run = { success: function(data) { 
-    console.log(data); window.location.href = 'showResponse';
+  var option_run = { 
+    url:'/Interface/testCurrentCollection',
+    success: function(data) {
+      $.post("/Interface/showResponseOnView",{collection:data},function(result){
+        $("body").html(result);
+      });
+      //$.main.refreshRight("/Interface/showResponseOnView?id="+data.id);
     }
   };
   var option_save = {
-    url:"/Interface/hello",
-    success: function(data) {
-            console.log(data);
-    }
+    url:"/Interface/saveCurrentCollection",
+    success: function(data) { console.log('+++++++++++++++'+data); alert('This request had been stored into DB!')}
   };
 
   // ajaxSubmit 

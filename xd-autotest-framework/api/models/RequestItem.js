@@ -97,17 +97,17 @@ module.exports = {
       required: false
     },
 
-    //preScript 前置脚本
-    prescript:{
-      type:'string',
-      required:false
-    },
-
-    //testscript  后置脚本
-    testscript:{
-      type:'string',
-      required:false
-    }
+    // //preScript 前置脚本
+    // prescript:{
+    //   type:'string',
+    //   required:false
+    // },
+    //
+    // //testscript  后置脚本
+    // testscript:{
+    //   type:'string',
+    //   required:false
+    // }
   }
 };
 
