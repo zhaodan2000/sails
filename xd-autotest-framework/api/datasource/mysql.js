@@ -6,7 +6,7 @@ var mysql = require('mysql');
 var pool_hash = {};
 function getPool(options) {
   var _options = {
-    'host': options.dbhost,
+    'host': options.host,
     'port': options.port,
     'user': options.user,
     'password': options.password,
