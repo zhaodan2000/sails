@@ -62,8 +62,5 @@ module.exports.routes = {
   },
   '/homeindex':{
     view:'homeindex'
-  },
-  '/response': {
-    view: 'response'
-  },
+  }
 };
