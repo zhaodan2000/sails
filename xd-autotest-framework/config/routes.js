@@ -50,7 +50,13 @@ module.exports.routes = {
   '/case': 'Home.testcase',
   '/schedule': 'Home.schedule',
   'get /doc/findRequestItemByName':'InterfaceDoc.findRequestItemByName',
-  
+  'post /doc/insertRequestItemService':'InterfaceDoc.insertRequestItemService',
+  'get /doc/deleteAllReqItem':'InterfaceDoc.deleteAllRequestItemRecords',
+
+  '/postmanUI': {
+    view: 'showdoc'
+  },
+
   /*
   '/apidoc':{
     view:'APIdoc'

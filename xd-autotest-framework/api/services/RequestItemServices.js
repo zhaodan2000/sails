@@ -4,31 +4,9 @@
 
 // var RequestItem = require('../models/RequestItem');
 var fs = require('fs');
+require('../utils/string');
 
 module.exports = {
-
-  //根据item生成collection 并返回
-  configCollection: function (item) {
-    var collection = {
-      variables: [],
-      info:{
-        _postman_id:'eaa77b0b-8bab-616c-f866-a76fa867c19c',
-        name:'new Collection',
-        schema:'https://schema.getpostman.com/json/collection/v2.0.0/collection.json'
-      },
-      item: [item]
-    }
-
-    fs.writeFile("./api/services/lastCollection.json", JSON.stringify(collection, null, 2), function (err) {
-      if (err) {
-        console.log('err ---------'+err);
-      } else {
-        console.log("JSON saved to lastCollection.json" );
-      }
-    });
-    return collection;
-  },
-
   //根据request生成item
   configItem: function (request, event) {
     var item = {
@@ -67,28 +45,48 @@ module.exports = {
     }
     return request;
   },
+  //将传入的prescript语句转化为event中prescript需要的语法
+  parseInputPreString: function (prestring, callback) {
 
-  newmanTest: function (collection) {
-    var Newman = require('newman');
-    var fs = require('fs');
+    var Pre={global:{},evn:{}};
+    eval(prestring);
 
-    // define Newman options
-    var newmanOptions = {
-      iterationCount: 1,                    // define the number of times the runner should run
-      outputFile: "./api/services/outfile.json",            // the file to export to
-      responseHandler: "TestResponseHandler", // the response handler to use
-      asLibrary: true,         				// this makes sure the exit code is returned as an argument to the callback function
-      stopOnError: true
+    var returnString = '';
+    //第一层遍历prescriptObj
+    for (var prop in Pre) {
+      if (Pre.hasOwnProperty(prop) && prop === 'global') {
+        var global = Pre[prop];
+        //当属性名为global时,再次遍历
+        for (var key in global) {
+          if (global.hasOwnProperty(key)){
+            var tmpString = "postman.setGlobalVariable(\"{0}\", '{1}');"
+            var value = (isJson(global[key]))? JSON.stringify(global[key]):global[key];
+            returnString = returnString.concat(tmpString.format(key, value) + '\n');
+          }
+        }
+      }else if(Pre.hasOwnProperty(prop) && prop === 'evn'){
+        var evn = Pre[prop];
+        //当属性名为evn时,再次遍历
+        for (var key in evn) {
+          if (evn.hasOwnProperty(key)){
+            var tmpString = "postman.setEnvironmentVariable(\"{0}\", '{1}');";
+            var value = (isJson(evn[key]))? JSON.stringify(evn[key]):evn[key];
+            returnString = returnString.concat(tmpString.format(key, value) + '\n');
+          }
+        }
+      }
     }
+    console.log(returnString);
+    return returnString;
+  },
 
-// Optional Callback function which will be executed once Newman is done executing all its tasks.
-    Newman.execute(collection, newmanOptions, function(exitCode){
-      console.log("exitCode is " + exitCode);
-      console.log('callback');
-    });
+  //将传入的testscript语句转化为event中testscript需要的语法
+  parseIntputTestString: function (teststring) {
+    var testscript;
   }
 }
 
+//转换headerJson对象为需要的结构
 function getHeaderWithJson(headerJson) {
   var headerArray = new Array;
   for (var prop in headerJson) {
@@ -106,6 +104,7 @@ function getHeaderWithJson(headerJson) {
   return headerArray;
 }
 
+//转换paramJson对象为需要的结构
 function getQueryParamWithJson(paramJson) {
   var paramArray = new Array;
   for (var prop in paramJson) {
@@ -123,6 +122,11 @@ function getQueryParamWithJson(paramJson) {
   }
   // console.log(paramArray);
   return paramArray;
+}
+
+isJson = function(obj){
+  var isjson = typeof(obj) == "object" && Object.prototype.toString.call(obj).toLowerCase() == "[object object]" && !obj.length;
+  return isjson;
 }
 
 

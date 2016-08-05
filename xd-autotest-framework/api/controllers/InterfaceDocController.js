@@ -11,6 +11,10 @@ module.exports = {
     res.view('doc/APIdoc');
   },
 
+  testPost:function(req,res){
+
+  },
+
   handleFileWrite:function(req,res) {
     var fs=require('fs');
     var path=require('path');
@@ -67,38 +71,31 @@ module.exports = {
   /**
    * 根据入参的name, 来查找mongodb里的符合条件的记录。
    **/
-    findRequestItemByName:function(req,res) {
-    //var requestName = "HOME6";
-    /**
-     DocService.testcallback(requestName,res,function (records) {
-        if(records){
-          var retres={retcode:0,retdesc:"success",data:records};
-          res.send(retres);}
-          else
-          res.send({retcode:-1,retdesc:"syserror"})
-      });
-     */
 
-    console.log("req.param()="+req.param());
+    findRequestItemByName:function(req,res) {
+
+    console.log("req.param()="+req.param("requestName"));
     console.log("req.url="+req.url);
     console.log("req.method="+req.method);
     console.log("req.host="+req.host);
-    var response={requestName:'newLogin',url:'http://192.168.103.101:8002/user/newLogin'};
-    var retres = {retcode: 0, retdesc: "success", data: response};
-    res.send(retres);
+    //var response={requestName:'newLogin',url:'http://192.168.103.101:8002/user/newLogin'};
+    //var retres = {retcode: 0, retdesc: "success", data: response};
+   // res.send(retres);
     //return response;
+    
+      mongoService.findRequestItemByName(req.param("requestName"), function (records) {
+        if (records) {
+          console.log(JSON.stringify(records));
+          var retres = {retcode: 0, retdesc: "success", data: records};
+          res.send(retres);
+        }
+        else
+          res.send({retcode: -1, retdesc: "syserror"})
+      });
+    
+   
 
-   /**
-    mongoService.findRequestItemByName(req['data']['requestName'], function (records) {
-      if (records) {
-        var retres = {retcode: 0, retdesc: "success", data: records};
-        res.send(retres);
-      }
-      else
-        res.send({retcode: -1, retdesc: "syserror"})
-    });
 
-    */
   },
 
   /**
@@ -136,16 +133,31 @@ module.exports = {
    * @param res
      */
   insertRequestItemService:function(req,res){
+    /**
       var apiItem={id:"6",dev:"lidehong",disabled:false,name:"HOME6",
         url:"http://192.168.103.101:8020/selftaught/home",
         queryParam:{req:""},
         version:"1.0.0",description:"test !!!",method:"POST",headers:{module:"2",
           clientType:"ios",version:"1.0.0",clientIp:"127.0.0.1",deviceId:"testDeviceId123456",sessionToken:"token123"},
         mode:"urlencoded",response:""};
-
+*/
+    if(req.body.hasOwnProperty("req")) // true)
+    {
+      var apiItem=req.body['req'];
+      console.log(JSON.stringify(apiItem));
       mongoService.insertRequestItemRecord(apiItem,function(records){
-        return ;
-    });
+        console.log("return records="+JSON.stringify(records));
+        if (records) {
+          var retres = {retcode: 0, retdesc: "success", data: records};
+          res.send(retres);
+        }
+        else
+          res.send({retcode: -1, retdesc: "syserror"});
+      });
+    }else{
+      console.log("req.body.hasOwnProperty(\"req\") 返回"+req.body.hasOwnProperty("req"));
+    }
+
 
   },
 
@@ -155,8 +167,6 @@ module.exports = {
    * @param
    * */
   updateRequestItemByName: function(req,res){
-
-
     mongoService.updateRequestItem(requestItem);
   },
 

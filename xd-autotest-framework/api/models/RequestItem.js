@@ -13,7 +13,6 @@ module.exports = {
   connection: 'someMongodbServer',
   tableName: 'xd_autotest_request',
   attributes: {
-
     id: {
       type: 'string',
       required: true,
@@ -98,17 +97,17 @@ module.exports = {
       required: false
     },
 
-    //preScript 前置脚本
-    prescript:{
-      type:'string',
-      required:false
-    },
-
-    //testscript  后置脚本
-    testscript:{
-      type:'string',
-      required:false
-    }
+    // //preScript 前置脚本
+    // prescript:{
+    //   type:'string',
+    //   required:false
+    // },
+    //
+    // //testscript  后置脚本
+    // testscript:{
+    //   type:'string',
+    //   required:false
+    // }
   }
 };
 

@@ -111,77 +111,125 @@ module.exports = {
     });
   },
   showdoc:function (req,res) {
-    DocService.testcallback('newLogin_API', res, function (records) {
+    DocService.testcallback('login', res, function (records) {
       res.view('showdoc', {data:records});
     })
   },
 
-  showreq:function (req, res) {
-    console.log(req.body);
-    var item = {headers:{},queryParam:{}};
-    for(var key in req.body){
-      var re_header = new RegExp(/^header/);
-      var flag_header = key.match(re_header);
-      var re_queryParam = new RegExp(/^queryParam/);
-      var flag_queryParam = key.match(re_queryParam);
-      var headers = "headers";
-      var queryParam = "queryParam";
-      if (flag_header){
-        var headerkey = key.substring(6);
-        item[headers][headerkey] = req.body[key];
-      }
-      else if(flag_queryParam){
-        var queryParamkey = key.substring(10);
-        item[queryParam][queryParamkey] = req.body[key];
-      }else {
-        item[key] = req.body[key];
-      }
-    }
+  saveCurrentCollection:function (req, res) {
+
+    var item = parseReqBody(req);
+    // console.log(item);
+    // console.log('item :' + JSON.stringify(item));
     RequestItem.update({name:req.body.name}, item, function (err, records) {
       if(err){
-        console.log(err);
+        console.log('----------------------'+err);
       }else {
-        return res.send('OK');
+        // console.log(records);
+        return res.send('-------------------------------OK');
       }
     })
-
-    // return res.send(req.body);
   },
 
-  showResponse: function (req, res) {
+  testCurrentCollection: function (req, res) {
+    var item = parseReqBody(req);
+    console.log('item ---------------------------------------------------'+ item);
+    //根据传入配置request
+    var request = RequestItemServices.configRequestItem(item);
 
-    RequestItem.findOne({name: 'newLogin_API'}).exec(function (err, articles) {
-      if (!err) {
-        // 刷新下一页
-        // return res.send(articles);
-        var request = RequestItemServices.configRequestItem(articles);
-        var item = RequestItemServices.configItem(request);
-        var collection = RequestItemServices.configCollection(item);
-        // var collectionJson = JSON.parse(collection);
-        // console.log(collection);
-        RequestItemServices.newmanTest(collection);
+    //配置前置脚本和后置脚本 ----- 根据item是不是输入了文本来判断是否添加脚本
+    // RequestItemServices.
 
-        var path = require('path');
-        var filePath = path.join(__dirname, '..', 'services', 'outfile.json');
-        // console.log(filePath);
-        var response = CollectionServices.parseResponse(filePath);
-        console.log(response);
-        var responseJson;
-        if (response){
-          responseJson = JSON.parse(response);
-        }
-
-        console.log(JSON.stringify(responseJson));
-        return res.view('response', {
-          data: JSON.stringify(responseJson, null, 4),
-          collection: JSON.stringify(collection, null, 4)
-        });
-        // return res.view('homeindex');
+    console.log('item.testscript:'+item.testscript);
+    console.log('item.prescript:'+item.prescript);
+    var event =[];
+    var test = {
+      listen: 'test',
+      script: {
+        type: "text/javascript",
+        exec: item.testscript
+        // exec: RequestItemServices.parseIntputTestString(item.testscript)
       }
-      else {
-        console.log(err);
+    };
+    var preScript = {
+      listen: 'prerequest',
+      script: {
+        type: "text/javascript",
+        // exec: item.prescript
+        exec: RequestItemServices.parseInputPreString(item.prescript)
       }
-    });
+    };
+    event.push(preScript);
+    event.push(test);
+    //根据request配置item
+    var item = RequestItemServices.configItem(request, event);
+    //设置event(前置脚本和后置脚本)
+    var itemArr = [];
+    itemArr.push(item);
+
+    Collection.findOne({name: "testCollection"}).exec(function (err, collection){
+      //先取出本个请求对应的collection
+      //设置collection的item
+      collection.item = itemArr;
+      //根据collection对象生成能够进行测试的collection
+      var collectionOBJ = CollectionServices.creatCollection(collection);
+
+      // console.log(collectionOBJ);
+
+      //配置测试需要的option(以后应该添加入参,根据入参进行配置)
+      var option = CollectionServices.optionMake();
+
+      //对collectionJson进行测试
+      CollectionServices.testCollectionWithCallBack(collectionOBJ, option, function (exitcode) {
+        //测试完成的回调,这里应该把测试结果返回才对
+        console.log("exitCode is " + exitcode);
+        console.log('callback');
+        return res.send(collectionOBJ);
+      });
+
+    })
+  },
+  showResponseOnView:function (req, res) {
+    //暂时先从文件中读取response
+    var path = require('path');
+    var filePath = path.join(__dirname, '..', 'services', 'outfile.json');
+    // console.log(filePath);
+    var response = CollectionServices.parseResponse(filePath);
+    // console.log(response);
+    var responseJson;
+    if (response){
+      responseJson = JSON.parse(response);
+      console.log(JSON.stringify(responseJson));
+      return res.view('response', {
+        data: JSON.stringify(responseJson, null, 4),
+        collection: JSON.stringify(req.body.collection, null, 4)
+      });
+    }else {
+      console.log('response is null');
+    }
   }
 };
 
+
+function parseReqBody(req) {
+  var item = {headers:{},queryParam:{}};
+  for(var key in req.body){
+    var re_header = new RegExp(/^header/);
+    var flag_header = key.match(re_header);
+    var re_queryParam = new RegExp(/^queryParam/);
+    var flag_queryParam = key.match(re_queryParam);
+    var headers = "headers";
+    var queryParam = "queryParam";
+    if (flag_header){
+      var headerkey = key.substring(6);
+      item[headers][headerkey] = req.body[key];
+    }
+    else if(flag_queryParam){
+      var queryParamkey = key.substring(10);
+      item[queryParam][queryParamkey] = req.body[key];
+    }else {
+      item[key] = req.body[key];
+    }
+  }
+  return item;
+}
