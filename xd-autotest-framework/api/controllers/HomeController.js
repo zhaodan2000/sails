@@ -13,7 +13,7 @@ module.exports = {
     res.view('overview/index');
   },
   doc: function(req, res) {
-    res.view('doc/index');
+    res.view('doc/APIdoc');
   },
   task: function(req, res) {
     res.view('task/index');

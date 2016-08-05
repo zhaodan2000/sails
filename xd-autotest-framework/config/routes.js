@@ -45,7 +45,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/overview': 'Home.overview',
-  '/doc': 'Home.doc',
+  '/doc': 'InterfaceDoc.testService',
   '/task': 'Home.task',
   '/case': 'Home.testcase',
   '/schedule': 'Home.schedule',

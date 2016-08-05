@@ -7,19 +7,8 @@
 
 module.exports = {
 
-  testSerivce:function(req,res){
-
-    var apiItem={id:"5",dev:"lidehong",disabled:false,name:"HOME5",
-      url:"http://192.168.103.101:8020/selftaught/home",
-      queryParam:{req:""},
-      version:"1.0.0",description:"test !!!",method:"POST",headers:{module:"2",
-        clientType:"ios",version:"1.0.0",clientIp:"127.0.0.1",deviceId:"testDeviceId123456",sessionToken:"token123"},
-      mode:"urlencoded",response:""};
-
-
-    mongoService.findRequestItemByName("HOME5");
-    mongoService.insertRequestItemRecord(requestItem);
-
+  testService:function(req,res){
+    res.view('doc/APIdoc');
   },
 
   handleFileWrite:function(req,res) {
@@ -32,16 +21,47 @@ module.exports = {
     * 读取文件目录是否存在。
     * */
     var mdFiledir=__dirname+'/mdFiles';
-    var isDirExisted;
-    fs.fs.exists(mdFiledir,function(exists) {
-      isDirExisted=exists;
+    fs.exists(mdFiledir,function(exists) {
+      /**
+       * 创建目录,如果目录不存在的话。
+       * */
+      if(!exists){
+        fs.mkdir(mdFiledir,function(err){
+          if(!err){
+            console.log("目录已经创建成功。");
+            return;
+          }else{
+            console.log("目录创建失败。");
+            return;
+          }
+        });
+      }else{console.log("目录已经存在,不需要再创建...");}
     });
 
-    /**
-     * 创建目录,如果目录不存在的话。
-     * */
-    if(!isDirExisted){fs.mkdir(mdFiledir);}
+    // fs.writeFile(filename,data,[options],callback);
+    var w_data = '这是一段通过fs.writeFile函数写入的内容；\r\n';
+    var w_data = new Buffer(w_data);
 
+    /**
+     * filename, 必选参数，文件名
+     * data, 写入的数据，可以字符或一个Buffer对象
+     * [options],flag,mode(权限),encoding
+     * callback 读取文件后的回调函数，参数默认第一个err,第二个data 数据
+     */
+    /**
+    fs.writeFile(mdFiledir + '/test.md', w_data, {flag: 'a'}, function (err) {
+      if(err) {
+        console.error(err);
+      } else {
+        console.log('写入成功');
+      }
+    }); */
+
+    // fs.appendFile(filename,data,[options],callback);
+
+    fs.appendFile(mdFiledir + '/test.md', '***使用fs.appendFile追加文件内容', function () {
+      console.log('追加内容完成');
+    });
   },
 
   /**
@@ -122,7 +142,9 @@ module.exports = {
    * @param
    * */
   updateRequestItemByName: function(req,res){
-    mongoService.updateRequestItem();
+
+
+    mongoService.updateRequestItem(requestItem);
   },
 
   /***
