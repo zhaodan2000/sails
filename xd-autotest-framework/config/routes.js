@@ -51,7 +51,8 @@ module.exports.routes = {
   '/schedule': 'Home.schedule',
   'get /doc/findRequestItemByName':'InterfaceDoc.findRequestItemByName',
   'post /doc/insertRequestItemService':'InterfaceDoc.insertRequestItemService',
-  
+  'get /doc/deleteAllReqItem':'InterfaceDoc.deleteAllRequestItemRecords',
+
   '/postmanUI': {
     view: 'showdoc'
   },
