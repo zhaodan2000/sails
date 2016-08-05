@@ -14,10 +14,11 @@
   };
 })(jQuery);
 $(function(){
-  $.each($(".side-nav>li"), function () {
+  $.each($(".operation>li"), function () {
     var node = $(this);
     node.click(function () {
       $(".active").removeClass("active");
+      node.addClass("active");
       var target = node.children();
       $.main.refreshRight(target.attr("target"));
     });

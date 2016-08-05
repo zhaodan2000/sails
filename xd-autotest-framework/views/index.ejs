@@ -11,7 +11,8 @@
 
     <title>自动测试框架</title>
 
-    <% include common/header.ejs %>
+    <% include common/framework-css.ejs %>
+    <% include common/framework-js.ejs %>
 
 </head>
 
@@ -134,7 +135,7 @@
             </ul>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
+                <ul class="nav navbar-nav top-nav operation">
                     <li class="active">
                         <a href="javascript:void(0)" target="overview"><i class="fa fa-fw fa-dashboard"></i> 概览</a>
                     </li>
@@ -165,7 +166,6 @@
     </div>
     <!-- /#wrapper -->
 
-    <% include common/footer.ejs %>
     <% include common/chart.ejs %>
     <script src="/xd-autotest-framework/js/index/frame-main.js"></script>
 </body>
