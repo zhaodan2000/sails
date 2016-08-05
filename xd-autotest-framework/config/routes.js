@@ -50,10 +50,7 @@ module.exports.routes = {
   '/case': 'Home.testcase',
   '/schedule': 'Home.schedule',
 
-
-  '/postmanUI': {
-    view: 'showdoc'
-  },
+  
   '/apidoc':{
     view:'APIdoc'
   },
