@@ -28,7 +28,6 @@ module.exports={
    * @param res
    */
   insertRequestItemRecord:function(requestItem, callback){
-
     RequestItem.create(requestItem).exec(function(err,records){
       if(!err){
         console.log("添加requestItem记录成功! records.name is :"+records.name);

@@ -1,16 +1,18 @@
 <script>
    $('#save_doc').click(function(){
-     var inputParam={requestName:'newLogin'};
-     var queryString="newLogin";
+     //var queryString="newLogin";
+     var queryString=$('input#input_requestName').val();
+
      console.log(" test ... :queryString="+queryString);
 
-     $.ajax({
+    $.ajax({
        url: '/doc/findRequestItemByName',
        type:"Get",
        //data:"{'first':'蚂蚁部落','second':'欢迎您'}",
        //data:queryString,
        data:{
          requestName: queryString,
+         //a: $('#a').val(),
          //b: $('#b').val()
        },
        success:function(data){
@@ -23,8 +25,37 @@
          $("textarea#textarea_response").val(JSON.stringify(err));
        }
      });
-     console.log("execute done service via ajax... this should be seen on front...");
+
+     console.log("execute done service (/doc/findRequestItemByName) via ajax... this should be seen on front...");
+
    });
+
+  $('#test_insertrequestitem').click(function(){
+    //var requestItem=JSON.parse($('textarea#textarea_requestItem').val());
+    console.log("requestItem="+$('textarea#textarea_requestItem').val());
+    var requestItemValue=$('textarea#textarea_requestItem').val();
+    var requestItem=JSON.parse(requestItemValue);
+
+    $.ajax({
+      url: "/doc/insertRequestItemService",
+      type: "Post",
+      data: {
+        req: requestItem
+      },
+      dataType: "urlencoded",
+      contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+      success: function (data) {
+        //返回的数据用data.d获取内容
+        //alert(data.d);
+        $("textarea#textarea_response").val(JSON.stringify(data));
+      },
+      error: function (err) {
+        //alert(err);
+        $("textarea#textarea_response").val(JSON.stringify(err));
+      }
+    });
+    console.log("execute done service (/doc/insertRequestItemService) via ajax... this should be seen on front...");
+  });
  </script>
 
 <head>
@@ -68,6 +99,33 @@
             <label>URL</label>
             <input class="form-control" placeholder="Enter text">
           </div>
+          <div class="form-group">
+            <label>输入完整的requestItem json格式的字符串内容:</label>
+            <textarea id="textarea_requestItem" class="form-control" placeholder="Enter text" rows="25" >{
+    "id":"6",
+    "dev":"lidehong",
+    "disabled":false,
+    "name":"HOME6",
+    "url":"http://192.168.103.101:8020/selftaught/home",
+    "queryParam":{
+        "req":""
+    },
+    "version":"1.0.0",
+    "description":"test !!!",
+    "method":"POST",
+    "headers":{
+        "module":"2",
+        "clientType":"iOS",
+        "version":"1.0.0",
+        "clientIp":"127.0.0.1",
+        "deviceId":"testDeviceId123456",
+        "sessionToken":"token123"
+    },
+    "mode":"urlencoded",
+    "response":""
+}
+            </textarea>
+          </div>
         </li>
         <li id="api_2">
           <i class="fa fa-edit" id="home_api">首页接口</i>
@@ -99,9 +157,14 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <button id="save_doc" name="save_doc_btn" >保存(无样式)</button>
-      <div class="btn btn-default">保存(默认效果)</div>
-      <div class="btn btn-primary">保存(主要效果)</div>
+      <div class="form-group">
+        <label>输入指定RequestItem的name:</label>
+        <input id="input_requestName" class="form-control">
+      </div>
+      <button id="save_doc" name="save_doc_btn" text="无样式">查询指定requestName的RequestItem</button>
+      <div class="btn btn-default" type="button" id="test_insertrequestitem" name="test_insertdb"
+      text="默认效果">添加RequestItem记录</div>
+      <div class="btn btn-primary" text="主要效果">保存(主要效果)</div>
       <fieldset disabled>
         <div class="btn btn-default">默认失效</div>
         <div class="btn btn-primary">主要失效</div>
@@ -110,6 +173,6 @@
   </div>
 </div>
 
-<div>
-  <textarea id="textarea_response"></textarea>
+<div width="1200px">
+  <textarea id="textarea_response" class="form-control" placeholder="Enter text" rows="25"></textarea>
   </div>
