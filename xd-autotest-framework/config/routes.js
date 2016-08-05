@@ -49,13 +49,8 @@ module.exports.routes = {
   '/task': 'Home.task',
   '/case': 'Home.testcase',
   '/schedule': 'Home.schedule',
-
   'get /doc/findRequestItemByName':'InterfaceDoc.findRequestItemByName',
-
-
-  '/postmanUI': {
-    view: 'showdoc'
-  },
+  
   /*
   '/apidoc':{
     view:'APIdoc'
