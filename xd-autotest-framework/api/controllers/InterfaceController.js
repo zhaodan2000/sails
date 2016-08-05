@@ -8,6 +8,7 @@
 
 module.exports = {
   hello: function (req, res) {
+    console.log("hello");
     var iter = {name: "login", version: "1.0",dev: 'zhang', description: "it's a desc", url: "http://192.168.103.101:8002/user/newLogin", method: "POST", headers: {clientType: 'android',module: '2',version: '1.0',clientIp: '192.168.31.23',deviceId: 'MyTestDeviceID123'},mode:'urlencoded',queryParam:{req:'{\"platform\":\"local\",\"phoneNum\":\"18210191798\",\"pwd\":\"123456\"}'}};
     // var iter = {name:'test'};
     RequestItem.create(iter).exec(function createCB(err, created) {

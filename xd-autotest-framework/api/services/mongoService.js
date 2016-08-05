@@ -1,5 +1,6 @@
 /**
  * Created by lyh on 8/4/16.
+ * CRUD
  */
 var Math=require('mathjs');
 

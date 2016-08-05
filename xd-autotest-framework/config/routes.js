@@ -44,7 +44,14 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/postmanUI/{id}': {
+  '/overview': 'Home.overview',
+  '/doc': 'InterfaceDoc.testService',
+  '/task': 'Home.task',
+  '/case': 'Home.testcase',
+  '/schedule': 'Home.schedule',
+
+
+  '/postmanUI': {
     view: 'showdoc'
   },
   '/apidoc':{
