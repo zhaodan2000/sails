@@ -133,27 +133,30 @@ module.exports = {
 
   testCurrentCollection: function (req, res) {
     var item = parseReqBody(req);
-    console.log(item);
+    console.log('item ---------------------------------------------------'+ item);
     //根据传入配置request
     var request = RequestItemServices.configRequestItem(item);
 
     //配置前置脚本和后置脚本 ----- 根据item是不是输入了文本来判断是否添加脚本
     // RequestItemServices.
-    
-    
+
+    console.log('item.testscript:'+item.testscript);
+    console.log('item.prescript:'+item.prescript);
     var event =[];
     var test = {
       listen: 'test',
       script: {
         type: "text/javascript",
         exec: item.testscript
+        // exec: RequestItemServices.parseIntputTestString(item.testscript)
       }
     };
     var preScript = {
       listen: 'prerequest',
       script: {
         type: "text/javascript",
-        exec: item.prescript
+        // exec: item.prescript
+        exec: RequestItemServices.parseInputPreString(item.prescript)
       }
     };
     event.push(preScript);
@@ -181,13 +184,12 @@ module.exports = {
         //测试完成的回调,这里应该把测试结果返回才对
         console.log("exitCode is " + exitcode);
         console.log('callback');
-
+        return res.send(collectionOBJ);
       });
-      return res.send(collectionOBJ);
+
     })
   },
   showResponseOnView:function (req, res) {
-    console.log(req.body);
     //暂时先从文件中读取response
     var path = require('path');
     var filePath = path.join(__dirname, '..', 'services', 'outfile.json');
@@ -197,13 +199,14 @@ module.exports = {
     var responseJson;
     if (response){
       responseJson = JSON.parse(response);
+      console.log(JSON.stringify(responseJson));
+      return res.view('response', {
+        data: JSON.stringify(responseJson, null, 4),
+        collection: JSON.stringify(req.body.collection, null, 4)
+      });
+    }else {
+      console.log('response is null');
     }
-
-    console.log(JSON.stringify(responseJson));
-    return res.view('response', {
-      data: JSON.stringify(responseJson, null, 4),
-      collection: JSON.stringify(req.body.collection, null, 4)
-    });
   }
 };
 

@@ -13,6 +13,8 @@ var Header = require('postman-collection').Header;
 var Body = require('postman-collection').RequestBody;
 var Url = require('postman-collection').Url;
 
+var String = require('../api/utils/string');
+
 function testCollection() {
   var  mycollection;
 
@@ -161,7 +163,7 @@ function parseHeaderString(headerString) {
 
   var prescriptObj={global:{},evn:{}};
   eval(prestring);
-  var returnString = String();
+  var returnString = '';
 
     //第一层遍历prescriptObj
   for (var prop in prescriptObj) {
@@ -170,8 +172,8 @@ function parseHeaderString(headerString) {
       //当属性名为global时,再次遍历
       for (var key in global) {
         if (global.hasOwnProperty(key)){
-          var tmpString = 'postman.setGlobalVariable(' + key + ',' + global[key] + ');';
-          returnString = returnString.concat(tmpString + '\n');
+          var tmpString = 'postman.setGlobalVariable({0}, {1})';
+          returnString = returnString.concat(tmpString.format(key, global[key]) + '\n');
         }
       }
     }else if(prescriptObj.hasOwnProperty(prop) && prop === 'evn'){
@@ -179,8 +181,8 @@ function parseHeaderString(headerString) {
       //当属性名为evn时,再次遍历
       for (var key in evn) {
         if (evn.hasOwnProperty(key)){
-          var tmpString = 'postman.setEnvironmentVariable('+key+','+ evn[key]+');';
-          returnString = returnString.concat(tmpString+'\n');
+          var tmpString = 'postman.setEnvironmentVariable({0}, {1})';
+          returnString = returnString.concat(tmpString.format(key, evn[key]) + '\n');
         }
       }
     }
@@ -189,6 +191,8 @@ function parseHeaderString(headerString) {
   return returnString;
 }
 
+var string = 'postman.setGlobalVariable({0}, {1})';
+console.log(string.format('req', '123'));
 
 parseInputPreString('prescriptObj.global.req=1;prescriptObj.evn.index=2');
 // newmanTest(testCollection());

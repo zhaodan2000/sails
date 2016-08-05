@@ -4,6 +4,7 @@
 
 // var RequestItem = require('../models/RequestItem');
 var fs = require('fs');
+require('../utils/string');
 
 module.exports = {
   //根据request生成item
@@ -45,30 +46,32 @@ module.exports = {
     return request;
   },
   //将传入的prescript语句转化为event中prescript需要的语法
-  parseInputPreString: function (prestring) {
+  parseInputPreString: function (prestring, callback) {
 
-    var prescriptObj={global:{},evn:{}};
+    var Pre={global:{},evn:{}};
     eval(prestring);
-    var returnString = String();
 
+    var returnString = '';
     //第一层遍历prescriptObj
-    for (var prop in prescriptObj) {
-      if (prescriptObj.hasOwnProperty(prop) && prop === 'global') {
-        var global = prescriptObj[prop];
+    for (var prop in Pre) {
+      if (Pre.hasOwnProperty(prop) && prop === 'global') {
+        var global = Pre[prop];
         //当属性名为global时,再次遍历
         for (var key in global) {
           if (global.hasOwnProperty(key)){
-            var tmpString = 'postman.setGlobalVariable(' + key + ',' + global[key] + ');';
-            returnString = returnString.concat(tmpString + '\n');
+            var tmpString = "postman.setGlobalVariable(\"{0}\", '{1}');"
+            var value = (isJson(global[key]))? JSON.stringify(global[key]):global[key];
+            returnString = returnString.concat(tmpString.format(key, value) + '\n');
           }
         }
-      }else if(prescriptObj.hasOwnProperty(prop) && prop === 'evn'){
-        var evn = prescriptObj[prop];
+      }else if(Pre.hasOwnProperty(prop) && prop === 'evn'){
+        var evn = Pre[prop];
         //当属性名为evn时,再次遍历
         for (var key in evn) {
           if (evn.hasOwnProperty(key)){
-            var tmpString = 'postman.setEnvironmentVariable('+key+','+ evn[key]+');';
-            returnString = returnString.concat(tmpString+'\n');
+            var tmpString = "postman.setEnvironmentVariable(\"{0}\", '{1}');";
+            var value = (isJson(evn[key]))? JSON.stringify(evn[key]):evn[key];
+            returnString = returnString.concat(tmpString.format(key, value) + '\n');
           }
         }
       }
@@ -119,6 +122,11 @@ function getQueryParamWithJson(paramJson) {
   }
   // console.log(paramArray);
   return paramArray;
+}
+
+isJson = function(obj){
+  var isjson = typeof(obj) == "object" && Object.prototype.toString.call(obj).toLowerCase() == "[object object]" && !obj.length;
+  return isjson;
 }
 
 

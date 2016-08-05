@@ -45,6 +45,13 @@ module.exports = {
   },
   //对collection对象进行测试
   testCollectionWithCallBack: function (collection, option, testCollectioncallback) {
+    fs.writeFile("./api/services/lastCollection.json", JSON.stringify(collection, null, 2), function (err) {
+      if (err) {
+        console.log('err ---------'+err);
+      } else {
+        console.log("JSON saved to lastCollection.json" );
+      }
+    });
     //先把collection对象转化未JSON,再使用JSON5解析
     var collectionJSON = JSON.stringify(collection, null, 2);
     var collectionJSONObject = JSON5.parse(collectionJSON);
@@ -64,9 +71,9 @@ module.exports = {
     var results = responseJSON.results;
 
     console.log(results.length);
-    var result = results.pop();
+    var result = results[results.length-1];
     // console.log(result);
-    console.log(result['responseCode']['body']);
+    // console.log(result['responseCode']['body']);
     return result['responseCode']['body'];
   },
   //export response

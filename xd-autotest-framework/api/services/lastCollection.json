@@ -1,41 +1,37 @@
 {
-  "variables": [],
   "info": {
-    "_postman_id": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
-    "name": "new Collection",
-    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+    "name": "testCollection",
+    "_postman_id": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+    "description": "This is a description"
   },
   "item": [
     {
-      "id": "100000",
-      "name": "newLogin_API",
-      "disabled": false,
+      "name": "login",
       "request": {
-        "id": "100000",
-        "name": "newLogin_API",
-        "disabled": false,
+        "name": "login",
         "url": "http://192.168.103.101:8002/user/newLogin",
         "method": "POST",
         "header": [
           {
             "key": "clientType",
-            "value": "iOS"
+            "value": "android"
           },
           {
             "key": "module",
-            "value": "iOS"
+            "value": "2"
           },
           {
             "key": "version",
-            "value": "iOS"
+            "value": "1.0"
           },
           {
             "key": "clientIp",
-            "value": "iOS"
+            "value": "192.168.31.23"
           },
           {
             "key": "deviceId",
-            "value": "iOS"
+            "value": "MyTestDeviceID123"
           }
         ],
         "body": {
@@ -43,13 +39,29 @@
           "urlencoded": [
             {
               "key": "req",
-              "value": "iOS",
+              "value": "{{req}}",
               "type": "text",
               "enabled": true
             }
           ]
         }
-      }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": "postman.setGlobalVariable(\"req\", '{\"platform\":\"local\",\"phoneNum\":\"18210199276\",\"pwd\":\"123456\"}');\n"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ""
+          }
+        }
+      ]
     }
   ]
 }
