@@ -3,26 +3,24 @@
  */
 ;(function ($) {
   $.main = $.main || {};
-  $.main.refreshMain = function (url) {
-    if ($("#page-wrapper")) {
+  $.main.refreshRight = function (url) {
+    if ($("#page-wrapper-right")) {
       $.ajax({
         url: url,
         success: function (data) {
-          $("#page-wrapper").html(data);
+          $("#page-wrapper-right").html(data);
         }
       });
     }
   };
 })(jQuery);
 $(function () {
-  $.each($(".main-operation>li"), function () {
+  $.each($(".right-operation>li"), function () {
     var node = $(this);
     node.click(function () {
-      $(".active").removeClass("active");
-      node.addClass("active")
       var target = node.children();
       if (target && target.attr("target"))
-        $.main.refreshMain(target.attr("target"));
+        $.main.refreshRight(target.attr("target"));
     });
   });
 });

@@ -1,29 +1,14 @@
-<div id="page-wrapper-right" class="container-fluid">
+<div class="container-fluid">
 
-  <!-- Page Heading -->
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">
-        <small>运行结果</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li class="active">
-          <i class="fa fa-table"></i> 用例
-        </li>
-      </ol>
-    </div>
-  </div>
-  <!-- /.row -->
-
-
-  <ul class="nav navbar-nav side-nav">
+  <ul class="nav navbar-nav side-nav right-operation">
     <% data.forEach(function(record){ %>
     <li>
-      <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+      <a href="javascript:void(0)"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
     </li>
     <% }) %>
     <li>
-      <a href="#demo" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-up"></i></a>
+      <a href="javascript:void(0)" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i
+          class="fa fa-fw fa-caret-up"></i></a>
       <ul id="demo" class="collapse">
         <li>
           <a href="#">Dropdown Item</a>
@@ -35,140 +20,160 @@
     </li>
   </ul>
 
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped">
-              <thead>
-              <tr>
-                <th>Order #</th>
-                <th>Order Date</th>
-                <th>Order Time</th>
-                <th>Amount (USD)</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>3326</td>
-                <td>10/21/2013</td>
-                <td>3:29 PM</td>
-                <td>$321.33</td>
-              </tr>
-              <tr>
-                <td>3325</td>
-                <td>10/21/2013</td>
-                <td>3:20 PM</td>
-                <td>$234.34</td>
-              </tr>
-              <tr>
-                <td>3324</td>
-                <td>10/21/2013</td>
-                <td>3:03 PM</td>
-                <td>$724.17</td>
-              </tr>
-              <tr>
-                <td>3323</td>
-                <td>10/21/2013</td>
-                <td>3:00 PM</td>
-                <td>$23.71</td>
-              </tr>
-              <tr>
-                <td>3322</td>
-                <td>10/21/2013</td>
-                <td>2:49 PM</td>
-                <td>$8345.23</td>
-              </tr>
-              <tr>
-                <td>3321</td>
-                <td>10/21/2013</td>
-                <td>2:23 PM</td>
-                <td>$245.12</td>
-              </tr>
-              <tr>
-                <td>3320</td>
-                <td>10/21/2013</td>
-                <td>2:15 PM</td>
-                <td>$5663.54</td>
-              </tr>
-              <tr>
-                <td>3319</td>
-                <td>10/21/2013</td>
-                <td>2:13 PM</td>
-                <td>$943.45</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="text-right">
-            <a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
+  <div id="page-wrapper-right">
+
+    <!-- Page Heading -->
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header">
+          <small>运行结果</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li class="active">
+            <i class="fa fa-table"></i> 用例
+          </li>
+        </ol>
+      </div>
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+                  <th>Order #</th>
+                  <th>Order Date</th>
+                  <th>Order Time</th>
+                  <th>Amount (USD)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>3326</td>
+                  <td>10/21/2013</td>
+                  <td>3:29 PM</td>
+                  <td>$321.33</td>
+                </tr>
+                <tr>
+                  <td>3325</td>
+                  <td>10/21/2013</td>
+                  <td>3:20 PM</td>
+                  <td>$234.34</td>
+                </tr>
+                <tr>
+                  <td>3324</td>
+                  <td>10/21/2013</td>
+                  <td>3:03 PM</td>
+                  <td>$724.17</td>
+                </tr>
+                <tr>
+                  <td>3323</td>
+                  <td>10/21/2013</td>
+                  <td>3:00 PM</td>
+                  <td>$23.71</td>
+                </tr>
+                <tr>
+                  <td>3322</td>
+                  <td>10/21/2013</td>
+                  <td>2:49 PM</td>
+                  <td>$8345.23</td>
+                </tr>
+                <tr>
+                  <td>3321</td>
+                  <td>10/21/2013</td>
+                  <td>2:23 PM</td>
+                  <td>$245.12</td>
+                </tr>
+                <tr>
+                  <td>3320</td>
+                  <td>10/21/2013</td>
+                  <td>2:15 PM</td>
+                  <td>$5663.54</td>
+                </tr>
+                <tr>
+                  <td>3319</td>
+                  <td>10/21/2013</td>
+                  <td>2:13 PM</td>
+                  <td>$943.45</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="text-right">
+              <a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- /.row -->
+
+    <% if (data.length) { %>
+    <% var object = data[0];console.log(object) %>
+    <form id="form" class="form-inline" action="/Interface/showreq" method="POST">
+      <div>
+        <h2>url</h2>
+        <label style="width: 200px">url</label>
+        <input name="url" type="text" value="<%- object.url %>"/>
+      </div>
+      <div>
+        <h2>header</h2>
+        <% for(var key in object.headers){
+          var value = object.headers[key]; %>
+        <label style="width: 200px"><%- key %></label>
+        <input name="<%- "header" + key %>" type="text" value="<%- value %>"/><br/>
+        <% } %>
+      </div>
+      <div>
+        <h2>queryParam</h2>
+        <% for(var key in object.queryParam){
+          var value = object.queryParam[key]; %>
+        <label style="width: 200px"><%- key %></label>
+        <input name="<%- "queryParam" + key %>" style="width:30%" type="text" value='<%- value %>'/><br/>
+        <% } %>
+      </div>
+      <div>
+        <h2>other</h2>
+        <label style="width: 200px">method</label>
+        <input name="method" type="text" value="<%- object.method %>"/><br/>
+
+        <label style="width: 200px">dev</label>
+        <input name="dev" type="text" value="<%- object.dev %>"/><br/>
+
+        <label style="width: 200px">disabled</label>
+        <input id="disabled" type="text" value="<%- object.disabled %>"/><br/>
+
+        <label style="width: 200px">name</label>
+        <input name="name" type="text" value="<%- object.name %>"/><br/>
+
+        <!--<label style="width: 200px">version</label>-->
+        <!--<input name="version" type="text" value="<%- object.version %>" /><br />-->
+
+        <label style="width: 200px">description</label>
+        <input name="description" type="text" value="<%- object.description %>"/><br/>
+
+        <label style="width: 200px">mode</label>
+        <input name="mode" type="text" value="<%- object.mode %>"/><br/>
+      </div>
+      <div>
+        <h2>prescript</h2>
+        <textarea name="prescript" style="width: 40%;height: 200px"></textarea><br/>
+        <h2>testscript</h2>
+        <textarea name="testscript" style="width: 40%;height: 200px"></textarea><br/>
+      </div>
+      <div>
+        <div class="btn" id="runBtn">运行</div>
+        <div class="btn" id="saveBtn">保存</div>
+      </div>
+    </form>
+    <% } %>
+
   </div>
-  <!-- /.row -->
-
-  <% if (data.length) { %>
-  <% var object = data[0];console.log(object) %>
-  <form id="form" class="form-inline" action="/Interface/showreq" method="POST">
-    <div>
-      <h2>url</h2>
-      <label style="width: 200px">url</label>
-      <input name="url" type="text" value="<%- object.url %>" />
-    </div>
-    <div>
-      <h2>header</h2>
-      <% for(var key in object.headers){
-        var value = object.headers[key];%>
-      <label style="width: 200px"><%- key %></label>
-      <input name="<%- "header" + key %>" type="text" value="<%- value %>" /><br />
-      <% } %>
-    </div>
-    <div>
-      <h2>queryParam</h2>
-      <% for(var key in object.queryParam){
-        var value = object.queryParam[key];%>
-      <label style="width: 200px"><%- key %></label>
-      <input name="<%- "queryParam" + key %>" style="width:30%" type="text" value='<%- value %>' /><br />
-      <% } %>
-    </div>
-    <div>
-      <h2>other</h2>
-      <label style="width: 200px">method</label>
-      <input name="method" type="text" value="<%- object.method %>" /><br />
-
-      <label style="width: 200px">dev</label>
-      <input name="dev" type="text" value="<%- object.dev %>" /><br />
-
-      <label style="width: 200px">disabled</label>
-      <input id="disabled" type="text" value="<%- object.disabled %>" /><br />
-
-      <label style="width: 200px">name</label>
-      <input name="name" type="text" value="<%- object.name %>" /><br />
-
-      <!--<label style="width: 200px">version</label>-->
-      <!--<input name="version" type="text" value="<%- object.version %>" /><br />-->
-
-      <label style="width: 200px">description</label>
-      <input name="description" type="text" value="<%- object.description %>" /><br />
-
-      <label style="width: 200px">mode</label>
-      <input name="mode" type="text" value="<%- object.mode %>" /><br />
-    </div>
-    <div>
-      <h2>prescript</h2>
-      <textarea name="prescript" style="width: 40%;height: 200px"></textarea><br />
-      <h2>testscript</h2>
-      <textarea name="testscript" style="width: 40%;height: 200px"></textarea><br />
-    </div>
-    <div>
-      <div class="btn" id="runBtn">运行</div>
-      <div class="btn" id="saveBtn">保存</div>
-    </div>
-  </form>
-  <% } %>
-
 </div>
 <!-- /.container-fluid -->
+
+<script src="/xd-autotest-framework/js/index/frame-right.js"></script>
