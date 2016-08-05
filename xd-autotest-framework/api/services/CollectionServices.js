@@ -57,8 +57,8 @@ module.exports = {
     var collectionJSONObject = JSON5.parse(collectionJSON);
 
     // var option = optionMake();
-    Newman.execute(collectionJSONObject, option, function (exitCode) {
-      testCollectioncallback(exitCode);
+    Newman.execute(collectionJSONObject, option, function (exitCode, options) {
+      testCollectioncallback(exitCode, options);
     });
   },
 

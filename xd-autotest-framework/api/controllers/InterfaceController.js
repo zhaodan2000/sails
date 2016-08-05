@@ -180,10 +180,10 @@ module.exports = {
       var option = CollectionServices.optionMake();
 
       //对collectionJson进行测试
-      CollectionServices.testCollectionWithCallBack(collectionOBJ, option, function (exitcode) {
+      CollectionServices.testCollectionWithCallBack(collectionOBJ, option, function (exitcode, options) {
         //测试完成的回调,这里应该把测试结果返回才对
         console.log("exitCode is " + exitcode);
-        console.log('callback');
+        console.log('options -------------'+JSON.stringify(options));
         return res.send(collectionOBJ);
       });
 

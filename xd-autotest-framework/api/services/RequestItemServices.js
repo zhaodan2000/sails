@@ -82,7 +82,39 @@ module.exports = {
 
   //将传入的testscript语句转化为event中testscript需要的语法
   parseIntputTestString: function (teststring) {
-    var testscript;
+
+    var Test={global:{},evn:{},test:{}};
+    eval(teststring);
+
+    var returnString = '';
+    //第一层遍历testscriptObj
+    for (var prop in Test) {
+      if (Test.hasOwnProperty(prop) && prop === 'global') {
+        var global = Test[prop];
+        //当属性名为global时,再次遍历
+        for (var key in global) {
+          if (global.hasOwnProperty(key)){
+            var tmpString = "postman.setGlobalVariable(\"{0}\", '{1}');"
+            var value = (isJson(global[key]))? JSON.stringify(global[key]):global[key];
+            returnString = returnString.concat(tmpString.format(key, value) + '\n');
+          }
+        }
+      }else if(Test.hasOwnProperty(prop) && prop === 'evn'){
+        var evn = Test[prop];
+        //当属性名为evn时,再次遍历
+        for (var key in evn) {
+          if (evn.hasOwnProperty(key)){
+            var tmpString = "postman.setEnvironmentVariable(\"{0}\", '{1}');";
+            var value = (isJson(evn[key]))? JSON.stringify(evn[key]):evn[key];
+            returnString = returnString.concat(tmpString.format(key, value) + '\n');
+          }
+        }
+      }else if(Test.hasOwnProperty(prop) && prop === 'test'){
+
+      }
+    }
+    console.log(returnString);
+    return returnString;
   }
 }
 
