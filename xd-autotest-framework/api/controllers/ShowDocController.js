@@ -40,8 +40,6 @@ module.exports = {
         return res.send('OK');
       }
     })
-
-    // return res.send(req.body);
   },
 };
 
