@@ -3,56 +3,9 @@
 <head>
   <meta charset="utf-8"/>
   <title>接口文档在线编辑</title>
-  <script src="http://seo.chinaz.com/template/default/js/jquery.min.js" type="text/javascript"></script>
-  <script src="http://libs.baidu.com/jqueryui/1.8.22/jquery-ui.min.js"></script>
-  <link href="http://cdn.bootcss.com/bootstrap/2.2.1/css/bootstrap.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap-modal/2.2.5/css/bootstrap-modal.css"/>
-  <link rel="stylesheet" type="text/css" href="http://res.bejson.com/postman/css/jquery.jscrollpane.css"/>
-  <link rel="stylesheet" type="text/css" href="http://res.bejson.com/postman/codemirror/lib/codemirror.css"/>
-  <link rel="stylesheet" type="text/css" href="http://res.bejson.com/postman/codemirror/theme/eclipse.css"/>
-  <link rel="stylesheet" type="text/css" href="http://res.bejson.com/postman/css/styles.css"/>
-  <link rel="stylesheet" type="text/css" href="http://res.bejson.com/postman/css/keyvalueeditor.css"/>
 </head>
 <body>
 <div id="container" class="clearfix">
-  <div id="sidebar-toggle">
-    <img src="img/tri_arrow_left.png"/>
-  </div>
-  <div id="sidebar">
-    <div id="header" class="clearfix">
-      <div id="logo">
-        <a target="_blank">
-          网站代码来自浏览器插件<a href="https://www.getpostman.com/" target="_blank">PostMan</a>
-        </a>
-      </div>
-    </div>
-    <div id="sidebar-sections" class="clearfix">
-      <div id="history-options" class="section-options">
-        <a class="history-actions-delete" rel="tooltip" data-placement="bottom" data-original-title="Clear history">
-          <img src="img/trash-empty.png" style="width:24px; height:24px; vertical-align: middle;"/>
-        </a>
-      </div>
-      <div id="collections-options" class="section-options">
-        <a href="#modal-new-collection" rel="tooltip" data-original-title="Add new collection" data-toggle="modal" data-backdrop="static" data-placement="bottom" data-keyboard="true"><img src="img/folder_plus.png" style="width:20px; height:20px; vertical-align: middle;"/></a>
-        <a href="#modal-import-collection" rel="tooltip" data-original-title="Import collection" data-toggle="modal" data-backdrop="static" data-placement="bottom" data-keyboard="true"><img src="img/inbox_in.png" style="width:20px; height:20px; vertical-align: middle;"/></a>
-      </div>
-      <ul id="sidebar-selectors" class="nav nav-pills">
-        <li class="active"><a href="#sidebar-section-history" data-id="history" data-toggle="tab">历史</a></li>
-        <li><a href="#sidebar-section-collections" data-id="collections" data-toggle="tab">组</a></li>
-      </ul>
-      <div id="sidebar-section-data">
-        <div class="tab-pane active" id="sidebar-section-history">
-          <ul id="history-items" class="clearfix">
-          </ul>
-        </div>
-        <div class="tab-pane active" id="sidebar-section-collections">
-          <ul id="collection-items" class="clearfix">
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div id="sidebar-filler"></div>
-  </div>
   <div id="main" class="content">
     <section id="request">
       <div id="request-builder">
@@ -63,22 +16,6 @@
             <li data-id="digestAuth">Digest Auth</li>
             <li data-id="oAuth1">OAuth 1.0</li>
           </ul>
-          <div id="environment-selector-wrapper">
-            <div id="environment-quicklook-wrapper">
-              <a id="environment-quicklook">
-                <img src="img/eye.png"/>
-              </a>
-            </div>
-            <div id="environment-quicklook-content" class="clearfix">
-              <div id="environment-quicklook-environments">
-                <h6>No environment</h6>
-                <ul></ul>
-              </div>
-              <div id="environment-quicklook-globals">
-                <h6>Globals</h6>
-                <ul></ul>
-              </div>
-            </div>
             <div id="environment-selector">
               <div class="btn-group">
                 <a data-toggle="dropdown">
