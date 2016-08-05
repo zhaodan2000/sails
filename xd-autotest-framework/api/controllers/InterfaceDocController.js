@@ -82,16 +82,18 @@ module.exports = {
     //var retres = {retcode: 0, retdesc: "success", data: response};
    // res.send(retres);
     //return response;
-
-    mongoService.findRequestItemByName(req.param("requestName"), function (records) {
-      if (records) {
-        console.log(JSON.stringify(records));
-        var retres = {retcode: 0, retdesc: "success", data: records};
-        res.send(retres);
-      }
-      else
-        res.send({retcode: -1, retdesc: "syserror"})
-    });
+    
+      mongoService.findRequestItemByName(req.param("requestName"), function (records) {
+        if (records) {
+          console.log(JSON.stringify(records));
+          var retres = {retcode: 0, retdesc: "success", data: records};
+          res.send(retres);
+        }
+        else
+          res.send({retcode: -1, retdesc: "syserror"})
+      });
+    
+   
 
 
   },

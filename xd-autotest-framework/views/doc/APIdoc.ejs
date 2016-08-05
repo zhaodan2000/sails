@@ -1,4 +1,8 @@
 <script>
+
+  /**
+   * 根据输入的requestName查询requestItem记录
+   * */
    $('#save_doc').click(function(){
      //var queryString="newLogin";
      var queryString=$('input#input_requestName').val();
@@ -18,7 +22,7 @@
        success:function(data){
          //返回的数据用data.d获取内容
          //alert(data.d);
-         $("textarea#textarea_response").val(JSON.stringify(data));
+         $("textarea#textarea_response").val(JSON.stringify(data,null,"\t"));
        },
        error:function(err){
          //alert(err);
@@ -30,11 +34,16 @@
 
    });
 
+   /**
+    * 插入equestItem记录
+    * */
   $('#test_insertrequestitem').click(function(){
     //var requestItem=JSON.parse($('textarea#textarea_requestItem').val());
     console.log("requestItem="+$('textarea#textarea_requestItem').val());
     var requestItemValue=$('textarea#textarea_requestItem').val();
+    console.log(requestItemValue);
     var requestItem=JSON.parse(requestItemValue);
+    console.log(requestItem);
 
     $.ajax({
       url: "/doc/insertRequestItemService",
@@ -47,7 +56,7 @@
       success: function (data) {
         //返回的数据用data.d获取内容
         //alert(data.d);
-        $("textarea#textarea_response").val(JSON.stringify(data));
+        $("textarea#textarea_response").val(JSON.stringify(data,null,4));
       },
       error: function (err) {
         //alert(err);
@@ -56,7 +65,27 @@
     });
     console.log("execute done service (/doc/insertRequestItemService) via ajax... this should be seen on front...");
   });
+
+   $('#delete_reqItemTable').click(function(){
+      $.ajax({
+        url:"/doc/deleteAllReqItem",
+        type:"Get",
+        data:{},
+        success:function(data){
+          console.log(data);
+          var retmsg={retcode:0,retdesc:"sucess",data:data};
+          $("textarea#textarea_response").val(retmsg);
+        },
+        error:function(err){
+          console.log(err);
+          var retmsg={retcode:-1,retdesc:"error",data:data};
+          $("textarea#textarea_response").val(JSON.stringify(retmsg,null,4));
+        }
+      });
+   });
  </script>
+
+
 
 <head>
   <meta charset="UTF-8">
@@ -161,10 +190,10 @@
         <label>输入指定RequestItem的name:</label>
         <input id="input_requestName" class="form-control">
       </div>
-      <button id="save_doc" name="save_doc_btn" text="无样式">查询指定requestName的RequestItem</button>
+      <button id="save_doc" name="save_doc_btn" text="无样式">查询ReqItem</button>
       <div class="btn btn-default" type="button" id="test_insertrequestitem" name="test_insertdb"
-      text="默认效果">添加RequestItem记录</div>
-      <div class="btn btn-primary" text="主要效果">保存(主要效果)</div>
+      text="默认效果">添加ReqItem记录</div>
+      <div id="delete_reqItemTable" class="btn btn-primary" text="主要效果">清空reqItem表</div>
       <fieldset disabled>
         <div class="btn btn-default">默认失效</div>
         <div class="btn btn-primary">主要失效</div>

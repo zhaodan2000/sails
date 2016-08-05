@@ -19,7 +19,10 @@ module.exports = {
     res.view('task/index');
   },
   testcase: function(req, res) {
-    res.view('testcase/index');
+    DocService.testcallback('newLogin', res, function (records) {
+      console.log("++++++++++++" + records);
+      res.view('testcase/index', {data:records});
+    });
   },
   schedule: function(req, res) {
     res.view('schedule/index');

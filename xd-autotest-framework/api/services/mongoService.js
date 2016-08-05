@@ -11,16 +11,31 @@ module.exports={
    **/
   findRequestItemByName:function(requestName, callback) {
     //var requestName="newLogin_API";
-    RequestItem.find({name: requestName}).exec(function (err, records) {
-      if (!err) {
-        console.log("find records success!");
-        callback(records);
-      } else {
-        console.log("find records failure!");
-        callback(null);
-      }
-    })
+    if(requestName) {
+      RequestItem.find({name: requestName}).exec(function (err, records) {
+        if (!err) {
+          console.log("find records success!");
+          callback(records);
+        } else {
+          console.log("find records failure!");
+          callback(null);
+        }
+      })
+    }else{
+      RequestItem.find({}).exec(function (err, records) {
+        if (!err) {
+          console.log("find records success!");
+          callback(records);
+        } else {
+          console.log("find records failure!");
+          callback(null);
+        }
+      })
+    }
   },
+
+
+
 
   /***
    * 生成一个接口MongoDB记录。

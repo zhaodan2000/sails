@@ -581,7 +581,7 @@
     }
 
   , toggle: function () {
-      this[this.$element.hasClass('in') ? 'hide' : 'show']()
+      this.$element[this.$element.hasClass('in')?'removeClass':'addClass']('in')
     }
 
   }
@@ -626,7 +626,7 @@
       , target = $this.attr('data-target')
         || e.preventDefault()
         || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') //strip for ie7
-      , option = $(target).data('collapse') ? 'toggle' : $this.data()
+      , option = $(target).data('collapse') ? 'toggle' : $this.data();
     $this[$(target).hasClass('in') ? 'addClass' : 'removeClass']('collapsed')
     $(target).collapse(option)
   })

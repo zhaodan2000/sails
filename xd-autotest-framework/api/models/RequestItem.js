@@ -13,7 +13,6 @@ module.exports = {
   connection: 'someMongodbServer',
   tableName: 'xd_autotest_request',
   attributes: {
-
     id: {
       type: 'string',
       required: true,
