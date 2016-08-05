@@ -136,6 +136,8 @@ module.exports = {
         item[key] = req.body[key];
       }
     }
+
+    console.log('item :' + JSON.stringify(item));
     RequestItem.update({name:req.body.name}, item, function (err, records) {
       if(err){
         console.log(err);
@@ -149,38 +151,39 @@ module.exports = {
 
   showResponse: function (req, res) {
 
-    RequestItem.findOne({name: 'newLogin_API'}).exec(function (err, articles) {
-      if (!err) {
-        // 刷新下一页
-        // return res.send(articles);
-        var request = RequestItemServices.configRequestItem(articles);
-        var item = RequestItemServices.configItem(request);
-        var collection = RequestItemServices.configCollection(item);
-        // var collectionJson = JSON.parse(collection);
-        // console.log(collection);
-        RequestItemServices.newmanTest(collection);
-
-        var path = require('path');
-        var filePath = path.join(__dirname, '..', 'services', 'outfile.json');
-        // console.log(filePath);
-        var response = CollectionServices.parseResponse(filePath);
-        console.log(response);
-        var responseJson;
-        if (response){
-          responseJson = JSON.parse(response);
-        }
-
-        console.log(JSON.stringify(responseJson));
-        return res.view('response', {
-          data: JSON.stringify(responseJson, null, 4),
-          collection: JSON.stringify(collection, null, 4)
-        });
-        // return res.view('homeindex');
-      }
-      else {
-        console.log(err);
-      }
-    });
+    console.log(req.body);
+    // RequestItem.findOne({name: 'newLogin_API'}).exec(function (err, articles) {
+    //   if (!err) {
+    //     // 刷新下一页
+    //     // return res.send(articles);
+    //     var request = RequestItemServices.configRequestItem(articles);
+    //     var item = RequestItemServices.configItem(request);
+    //     var collection = RequestItemServices.configCollection(item);
+    //     // var collectionJson = JSON.parse(collection);
+    //     // console.log(collection);
+    //     RequestItemServices.newmanTest(collection);
+    //
+    //     var path = require('path');
+    //     var filePath = path.join(__dirname, '..', 'services', 'outfile.json');
+    //     // console.log(filePath);
+    //     var response = CollectionServices.parseResponse(filePath);
+    //     console.log(response);
+    //     var responseJson;
+    //     if (response){
+    //       responseJson = JSON.parse(response);
+    //     }
+    //
+    //     console.log(JSON.stringify(responseJson));
+    //     return res.view('response', {
+    //       data: JSON.stringify(responseJson, null, 4),
+    //       collection: JSON.stringify(collection, null, 4)
+    //     });
+    //     // return res.view('homeindex');
+    //   }
+    //   else {
+    //     console.log(err);
+    //   }
+    // });
   }
 };
 

@@ -1,35 +1,38 @@
 {
     "id": "",
     "name": "Default",
-    "timestamp": 1470303521441,
-    "collection_id": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
+    "timestamp": 1470307178424,
+    "collection_id": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
     "folder_id": 0,
     "target_type": "collection",
     "count": 1,
     "collection": {
-        "id": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
-        "name": "new Collection",
+        "id": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
+        "name": "testCollection",
+        "description": "This is a description",
         "order": [
-            "100000"
+            "83509941-cb61-44f8-85d4-cb9225747b2c"
         ],
         "folders": [],
         "requests": [
             {
-                "id": "100000",
-                "name": "newLogin_API",
-                "collectionId": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
+                "id": "83509941-cb61-44f8-85d4-cb9225747b2c",
+                "name": "login",
+                "collectionId": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
                 "method": "POST",
-                "headers": "clientType: iOS\nmodule: iOS\nversion: iOS\nclientIp: iOS\ndeviceId: iOS",
+                "headers": "clientType: android\nmodule: 2\nversion: 1.0\nclientIp: 192.168.31.23\ndeviceId: MyTestDeviceID123",
                 "dataMode": "urlencoded",
                 "data": [
                     {
                         "key": "req",
-                        "value": "iOS",
+                        "value": "{\"platform\":\"local\",\"phoneNum\":\"18210191798\",\"pwd\":\"123456\"}",
                         "type": "text",
                         "enabled": true
                     }
                 ],
                 "rawModeData": "",
+                "tests": "var jsonData = JSON.parse(responseBody);\ntests[\"retcode = 0 pass\"] = jsonData.retcode === \"0\";",
+                "preRequestScript": "",
                 "url": "http://192.168.103.101:8002/user/newLogin"
             }
         ]
@@ -40,28 +43,37 @@
     },
     "results": [
         {
-            "id": "100000",
-            "name": "newLogin_API",
+            "id": "83509941-cb61-44f8-85d4-cb9225747b2c",
+            "name": "login",
             "url": "http://192.168.103.101:8002/user/newLogin",
-            "totalTime": 103,
+            "totalTime": 124,
             "responseCode": {
                 "code": 200,
                 "name": "",
-                "detail": ""
+                "detail": "",
+                "body": "{\"moduleInfo\":{\"admissionCardCode\":\"\",\"age\":\"0\",\"bePraiseNum\":\"0\",\"createTime\":\"2016-07-07 10:57:59.0\",\"credit\":\"53\",\"degreeLevel\":\"\",\"gender\":\"1\",\"id\":\"208\",\"identificationCardCode\":\"\",\"latestDeviceIp\":\"192.168.31.23\",\"major\":\"01B0402\",\"majorName\":\"\",\"medalId\":\"1 \",\"medalImg\":\"http://7xigj3.com1.z0.glb.clouddn.com/image_2015_11_13_15_59_230f0054d4-e12a-41ee-b88d-ad67d728a263  \",\"medalName\":\"无名的旅人 \",\"merchant\":\"\",\"module\":\"2\",\"nickName\":\"姬丝秀忒\",\"officialGender\":\"\",\"picList\":[],\"platform\":\"local\",\"portrait\":\"http://7xigj3.com1.z0.glb.clouddn.com/DE9B75CD-CFCE-4BCE-831E-F1064631466B\",\"realName\":\"\",\"salt\":\"HnRx6n\",\"sign\":\"\",\"token\":\"27423175-7c3e-4ba9-a24e-272c4cc4fa08\",\"tokenTime\":\"2016-08-04 18:41:03.508\",\"uniqueId\":\"\",\"usedDeviceId\":\"MyTestDeviceID123\",\"userId\":\"208\",\"userName\":\"18210191798\",\"userType\":\"1\"},\"retOk\":true,\"retcode\":\"0\",\"retdesc\":\"操作成功\",\"serverIp\":\"127.0.1.1\",\"token\":\"27423175-7c3e-4ba9-a24e-272c4cc4fa08\"}"
             },
-            "tests": {},
+            "tests": {
+                "retcode = 0 pass": true
+            },
             "totalPassFailCounts": {
-                "pass": 0,
+                "pass": 1,
                 "fail": 0
             },
-            "testPassFailCounts": {},
+            "testPassFailCounts": {
+                "retcode = 0 pass": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
             "times": [],
             "allTests": [
-                {},
-                {}
+                {
+                    "retcode = 0 pass": true
+                }
             ],
-            "time": 9,
-            "meanResponseTime": 103
+            "time": 124,
+            "meanResponseTime": 124
         }
     ],
     "environment": {
