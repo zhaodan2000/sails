@@ -1,4 +1,8 @@
-<script type="text/javascript">
+<script type="text/javascript" >
+  /**
+   * Created by lyh on 8/8/16.
+   */
+
 
   $('#find_docItem').click(function(){
     $.ajax({
@@ -23,40 +27,40 @@
   /**
    * 根据输入的requestName查询requestItem记录
    * */
-   $('#findReqItem').click(function(){
-     //var queryString="newLogin";
-     var queryString=$('input#input_requestName').val();
+  $('#findReqItem').click(function(){
+    //var queryString="newLogin";
+    var queryString=$('input#input_requestName').val();
 
-     console.log(" test ... :queryString="+queryString);
+    console.log(" test ... :queryString="+queryString);
 
     $.ajax({
-       url: '/doc/findRequestItemByName',
-       type:"Get",
-       //data:"{'first':'蚂蚁部落','second':'欢迎您'}",
-       //data:queryString,
-       data:{
-         requestName: queryString,
-         //a: $('#a').val(),
-         //b: $('#b').val()
-       },
-       success:function(data){
-         //返回的数据用data.d获取内容
-         //alert(data.d);
-         $("textarea#textarea_response").val(JSON.stringify(data,null,"\t"));
-       },
-       error:function(err){
-         //alert(err);
-         $("textarea#textarea_response").val(JSON.stringify(err,null,"\t"));
-       }
-     });
+      url: '/doc/findRequestItemByName',
+      type:"Get",
+      //data:"{'first':'蚂蚁部落','second':'欢迎您'}",
+      //data:queryString,
+      data:{
+        requestName: queryString,
+        //a: $('#a').val(),
+        //b: $('#b').val()
+      },
+      success:function(data){
+        //返回的数据用data.d获取内容
+        //alert(data.d);
+        $("textarea#textarea_response").val(JSON.stringify(data,null,"\t"));
+      },
+      error:function(err){
+        //alert(err);
+        $("textarea#textarea_response").val(JSON.stringify(err,null,"\t"));
+      }
+    });
 
-     console.log("execute done service (/doc/findRequestItemByName) via ajax... this should be seen on front...");
+    console.log("execute done service (/doc/findRequestItemByName) via ajax... this should be seen on front...");
 
-   });
+  });
 
-   /**
-    * 插入equestItem记录
-    * */
+  /**
+   * 插入equestItem记录
+   * */
   $('#test_insertrequestitem').click(function(){
     //var requestItem=JSON.stringify($('textarea#textarea_requestItem').val());
     console.log("requestItem="+$('textarea#textarea_requestItem').val());
@@ -86,23 +90,23 @@
     console.log("execute done service (/doc/insertRequestItemService) via ajax... this should be seen on front...");
   });
 
-   $('#delete_reqItemTable').click(function(){
-      $.ajax({
-        url:"/doc/deleteAllReqItem",
-        type:"Get",
-        data:{},
-        success:function(data){
-          console.log(data);
-          var retmsg={retcode:0,retdesc:"sucess",data:data};
-          $("textarea#textarea_response").val(JSON.stringify(retmsg,null,"\t"));
-        },
-        error:function(err){
-          console.log(err);
-          var retmsg={retcode:-1,retdesc:"error",data:data};
-          $("textarea#textarea_response").val(JSON.stringify(retmsg,null,4));
-        }
-      });
-   });
+  $('#delete_reqItemTable').click(function(){
+    $.ajax({
+      url:"/doc/deleteAllReqItem",
+      type:"Get",
+      data:{},
+      success:function(data){
+        console.log(data);
+        var retmsg={retcode:0,retdesc:"sucess",data:data};
+        $("textarea#textarea_response").val(JSON.stringify(retmsg,null,"\t"));
+      },
+      error:function(err){
+        console.log(err);
+        var retmsg={retcode:-1,retdesc:"error",data:data};
+        $("textarea#textarea_response").val(JSON.stringify(retmsg,null,4));
+      }
+    });
+  });
 
   /**
    * 将用户的输入存md文件中。
@@ -155,29 +159,29 @@
   });
 
   $('#find_doc').click(function(){
-      var queryString=$('#md_filename').val()+'.md';
-      console.log(queryString);
+    var queryString=$('#md_filename').val()+'.md';
+    console.log(queryString);
 
-      $.ajax({
-        url: '/doc/findDocByName',
-        type:"Get",
-        //data:"{'first':'蚂蚁部落','second':'欢迎您'}",
-        //data:queryString,
-        data:{
-          docName: queryString,
-          //a: $('#a').val(),
-          //b: $('#b').val()
-        },
-        success:function(data){
-          //返回的数据用data.d获取内容
-          //alert(data.d);
-          $("textarea#textarea_response").val(JSON.stringify(data,null,"\t"));
-        },
-        error:function(err){
-          //alert(err);
-          $("textarea#textarea_response").val(JSON.stringify(err,null,"\t"));
-        }
-      })
+    $.ajax({
+      url: '/doc/findDocByName',
+      type:"Get",
+      //data:"{'first':'蚂蚁部落','second':'欢迎您'}",
+      //data:queryString,
+      data:{
+        docName: queryString,
+        //a: $('#a').val(),
+        //b: $('#b').val()
+      },
+      success:function(data){
+        //返回的数据用data.d获取内容
+        //alert(data.d);
+        $("textarea#textarea_response").val(JSON.stringify(data,null,"\t"));
+      },
+      error:function(err){
+        //alert(err);
+        $("textarea#textarea_response").val(JSON.stringify(err,null,"\t"));
+      }
+    })
 
   });
 
@@ -206,9 +210,10 @@
       }
     })
 
-  })
+  });
 
- </script>
+
+</script>
 
 
 <!-- Page Heading -->
@@ -352,7 +357,7 @@
       <div class="btn btn-default" id="create_doc">添加doc</div>
       <div class="btn btn-default" id="find_docItem">查询docItem</div>
       <div class="btn btn-default" id="create_docItem">添加docItem</div>
-    </form>
+     </form>
   </div>
 </div>
 

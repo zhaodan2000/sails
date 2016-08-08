@@ -97,6 +97,13 @@ module.exports = {
       required: false
     },
 
+    dirpath:{
+      type:'string',
+      required:false,
+      defaultsTo:'/默认'
+    }
+
+
     // //preScript 前置脚本
     // prescript:{
     //   type:'string',

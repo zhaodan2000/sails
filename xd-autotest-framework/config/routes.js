@@ -56,7 +56,6 @@ module.exports.routes = {
   'post /doc/savedocwithItem':'InterfaceDoc.saveDoc2db',
   'get /doc/findDocByName':'InterfaceDoc.findDocByName',
   'get /doc/createDoc' :'InterfaceDoc.createDoc',
-  "get /doc/findDoc":'InterfaceDoc.test',
 
   '/postmanUI': {
     view: 'showdoc'

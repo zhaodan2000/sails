@@ -18,9 +18,14 @@ module.exports = {
   test:function(req,res){
     //mongoService.deletAllRecords(docItem);
     var data;
+    mongoService.findAll('RequestItem', function(records){
+      data=records;
+    });
+    res.send(data);
+    /**
     mongoService.findAll(docItem, function(records){
       data=records;
-    })
+    })**/
   },
 
   createDoc:function(req,res){

@@ -2,14 +2,14 @@
 
   <ul class="nav navbar-nav side-nav right-operation">
     <% data.forEach(function(record,index){ %>
-    <%console.log(record)%>
+    <%console.log("----------" + JSON.stringify(record))%>
     <li>
-      <a href="javascript:void(index)" data-toggle="collapse" data-target="<%='#info' + index%>"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i
+      <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#info' + index%>"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i
           class="fa fa-fw fa-caret-up"></i></a>
       <ul id="<%='info' + index%>" class="collapse">
         <li>
-          <div class="row" align="center"><a href="#">Dropdown Item</a><i><button class="btn btn-xs btn-primary" type="button">run</button>
-              <button class="btn btn-xs btn-success" type="button"
+          <div class="row" align="center"><a href="#">Dropdown Item</a><i><button class="btn btn-xs btn-primary" type="button" id="<%='#run' + record%>">run</button>
+              <button class="btn btn-xs btn-success" type="button" id="<%='#info' + index%>"
                        onclick="addModel(this)">view</button></i></div>
         </li>
       </ul>

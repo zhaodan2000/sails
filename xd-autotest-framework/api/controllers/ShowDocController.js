@@ -6,6 +6,12 @@
  */
 
 module.exports = {
+  findRequestItemByID:function (req,res) {
+    mongoService.findRequestItemByID(requestId,function (record) {
+      return res.send(record);
+    })
+  },
+
   showdoc:function (req,res) {
     DocService.testcallback('newLogin_API', res, function (records) {
       res.view('showdoc', {data:records});

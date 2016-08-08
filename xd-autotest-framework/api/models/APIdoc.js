@@ -4,7 +4,7 @@
 
 module.exports={
   connection: 'someMongodbServer',
-  tableName: 'xd_autotest_doc',
+  tableName: 'xd_autotest_apidoc',
   attributes: {
     id: {
       type: 'string',
@@ -19,13 +19,13 @@ module.exports={
     },
 
     /**
-     * 一个doc与docItem是one-to-many的关系,
+     * 一个APIdoc与docItem是one-to-many的关系,
      * 可通过doc与docItem的引用指向来相互关联,
      * 参考:http://sailsjs.org/documentation/concepts/models-and-orm/associations/one-to-many
      * */
-    doc_items: {
-      collection: 'docItem',
-      via: 'docID'
+    APIdoc_items: {
+      collection: 'APIdocitem',
+      via: 'APIdocID'
     }
   }
 }
