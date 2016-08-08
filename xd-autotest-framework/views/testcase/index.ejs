@@ -1,26 +1,23 @@
 <div class="container-fluid">
 
   <ul class="nav navbar-nav side-nav right-operation">
-    <% data.forEach(function(record){ %>
+    <% data.forEach(function(record,index){ %>
+    <%console.log(record)%>
     <li>
-      <a href="javascript:void(0)"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-    </li>
-    <% }) %>
-    <li>
-      <a href="javascript:void(0)" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i
+      <a href="javascript:void(index)" data-toggle="collapse" data-target="<%='#info' + index%>"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i
           class="fa fa-fw fa-caret-up"></i></a>
-      <ul id="demo" class="collapse">
+      <ul id="<%='info' + index%>" class="collapse">
         <li>
-          <a href="#">Dropdown Item</a>
-        </li>
-        <li>
-          <a href="#">Dropdown Item</a>
+          <div class="row" align="center"><a href="#">Dropdown Item</a><i><button class="btn btn-xs btn-primary" type="button">run</button>
+              <button class="btn btn-xs btn-success" type="button"
+                       onclick="addModel(this)">view</button></i></div>
         </li>
       </ul>
     </li>
+    <% }) %>
   </ul>
 
-  <div id="page-wrapper-right">
+  <div id="page-wrapper-right" aria-hidden="false">
 
     <!-- Page Heading -->
     <div class="row">
@@ -33,81 +30,6 @@
             <i class="fa fa-table"></i> 用例
           </li>
         </ol>
-      </div>
-    </div>
-    <!-- /.row -->
-
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="table-responsive">
-              <table class="table table-bordered table-hover table-striped">
-                <thead>
-                <tr>
-                  <th>Order #</th>
-                  <th>Order Date</th>
-                  <th>Order Time</th>
-                  <th>Amount (USD)</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>3326</td>
-                  <td>10/21/2013</td>
-                  <td>3:29 PM</td>
-                  <td>$321.33</td>
-                </tr>
-                <tr>
-                  <td>3325</td>
-                  <td>10/21/2013</td>
-                  <td>3:20 PM</td>
-                  <td>$234.34</td>
-                </tr>
-                <tr>
-                  <td>3324</td>
-                  <td>10/21/2013</td>
-                  <td>3:03 PM</td>
-                  <td>$724.17</td>
-                </tr>
-                <tr>
-                  <td>3323</td>
-                  <td>10/21/2013</td>
-                  <td>3:00 PM</td>
-                  <td>$23.71</td>
-                </tr>
-                <tr>
-                  <td>3322</td>
-                  <td>10/21/2013</td>
-                  <td>2:49 PM</td>
-                  <td>$8345.23</td>
-                </tr>
-                <tr>
-                  <td>3321</td>
-                  <td>10/21/2013</td>
-                  <td>2:23 PM</td>
-                  <td>$245.12</td>
-                </tr>
-                <tr>
-                  <td>3320</td>
-                  <td>10/21/2013</td>
-                  <td>2:15 PM</td>
-                  <td>$5663.54</td>
-                </tr>
-                <tr>
-                  <td>3319</td>
-                  <td>10/21/2013</td>
-                  <td>2:13 PM</td>
-                  <td>$943.45</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="text-right">
-              <a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <!-- /.row -->
@@ -172,8 +94,38 @@
     </form>
     <% } %>
 
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close"
+                    data-dismiss="modal" aria-hidden="true">
+              &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+              模态框（Modal）标题
+            </h4>
+            <input id="test" value="123">
+          </div>
+          <div class="modal-body">
+            在这里添加一些文本
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default"
+                    data-dismiss="modal">关闭
+            </button>
+            <button type="button" class="btn btn-primary">
+              提交更改
+            </button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal -->
+
   </div>
 </div>
 <!-- /.container-fluid -->
 
-<script src="/xd-autotest-framework/js/index/frame-right.js"></script>
+  <script src="/xd-autotest-framework/js/index/frame-right.js"></script>
+  <script src="/postman/testcase.js"></script>
