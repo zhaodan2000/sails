@@ -39,7 +39,7 @@
           "urlencoded": [
             {
               "key": "req",
-              "value": "{{req}}",
+              "value": "{\"platform\":\"local\",\"phoneNum\":\"18210191798\",\"pwd\":\"123456\"}",
               "type": "text",
               "enabled": true
             }
@@ -51,7 +51,7 @@
           "listen": "prerequest",
           "script": {
             "type": "text/javascript",
-            "exec": "postman.setGlobalVariable(\"req\", '{\"platform\":\"local\",\"phoneNum\":\"18210199276\",\"pwd\":\"123456\"}');\n"
+            "exec": ""
           }
         },
         {
