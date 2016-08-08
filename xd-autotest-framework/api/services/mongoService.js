@@ -34,8 +34,33 @@ module.exports={
     }
   },
 
-
-
+  /**
+   * 根据入参的id, 来查找mongodb里的符合条件的记录。
+   **/
+  findRequestItemByID:function(reqid, callback) {
+    //var requestName="newLogin_API";
+    if(reqid) {
+      RequestItem.find({id: reqid}).exec(function (err, records) {
+        if (!err) {
+          console.log("find records success!");
+          callback(records);
+        } else {
+          console.log("find records failure!");
+          callback(null);
+        }
+      })
+    }else{
+      RequestItem.find({}).exec(function (err, records) {
+        if (!err) {
+          console.log("find records success!");
+          callback(records);
+        } else {
+          console.log("find records failure!");
+          callback(null);
+        }
+      })
+    }
+  },
 
   /***
    * 生成一个接口MongoDB记录。
@@ -49,7 +74,6 @@ module.exports={
         callback(records);
         return ;
       }
-
       console.log("添加requestItem记录失败。。。错误原因为:\r\n"+err);
       callback(null);
       return ;
@@ -98,32 +122,5 @@ module.exports={
     });
 
   },
-
-  deletAllRecords:function(modelType){
-    modelType.destroy().exec(function(err){
-      if(!err){
-        console.log("删除所有records成功!");
-      }else{
-        console.log("删除所有records失败。。。");
-      }
-    });
-  },
-
-  findAll:function(modelType, callback){
-    modelType.find().exec(function(records){
-      if(records){
-        console.log("查找所有records成功!");
-        console.log(records);
-        callback(records);
-      }else{
-        console.log("删除所有records失败。。。");
-        callback(null);
-      }
-    });
-  }
-
-
-
-
 
 }
