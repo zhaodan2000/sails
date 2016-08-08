@@ -4,22 +4,175 @@
  * @description :: Server-side logic for managing Interfacedocs
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+var fs=require('fs');
+var path=require('path');
+
 
 module.exports = {
 
   testService:function(req,res){
     res.view('doc/APIdoc');
-  },
-
-  testPost:function(req,res){
 
   },
 
+  test:function(req,res){
+    //mongoService.deletAllRecords(docItem);
+    var data;
+    mongoService.findAll(docItem, function(records){
+      data=records;
+    })
+  },
+
+  createDoc:function(req,res){
+    var queryString=req.param("docName");
+    console.log(queryString);
+
+    var isExisted=false;
+    var _doc;
+    doc.find({name:queryString}).exec(function (records) {
+      if(records){
+        console.log("\r\n查找doc成功!");
+        console.log(records);
+        isExisted=true;
+        _doc={retcode:0,retdesc:'success',data:records};
+      }else{
+        console.log("\r\n查找doc失败...");
+        _doc={retcode:-1, retdesc:"find failed..",data:records};
+      }
+    });
+
+    if(_doc.retcode===-1){
+      doc.create({id:new Date().getMilliseconds().toString(),name:queryString}).exec(function(err,records){
+        if(!err){
+          console.log("插入成功");
+          console.log(records);
+        }else{
+          console.log("插入失败...");
+        }
+      })
+    }
+    res.send(_doc);
+
+  },
+
+
+  /**
+   * 根据doc name查找doc.
+   * */
+  findDocByName:function(req,res){
+    var queryString=req.param("docName");
+    console.log(queryString);
+
+    var _doc;
+    if(queryString){
+
+    }
+    doc.find({name:queryString}).exec(function (records) {
+      if(records){
+        console.log("\r\n查找doc成功!");
+        console.log(records);
+        _doc={retcode:0,retdesc:'success',data:records};
+      }else{
+        console.log("\r\n查找doc失败...");
+        _doc={retcode:-1, retdesc:"find failed..",data:records};
+      }
+    });
+
+    res.send(_doc);
+  },
+
+  /**
+   * 将doc与docItem存入db中,其中doc:docItem=1:N
+   * */
+  saveDoc2db: function(req,res){
+    console.log("\r\nreq.body is:")
+    console.log(req.body);
+    var filename=req.body.filename;
+    var requestItem=JSON.parse(req.body.reqItem);
+    //var requestItem=jQuery.parseJSON(req.body.reqItem);
+
+    console.log("\r\nJSON.parse(req.body.reqItem) is:");
+    console.log(requestItem);
+
+    var isDocExisted=false;
+    var record;
+    doc.find({name:req.body.filename}).exec(function(records){
+      if(records){
+        isDocExisted=true;
+        record=records;
+        console.log("doc.find({name:%s}) is %s",req.body.filename, records);
+      }else{
+        console.log("did not find doc with name '%s'", req.body.filename);
+      }
+    });
+
+    var _doc;
+    if(!isDocExisted){//创建doc对象
+      _doc={id:new Date().getTime().toString(), name:req.body.filename};
+      //var _docJson=JSON.stringify(_doc); **********教训: 将js中的object转换为jsonString后,插入mongodb的表中会报错"无法解析表的字段名"***************
+      //console.log(_docJson);
+
+      doc.create(_doc,function(err, records){
+        if(!err) {
+          console.log("inserted doc row is:"+JSON.stringify(records,null,"\t"));
+        }else{
+          console.log(err);
+        }
+      });
+    }else{
+      _doc=record;
+    }
+
+    var isDocItemExisted=false;
+    var docitem_record;
+    docItem.find({docID:_doc.id,name:requestItem['name']}).exec(function(records){
+      if(records){
+        isDocItemExisted=true;
+        docitem_record=records;
+        console.log("docItem.find({docID:%s,name:%s}) is %s",_doc.id, requestItem['name'], records);
+      }
+    });
+
+    var _docItem;
+    if(!isDocItemExisted){
+      console.log("requestItem.name="+requestItem['name']);
+      console.log("requestItem.name="+requestItem['url']);
+      _docItem={docID:_doc.id, name:requestItem['name'], url:requestItem['url']};
+      docItem.create(_docItem, function(err, records){
+        if(!err) {
+          console.log("\r\ninserted docItem is:");
+          console.log(records);
+        }else{
+          console.log(err);
+        }
+      });
+    }else{
+      _docItem=docitem_record;
+    }
+
+    var _docs;
+    doc.find().populate('doc_items').exec(function(err,docs){
+      if(!err){
+        console.log("try to find docs:");
+        console.log(docs);
+        _docs=docs;
+      }else{
+        console.log(err);
+        _docs=null;
+      }
+    });
+
+    res.send(_docs);
+
+  },
+
+/**
+ * 写文件或追加文件
+ * */
   handleFileWrite:function(req,res) {
-    var fs=require('fs');
-    var path=require('path');
 
     console.log("current path:"+__dirname);
+    console.log(req);
 
    /**
     * 读取文件目录是否存在。
@@ -42,9 +195,9 @@ module.exports = {
       }else{console.log("目录已经存在,不需要再创建...");}
     });
 
-    // fs.writeFile(filename,data,[options],callback);
-    var w_data = '这是一段通过fs.writeFile函数写入的内容；\r\n';
-    var w_data = new Buffer(w_data);
+    var filename=req.body.filename;
+    var filecontent=req.body.filecontent;
+    var w_data = new Buffer(filecontent);
 
     /**
      * filename, 必选参数，文件名
@@ -53,6 +206,9 @@ module.exports = {
      * callback 读取文件后的回调函数，参数默认第一个err,第二个data 数据
      */
     /**
+     fs.writeFile(filename,data,[options],callback);
+     var w_data = '这是一段通过fs.writeFile函数写入的内容；\r\n';
+
     fs.writeFile(mdFiledir + '/test.md', w_data, {flag: 'a'}, function (err) {
       if(err) {
         console.error(err);
@@ -63,7 +219,8 @@ module.exports = {
 
     // fs.appendFile(filename,data,[options],callback);
 
-    fs.appendFile(mdFiledir + '/test.md', '***使用fs.appendFile追加文件内容', function () {
+    //fs.appendFile(mdFiledir + '/'+filename, '***使用fs.appendFile追加文件内容', function () {
+    fs.appendFile(mdFiledir + '/'+filename, filecontent,function () {
       console.log('追加内容完成');
     });
   },
@@ -82,7 +239,7 @@ module.exports = {
     //var retres = {retcode: 0, retdesc: "success", data: response};
    // res.send(retres);
     //return response;
-    
+
       mongoService.findRequestItemByName(req.param("requestName"), function (records) {
         if (records) {
           console.log(JSON.stringify(records));
@@ -92,8 +249,8 @@ module.exports = {
         else
           res.send({retcode: -1, retdesc: "syserror"})
       });
-    
-   
+
+
 
 
   },
@@ -152,7 +309,7 @@ module.exports = {
           res.send(retres);
         }
         else
-          res.send({retcode: -1, retdesc: "syserror"});
+          res.send({retcode: -1, retdesc: "syserror",msg:"重复插入记录了."});
       });
     }else{
       console.log("req.body.hasOwnProperty(\"req\") 返回"+req.body.hasOwnProperty("req"));

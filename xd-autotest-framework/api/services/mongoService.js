@@ -99,6 +99,29 @@ module.exports={
 
   },
 
+  deletAllRecords:function(modelType){
+    modelType.destroy().exec(function(err){
+      if(!err){
+        console.log("删除所有records成功!");
+      }else{
+        console.log("删除所有records失败。。。");
+      }
+    });
+  },
+
+  findAll:function(modelType, callback){
+    modelType.find().exec(function(records){
+      if(records){
+        console.log("查找所有records成功!");
+        console.log(records);
+        callback(records);
+      }else{
+        console.log("删除所有records失败。。。");
+        callback(null);
+      }
+    });
+  }
+
 
 
 

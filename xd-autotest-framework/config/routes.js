@@ -52,6 +52,11 @@ module.exports.routes = {
   'get /doc/findRequestItemByName':'InterfaceDoc.findRequestItemByName',
   'post /doc/insertRequestItemService':'InterfaceDoc.insertRequestItemService',
   'get /doc/deleteAllReqItem':'InterfaceDoc.deleteAllRequestItemRecords',
+  'post /doc/savedoc':'InterfaceDoc.handleFileWrite',
+  'post /doc/savedocwithItem':'InterfaceDoc.saveDoc2db',
+  'get /doc/findDocByName':'InterfaceDoc.findDocByName',
+  'get /doc/createDoc' :'InterfaceDoc.createDoc',
+  "get /doc/findDoc":'InterfaceDoc.test',
 
   '/postmanUI': {
     view: 'showdoc'

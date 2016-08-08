@@ -4,18 +4,15 @@
 
 module.exports={
   connection: 'someMongodbServer',
-  tableName: 'xd_autotest_docItem',
+  tableName: 'xd_autotest_docitem',
+  //autoPK:true,//ID自动增加
   attributes: {
-    apiID:{
+    id:{
       type:'string',
       unique:true,
-      required:true,
+      //autoIncrement:true,
+      //required:true,
       primaryKey:true
-    },
-    docID: {
-      type:'string',
-      unique:true,
-      required:true
     },
     name: {
       type: 'string',
@@ -29,6 +26,7 @@ module.exports={
     },
     dev:{
       type:'string',
+      required:false
     },
     disabled:{
       type:'boolean',
@@ -75,8 +73,16 @@ module.exports={
     },
     response:{
       type:'json',
-      required:true
+      //required:true
+    },
+    /**
+     * doc与docItem建立关联。
+     * 顺序:先create/update docItem,再populate doc.
+     * */
+    docID: {
+      model:'doc'
     }
+
 
   }
 }

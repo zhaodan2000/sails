@@ -1,9 +1,29 @@
-<script>
+<script type="text/javascript">
+
+  $('#find_docItem').click(function(){
+    $.ajax({
+      url: '/doc/findDoc',
+      type:"Get",
+      //data:"{'first':'蚂蚁部落','second':'欢迎您'}",
+      //data:queryString,
+      data:{},
+      success:function(data){
+        //返回的数据用data.d获取内容
+        //alert(data.d);
+        $("textarea#textarea_response").val(JSON.stringify(data,null,"\t"));
+      },
+      error:function(err){
+        //alert(err);
+        $("textarea#textarea_response").val(JSON.stringify(err,null,"\t"));
+      }
+    });
+  });
+
 
   /**
    * 根据输入的requestName查询requestItem记录
    * */
-   $('#save_doc').click(function(){
+   $('#findReqItem').click(function(){
      //var queryString="newLogin";
      var queryString=$('input#input_requestName').val();
 
@@ -26,7 +46,7 @@
        },
        error:function(err){
          //alert(err);
-         $("textarea#textarea_response").val(JSON.stringify(err));
+         $("textarea#textarea_response").val(JSON.stringify(err,null,"\t"));
        }
      });
 
@@ -38,7 +58,7 @@
     * 插入equestItem记录
     * */
   $('#test_insertrequestitem').click(function(){
-    //var requestItem=JSON.parse($('textarea#textarea_requestItem').val());
+    //var requestItem=JSON.stringify($('textarea#textarea_requestItem').val());
     console.log("requestItem="+$('textarea#textarea_requestItem').val());
     var requestItemValue=$('textarea#textarea_requestItem').val();
     console.log(requestItemValue);
@@ -56,11 +76,11 @@
       success: function (data) {
         //返回的数据用data.d获取内容
         //alert(data.d);
-        $("textarea#textarea_response").val(JSON.stringify(data,null,4));
+        $("textarea#textarea_response").val(JSON.stringify(data,null,"\t"));
       },
       error: function (err) {
         //alert(err);
-        $("textarea#textarea_response").val(JSON.stringify(err));
+        $("textarea#textarea_response").val(JSON.stringify(err,null,"\t"));
       }
     });
     console.log("execute done service (/doc/insertRequestItemService) via ajax... this should be seen on front...");
@@ -74,7 +94,7 @@
         success:function(data){
           console.log(data);
           var retmsg={retcode:0,retdesc:"sucess",data:data};
-          $("textarea#textarea_response").val(retmsg);
+          $("textarea#textarea_response").val(JSON.stringify(retmsg,null,"\t"));
         },
         error:function(err){
           console.log(err);
@@ -83,15 +103,114 @@
         }
       });
    });
+
+  /**
+   * 将用户的输入存md文件中。
+   * */
+  $('#save_doc').click(function() {
+    var file_name = $('#md_filename').val()+'.md';
+    var file_content = $('#md_filecontent').val();
+    var param={'filename':file_name, 'filecontent':file_content};
+    var queryString=JSON.parse(JSON.stringify(param));
+    console.log(param);
+    console.log("JSON.stringify(param)="+JSON.stringify(param));
+
+    $.ajax({
+      url: "/doc/savedoc",
+      type: "Post",
+      dataType: "json",
+      data: JSON.stringify(param),
+      contentType: "application/json;charset=utf-8",
+      success: function (data) {
+        $('textarea#textarea_response').val(JSON.stringify(data, null, "\t"));
+      },
+      err: function (data) {
+        $('#textarea_response').val(JSON.stringify(err, null, "\t"));
+      }
+    })
+  });
+
+  /**
+   * 将用户的输入存入doc与docItem中。
+   * */
+  $('#save_doc_2_db').click(function(){
+    var file_name = $('#md_filename').val()+'.md';
+    var requestItemValue=$('textarea#textarea_requestItem').val();
+    var _json={filename:file_name, reqItem:requestItemValue};
+
+    $.ajax({
+      url:'/doc/savedocwithItem',
+      method:"Post",
+      dataType:"json",
+      contentType: "application/json;charset=utf-8",
+      data: JSON.stringify(_json),
+      success:function(data){
+        $('textarea#textarea_response').val(JSON.stringify(data, null, "\t"));
+      },
+      err:function(err){
+        $('textarea#textarea_response').val(JSON.stringify(err, null, "\t"));
+      }
+
+    });
+  });
+
+  $('#find_doc').click(function(){
+      var queryString=$('#md_filename').val()+'.md';
+      console.log(queryString);
+
+      $.ajax({
+        url: '/doc/findDocByName',
+        type:"Get",
+        //data:"{'first':'蚂蚁部落','second':'欢迎您'}",
+        //data:queryString,
+        data:{
+          docName: queryString,
+          //a: $('#a').val(),
+          //b: $('#b').val()
+        },
+        success:function(data){
+          //返回的数据用data.d获取内容
+          //alert(data.d);
+          $("textarea#textarea_response").val(JSON.stringify(data,null,"\t"));
+        },
+        error:function(err){
+          //alert(err);
+          $("textarea#textarea_response").val(JSON.stringify(err,null,"\t"));
+        }
+      })
+
+  });
+
+  $('#create_doc').click(function(){
+    var queryString=$('#md_filename').val()+'.md';
+    console.log(queryString);
+
+    $.ajax({
+      url: '/doc/findDocByName',
+      type:"Get",
+      //data:"{'first':'蚂蚁部落','second':'欢迎您'}",
+      //data:queryString,
+      data:{
+        docName: queryString,
+        //a: $('#a').val(),
+        //b: $('#b').val()
+      },
+      success:function(data){
+        //返回的数据用data.d获取内容
+        //alert(data.d);
+        $("textarea#textarea_response").val(JSON.stringify(data,null,"\t"));
+      },
+      error:function(err){
+        //alert(err);
+        $("textarea#textarea_response").val(JSON.stringify(err,null,"\t"));
+      }
+    })
+
+  })
+
  </script>
 
 
-
-<head>
-  <meta charset="UTF-8">
-  <title>在线编辑文档页面</title>
-</head>
-<body>
 <!-- Page Heading -->
 <div class="row">
   <div class="col-lg-12">
@@ -115,7 +234,6 @@
 
 <div class="row">
   <div class="col-lg-6">
-
     <form role="form">
       <ol id="APIs">
         <li id="api_1">
@@ -178,30 +296,75 @@
             <input class="form-control" placeholder="Enter text" id="apiURL_value" />
           </div>
         </li>
+        <li id="doc_node">
+          <i class="fa fa-edit" id="">文档属性</i>
+          <div class="form-group">
+            <label>文档名(不需要含.md后缀)</label>
+            <input class="form-control" id="md_filename" />
+            <label>文档内容(添加/追加)</label>
+            <input class="form-control" id="md_filecontent" />
+          </div>
+          <div class="form-group">
+            <label>URL</label>
+            <input class="form-control" placeholder="Enter text" id="apiURL_value" />
+          </div>
+        </li>
       </ol>
     </form>
-
   </div>
+</div>
 
 
-  <div class="row">
-    <div class="col-lg-12">
+<div class="row">
+  <div class="col-lg-6">
+    <form role="form">
       <div class="form-group">
         <label>输入指定RequestItem的name:</label>
         <input id="input_requestName" class="form-control">
       </div>
-      <button id="save_doc" name="save_doc_btn" text="无样式">查询ReqItem</button>
-      <div class="btn btn-default" type="button" id="test_insertrequestitem" name="test_insertdb"
-      text="默认效果">添加ReqItem记录</div>
-      <div id="delete_reqItemTable" class="btn btn-primary" text="主要效果">清空reqItem表</div>
+      <div class="btn btn-default" id="save_doc_2_db">保存文档2db</div>
+        <!--<button id="save_doc" name="save_doc_btn" text="无样式">查询ReqItem</button>-->
+      <div class="btn btn-default" text="主要效果" id="save_doc" >保存文档</div>
+
+      <div class="btn btn-default" type="button" id="findReqItem" name="test_finddb"
+             text="默认效果">查询ReqItem</div>
+        <div class="btn btn-default" type="button" id="test_insertrequestitem" name="test_insertdb"
+             text="默认效果">添加ReqItem记录</div>
+        <div id="delete_reqItemTable" class="btn btn-primary" text="主要效果">清空reqItem表</div>
+        <div class="btn btn-default" disabled="false">默认失效</div>
+        <div class="btn btn-primary" disabled="true">主要失效</div>
+      <!--  fieldset 换行效果置灰效果
       <fieldset disabled>
-        <div class="btn btn-default">默认失效</div>
-        <div class="btn btn-primary">主要失效</div>
-      </fieldset>
-    </div>
+          <div class="btn btn-default">默认失效</div>
+          <div class="btn btn-primary">主要失效</div>
+        </fieldset>
+     -->
+
+
+    </form>
   </div>
 </div>
 
-<div width="1200px">
-  <textarea id="textarea_response" class="form-control" placeholder="Enter text" rows="25"></textarea>
+<div class="row">
+  <div class="col-lg-6">
+    <form role="form">
+      <div class="btn btn-default" id="find_doc">查询doc</div>
+      <div class="btn btn-default" id="create_doc">添加doc</div>
+      <div class="btn btn-default" id="find_docItem">查询docItem</div>
+      <div class="btn btn-default" id="create_docItem">添加docItem</div>
+    </form>
   </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6">
+    <form role="form">
+      <div class="form-group" >
+        <label>执行结果:</label>
+        <textarea id="textarea_response" class="form-control" placeholder="操作执行的结果" rows="25"></textarea>
+      </div>
+    </form>
+  </div>
+</div>
+
+
