@@ -112,7 +112,7 @@ function testCollection() {
 }
 
 function newmanTest(collection) {
-  var Newman = require('newman');
+  var Newman = require('xdnewman');
   var JSON5 = require('json5');
   var fs = require('fs');
 
