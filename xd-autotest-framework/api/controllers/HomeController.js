@@ -20,6 +20,7 @@ module.exports = {
   },
   testcase: function(req, res) {
     mongoService.findRequestItemByName("",function (records) {
+      console.log(records);
       res.view('testcase/index', {data:records});
     });
   },

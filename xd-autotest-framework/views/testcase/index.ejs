@@ -1,9 +1,19 @@
 <div class="container-fluid">
 
   <ul class="nav navbar-nav side-nav">
+    <li id="12121">
+      <div class="form-group input-group">
+        <input type="text" class="form-control" placeholder="搜索用例" onkeydown="onKeyDown(data)" id="search-input" style="width: 225px">
+      </div>
+    </li>
+    <li>
+      <div>
+        <button class="btn btn-primary btn-group-justified" type="button">添加用例</button>
+      </div>
+    </li>
     <% data.forEach(function(record,index){ %>
     <li>
-      <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#info' + index%>"><i class="fa fa-fw fa-arrows-v"></i> 首页 <i
+      <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#info' + index%>" style="display:block"><i class="fa fa-fw fa-arrows-v"></i> 首页 <i
           class="fa fa-fw fa-caret-up"></i></a>
       <ul id="<%='info' + index%>" class="collapse">
         <li>
@@ -32,7 +42,7 @@
     <!-- /.row -->
 
     <% if (data.length) { %>
-    <% var object = data[1];console.log(object) %>
+    <% var object = data[0];console.log(object) %>
     <form id="form" class="form-inline" action="/Interface/showreq" method="POST">
       <div>
         <h2>url</h2>
