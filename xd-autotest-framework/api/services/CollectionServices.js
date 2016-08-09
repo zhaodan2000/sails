@@ -3,13 +3,16 @@
  */
 
 var fs = require('fs');
-// var SDK = require('postman-collection');
 var Newman = require('xdnewman');
 var JSON5 = require('json5');
 
 module.exports = {
 
-  //倒入一个collection文件
+  /**
+   * 倒入一个collection文件
+   * @param filePath
+   * @returns {SDK.Collection|*}
+     */
   importCollection: function (filePath) {
     var Collection = SDK.Collection,
       collection;
@@ -18,7 +21,11 @@ module.exports = {
     return collection;
   },
 
-  //创建一个collection
+  /**
+   * 创建一个collection
+   * @param collection
+   * @returns {{variables: (*|VariableList|module.exports.attributes.variables|{type, required}|Array), info: {name: *, _postman_id: *, schema: *, description: *}, item: *}}
+     */
   creatCollection: function(collection) {
     var collectionObj = {
       variables:collection.variables,
@@ -33,7 +40,10 @@ module.exports = {
     return collectionObj;
   },
 
-  //生成Newman执行需要的option
+  /**
+   * 生成Newman执行需要的option
+   * @returns {{iterationCount: number, outputFile: string, responseHandler: string, asLibrary: boolean, stopOnError: boolean}}
+     */
   optionMake : function () {
     return {
       iterationCount: 1,                    // define the number of times the runner should run
@@ -43,7 +53,13 @@ module.exports = {
       stopOnError: true
     }
   },
-  //对collection对象进行测试
+
+  /**
+   * 对collection对象进行测试
+   * @param collection
+   * @param option
+   * @param testCollectioncallback
+     */
   testCollectionWithCallBack: function (collection, option, testCollectioncallback) {
     fs.writeFile("./api/services/lastCollection.json", JSON.stringify(collection, null, 2), function (err) {
       if (err) {
@@ -56,13 +72,16 @@ module.exports = {
     var collectionJSON = JSON.stringify(collection, null, 2);
     var collectionJSONObject = JSON5.parse(collectionJSON);
 
-    // var option = optionMake();
     Newman.execute(collectionJSONObject, option, function (exitCode, options) {
       testCollectioncallback(exitCode, options);
     });
   },
 
-  //解析项目目录下outflie.json文件,获取测试的response
+  /**
+   * 解析项目目录下outflie.json文件,获取测试的response
+   * @param filePath
+   * @returns {*}
+     */
   parseResponse: function (filePath) {
     var responsefile = fs.readFileSync(filePath, 'utf8');
     var responseJSON = JSON5.parse(responsefile, null, 2);
@@ -82,8 +101,12 @@ module.exports = {
   }
 };
 
-
-pretty = function (obj) { // function to neatly log the collection object to console
+/**
+ * function to neatly log the collection object to console
+ * @param obj
+ * @returns {String|*}
+ */
+pretty = function (obj) {
   return require('util').inspect(obj, {colors: true});
 }
 
