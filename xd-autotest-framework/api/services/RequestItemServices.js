@@ -7,7 +7,12 @@ var fs = require('fs');
 require('../utils/string');
 
 module.exports = {
-  //根据request生成item
+  /**
+   *
+   * @param request
+   * @param event
+   * @returns {{id: *, name: *, disabled: *, request: *, event: *}}
+     */
   configItem: function (request, event) {
     var item = {
       id : request.id,
@@ -15,18 +20,15 @@ module.exports = {
       disabled : request.disabled,
       request : request,
       event:event
-      // event:[{
-      //   listen: 'test',
-      //   script: {
-      //     type: "text/javascript",
-      //     exec: "var jsonData = JSON.parse(responseBody);\ntests[\"retcode\"] = jsonData.retcode === \"0\";"
-      //   }
-      // }]
     }
     return item;
   },
 
-  //根据一个requestItem对象生成request
+  /**
+   * 根据一个requestItem对象生成request
+   * @param requestItem
+   * @returns {{id: *, name: *, disabled: *, url: *, method: *, header, body: {mode: *, urlencoded}}}
+     */
   configRequestItem: function (requestItem) {
     var headers = requestItem.headers;  //type is json
     var queryParam = requestItem.queryParam;  //type is json
@@ -45,7 +47,13 @@ module.exports = {
     }
     return request;
   },
-  //将传入的prescript语句转化为event中prescript需要的语法
+
+  /**
+   * 将传入的prescript语句转化为event中prescript需要的语法
+   * @param prestring
+   * @param callback
+   * @returns {string}
+     */
   parseInputPreString: function (prestring, callback) {
 
     var Pre={global:{},evn:{}};
@@ -80,9 +88,12 @@ module.exports = {
     return returnString;
   },
 
-  //将传入的testscript语句转化为event中testscript需要的语法
+  /**
+   * 将传入的testscript语句转化为event中testscript需要的语法
+   * @param teststring
+   * @returns {string}
+     */
   parseIntputTestString: function (teststring) {
-
     var Test={global:{},evn:{},test:{}};
     eval(teststring);
 
@@ -118,7 +129,11 @@ module.exports = {
   }
 }
 
-//转换headerJson对象为需要的结构
+/**
+ * 转换headerJson对象为需要的结构
+ * @param headerJson
+ * @returns {Array}
+ */
 function getHeaderWithJson(headerJson) {
   var headerArray = new Array;
   for (var prop in headerJson) {
@@ -136,7 +151,11 @@ function getHeaderWithJson(headerJson) {
   return headerArray;
 }
 
-//转换paramJson对象为需要的结构
+/**
+ * 转换paramJson对象为需要的结构
+ * @param paramJson
+ * @returns {Array}
+ */
 function getQueryParamWithJson(paramJson) {
   var paramArray = new Array;
   for (var prop in paramJson) {
@@ -156,6 +175,11 @@ function getQueryParamWithJson(paramJson) {
   return paramArray;
 }
 
+/**
+ * 判断是否为json对象
+ * @param obj
+ * @returns {boolean}
+ */
 isJson = function(obj){
   var isjson = typeof(obj) == "object" && Object.prototype.toString.call(obj).toLowerCase() == "[object object]" && !obj.length;
   return isjson;

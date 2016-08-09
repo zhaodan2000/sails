@@ -6,6 +6,8 @@
  */
 
 module.exports = {
-	
+	showTaskMangerView: function (req, res) {
+    
+  }
 };
 
