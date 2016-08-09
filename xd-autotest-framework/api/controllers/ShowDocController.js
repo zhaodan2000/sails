@@ -7,8 +7,9 @@
 
 module.exports = {
   findRequestItemByID:function (req,res) {
-    mongoService.findRequestItemByID(requestId,function (record) {
-      return res.send(record);
+    mongoService.findRequestItemByID(req.param("id"),function (record) {
+      console.log(record);
+      res.view('showdoc', {data:record});
     })
   },
 

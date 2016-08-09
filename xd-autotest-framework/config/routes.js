@@ -57,10 +57,6 @@ module.exports.routes = {
   'get /doc/findDocByName':'InterfaceDoc.findDocByName',
   'get /doc/createDoc' :'InterfaceDoc.createDoc',
 
-  '/postmanUI': {
-    view: 'showdoc'
-  },
-
   /*
   '/apidoc':{
     view:'APIdoc'
