@@ -19,8 +19,7 @@ module.exports = {
     res.view('task/index');
   },
   testcase: function(req, res) {
-    DocService.testcallback('newLogin', res, function (records) {
-      console.log("++++++++++++" + records);
+    mongoService.findRequestItemByName("",function (records) {
       res.view('testcase/index', {data:records});
     });
   },
