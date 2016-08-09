@@ -4,7 +4,7 @@
 
 var fs = require('fs');
 // var SDK = require('postman-collection');
-var Newman = require('newman');
+var Newman = require('xdnewman');
 var JSON5 = require('json5');
 
 module.exports = {
