@@ -132,9 +132,9 @@ function newmanTest(collection) {
   }
 
 // Optional Callback function which will be executed once Newman is done executing all its tasks.
-  Newman.execute(collection, newmanOptions, function(exitCode){
+  Newman.execute(collection, newmanOptions, function(exitCode, results){
     console.log("exitCode is " + exitCode);
-    console.log('callback');
+    console.log(results);
   });
 }
 
@@ -194,7 +194,7 @@ function parseHeaderString(headerString) {
 var string = 'postman.setGlobalVariable({0}, {1})';
 console.log(string.format('req', '123'));
 
-parseInputPreString('prescriptObj.global.req=1;prescriptObj.evn.index=2');
-// newmanTest(testCollection());
+// parseInputPreString('prescriptObj.global.req=1;prescriptObj.evn.index=2');
+newmanTest(testCollection());
 // testCollection()
 // readdishCollection()
