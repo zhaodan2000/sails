@@ -1,32 +1,38 @@
 {
     "id": "",
     "name": "Default",
-    "timestamp": 1470103235449,
+    "timestamp": 1470722308684,
+    "collection_id": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
     "folder_id": 0,
     "target_type": "collection",
     "count": 1,
     "collection": {
+        "id": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
         "name": "This is new info",
         "order": [
-            "my-post-request"
+            "444897f2-7fe2-43a2-aac6-5b24633d6b49"
         ],
         "folders": [],
         "requests": [
             {
-                "id": "my-post-request",
+                "id": "444897f2-7fe2-43a2-aac6-5b24633d6b49",
                 "name": "Send a POST request",
-                "collectionId": "397ea485-c66c-4e67-b0fd-0539a0463ace",
+                "collectionId": "eaa77b0b-8bab-616c-f866-a76fa867c19c",
                 "method": "POST",
-                "headers": "",
+                "headers": "clientType: android\nmodule: 2\nversion: 1.0\nclientIp: 192.168.31.23\ndeviceId: MyTestDeviceID123",
                 "dataMode": "urlencoded",
                 "data": [
                     {
-                        "key": "",
-                        "value": ""
+                        "key": "req",
+                        "value": "{\"platform\":\"local\",\"phoneNum\":\"18210191798\",\"pwd\":\"123456\"}",
+                        "type": "text",
+                        "enabled": true
                     }
                 ],
                 "rawModeData": "",
-                "url": "http://192.168.103.101:8002/user/newLogin?members=members=members=req={\"platform\":\"loacl\",\"phoneNum\":\"17701257566\",\"pwd\":\"123456\"},reference=[object Object],Type=function PostmanQueryParam(options) {\n        if (_.isString(options)) {\n            options = QueryParam.parseSingle(options);\n        }\n\n        this.key = _.get(options, 'key') || '';\n        this.value = _.get(options, 'value') || '';\n    },_postman_propertyIndexKey=id,_postman_propertyIndexCaseInsensitive=,reference=[object Object],Type=function PostmanQueryParam(options) {\n        if (_.isString(options)) {\n            options = QueryParam.parseSingle(options);\n        }\n\n        this.key = _.get(options, 'key') || '';\n        this.value = _.get(options, 'value') || '';\n    },_postman_propertyIndexKey=id,_postman_propertyIndexCaseInsensitive=&reference=[object Object]&Type=function PostmanQueryParam(options) {\n        if (_.isString(options)) {\n            options = QueryParam.parseSingle(options);\n        }\n\n        this.key = _.get(options, 'key') || '';\n        this.value = _.get(options, 'value') || '';\n    }&_postman_propertyIndexKey=id&_postman_propertyIndexCaseInsensitive=#null"
+                "tests": "var jsonData = JSON.parse(responseBody);\ntests[\"retcode\"] = jsonData.retcode === \"0\";",
+                "preRequestScript": "",
+                "url": "http://192.168.103.101:8002/user/newLogin"
             }
         ]
     },
@@ -36,28 +42,37 @@
     },
     "results": [
         {
-            "id": "my-post-request",
+            "id": "444897f2-7fe2-43a2-aac6-5b24633d6b49",
             "name": "Send a POST request",
-            "url": "http://192.168.103.101:8002/user/newLogin?members=members=members=req={\"platform\":\"loacl\",\"phoneNum\":\"17701257566\",\"pwd\":\"123456\"},reference=[object Object],Type=function PostmanQueryParam(options) {\n        if (_.isString(options)) {\n            options = QueryParam.parseSingle(options);\n        }\n\n        this.key = _.get(options, 'key') || '';\n        this.value = _.get(options, 'value') || '';\n    },_postman_propertyIndexKey=id,_postman_propertyIndexCaseInsensitive=,reference=[object Object],Type=function PostmanQueryParam(options) {\n        if (_.isString(options)) {\n            options = QueryParam.parseSingle(options);\n        }\n\n        this.key = _.get(options, 'key') || '';\n        this.value = _.get(options, 'value') || '';\n    },_postman_propertyIndexKey=id,_postman_propertyIndexCaseInsensitive=&reference=[object Object]&Type=function PostmanQueryParam(options) {\n        if (_.isString(options)) {\n            options = QueryParam.parseSingle(options);\n        }\n\n        this.key = _.get(options, 'key') || '';\n        this.value = _.get(options, 'value') || '';\n    }&_postman_propertyIndexKey=id&_postman_propertyIndexCaseInsensitive=#null",
-            "totalTime": 109,
+            "url": "http://192.168.103.101:8002/user/newLogin",
+            "totalTime": 253,
             "responseCode": {
                 "code": 200,
                 "name": "",
-                "detail": "",
-                "body": "{\"retcode\":\"00001\",\"retdesc\":\"module can't be empty.\",\"serverIp\":\"127.0.1.1\"}"
+                "detail": ""
             },
-            "tests": {},
+            "body": "{\"moduleInfo\":{\"admissionCardCode\":\"\",\"age\":\"0\",\"bePraiseNum\":\"0\",\"createTime\":\"2016-07-07 10:57:59.0\",\"credit\":\"53\",\"degreeLevel\":\"\",\"gender\":\"1\",\"id\":\"208\",\"identificationCardCode\":\"\",\"latestDeviceIp\":\"192.168.31.23\",\"major\":\"01B0402\",\"majorName\":\"\",\"medalId\":\"1 \",\"medalImg\":\"http://7xigj3.com1.z0.glb.clouddn.com/image_2015_11_13_15_59_230f0054d4-e12a-41ee-b88d-ad67d728a263  \",\"medalName\":\"无名的旅人 \",\"merchant\":\"\",\"module\":\"2\",\"nickName\":\"姬丝秀忒\",\"officialGender\":\"\",\"picList\":[],\"platform\":\"local\",\"portrait\":\"http://7xigj3.com1.z0.glb.clouddn.com/DE9B75CD-CFCE-4BCE-831E-F1064631466B\",\"realName\":\"\",\"salt\":\"HnRx6n\",\"sign\":\"\",\"token\":\"7d620844-40a3-41d3-a135-d5dd5206be8d\",\"tokenTime\":\"2016-08-09 14:00:06.752\",\"uniqueId\":\"\",\"usedDeviceId\":\"MyTestDeviceID123\",\"userId\":\"208\",\"userName\":\"18210191798\",\"userType\":\"1\"},\"retOk\":true,\"retcode\":\"0\",\"retdesc\":\"操作成功\",\"serverIp\":\"127.0.1.1\",\"token\":\"7d620844-40a3-41d3-a135-d5dd5206be8d\"}",
+            "tests": {
+                "retcode": true
+            },
             "totalPassFailCounts": {
-                "pass": 0,
+                "pass": 1,
                 "fail": 0
             },
-            "testPassFailCounts": {},
+            "testPassFailCounts": {
+                "retcode": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
             "times": [],
             "allTests": [
-                {}
+                {
+                    "retcode": true
+                }
             ],
-            "time": 109,
-            "meanResponseTime": 109
+            "time": 253,
+            "meanResponseTime": 253
         }
     ],
     "environment": {
