@@ -5,10 +5,10 @@
 module.exports={
   connection: 'someMongodbServer',
   tableName: 'xd_autotest_apidocitem',
-  //autoPK:true,//ID自动增加
+  autoPK:true,//PrimaryKey ID自动增加
   attributes: {
     id:{
-      type:'integer',
+      type:'string',
       autoIncrement:true,
       unique:true,
       primaryKey:true

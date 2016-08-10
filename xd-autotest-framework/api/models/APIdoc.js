@@ -5,11 +5,11 @@
 module.exports={
   connection: 'someMongodbServer',
   tableName: 'xd_autotest_apidoc',
+  autoPK:true,
   attributes: {
     id: {
-      type: 'integer',
+      type: 'string',
       required: false,
-      autoIncrement:true,
       unique: true,
       primaryKey: true
     },

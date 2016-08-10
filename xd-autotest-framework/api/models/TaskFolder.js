@@ -7,18 +7,17 @@
 
 module.exports = {
   connection: 'someMongodbServer',
-  tableName: 'xd_autotest_apidoc',
+  tableName: 'xd_autotest_TaskFolder',
+  autoPK:true,
   attributes: {
-    Task_ID:{
-      type:'integer',
-      autoIncrement:true,
+    id:{
+      type:'string',
       required:false,
-      unique: true,
-      primaryKey: true
+      primaryKey:true
     },
     Task_name:{
       type:'string',
-      unique:true,
+      unique:false,
       required:true
     },
     Task_desc:{
@@ -27,16 +26,21 @@ module.exports = {
       required:false,
       defaultsTo:'暂时没有任务描述。'
     },
-    isFolder:{
-      type:'boolean',
-      required:false,
-      defaultsTo:true
-    },
     Schedule_ID:{
       type:'integer',
       required:true,
       defaultsTo:'1'
+    },
+    Schedule_desc:{
+      type:'string',
+      required:true,
+      defaultsTo:'1'
+    },
+    Cases:{
+      collection:'TaskCase',
+      via:'TaskID'
     }
+
   }
 };
 

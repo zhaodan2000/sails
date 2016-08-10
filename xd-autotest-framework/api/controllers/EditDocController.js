@@ -13,15 +13,33 @@ module.exports = {
 
   testDelete:function(req,res){
    var modelType=req.param("modelType");
-    _AdocTest.testDelete(modelType);
-    //_AdocTest.testDelete("TCFolder");
-
+    mongoService.Delete(modelType,null);
   },
 
   testFind:function(req,res){
     var modelType=req.param("modelType");
-    _AdocTest.testFind(modelType);
-    //_AdocTest.testFind('TCFolder');
+    mongoService.Find(modelType,null,function(records){
+      console.log(records);
+      res.send(records);
+    });
+  },
+
+  testInsert:function(req,res) {
+    var task_element = {Task_name: 'testTask', Schedule_ID: 1, Schedule_desc: '每周三09:00执行'};
+    var task_output;
+    var taskCase_output;
+    mongoService.Insert('TaskFolder',task_element,function(records){
+      task_output=records;
+      console.log("+++++++"+JSON.stringify(task_output));
+      var taskCase_element={name:'Case in task folder!',  url:"http://www.baidu.com", TaskID:records.id};
+      mongoService.Insert('TaskCase',taskCase_element,function(records){
+        taskCase_output=records;
+        var data={task:task_output, taskCase: taskCase_output};
+
+        console.log(data);
+      });
+    });
+    res.ok();
   },
 
   testInsertDocItem:function(req,res){
