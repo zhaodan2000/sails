@@ -1,23 +1,21 @@
 <div class="container-fluid">
 
   <ul class="nav navbar-nav side-nav">
-
     <li>
       <a data-toggle="collapse" onclick="showManagerTask()"> 任务管理 </a>
-      <a data-toggle="collapse" data-target="#info1"><i class="fa fa-fw fa-arrows-v"></i> 任务1 <button>info</button></a>
+      <a data-toggle="collapse" data-target="#info1"><i class="fa fa-fw fa-arrows-v"></i> 任务1 </a>
       <ul id="info1" class="collapse">
         <li>
           <a>有依赖的用例组1</a>
           <a>无依赖的用例组1</a>
-          <a>单个的用例1</a>
+          <a>单个的用例1<p style="float:right; background-color: red; font-size: 12px">fail</p></a>
           <a data-toggle="collapse" data-target="#info2"><i class="fa fa-fw fa-arrows-v"></i> 任务2 </a>
           <ul id="info2" class="collapse">
-            <a>无依赖的用例组2</a>
+            <a>无依赖的用例组2<p style="float:right; background-color: red; font-size: 12px">fail</p></a>
           </ul>
         </li>
       </ul>
     </li>
-
   </ul>
   <!-- Page Heading -->
   <div id="page-wrapper-right" aria-hidden="false" class="right-operation">
@@ -55,7 +53,14 @@
                   <td>任务1</td>
                   <td>10/21/2013</td>
                   <td>3:29 PM</td>
-                  <td>33</td>
+                  <td>33
+                    <div style="float: right">
+                      <button class="btn btn-primary" onclick="alert('编辑')">编辑</button>
+                      <button class="btn btn-info" onclick="alert('查看')">查看</button>
+                      <button class="btn btn-danger" onclick="alert('删除')">删除</button>
+                    </div>
+
+                  </td>
                 </tr>
                 <tr>
                   <td>任务1</td>

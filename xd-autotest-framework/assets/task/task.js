@@ -1,9 +1,22 @@
 /**
  * Created by chenxiaoxiang on 16/8/8.
  */
+
+/**
+ * 显示任务管理页面
+ */
 function showManagerTask(){
   $.main.refreshRight("/TaskManager/showTaskMangerView", {data:'1'});
 }
+
+/**
+ * 显示用例详情页面
+ */
+function showCaseInfo() {
+  $.main.refreshRight();
+}
+
+
 
 $(document).ready(function () {
   var option_run = {
