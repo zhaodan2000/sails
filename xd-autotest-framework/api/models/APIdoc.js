@@ -7,8 +7,9 @@ module.exports={
   tableName: 'xd_autotest_apidoc',
   attributes: {
     id: {
-      type: 'string',
-      required: true,
+      type: 'integer',
+      required: false,
+      autoIncrement:true,
       unique: true,
       primaryKey: true
     },

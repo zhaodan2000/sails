@@ -8,9 +8,9 @@ module.exports={
   //autoPK:true,//ID自动增加
   attributes: {
     id:{
-      type:'string',
+      type:'integer',
+      autoIncrement:true,
       unique:true,
-      required:true,
       primaryKey:true
     },
     name: {
@@ -76,7 +76,7 @@ module.exports={
     /**
      * doc与docItem建立关联。
      * 顺序:先create/update docItem,再populate doc.
-     * */
+     **/
     APIdocID: {
       model:'APIdoc'
     }
