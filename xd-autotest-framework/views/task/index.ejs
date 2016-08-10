@@ -3,16 +3,17 @@
   <ul class="nav navbar-nav side-nav">
     <li>
       <a data-toggle="collapse" onclick="showManagerTask()"> 任务管理 </a>
-      <a data-toggle="collapse" data-target="#info1"><i class="fa fa-fw fa-arrows-v"></i> 任务1 </a>
+      <a data-toggle="collapse" data-target="#info1"><i class="fa fa-fw fa-arrows-v"></i> 任务(无依赖参数) </a>
       <ul id="info1" class="collapse">
         <li>
-          <a>有依赖的用例组1</a>
-          <a>无依赖的用例组1</a>
           <a>单个的用例1<p style="float:right; background-color: red; font-size: 12px">fail</p></a>
-          <a data-toggle="collapse" data-target="#info2"><i class="fa fa-fw fa-arrows-v"></i> 任务2 </a>
-          <ul id="info2" class="collapse">
-            <a>无依赖的用例组2<p style="float:right; background-color: red; font-size: 12px">fail</p></a>
-          </ul>
+        </li>
+      </ul>
+      <a data-toggle="collapse" data-target="#info2"><i class="fa fa-fw fa-arrows-v"></i> 任务(无依赖参数) </a>
+      <ul id="info2" class="collapse">
+        <li>
+          <a>单个的用例1<p style="float:right; background-color: red; font-size: 12px">fail</p></a>
+          <a>单个的用例1<p style="float:right; background-color: green; font-size: 12px">fail</p></a>
         </li>
       </ul>
     </li>

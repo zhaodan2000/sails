@@ -5,12 +5,12 @@
 module.exports={
   connection: 'someMongodbServer',
   tableName: 'xd_autotest_apidocitem',
-  //autoPK:true,//ID自动增加
+  autoPK:true,//PrimaryKey ID自动增加
   attributes: {
     id:{
       type:'string',
+      autoIncrement:true,
       unique:true,
-      required:true,
       primaryKey:true
     },
     name: {
@@ -76,7 +76,7 @@ module.exports={
     /**
      * doc与docItem建立关联。
      * 顺序:先create/update docItem,再populate doc.
-     * */
+     **/
     APIdocID: {
       model:'APIdoc'
     }
