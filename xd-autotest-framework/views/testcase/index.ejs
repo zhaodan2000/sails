@@ -7,8 +7,11 @@
       </div>
     </li>
     <li>
-      <div>
-        <button class="btn btn-primary btn-group-justified" type="button">添加用例</button>
+      <div class="modal-body">
+        <form action='/ShowDoc/operatfile' method="post" id="fileForm">
+          <label class="control-label" for="inputSuccess"><font color="#FFFFFF" size="4">导入用例</font></label>
+          <input type="file" id="uploadfile" accept=".postman_collection" onchange="uploadfile(this)">
+        </form>
       </div>
     </li>
     <% data.forEach(function(record,index){ %>

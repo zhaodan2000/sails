@@ -48,5 +48,9 @@ module.exports = {
       }
     })
   },
+  
+  operatfile:function (req,res) {
+    console.log(req.body);
+  },
 };
 

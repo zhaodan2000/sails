@@ -19,7 +19,7 @@ module.exports = {
     res.view('task/index');
   },
   testcase: function(req, res) {
-    mongoService.findRequestItemByName("",function (records) {
+    mongoService.Find("ReqFolder",null,function (records) {
       console.log(records);
       res.view('testcase/index', {data:records});
     });

@@ -1,7 +1,7 @@
 {
     "id": "",
     "name": "Default",
-    "timestamp": 1470728363574,
+    "timestamp": 1470745864063,
     "collection_id": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
     "folder_id": 0,
     "target_type": "collection",
@@ -11,12 +11,12 @@
         "name": "testCollection",
         "description": "This is a description",
         "order": [
-            "5ab1c33f-306f-4a9f-a2bb-8cddc35cf14f"
+            "940d6b0f-0097-483e-ba3f-87606a1be118"
         ],
         "folders": [],
         "requests": [
             {
-                "id": "5ab1c33f-306f-4a9f-a2bb-8cddc35cf14f",
+                "id": "940d6b0f-0097-483e-ba3f-87606a1be118",
                 "name": "HOME6",
                 "collectionId": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
                 "method": "POST",
@@ -43,15 +43,16 @@
     },
     "results": [
         {
-            "id": "1e9a3598-a3ca-452a-815a-c59ba9dffb44",
+            "id": "d198a5b9-3be4-460c-9953-448704c12290",
             "name": "HOME6",
             "url": "http://192.168.103.101:8020/selftaught/home",
-            "totalTime": 71,
+            "totalTime": 20,
             "responseCode": {
                 "code": 200,
                 "name": "",
                 "detail": ""
             },
+            "body": "{\"retcode\":\"00001\",\"retdesc\":\"参数异常clientType has a unvalid value, plz check it.\",\"serverIp\":\"127.0.1.1\"}",
             "tests": {},
             "totalPassFailCounts": {
                 "pass": 0,
@@ -62,34 +63,11 @@
             "allTests": [
                 {}
             ],
-            "time": 71,
-            "meanResponseTime": 71
+            "time": 20,
+            "meanResponseTime": 20
         },
         {
-            "id": "2289da78-f7bf-4518-bcb5-356d5e023392",
-            "name": "HOME6",
-            "url": "http://192.168.103.101:8020/selftaught/home",
-            "totalTime": 9,
-            "responseCode": {
-                "code": 200,
-                "name": "",
-                "detail": ""
-            },
-            "tests": {},
-            "totalPassFailCounts": {
-                "pass": 0,
-                "fail": 0
-            },
-            "testPassFailCounts": {},
-            "times": [],
-            "allTests": [
-                {}
-            ],
-            "time": 9,
-            "meanResponseTime": 9
-        },
-        {
-            "id": "448f67ce-6852-445c-954c-6cce7d4b78b4",
+            "id": "940d6b0f-0097-483e-ba3f-87606a1be118",
             "name": "HOME6",
             "url": "http://192.168.103.101:8020/selftaught/home",
             "totalTime": 7,
@@ -98,52 +76,7 @@
                 "name": "",
                 "detail": ""
             },
-            "tests": {},
-            "totalPassFailCounts": {
-                "pass": 0,
-                "fail": 0
-            },
-            "testPassFailCounts": {},
-            "times": [],
-            "allTests": [
-                {}
-            ],
-            "time": 7,
-            "meanResponseTime": 7
-        },
-        {
-            "id": "14b41a80-84e5-40f2-b8e8-5f6203869a46",
-            "name": "HOME6",
-            "url": "http://192.168.103.101:8020/selftaught/home",
-            "totalTime": 7,
-            "responseCode": {
-                "code": 200,
-                "name": "",
-                "detail": ""
-            },
-            "tests": {},
-            "totalPassFailCounts": {
-                "pass": 0,
-                "fail": 0
-            },
-            "testPassFailCounts": {},
-            "times": [],
-            "allTests": [
-                {}
-            ],
-            "time": 7,
-            "meanResponseTime": 7
-        },
-        {
-            "id": "5ab1c33f-306f-4a9f-a2bb-8cddc35cf14f",
-            "name": "HOME6",
-            "url": "http://192.168.103.101:8020/selftaught/home",
-            "totalTime": 7,
-            "responseCode": {
-                "code": 200,
-                "name": "",
-                "detail": ""
-            },
+            "body": "{\"retcode\":\"00001\",\"retdesc\":\"参数异常clientType has a unvalid value, plz check it.\",\"serverIp\":\"127.0.1.1\"}",
             "tests": {},
             "totalPassFailCounts": {
                 "pass": 0,
