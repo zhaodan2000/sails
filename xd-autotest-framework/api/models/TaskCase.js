@@ -1,31 +1,26 @@
 /**
- * Created by xiaodou_chenxiaoxiang on 16/7/28.
- */
-/**
- * Interface.js
+ * TaskOrderCaseFolder.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
-var uuid = require('node-uuid');
 
 module.exports = {
   connection: 'someMongodbServer',
-  tableName: 'xd_autotest_request',
+  tableName: 'xd_autotest_TaskCase',
   autoPK:true,
   attributes: {
-    id: {
-      type: 'string',
-      required: false,
-      primaryKey: true
+    id:{
+      type:'string',
+      required:false,
+      primaryKey:true
     },
-
     //request name
     name: {
       type: 'string',
       required: true,
       minLength: 1,
-      // unique:true,
+      unique:false,
       maxLength: 60
     },
 
@@ -95,11 +90,24 @@ module.exports = {
       required: false
     },
 
-    ReqFolderID:{
-      model:'ReqFolder'
+    dirpath:{
+      type:'string',
+      required:false,
+      defaultsTo:'/默认'
+    },
+    //preScript 前置脚本
+    prescript:{
+     type:'string',
+     required:false
+    },
+    //testscript  后置脚本
+    testscript:{
+       type:'string',
+       required:false
+    },
+    TaskID:{
+      model:'TaskFolder'
     }
-
-
   }
 };
 
