@@ -3,7 +3,7 @@
  */
 
 var fs = require('fs');
-var Newman = require('xdnewman');
+
 var JSON5 = require('json5');
 
 module.exports = {
@@ -43,7 +43,7 @@ module.exports = {
   /**
    * 生成Newman执行需要的option
    * @returns {{iterationCount: number, outputFile: string, responseHandler: string, asLibrary: boolean, stopOnError: boolean}}
-     */
+   */
   optionMake : function () {
     return {
       iterationCount: 1,                    // define the number of times the runner should run
@@ -59,7 +59,7 @@ module.exports = {
    * @param collection
    * @param option
    * @param testCollectioncallback
-     */
+   */
   testCollectionWithCallBack: function (collection, option, testCollectioncallback) {
     fs.writeFile("./api/services/lastCollection.json", JSON.stringify(collection, null, 2), function (err) {
       if (err) {
@@ -69,11 +69,12 @@ module.exports = {
       }
     });
     //先把collection对象转化未JSON,再使用JSON5解析
+    var Newman = require('xdnewman');
     var collectionJSON = JSON.stringify(collection, null, 2);
     var collectionJSONObject = JSON5.parse(collectionJSON);
 
-    Newman.execute(collectionJSONObject, option, function (exitCode, options) {
-      testCollectioncallback(exitCode, options);
+    Newman.execute(collectionJSONObject, option, function (exitCode, results) {
+      testCollectioncallback(exitCode, results);
     });
   },
 
@@ -81,7 +82,7 @@ module.exports = {
    * 解析项目目录下outflie.json文件,获取测试的response
    * @param filePath
    * @returns {*}
-     */
+   */
   parseResponse: function (filePath) {
     var responsefile = fs.readFileSync(filePath, 'utf8');
     var responseJSON = JSON5.parse(responsefile, null, 2);
