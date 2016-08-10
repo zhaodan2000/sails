@@ -103,7 +103,7 @@ module.exports={
    */
   deleteRecordsByName:function(APIdocName){
     APIdoc.destroy({name:APIdocName}).exec(function(err){
-      if(err){console.log("删除指定APIdocName记录失败。。。")}
+      if(err){console.log("删除指定APIdocName记录失败。。。"+err)}
       else{console.log("删除指定APIdocName记录成功!")}
     });
   },

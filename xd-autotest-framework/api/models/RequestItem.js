@@ -12,14 +12,12 @@ var uuid = require('node-uuid');
 module.exports = {
   connection: 'someMongodbServer',
   tableName: 'xd_autotest_request',
+  autoPK:true,
   attributes: {
     id: {
       type: 'string',
-      required: true,
-      primaryKey: true,
-      defaultsTo: function () {
-        return uuid.v4();
-      }
+      required: false,
+      primaryKey: true
     },
 
     //request name
@@ -97,24 +95,11 @@ module.exports = {
       required: false
     },
 
-    dirpath:{
-      type:'string',
-      required:false,
-      defaultsTo:'/默认'
+    ReqFolderID:{
+      model:'ReqFolder'
     }
 
 
-    // //preScript 前置脚本
-    // prescript:{
-    //   type:'string',
-    //   required:false
-    // },
-    //
-    // //testscript  后置脚本
-    // testscript:{
-    //   type:'string',
-    //   required:false
-    // }
   }
 };
 

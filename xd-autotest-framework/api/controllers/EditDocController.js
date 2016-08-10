@@ -25,6 +25,7 @@ module.exports = {
   },
 
   testInsert:function(req,res) {
+    /**
     var task_element = {Task_name: 'testTask', Schedule_ID: 1, Schedule_desc: '每周三09:00执行'};
     var task_output;
     var taskCase_output;
@@ -35,11 +36,21 @@ module.exports = {
       mongoService.Insert('TaskCase',taskCase_element,function(records){
         taskCase_output=records;
         var data={task:task_output, taskCase: taskCase_output};
-
         console.log(data);
+        res.send(data);
       });
     });
-    res.ok();
+**/
+    var reqFolder={id:'93664a09-6e6b-c858-4430-a3be62'+new Date().getMilliseconds().toString(), name:'首页接口业务场景用例'};
+    mongoService.Insert('ReqFolder',reqFolder,function(reqFolder){
+      if(reqFolder){
+        var reqItem={name:'第三方登录接口', url:'http://192.168.88.242:8002/user/newLogin', ReqFolderID:reqFolder.id};
+        mongoService.Insert('RequestItem',reqItem,function(records){
+          res.send(records);
+        })
+      }
+    } );
+
   },
 
   testInsertDocItem:function(req,res){
