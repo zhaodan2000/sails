@@ -22,7 +22,8 @@ module.exports = {
     });
   },
   testcase: function(req, res) {
-    mongoService.findRequestItemByName("",function (records) {
+    mongoService.Find("ReqFolder",null,function (records) {
+      console.log(records);
       res.view('testcase/index', {data:records});
     });
   },
