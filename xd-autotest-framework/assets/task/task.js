@@ -65,8 +65,12 @@ function refreshMainList() {
  */
 function showTaskDetailView(name) {
   console.log('name:%s',name);
-  $.main.refreshRight("/TaskManager/editTask");
+  // $.main.refreshRight("/TaskManager/editTask");
+  $.post("/TaskManager/editTask", {taskId:name}, function (res) {
+    //这里不用返回,直接跳转到taskDetail页面
+  })
 }
+
 
 /**
  * 显示orderCase的详情页面

@@ -1,0 +1,103 @@
+<div id="page-wrapper-right" aria-hidden="false" class="right-operation">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">
+        任务
+        <small>任务列表</small>
+        <!-- Button to trigger modal -->
+        <a href="#addTaskModal" role="button" class="btn btn-primary" data-toggle="modal">添加任务</a>
+        <a id="deleteAll" role="button" class="btn btn-danger" data-toggle="modal" onclick="deleteAllTasks()">删除全部任务</a>
+        <!-- Modal -->
+        <div id="addTaskModal" class="modal fade" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <form id="form"  method="POST">
+                <div class="modal-header"><button class="close" type="button" data-dismiss="modal">&times;</button>
+                  <h4 id="myModalLabel" class="modal-title">添加任务</h4>
+                </div>
+
+                <div class="modal-body" style="height: 300px; width: 500px">
+                  <div class="form-group">
+                    <label style="font-size: 18px">任务名</label>
+                    <input name="task_name" type="text" class="form-control" placeholder="任务名">
+                  </div>
+                  <div class="form-group">
+                    <label style="font-size: 18px"> 类型:</label>
+                    <select name="type_desc" class="form-control">
+                      <option>group</option>
+                      <option>orderCase</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label style="font-size: 18px">调度策略:</label>
+                    <select name="schedule_desc" class="form-control">
+                      <option>不会自动执行任务脚本</option>
+                      <option>每天07:30执行任务脚本</option>
+                      <option>每周日22：30执行任务</option>
+                      <option>每周周一到周五21:00执行任务脚本</option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+              <div class="modal-footer">
+                <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
+                <button class="btn btn-primary" type="button"  id="saveBtn">添加</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </h1>
+      <ol class="breadcrumb">
+        <li class="active">
+          <i class="fa fa-tasks"></i> 任务
+        </li>
+      </ol>
+    </div>
+  </div>
+  <!-- /.row -->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table id="taskTable" class="table table-bordered table-hover table-striped">
+
+              <thead>
+              <tr>
+                <th>任务</th>
+                <th>creatTime</th>
+                <th>调度策略描述</th>
+                <th>调度策略类型</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <% if (data) { %>
+              <% data.forEach(function(record,index){ %>
+              <tr>
+                <td ><%-record.Task_name%></td>
+                <td><%-record.createdAt%></td>
+                <td><%-record.Schedule_desc%></td>
+                <td><%-record.Schedule_ID%>
+                  <div style="float: right">
+                    <button  class="btn btn-primary" onclick="alert('运行')">运行</button>
+                    <button name="<%-record.id%>" class="btn btn-primary" onclick="showTaskDetailView(this.name)" >编辑</button>
+                    <button  class="btn btn-danger" onclick="alert('删除')">删除</button>
+                  </div>
+                </td>
+              </tr>
+              <% }) %>
+              <% } %>
+              </tbody>
+            </table>
+          </div>
+          <div class="text-right">
+            <a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.row -->
+</div>
