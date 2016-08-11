@@ -158,7 +158,8 @@ module.exports={
             console.log("create TaskFolder records success!"); 
             callback(records); 
           }else{ 
-            console.log("create TaskFolder records failure!"); 
+            console.log("create TaskFolder records failure!");
+            console.log(err);
             callback(null); 
           } 
         }); 
@@ -169,7 +170,8 @@ module.exports={
             console.log("create TaskCase records success!");
             callback(records);
           } else { 
-            console.log("create TaskCase records failure!"); 
+            console.log("create TaskCase records failure!");
+            console.log(err);
             callback(null); 
           } 
         }); 
@@ -180,7 +182,8 @@ module.exports={
             console.log("create RequestItem records success!"); 
             callback(records); 
           } else { 
-            console.log("create RequestItem records failure!"); 
+            console.log("create RequestItem records failure!");
+            console.log(err);
             callback(null); 
           } 
         }); 
@@ -192,6 +195,7 @@ module.exports={
             callback(records);
           } else {
             console.log("create ReqFolder records failure!");
+            console.log(err);
             callback(null);
           }
         });
@@ -203,6 +207,7 @@ module.exports={
             callback(records);
           } else {
             console.log("create %s records failure!", modelType);
+            console.log(err);
             callback(null);
           }
         });
@@ -214,6 +219,19 @@ module.exports={
             callback(records);
           } else {
             console.log("create %s records failure!", modelType);
+            console.log(err);
+            callback(null);
+          }
+        });
+        break;
+      case 'ScheduleStrategy':
+        ScheduleStrategy.create(item).exec(function(err,records){
+          if (!err) {
+            console.log("create %s records success!", modelType);
+            callback(records);
+          } else {
+            console.log("create %s records failure!", modelType);
+            console.log(err);
             callback(null);
           }
         });
@@ -296,6 +314,18 @@ module.exports={
         break;
       case "APIdocitem":
         APIdocitem.create(item).exec(function(err,records){
+          if (!err) {
+            console.log("create %s records success!", modelType);
+            callback(records);
+          } else {
+            console.log("create %s records failure!", modelType);
+            console.log(err);
+            callback(null);
+          }
+        });
+        break;
+      case "ScheduleStrategy":
+        ScheduleStrategy.create(item).exec(function(err,records){
           if (!err) {
             console.log("create %s records success!", modelType);
             callback(records);
@@ -396,7 +426,18 @@ module.exports={
           }
         });
         break;
-
+      case "ScheduleStrategy":
+        ScheduleStrategy.find(dic).exec(function(err,records){
+          if (!err) {
+            console.log("find %s records success!", modelType);
+            callback(records);
+          } else {
+            console.log("find %s records failure!", modelType);
+            console.log(err);
+            callback(null);
+          }
+        });
+        break;
       default:
         break;
     }
@@ -463,7 +504,17 @@ module.exports={
         });
         break;
       case "APIdocitem":
-        APIdocitem.destroy(dic).exec(function(err){
+      APIdocitem.destroy(dic).exec(function(err){
+        if (!err) {
+          console.log("destroy %s records success!", modelType);
+        } else {
+          console.log("destroy %s records failure!", modelType);
+          console.log(err);
+        }
+      });
+      break;
+      case "ScheduleStrategy":
+        ScheduleStrategy.destroy(dic).exec(function(err){
           if (!err) {
             console.log("destroy %s records success!", modelType);
           } else {
@@ -472,6 +523,7 @@ module.exports={
           }
         });
         break;
+
       default:
         break;
     }
