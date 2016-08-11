@@ -65,7 +65,7 @@ function refreshMainList() {
  */
 function showTaskDetailView(name) {
   console.log('name:%s',name);
-  // $.main.refreshRight();
+  $.main.refreshRight("/TaskManager/editTask");
 }
 
 /**

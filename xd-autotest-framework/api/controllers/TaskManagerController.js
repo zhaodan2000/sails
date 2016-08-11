@@ -41,6 +41,7 @@ module.exports = {
 
   editTask: function (req, res) {
 
+
   },
 
   deleteTask: function (req, res) {
@@ -51,7 +52,6 @@ module.exports = {
     mongoService.Delete('TaskFolder', null);
     res.view('task/index', {data:null});
   }
-
 };
 
 function parseAddTaskBody(body) {
