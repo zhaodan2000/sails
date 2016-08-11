@@ -12,19 +12,16 @@ function showManagerTask(){
 $(document).ready(function () {
   var option_save = {
     url:"/TaskManager/addTask",
-    success: function(data) {
-       console.log('+++++++++++++++'+data);
-
-      $.main.refreshMain("/TaskManager/showTaskMangerView");
-      console('This request had been stored into DB!'
+    success: function(data) { console.log('+++++++++++++++'+data);$.main.refreshMain("/TaskManager/showTaskMangerView", {data:data});console('This request had been stored into DB!'
       )}
   };
 
   //ajaxSubmit 
   $("#saveBtn").click(function () {
     console.log("ok");
-    $("#form").ajaxSubmit(option_save);
     $('#addTaskModal').modal('hide');
+    $("#form").ajaxSubmit(option_save);
+
   });
 });
 

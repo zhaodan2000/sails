@@ -16,21 +16,18 @@ module.exports = {
 
   addTask: function (req, res) {
     console.log('req.body:'+JSON.stringify(req.body, null, 4));
-    //从上传的数据中获得task数据
-    //创建task
-    //搜索数据库
-    //刷新页面
-    var taskForm = {Task_name:'a NEW task', Schedule_ID:'1', Schedule_desc:'每月执行一次'};
+    var form = parseAddTaskBody(req.body);
+    var taskForm = {Task_name:form.task_name, type:form.type, Schedule_ID:form.schedule_ID, Schedule_desc:form.schedule_desc};
     mongoService.Insert("TaskFolder", taskForm, function (records) {
-      if (records ){
+      if (records){
+        //sucess
         console.log('insert sucess');
-        // console.log(records);
         mongoService.Find("TaskFolder", null, function (records) {
-          // console.log('records:'+ records);
           res.view('task/index', {data:records});
         });
       }else {
-
+        //fail
+        console.log('insert fail');
       }
     });
   },
@@ -47,3 +44,38 @@ module.exports = {
 
   }
 };
+
+function parseAddTaskBody(body) {
+  var form = body;
+  form.schedule_ID = "";
+  console.log(body.schedule_desc);
+  switch(body.schedule_desc){
+    case '不会自动执行任务脚本':
+      form.schedule_ID = "1";
+      break;
+    case '每天07:30执行任务脚本':
+      form.schedule_ID = "2";
+      break;
+    case '每周日22：30执行任务':
+      form.schedule_ID = "3";
+      break;
+    case '每周周一到周五21:00执行任务脚本':
+      form.schedule_ID = "4";
+      break;
+    default:
+      break;
+  }
+  console.log('form.schedule_ID' +form.schedule_ID);
+
+  switch(body.type_desc){
+    case 'group':
+      form.type = '1'
+      break;
+    case 'orderCase':
+      form.type = '2'
+      break;
+    default:
+      break;
+  }
+  return form;
+}
