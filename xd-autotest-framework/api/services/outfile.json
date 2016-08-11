@@ -1,7 +1,7 @@
 {
     "id": "",
     "name": "Default",
-    "timestamp": 1470745864063,
+    "timestamp": 1470907616772,
     "collection_id": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
     "folder_id": 0,
     "target_type": "collection",
@@ -11,29 +11,21 @@
         "name": "testCollection",
         "description": "This is a description",
         "order": [
-            "940d6b0f-0097-483e-ba3f-87606a1be118"
+            "7f8f85aa-db54-4563-940b-2fc9c5d3eb08"
         ],
         "folders": [],
         "requests": [
             {
-                "id": "940d6b0f-0097-483e-ba3f-87606a1be118",
-                "name": "HOME6",
+                "id": "7f8f85aa-db54-4563-940b-2fc9c5d3eb08",
+                "name": "首页接口业务场景用例",
                 "collectionId": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
-                "method": "POST",
-                "headers": "module: 2\nclientType: iOS\nversion: 1.0.0\nclientIp: 127.0.0.1\ndeviceId: testDeviceId123456\nsessionToken: token123",
-                "dataMode": "urlencoded",
-                "data": [
-                    {
-                        "key": "req",
-                        "value": "",
-                        "type": "text",
-                        "enabled": true
-                    }
-                ],
+                "method": "",
+                "headers": "",
+                "data": [],
                 "rawModeData": "",
                 "tests": "",
                 "preRequestScript": "",
-                "url": "http://192.168.103.101:8020/selftaught/home"
+                "url": ""
             }
         ]
     },
@@ -43,16 +35,15 @@
     },
     "results": [
         {
-            "id": "d198a5b9-3be4-460c-9953-448704c12290",
-            "name": "HOME6",
-            "url": "http://192.168.103.101:8020/selftaught/home",
-            "totalTime": 20,
+            "id": "7f8f85aa-db54-4563-940b-2fc9c5d3eb08",
+            "name": "首页接口业务场景用例",
+            "url": "",
+            "totalTime": 0,
             "responseCode": {
-                "code": 200,
+                "code": 0,
                 "name": "",
                 "detail": ""
             },
-            "body": "{\"retcode\":\"00001\",\"retdesc\":\"参数异常clientType has a unvalid value, plz check it.\",\"serverIp\":\"127.0.1.1\"}",
             "tests": {},
             "totalPassFailCounts": {
                 "pass": 0,
@@ -63,32 +54,8 @@
             "allTests": [
                 {}
             ],
-            "time": 20,
-            "meanResponseTime": 20
-        },
-        {
-            "id": "940d6b0f-0097-483e-ba3f-87606a1be118",
-            "name": "HOME6",
-            "url": "http://192.168.103.101:8020/selftaught/home",
-            "totalTime": 7,
-            "responseCode": {
-                "code": 200,
-                "name": "",
-                "detail": ""
-            },
-            "body": "{\"retcode\":\"00001\",\"retdesc\":\"参数异常clientType has a unvalid value, plz check it.\",\"serverIp\":\"127.0.1.1\"}",
-            "tests": {},
-            "totalPassFailCounts": {
-                "pass": 0,
-                "fail": 0
-            },
-            "testPassFailCounts": {},
-            "times": [],
-            "allTests": [
-                {}
-            ],
-            "time": 7,
-            "meanResponseTime": 7
+            "time": 0,
+            "meanResponseTime": 0
         }
     ],
     "environment": {
