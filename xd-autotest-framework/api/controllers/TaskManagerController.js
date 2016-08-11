@@ -22,9 +22,12 @@ module.exports = {
       if (records){
         //sucess
         console.log('insert sucess');
-        mongoService.Find("TaskFolder", null, function (records) {
-          res.view('task/index', {data:records});
-        });
+        console.log('insert records:'+JSON.stringify(records, null, 4));
+        return res.send(records);
+        // mongoService.Find("TaskFolder", null, function (records) {
+        //   // res.view('task/index', {data:records});
+        //   return res.send('sucess');
+        // });
       }else {
         //fail
         console.log('insert fail');
@@ -42,7 +45,13 @@ module.exports = {
 
   deleteTask: function (req, res) {
 
+  },
+
+  deleteAllTasks: function (req, res) {
+    mongoService.Delete('TaskFolder', null);
+    res.view('task/index', {data:null});
   }
+
 };
 
 function parseAddTaskBody(body) {
