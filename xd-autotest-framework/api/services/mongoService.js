@@ -60,7 +60,7 @@ module.exports={
         TaskFolder.find(dic).populate('Cases').exec(function(err,populated){
           if(!err){
             console.log("populated records:");
-            console.log(populated);
+            // console.log(populated);
             callback(populated);
           }else{
             console.log("populated failure...");
@@ -326,7 +326,7 @@ module.exports={
         TaskFolder.find(dic).populate('Cases').exec(function(err,populated){
           if(!err){
             console.log("populated  %s records:",modelType);
-            console.log(populated);
+            // console.log(populated);
             callback(populated);
           }else{
             console.log("populated %s failure...",modelType);

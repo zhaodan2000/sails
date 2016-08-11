@@ -1,21 +1,22 @@
-<div class="container-fluid">
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
 
   <ul class="nav navbar-nav side-nav">
     <li>
       <a data-toggle="collapse" onclick="showManagerTask()"> 任务管理 </a>
-      <a data-toggle="collapse" data-target="#info1"><i class="fa fa-fw fa-arrows-v"></i> 任务(无依赖参数) </a>
-      <ul id="info1" class="collapse">
+
+      <% data.forEach(function(record,index){ %>
+    <li>
+      <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#info' + index%>"><i class="fa fa-fw fa-arrows-v"></i> <%=record.Task_name%> <i
+          class="fa fa-fw fa-caret-up"></i></a>
+      <ul id="<%='info' + index%>" class="collapse">
+        <% var cases = record.Cases; cases.forEach(function(caseItem,recordIndex){ %>
         <li>
-          <a>单个的用例1<p style="float:right; background-color: red; font-size: 12px">fail</p></a>
+          <a href="javascript:void(0)" id="<%=caseItem.id%>" onclick="requestItem(this)"><%=caseItem.name%></a>
         </li>
+        <% }) %>
       </ul>
-      <a data-toggle="collapse" data-target="#info2"><i class="fa fa-fw fa-arrows-v"></i> 任务(无依赖参数) </a>
-      <ul id="info2" class="collapse">
-        <li>
-          <a>单个的用例1<p style="float:right; background-color: red; font-size: 12px">fail</p></a>
-          <a>单个的用例1<p style="float:right; background-color: green; font-size: 12px">fail</p></a>
-        </li>
-      </ul>
+    </li>
+    <% }) %>
     </li>
   </ul>
   <!-- Page Heading -->
@@ -25,6 +26,51 @@
         <h1 class="page-header">
           任务
           <small>任务列表</small>
+          <!-- Button to trigger modal -->
+          <a href="#addTaskModal" role="button" class="btn btn-primary" data-toggle="modal">添加任务</a>
+
+          <!-- Modal -->
+          <div id="addTaskModal" class="modal fade" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+
+                <form id="form"  method="POST">
+                  <div class="modal-header"><button class="close" type="button" data-dismiss="modal">&times;</button>
+                    <h4 id="myModalLabel" class="modal-title">添加任务</h4>
+                  </div>
+
+                  <div class="modal-body" style="height: 300px; width: 500px">
+                    <div class="form-group">
+                      <label style="font-size: 18px">任务名</label>
+                      <input name="taskName" type="text" class="form-control" placeholder="任务名">
+                    </div>
+                    <div class="form-group">
+                      <label style="font-size: 18px"> 类型:</label>
+                      <select name="type" class="form-control">
+                        <option>group</option>
+                        <option>orderCase</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label style="font-size: 18px">调度策略:</label>
+                      <select name="scheduleId" class="form-control">
+                        <option>不会自动执行任务脚本</option>
+                        <option>每天07:30执行任务脚本</option>
+                        <option>每周日22：30执行任务</option>
+                        <option>每周周一到周五21:00执行任务脚</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="modal-footer">
+                    <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
+                    <button class="btn btn-primary" type="button" id="saveBtn">添加</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
         </h1>
         <ol class="breadcrumb">
           <li class="active">
@@ -34,77 +80,39 @@
       </div>
     </div>
     <!-- /.row -->
-
     <div class="row">
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="table-responsive">
               <table class="table table-bordered table-hover table-striped">
+
                 <thead>
                 <tr>
                   <th>任务</th>
                   <th>creatTime</th>
-                  <th>上次测试时间</th>
-                  <th>包含用例个数</th>
+                  <th>调度策略描述</th>
+                  <th>调度策略类型</th>
                 </tr>
                 </thead>
+
                 <tbody>
+
+                <% data.forEach(function(record,index){ %>
                 <tr>
-                  <td>任务1</td>
-                  <td>10/21/2013</td>
-                  <td>3:29 PM</td>
-                  <td>33
+                  <td ><%-record.Task_name%></td>
+                  <td><%-record.createdAt%></td>
+                  <td><%-record.Schedule_desc%></td>
+                  <td><%-record.Schedule_ID%>
                     <div style="float: right">
-                      <button class="btn btn-primary" onclick="alert('编辑')">编辑</button>
-                      <button class="btn btn-info" onclick="alert('查看')">查看</button>
+                      <button class="btn btn-primary" onclick="alert('运行')">运行</button>
+                      <button onclick="alert('编辑')">编辑</button>
                       <button class="btn btn-danger" onclick="alert('删除')">删除</button>
                     </div>
-
                   </td>
                 </tr>
-                <tr>
-                  <td>任务1</td>
-                  <td>10/21/2013</td>
-                  <td>3:20 PM</td>
-                  <td>34</td>
-                </tr>
-                <tr>
-                  <td>任务1</td>
-                  <td>10/21/2013</td>
-                  <td>3:03 PM</td>
-                  <td>17</td>
-                </tr>
-                <tr>
-                  <td>任务1</td>
-                  <td>10/21/2013</td>
-                  <td>3:00 PM</td>
-                  <td>71</td>
-                </tr>
-                <tr>
-                  <td>任务1</td>
-                  <td>10/21/2013</td>
-                  <td>2:49 PM</td>
-                  <td>23</td>
-                </tr>
-                <tr>
-                  <td>任务1</td>
-                  <td>10/21/2013</td>
-                  <td>2:23 PM</td>
-                  <td>12</td>
-                </tr>
-                <tr>
-                  <td>任务1</td>
-                  <td>10/21/2013</td>
-                  <td>2:15 PM</td>
-                  <td>54</td>
-                </tr>
-                <tr>
-                  <td>任务1</td>
-                  <td>10/21/2013</td>
-                  <td>2:13 PM</td>
-                  <td>45</td>
-                </tr>
+                <% }) %>
+
                 </tbody>
               </table>
             </div>

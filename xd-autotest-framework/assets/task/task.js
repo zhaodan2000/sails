@@ -6,11 +6,30 @@
  * 显示任务管理页面
  */
 function showManagerTask(){
-  $.main.refreshRight("/TaskManager/showTaskMangerView", {data:'1'});
+  $.main.refreshMain("/TaskManager/showTaskMangerView");
 }
 
+$(document).ready(function () {
+  var option_save = {
+    url:"/TaskManager/addTask",
+    success: function(data) {
+       console.log('+++++++++++++++'+data);
+
+      $.main.refreshMain("/TaskManager/showTaskMangerView");
+      console('This request had been stored into DB!'
+      )}
+  };
+
+  //ajaxSubmit 
+  $("#saveBtn").click(function () {
+    console.log("ok");
+    $("#form").ajaxSubmit(option_save);
+    $('#addTaskModal').modal('hide');
+  });
+});
+
 /**
- * 刷新main列表(左边的任务列表)
+ * 刷新整个页面
  */
 function refreshMainList() {
   $.main.refreshMain();
@@ -36,4 +55,5 @@ function showOrderCaseInfo() {
 function showCaseInfo() {
   $.main.refreshRight();
 }
+
 
