@@ -1,7 +1,7 @@
 {
     "id": "",
     "name": "Default",
-    "timestamp": 1470394799812,
+    "timestamp": 1470745864063,
     "collection_id": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
     "folder_id": 0,
     "target_type": "collection",
@@ -11,21 +11,21 @@
         "name": "testCollection",
         "description": "This is a description",
         "order": [
-            "4eff7f62-a680-4d73-a1fa-7ccfbea07ee1"
+            "940d6b0f-0097-483e-ba3f-87606a1be118"
         ],
         "folders": [],
         "requests": [
             {
-                "id": "4eff7f62-a680-4d73-a1fa-7ccfbea07ee1",
-                "name": "login",
+                "id": "940d6b0f-0097-483e-ba3f-87606a1be118",
+                "name": "HOME6",
                 "collectionId": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
                 "method": "POST",
-                "headers": "clientType: android\nmodule: 2\nversion: 1.0\nclientIp: 192.168.31.23\ndeviceId: MyTestDeviceID123",
+                "headers": "module: 2\nclientType: iOS\nversion: 1.0.0\nclientIp: 127.0.0.1\ndeviceId: testDeviceId123456\nsessionToken: token123",
                 "dataMode": "urlencoded",
                 "data": [
                     {
                         "key": "req",
-                        "value": "{\"platform\":\"local\",\"phoneNum\":\"18210191798\",\"pwd\":\"123456\"}",
+                        "value": "",
                         "type": "text",
                         "enabled": true
                     }
@@ -33,7 +33,7 @@
                 "rawModeData": "",
                 "tests": "",
                 "preRequestScript": "",
-                "url": "http://192.168.103.101:8002/user/newLogin"
+                "url": "http://192.168.103.101:8020/selftaught/home"
             }
         ]
     },
@@ -43,16 +43,16 @@
     },
     "results": [
         {
-            "id": "4eff7f62-a680-4d73-a1fa-7ccfbea07ee1",
-            "name": "login",
-            "url": "http://192.168.103.101:8002/user/newLogin",
-            "totalTime": 94,
+            "id": "d198a5b9-3be4-460c-9953-448704c12290",
+            "name": "HOME6",
+            "url": "http://192.168.103.101:8020/selftaught/home",
+            "totalTime": 20,
             "responseCode": {
                 "code": 200,
                 "name": "",
-                "detail": "",
-                "body": "{\"moduleInfo\":{\"admissionCardCode\":\"\",\"age\":\"0\",\"bePraiseNum\":\"0\",\"createTime\":\"2016-07-07 10:57:59.0\",\"credit\":\"53\",\"degreeLevel\":\"\",\"gender\":\"1\",\"id\":\"208\",\"identificationCardCode\":\"\",\"latestDeviceIp\":\"192.168.31.23\",\"major\":\"01B0402\",\"majorName\":\"\",\"medalId\":\"1 \",\"medalImg\":\"http://7xigj3.com1.z0.glb.clouddn.com/image_2015_11_13_15_59_230f0054d4-e12a-41ee-b88d-ad67d728a263  \",\"medalName\":\"无名的旅人 \",\"merchant\":\"\",\"module\":\"2\",\"nickName\":\"姬丝秀忒\",\"officialGender\":\"\",\"picList\":[],\"platform\":\"local\",\"portrait\":\"http://7xigj3.com1.z0.glb.clouddn.com/DE9B75CD-CFCE-4BCE-831E-F1064631466B\",\"realName\":\"\",\"salt\":\"HnRx6n\",\"sign\":\"\",\"token\":\"2a13acf0-170c-487d-b119-5603d1b280a0\",\"tokenTime\":\"2016-08-05 19:01:27.66\",\"uniqueId\":\"\",\"usedDeviceId\":\"MyTestDeviceID123\",\"userId\":\"208\",\"userName\":\"18210191798\",\"userType\":\"1\"},\"retOk\":true,\"retcode\":\"0\",\"retdesc\":\"操作成功\",\"serverIp\":\"127.0.1.1\",\"token\":\"2a13acf0-170c-487d-b119-5603d1b280a0\"}"
+                "detail": ""
             },
+            "body": "{\"retcode\":\"00001\",\"retdesc\":\"参数异常clientType has a unvalid value, plz check it.\",\"serverIp\":\"127.0.1.1\"}",
             "tests": {},
             "totalPassFailCounts": {
                 "pass": 0,
@@ -63,8 +63,32 @@
             "allTests": [
                 {}
             ],
-            "time": 94,
-            "meanResponseTime": 94
+            "time": 20,
+            "meanResponseTime": 20
+        },
+        {
+            "id": "940d6b0f-0097-483e-ba3f-87606a1be118",
+            "name": "HOME6",
+            "url": "http://192.168.103.101:8020/selftaught/home",
+            "totalTime": 7,
+            "responseCode": {
+                "code": 200,
+                "name": "",
+                "detail": ""
+            },
+            "body": "{\"retcode\":\"00001\",\"retdesc\":\"参数异常clientType has a unvalid value, plz check it.\",\"serverIp\":\"127.0.1.1\"}",
+            "tests": {},
+            "totalPassFailCounts": {
+                "pass": 0,
+                "fail": 0
+            },
+            "testPassFailCounts": {},
+            "times": [],
+            "allTests": [
+                {}
+            ],
+            "time": 7,
+            "meanResponseTime": 7
         }
     ],
     "environment": {

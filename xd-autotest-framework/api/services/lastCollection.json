@@ -7,31 +7,35 @@
   },
   "item": [
     {
-      "name": "login",
+      "name": "HOME6",
       "request": {
-        "name": "login",
-        "url": "http://192.168.103.101:8002/user/newLogin",
+        "name": "HOME6",
+        "url": "http://192.168.103.101:8020/selftaught/home",
         "method": "POST",
         "header": [
-          {
-            "key": "clientType",
-            "value": "android"
-          },
           {
             "key": "module",
             "value": "2"
           },
           {
+            "key": "clientType",
+            "value": "iOS"
+          },
+          {
             "key": "version",
-            "value": "1.0"
+            "value": "1.0.0"
           },
           {
             "key": "clientIp",
-            "value": "192.168.31.23"
+            "value": "127.0.0.1"
           },
           {
             "key": "deviceId",
-            "value": "MyTestDeviceID123"
+            "value": "testDeviceId123456"
+          },
+          {
+            "key": "sessionToken",
+            "value": "token123"
           }
         ],
         "body": {
@@ -39,7 +43,7 @@
           "urlencoded": [
             {
               "key": "req",
-              "value": "{\"platform\":\"local\",\"phoneNum\":\"18210191798\",\"pwd\":\"123456\"}",
+              "value": "",
               "type": "text",
               "enabled": true
             }

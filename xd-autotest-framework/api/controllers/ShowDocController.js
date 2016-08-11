@@ -5,9 +5,16 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+var formidable = require('formidable');
+var http = require('http');
+var util = require('util');
+var request = require('request');
+
 module.exports = {
   findRequestItemByID:function (req,res) {
-    mongoService.Find('RequestItem',null,function (record) {
+    var dic = {id:req.param("id")};
+    console.log(dic);
+    mongoService.Find('RequestItem',dic,function (record) {
       console.log(record);
       res.view('showdoc', {data:record});
     })
@@ -47,6 +54,71 @@ module.exports = {
         return res.send('OK');
       }
     })
+  },
+
+  operatfile:function (req,res) {
+    var form        = new formidable.IncomingForm();
+    form.parse(req,function(error, fields, files){
+       console.log(files); //打印上传文件结构
+       console.log(files.path); //文件路径
+       files[fields] = files
+    });
+    // formidable = require("formidable"); //载入 formidable
+    //
+    // var form = new formidable.IncomingForm();
+    // var post = {},
+    //   file = {};
+    // form.uploadDir = '/tmp';  //文件上传 临时文件存放路径
+    //
+    // form
+    //   .on('error', function(err) {
+    //     console.log("error"+err); //各种错误
+    //   })
+    //   //POST 普通数据 不包含文件 field 表单name value 表单value
+    //   .on('field', function(field, value) {
+    //     console.log("field"+err); //各种错误
+    //     if (form.type == 'multipart') {  //有文件上传时 enctype="multipart/form-data"
+    //       console.log("field1"+err); //各种错误
+    //       if (field in post) { //同名表单 checkbox 返回array 同get处理
+    //         console.log("field2"+err); //各种错误
+    //         if (util.isArray(post[field]) === false) {
+    //           console.log("field3"+err); //各种错误
+    //           post[field] = [post[field]];
+    //         }
+    //         post[field].push(value);
+    //         return;
+    //       }
+    //     }
+    //     post[field] = value;
+    //   })
+    //   .on('file', function(field, file) { //上传文件
+    //     console.log(file); //打印上传文件结构
+    //     console.log(file.path); //文件路径
+    //     file[field] = file;
+    //   })
+    //   .on('end', function() {
+    //     fn(); //解析完毕 做其他work
+    //   });
+    // form.parse(request); //解析request对象
+
+    // //创建表单上传
+    // var form = new formidable.IncomingForm();
+    // //设置编辑
+    // form.encoding = 'utf-8';
+    // //设置文件存储路径
+    // form.uploadDir = "/outfile.json";
+    // //保留后缀
+    // form.keepExtensions = true;
+    // //设置单文件大小限制
+    // form.maxFieldsSize = 2 * 1024 * 1024;
+    // //form.maxFields = 1000;  设置所以文件的大小总和
+    //
+    // form.parse(req, function(err, fields, files) {
+    //   res.writeHead(200, {'content-type': 'text/plain'});
+    //   res.write('received upload:\n\n');
+    //   res.end(util.inspect({fields: fields, files: files}));
+    //   res.ok();
+    // });
   },
 };
 

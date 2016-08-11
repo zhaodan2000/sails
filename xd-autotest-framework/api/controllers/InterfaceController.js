@@ -133,59 +133,34 @@ module.exports = {
   },
 
   testCurrentCollection: function (req, res) {
-    var item = parseReqBody(req);
-    console.log('item ---------------------------------------------------'+ item);
+    var reqBody = parseReqBody(req);
+    console.log('item ---------------------------------------------------'+ reqBody);
     //根据传入配置request
-    var request = RequestItemServices.configRequestItem(item);
-
-    //配置前置脚本和后置脚本 ----- 根据item是不是输入了文本来判断是否添加脚本
-    // RequestItemServices.
-
-    console.log('item.testscript:'+item.testscript);
-    console.log('item.prescript:'+item.prescript);
-    var event =[];
-    var test = {
-      listen: 'test',
-      script: {
-        type: "text/javascript",
-        exec: item.testscript
-        // exec: RequestItemServices.parseIntputTestString(item.testscript)
-      }
-    };
-    var preScript = {
-      listen: 'prerequest',
-      script: {
-        type: "text/javascript",
-        // exec: item.prescript
-        exec: RequestItemServices.parseInputPreString(item.prescript)
-      }
-    };
-    event.push(preScript);
-    event.push(test);
+    var request = RequestItemServices.configRequestItem(reqBody);
+    //配置前置脚本和后置脚本
+    var event = RequestItemServices.configEvent(reqBody);
     //根据request配置item
     var item = RequestItemServices.configItem(request, event);
-    //设置event(前置脚本和后置脚本)
+
     var itemArr = [];
     itemArr.push(item);
 
     Collection.findOne({name: "testCollection"}).exec(function (err, collection){
-      //先取出本个请求对应的collection
+      //先取出本请求对应的 collection(task)
       //设置collection的item
       collection.item = itemArr;
       //根据collection对象生成能够进行测试的collection
       var collectionOBJ = CollectionServices.creatCollection(collection);
 
-      // console.log(collectionOBJ);
-
       //配置测试需要的option(以后应该添加入参,根据入参进行配置)
       var option = CollectionServices.optionMake();
 
       //对collectionJson进行测试
-      CollectionServices.testCollectionWithCallBack(collectionOBJ, option, function (exitcode, options) {
-        //测试完成的回调,这里应该把测试结果返回才对
+      CollectionServices.testCollectionWithCallBack(collectionOBJ, option, function (exitcode, results) {
+        //测试完成的回调,当exitcode为0时, results中返回的是response数组
         console.log("exitCode is " + exitcode);
-        console.log('options -------------'+JSON.stringify(options));
-        return res.send(collectionOBJ);
+        console.log('options -------------'+JSON.stringify(results));
+        res.view('showdoc', {data:results});
       });
 
     })

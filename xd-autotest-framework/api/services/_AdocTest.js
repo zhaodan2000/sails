@@ -44,6 +44,8 @@ module.exports={
       output=records;
     });
      */
+
+
     TCFolder.find({id:'57a992afd1771ad9392a63cc'}).exec(function(records){
       console.log(records);
     });
@@ -57,7 +59,41 @@ module.exports={
       console.log("Array新增元素成功!!!");
     }
 
-  }
+  },
 
+  testDelete:function(modelType){
+      switch(modelType){
+        case 'TCFolder':
+              TCFolder.destroy();
+              break;
+        case 'TCOrderCaseFolder':
+              TCOrderCaseFolder.destroy();
+              break;
+        default:
+              break;
+      }
+  },
+
+  testFind:function(modelType){
+    switch(modelType){
+      case "TCFolder":
+            TCFolder.find().exec(function(err,records){
+              console.log(records);
+            });
+            break;
+      case "TCOrderCaseFolder":
+            TCOrderCaseFolder.find().exec(function (err,records) {
+              console.log(records);
+            });
+            break;
+      case "RequestItem":
+            RequestItem.find().exec(function(err,records){
+              console.log(records);
+            });
+            break;
+      default:
+            break;
+    }
+  }
 
 }

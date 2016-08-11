@@ -16,10 +16,14 @@ module.exports = {
     res.view('doc/APIdoc');
   },
   task: function(req, res) {
-    res.view('task/index');
+    mongoService.Find("TaskFolder", null, function (records) {
+      console.log('records:'+ records);
+      res.view('task/index', {data:records});
+    });
   },
   testcase: function(req, res) {
-    mongoService.findRequestItemByName("",function (records) {
+    mongoService.Find("ReqFolder",null,function (records) {
+      console.log(records);
       res.view('testcase/index', {data:records});
     });
   },
