@@ -8,19 +8,21 @@
     </li>
     <li>
       <div class="modal-body">
-        <form action='/ShowDoc/operatfile' method="post" id="fileForm">
+        <form action='/ShowDoc/operatfile' method="post" id="fileForm" enctype="multipart/form-data">
           <label class="control-label" for="inputSuccess"><font color="#FFFFFF" size="4">导入用例</font></label>
-          <input type="file" id="uploadfile" accept=".postman_collection" onchange="uploadfile(this)">
+          <input type="file" id="uploadfile" name="submit" accept=".postman_collection" onchange="upfile()">
         </form>
       </div>
     </li>
     <% data.forEach(function(record,index){ %>
     <li>
-      <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#info' + index%>" style="display:block"><i class="fa fa-fw fa-arrows-v"></i> 首页 <i
+      <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#info' + index%>" style="display:block"><i class="fa fa-fw fa-arrows-v"></i> <%=record.name%> <i
           class="fa fa-fw fa-caret-up"></i></a>
       <ul id="<%='info' + index%>" class="collapse">
         <li>
-          <a href="javascript:void(0)" id="<%=record.id%>" onclick="requestItem(this)"><%=record.name%></a>
+          <%record.ReqItems.forEach(function (reqItem,i) {%>
+            <a href="javascript:void(0)" id="<%=reqItem.id%>" onclick="requestItem(this)"><%=reqItem.name%></a>
+          <%})%>
         </li>
       </ul>
     </li>

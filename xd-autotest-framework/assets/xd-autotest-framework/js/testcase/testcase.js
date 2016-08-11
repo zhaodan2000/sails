@@ -56,15 +56,18 @@ function onKeyDown(data) {
 }
 
 //文件的形式导入用例
-function uploadfile() {
+function upfile() {
+  console.log("wqwqwqwqwqwqwqw");
   var option = {
+    contentType: "text/xml",
+    keepAlive:"YES",
     success: function (data) {
       //$.main.refreshRight("/Interface/showResponseOnView?id="+data.id);
     }
   };
 
   // ajaxSubmit 
-  $("#form").ajaxSubmit(option);
+  $("#fileForm").ajaxSubmit(option);
 }
 
 function getImgURL(node) {
