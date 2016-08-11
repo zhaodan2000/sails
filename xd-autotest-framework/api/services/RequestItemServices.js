@@ -2,15 +2,43 @@
  * Created by xiaodou_chenxiaoxiang on 16/8/1.
  */
 
-// var RequestItem = require('../models/RequestItem');
 var fs = require('fs');
 require('../utils/string');
 
 module.exports = {
+
+  configEvent: function (item) {
+    //配置前置脚本和后置脚本 ----- 根据item是不是输入了文本来判断是否添加脚本
+    // RequestItemServices.
+
+    console.log('item.testscript:'+item.testscript);
+    console.log('item.prescript:'+item.prescript);
+    var event =[];
+    var test = {
+      listen: 'test',
+      script: {
+        type: "text/javascript",
+        exec: item.testscript
+        // exec: RequestItemServices.parseIntputTestString(item.testscript)
+      }
+    };
+    var preScript = {
+      listen: 'prerequest',
+      script: {
+        type: "text/javascript",
+        // exec: item.prescript
+        exec: RequestItemServices.parseInputPreString(item.prescript)
+      }
+    };
+    event.push(preScript);
+    event.push(test);
+    return event;
+  },
+
   /**
    *
-   * @param request
-   * @param event
+   * @param request type is obj
+   * @param event  type is array
    * @returns {{id: *, name: *, disabled: *, request: *, event: *}}
      */
   configItem: function (request, event) {

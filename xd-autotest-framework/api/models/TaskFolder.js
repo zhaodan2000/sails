@@ -26,8 +26,13 @@ module.exports = {
       required:false,
       defaultsTo:'暂时没有任务描述。'
     },
+    caseType:{
+      type:'string',
+      enum:['1','2'],//1表示原子case, 2表示顺序case.
+      defaultsTo:'1'
+    },
     Schedule_ID:{
-      type:'integer',
+      type:'string',
       required:true,
       defaultsTo:'1'
     },
