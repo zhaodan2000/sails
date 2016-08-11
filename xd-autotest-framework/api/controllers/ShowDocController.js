@@ -7,7 +7,7 @@
 
 module.exports = {
   findRequestItemByID:function (req,res) {
-    mongoService.findRequestItemByID(req.param("id"),function (record) {
+    mongoService.Find('RequestItem',null,function (record) {
       console.log(record);
       res.view('showdoc', {data:record});
     })

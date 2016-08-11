@@ -57,7 +57,7 @@ module.exports={
       required:false,
       defaultsTo:{
         "module":"2",
-        "version":"",
+        "version":"1.0",
         "clientType":"ios",
         "clientIp":"192.168.1.1",
         "deviceId":"888",
