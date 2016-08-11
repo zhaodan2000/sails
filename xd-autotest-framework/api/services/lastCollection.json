@@ -7,47 +7,15 @@
   },
   "item": [
     {
-      "name": "HOME6",
+      "name": "首页接口业务场景用例",
       "request": {
-        "name": "HOME6",
-        "url": "http://192.168.103.101:8020/selftaught/home",
-        "method": "POST",
-        "header": [
-          {
-            "key": "module",
-            "value": "2"
-          },
-          {
-            "key": "clientType",
-            "value": "iOS"
-          },
-          {
-            "key": "version",
-            "value": "1.0.0"
-          },
-          {
-            "key": "clientIp",
-            "value": "127.0.0.1"
-          },
-          {
-            "key": "deviceId",
-            "value": "testDeviceId123456"
-          },
-          {
-            "key": "sessionToken",
-            "value": "token123"
-          }
-        ],
+        "name": "首页接口业务场景用例",
+        "url": "",
+        "method": "",
+        "header": [],
         "body": {
-          "mode": "urlencoded",
-          "urlencoded": [
-            {
-              "key": "req",
-              "value": "",
-              "type": "text",
-              "enabled": true
-            }
-          ]
+          "mode": "",
+          "urlencoded": []
         }
       },
       "event": [
