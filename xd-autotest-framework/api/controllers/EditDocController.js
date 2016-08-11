@@ -25,32 +25,48 @@ module.exports = {
   },
 
   testInsert:function(req,res) {
-    /**
-    var task_element = {Task_name: 'testTask', Schedule_ID: 1, Schedule_desc: '每周三09:00执行'};
-    var task_output;
-    var taskCase_output;
-    mongoService.Insert('TaskFolder',task_element,function(records){
-      task_output=records;
-      console.log("+++++++"+JSON.stringify(task_output));
-      var taskCase_element={name:'Case in task folder!',  url:"http://www.baidu.com", TaskID:records.id};
-      mongoService.Insert('TaskCase',taskCase_element,function(records){
-        taskCase_output=records;
-        var data={task:task_output, taskCase: taskCase_output};
-        console.log(data);
-        res.send(data);
+    if(req.param("type")==='Task'){
+      var task_element = {Task_name: 'testTask', Schedule_ID: 1, Schedule_desc: '每周三09:00执行'};
+      var task_output;
+      var taskCase_output;
+      mongoService.Insert('TaskFolder',task_element,function(records){
+        task_output=records;
+        console.log("+++++++"+JSON.stringify(task_output));
+        var taskCase_element={name:'Case in task folder!',  url:"http://www.baidu.com", TaskID:records.id};
+        mongoService.Insert('TaskCase',taskCase_element,function(records){
+          taskCase_output=records;
+          var data={task:task_output, taskCase: taskCase_output};
+          console.log(data);
+          res.send(data);
+        });
       });
-    });
-**/
-    var reqFolder={id:'93664a09-6e6b-c858-4430-a3be62'+new Date().getMilliseconds().toString(), name:'首页接口业务场景用例'};
-    mongoService.Insert('ReqFolder',reqFolder,function(reqFolder){
-      if(reqFolder){
-        var reqItem={name:'第三方登录接口', url:'http://192.168.88.242:8002/user/newLogin', ReqFolderID:reqFolder.id};
-        mongoService.Insert('RequestItem',reqItem,function(records){
-          res.send(records);
-        })
-      }
-    } );
+    }else if(req.param("type")==='Req'){
+          var reqItem={name:'个人资料修改接口', url:'http://192.168.31.88:8002/selftaught/user/modifyMyInfo', ReqFolderID:'93664a09-6e6b-c858-4430-a3be62510'};
+          mongoService.Insert('RequestItem',reqItem,function(records){
+            res.send(records);
+          });
+      }else{
+      //
+      var ScheduleStrategyItem1={id:'ss00',schedule_time:'-',day_of_week:'-',schedule_period:'-',schedule_desc:'选择此策略则表示不会自动执行任务脚本。'};
+      var ScheduleStrategyItem2={id:'ss01',schedule_time:'07:30',day_of_week:'-',schedule_period:'daily',schedule_desc:'选择此策略则表示每天07:30执行任务脚本。'};
+      var ScheduleStrategyItem3={id:'ss02',schedule_time:'22:30',day_of_week:'Sunday',schedule_period:'weekly',schedule_desc:'选择此策略则每周日22：30执行任务。'};
+      var ScheduleStrategyItem4={id:'ss03',schedule_time:'21:00',day_of_week:'workday',schedule_period:'weekly',schedule_desc:'选择此策略则表示每周周一到周五21:00执行任务脚。'};
+/*
+      mongoService.Insert('ScheduleStrategy',ScheduleStrategyItem1,function(records){
 
+      });
+      mongoService.Insert('ScheduleStrategy',ScheduleStrategyItem2,function(records){
+
+      });
+      mongoService.Insert('ScheduleStrategy',ScheduleStrategyItem3,function(records){
+
+      });
+      */
+      mongoService.Insert('ScheduleStrategy',ScheduleStrategyItem4,function(records){
+
+      });
+
+    }
   },
 
   testInsertDocItem:function(req,res){
