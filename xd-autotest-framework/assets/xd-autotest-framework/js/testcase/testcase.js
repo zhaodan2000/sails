@@ -26,6 +26,7 @@ $(document).ready(function () {
   };
   var option_submit = {
     success:function (data) {
+      $.main.refreshMain("/Home/testcase");
       console.log('+++++++++++++++' + data);
     }
   };
@@ -45,6 +46,7 @@ $(document).ready(function () {
 
   //提交增加的用例
   $("#submitBtn").click(function () {
+    $('#myModal').modal('hide');
     console.log("ok");
     $("#formModel").ajaxSubmit(option_submit);
   });
