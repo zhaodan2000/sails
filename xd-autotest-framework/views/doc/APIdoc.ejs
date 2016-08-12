@@ -3,6 +3,43 @@
    * Created by lyh on 8/8/16.
    */
 
+  $('#showMdFile').click(function(){
+    $.main.refreshMain('/EditDoc/testAPImd');
+
+  });
+
+  $('#addAPIbutton').click(function(){
+
+    /**
+     <li id="api_template">
+     <i class="fa fa-edit" id="apiTitle">接口</i>
+     <div class="form-group">
+     <label>接口名</label>
+     <input class="form-control" id="apiTitle_value" />
+     </div>
+     <div class="form-group">
+     <label>URL</label>
+     <input class="form-control" placeholder="Enter text" id="apiURL_value" />
+     </div>
+     </li>
+     *
+     */
+
+    var testItem=$("li#api_template").clone(true);
+    var siblings_length=$("ol#APIs").children('li').length;
+    console.log('siblings_length=%d',siblings_length);
+    testItem.find('input#apiTitle_value').attr("id","apiTitle_"+siblings_length);
+    testItem.find('input#apiURL_value').attr("id","apiURL_"+siblings_length);
+    testItem.attr('id','api_'+siblings_length);
+    console.log(testItem);
+    $('ol#APIs').prepend(testItem);
+    console.log("完成咯~");
+    /**
+    for(var i=0;i<siblings_length;i++){
+  }**/
+
+  });
+
 
   $('#find_docItem').click(function(){
     $.ajax({
@@ -68,7 +105,6 @@
     console.log(requestItemValue);
     var requestItem=JSON.parse(requestItemValue);
     console.log(requestItem);
-
     $.ajax({
       url: "/doc/insertRequestItemService",
       type: "Post",
@@ -290,8 +326,8 @@
             <input class="form-control" placeholder="Enter text" />
           </div>
         </li>
-        <li id="template_api">
-          <i class="fa fa-edit" id="apiTitle">首页接口</i>
+        <li id="api_template">
+          <i class="fa fa-edit" id="apiTitle">接口</i>
           <div class="form-group">
             <label>接口名</label>
             <input class="form-control" id="apiTitle_value" />
@@ -327,6 +363,8 @@
         <label>输入指定RequestItem的name:</label>
         <input id="input_requestName" class="form-control">
       </div>
+      <div class="btn btn-default" id="showMdFile">展示md文件</div>
+      <div class="btn btn-default" id="addAPIbutton">增加API接口</div>
       <div class="btn btn-default" id="save_doc_2_db">保存文档2db</div>
         <!--<button id="save_doc" name="save_doc_btn" text="无样式">查询ReqItem</button>-->
       <div class="btn btn-default" text="主要效果" id="save_doc" >保存文档</div>
