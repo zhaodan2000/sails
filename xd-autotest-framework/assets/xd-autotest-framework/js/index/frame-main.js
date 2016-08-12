@@ -3,10 +3,13 @@
  */
 ;(function ($) {
   $.main = $.main || {};
-  $.main.refreshMain = function (url) {
+  $.main.refreshMain = function (url, option) {
     if ($("#page-wrapper")) {
+      var _option = {};
+      _option.data = option.data? option.data:{};
       $.ajax({
         url: url,
+        data : option.data,
         success: function (data) {
           $("#page-wrapper").html(data);
         }
