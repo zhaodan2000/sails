@@ -9,15 +9,16 @@ function showManagerTask(){
   $.main.refreshMain("/TaskManager/showTaskMangerView");
 }
 
+/**
+ * 添加一个task
+ */
 $(document).ready(function () {
   var option_save = {
     url:"/TaskManager/addTask",
     success: function(data) {
-      console.log('+++++++++++++++'+data);
-      // appendText(data);
-
-      // showManagerTask();
-      // $.main.refreshMain('task/index');
+      // console.log('+++++++++++++++'+data);
+      //刷新页面之后后出现遮罩
+      // $.main.refreshMain("/TaskManager/showTaskMangerView");
       }
   };
 
@@ -26,23 +27,7 @@ $(document).ready(function () {
     $('#addTaskModal').modal('hide');
     $("#form").ajaxSubmit(option_save);
   });
-
-  // $("#editBtn1").click(function(){
-  //   console.log('buttonClicked');
-  //   console.log($(this).attr("name"));
-  // });
 });
-
-// function appendText(data)
-// {
-//   var td1=$("<td></td>").text(data.Task_name);  // 使用 jQuery 创建文本
-//   var td2=$("<td></td>").text(data.createdAt);  // 使用 jQuery 创建文本
-//   var td3=$("<td></td>").text(data.Schedule_desc);  // 使用 jQuery 创建文本
-//   var td4=$("<td></td>").text(data.Schedule_ID);  // 使用 jQuery 创建文本
-//   var tr = $("<tr></tr>");
-//   tr.appendChild(td1,td2,td3,td4)
-//   $("tbody").append(tr);        // 追加新元素
-// }
 
 /**
  * 删除所有任务
@@ -51,25 +36,7 @@ function deleteAllTasks() {
   $.main.refreshMain("/TaskManager/deleteAllTasks");
 }
 
-/**
- * 刷新整个页面
- */
-function refreshMainList() {
-  $.main.refreshMain();
-}
 
-/**
- * 显示task的详情页面
- */
-function showTaskDetailView(name) {
-  console.log('name:%s',name);
-
-  $.main.refreshRight("/TaskManager/editTask", {data:{Task_name:name}});
-  // $.post("/TaskManager/editTask", {Task_name:name}, function (res) {
-  //   //这里不用返回,直接跳转到taskDetail页面
-  //   //
-  // })
-}
 
 /**
  * 显示orderCase的详情页面
@@ -85,4 +52,34 @@ function showCaseInfo() {
   $.main.refreshRight();
 }
 
+/**
+ * 根据任务名运行任务
+ * @param taskName
+ */
+function runSelectedTask(name) {
+  console.log('name:%s',name);
+  $.post("/TaskManager/runTask", {Task_name:name}, function (result) {
+    // $.main.refreshMain("/TaskManager/showTaskMangerView");
+    alert("收到开始运行信息")
+  }, "json");
+}
+
+/**
+ * 根据任务名显示task的详情页面
+ */
+function showTaskDetailView(name) {
+  console.log('name:%s',name);
+  $.main.refreshRight("/TaskManager/editTask", {data:{Task_name:name}});
+}
+
+/**
+ * 根据任务名删除任务
+ * @param taskName
+ */
+function deleteSelectedTask(name) {
+  $.post("/TaskManager/deleteTask", {Task_name:name}, function (result) {
+    $.main.refreshMain("/TaskManager/showTaskMangerView");
+    alert("删除成功")
+  }, "json");
+}
 
