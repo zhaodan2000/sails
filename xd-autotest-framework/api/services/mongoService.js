@@ -141,6 +141,52 @@ module.exports={
     }
   },
 
+  /**
+   * 根据传入的model类型,以及查找的条件,
+   * 将对应的model记录删除掉。
+   * @param modelType 为model类型,字符串。
+   * @param dic 为查找的条件,字典。
+   * **/
+  DeleteSingleTask:function(modelType,dic,callback){
+    switch(modelType){
+      case "TaskFolder":
+        TaskFolder.destroy(dic).exec(function(err){
+          if (!err) {
+            console.log("destroy records success!");
+            callback(err);
+          } else {
+            console.log("destroy records failure!");
+            callback(err);
+          }
+        });
+        break;
+      case "TaskCase":
+        TaskFolder.destroy(dic).exec(function (err) {
+          if (!err) {
+            console.log("destroy records success!");
+            callback(err);
+          } else {
+            console.log("destroy records failure!");
+            callback(err);
+          }
+        });
+        break;
+      case "RequestItem":
+        RequestItem.destroy(dic).exec(function(err){
+          if (!err) {
+            console.log("destroy records success!");
+          } else {
+            console.log("destroy records failure!");
+          }
+        });
+        break;
+
+      default:
+        break;
+    }
+  },
+
+
 
 
   /**

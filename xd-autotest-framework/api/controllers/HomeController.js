@@ -28,7 +28,10 @@ module.exports = {
     });
   },
   schedule: function(req, res) {
-    res.view('schedule/index');
+    mongoService.Find("TaskFolder", null, function (records) {
+      console.log('records:'+ records);
+      res.view('schedule/index', {data:records});
+    });
   },
 };
 
