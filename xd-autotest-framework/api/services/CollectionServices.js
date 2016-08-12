@@ -96,7 +96,13 @@ module.exports = {
     // console.log(result['responseCode']['body']);
     return result['responseCode']['body'];
   },
-  //export response
+
+  /**
+   * 把文件导出
+   * @param responseData
+   * @param filePath
+   * @param fileName
+     */
   exportResponse:function (responseData, filePath, fileName) {
     fs.writeFileSync(filePath+fileName, responseData.toString());
   }

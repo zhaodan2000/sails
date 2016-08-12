@@ -104,9 +104,9 @@
                   <td><%-record.Schedule_desc%></td>
                   <td><%-record.Schedule_ID%>
                     <div style="float: right">
-                      <button  class="btn btn-primary" onclick="alert('运行')">运行</button>
-                      <button name="<%-record.Task_name%>" class="btn btn-primary" onclick="showTaskDetailView(this.name)" >编辑</button>
-                      <button  class="btn btn-danger" onclick="alert('删除')">删除</button>
+                      <button name="<%-record.Task_name%>" class="btn btn-xs btn-primary" onclick="runSelectedTask(this.name)">运行</button>
+                      <button name="<%-record.Task_name%>" class="btn btn-xs btn-info" onclick="showTaskDetailView(this.name)" >编辑</button>
+                      <button name="<%-record.Task_name%>" class="btn btn-xs btn-danger" onclick="deleteSelectedTask(this.name)">删除</button>
                     </div>
                   </td>
                 </tr>

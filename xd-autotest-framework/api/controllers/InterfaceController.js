@@ -161,6 +161,7 @@ module.exports = {
       });
     })
   },
+  
   showResponseOnView:function (req, res) {
     //暂时先从文件中读取response
     var path = require('path');

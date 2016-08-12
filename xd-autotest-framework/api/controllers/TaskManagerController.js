@@ -9,10 +9,7 @@ module.exports = {
      */
   showTaskMangerView: function (req, res) {
     // console.log(req.param());
-    mongoService.Find("TaskFolder", null, function (records) {
-      // console.log('records:'+ records);
-      res.view('task/index', {data:records});
-    });
+    refreshTaskView(res);
   },
 
   /**
@@ -21,19 +18,14 @@ module.exports = {
    * @param res
      */
   addTask: function (req, res) {
-    console.log('req.body:'+JSON.stringify(req.body, null, 4));
+    // console.log('req.body:'+JSON.stringify(req.body, null, 4));
     var form = parseAddTaskBody(req.body);
     var taskForm = {Task_name:form.task_name, type:form.type, Schedule_ID:form.schedule_ID, Schedule_desc:form.schedule_desc};
     mongoService.Insert("TaskFolder", taskForm, function (records) {
       if (records){
         //sucess
         console.log('insert sucess');
-        console.log('insert records:'+JSON.stringify(records, null, 4));
         return res.send(records);
-        // mongoService.Find("TaskFolder", null, function (records) {
-        //   // res.view('task/index', {data:records});
-        //   return res.send('sucess');
-        // });
       }else {
         //fail
         console.log('insert fail');
@@ -67,23 +59,6 @@ module.exports = {
   },
 
   /**
-   * 删除task任务
-   * @param req
-   * @param res
-     */
-  deleteTask: function (req, res) {
-    console.log(req.body.taskId);
-    //根据taskId搜索task
-    mongoService.Delete('TaskFolder',{id:req.body.taskId}, function (records) {
-      if(records){
-        console.log("delete sucess %s", records);
-        // 跳转页面并显示
-        // res.view("task/groupDetailView", {data:records});
-      }
-    })
-  },
-
-  /**
    * 清空所有任务
    * @param req
    * @param res
@@ -99,6 +74,57 @@ module.exports = {
    * @param res
      */
   runTask: function (req, res) {
+    console.log(req.body);
+    //根据taskId搜索task
+    mongoService.Find('TaskFolder',{Task_name:req.body.Task_name}, function (records) {
+      if(records){
+
+        console.log(JSON.stringify(records, null, 4));
+        //使用records进行配置collection并运行
+
+        //成功运行之后返回成功信息
+        return res.send(records);
+
+      }
+    })
+  },
+  /**
+   * 删除task任务
+   * @param req
+   * @param res
+   */
+  deleteTask: function (req, res) {
+    mongoService.Delete('TaskFolder',{Task_name:req.body.Task_name});
+    mongoService.Find("TaskFolder", null, function (records) {
+      if(records){
+        return res.send(records);
+      }
+    })
+  },
+
+  /**
+   * 更新task, 向task的Cases数组中添加case
+   * @param req
+   * @param res
+     */
+  addCaseToTask: function (req, res) {
+
+  },
+
+  /**
+   * 更新task, 删除task的Cases数组中所有case
+   * @param req
+   * @param res
+     */
+  deleteAllCase: function (req, res) {
+
+  },
+  /**
+   * 更新task中Cases数组中case顺序
+   * @param req
+   * @param res
+     */
+  updateCasesOrder: function (req, res) {
 
   }
 };
@@ -141,4 +167,14 @@ function parseAddTaskBody(body) {
       break;
   }
   return form;
+}
+
+/**
+ * 刷新task页面
+ */
+function refreshTaskView(res) {
+  mongoService.Find("TaskFolder", null, function (records) {
+    // console.log('---------------find'+records);
+    res.view('task/index', {data:records});
+  })
 }
