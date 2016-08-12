@@ -1,0 +1,95 @@
+
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      <%-data.Task_name%>
+      <small>任务详情</small>
+      <!-- Button to trigger modal -->
+        <a href="#addTaskModal" role="button" class="btn btn-primary" data-toggle="modal">搜索用例</a>
+        <a id="deleteAll" role="button" class="btn btn-danger" data-toggle="modal" onclick="deleteAllCases()">删除全部用例</a>
+      <!-- Modal -->
+      <div id="addTaskModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header"><button class="close" type="button" data-dismiss="modal">&times;</button>
+                <h4 id="myModalLabel" class="modal-title">添加用例</h4>
+              </div>
+            <form id="form" method="POST" >
+              <div class="modal-body" style="height: 300px; width: 500px">
+                  <label style="font-size: 18px">搜索用例</label>
+                <div class="form-group form-inline">
+                  <input name="case_name " type="text" class="form-control" placeholder="用例名">
+                  <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                </div>
+              </div>
+            </form>
+
+            <div class="modal-footer">
+              <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
+              <button class="btn btn-primary" type="button"  id="saveBtn">添加</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </h1>
+    <ol class="breadcrumb">
+      <li class="active">
+        <i class="fa fa-tasks"></i> <%-data.Task_name%>
+      </li>
+    </ol>
+  </div>
+</div>
+ <!--/.row -->
+<div class="row">
+  <div class="col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> 用例列表</h3>
+      </div>
+      <div class="panel-body">
+        <div class="list-group">
+          <% if (data) { %>
+          <% var cases =data.Cases; cases.forEach(function(caseItem,index){ %>
+          <a href="#" class="list-group-item">
+            <span class="badge">index</span>
+            <i class="fa fa-fw fa-check"></i> caseItem.name
+          </a>
+          <% }) %>
+          <% } %>
+          <a href="#" class="list-group-item">
+            <span class="badge">just now</span>
+            <i class="fa fa-fw fa-check"></i> caseItem
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> 添加用例</h3>
+      </div>
+      <div class="col-lg-6">
+        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Action <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a >Action</a></li>
+          <li><a >Another action</a></li>
+          <li><a >Something else here</a></li>
+          <li class="divider"></li>
+          <li class="dropdown-submenu">
+            <a tabindex="0">More options</a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#">Something else here</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/xd-autotest-framework/js/index/frame-right.js"></script>
+<script src="/task/editTask.js"></script>
