@@ -3,7 +3,7 @@
   <ul class="nav navbar-nav side-nav">
     <li>
       <a data-toggle="collapse" onclick="showManagerTask()"> 任务管理 </a>
-
+      <% if (data) { %>
       <% data.forEach(function(record,index){ %>
     <li>
       <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#info' + index%>"><i class="fa fa-fw fa-arrows-v"></i> <%=record.Task_name%> <i
@@ -11,12 +11,13 @@
       <ul id="<%='info' + index%>" class="collapse">
         <% var cases = record.Cases; cases.forEach(function(caseItem,recordIndex){ %>
         <li>
-          <a href="javascript:void(0)" id="<%=caseItem.id%>" onclick="requestItem(this)"><%=caseItem.name%></a>
+          <a href="javascript:void(0)" id="<%=caseItem.id%>"><%=caseItem.name%></a>
         </li>
         <% }) %>
       </ul>
     </li>
     <% }) %>
+    <% } %>
     </li>
   </ul>
   <!-- Page Heading -->
@@ -28,7 +29,7 @@
           <small>任务列表</small>
           <!-- Button to trigger modal -->
           <a href="#addTaskModal" role="button" class="btn btn-primary" data-toggle="modal">添加任务</a>
-
+          <a id="deleteAll" role="button" class="btn btn-danger" data-toggle="modal" onclick="deleteAllTasks()">删除全部任务</a>
           <!-- Modal -->
           <div id="addTaskModal" class="modal fade" tabindex="-1">
             <div class="modal-dialog">
@@ -60,12 +61,11 @@
                       </select>
                     </div>
                   </div>
-
-                  <div class="modal-footer">
-                    <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
-                    <button class="btn btn-primary" type="button" id="saveBtn">添加</button>
-                  </div>
                 </form>
+                <div class="modal-footer">
+                  <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
+                  <button class="btn btn-primary" type="button"  id="saveBtn">添加</button>
+                </div>
               </div>
             </div>
           </div>
@@ -84,7 +84,7 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="table-responsive">
-              <table class="table table-bordered table-hover table-striped">
+              <table id="taskTable" class="table table-bordered table-hover table-striped">
 
                 <thead>
                 <tr>
@@ -96,7 +96,7 @@
                 </thead>
 
                 <tbody>
-
+                <% if (data) { %>
                 <% data.forEach(function(record,index){ %>
                 <tr>
                   <td ><%-record.Task_name%></td>
@@ -104,14 +104,14 @@
                   <td><%-record.Schedule_desc%></td>
                   <td><%-record.Schedule_ID%>
                     <div style="float: right">
-                      <button class="btn btn-primary" onclick="alert('运行')">运行</button>
-                      <button onclick="alert('编辑')">编辑</button>
-                      <button class="btn btn-danger" onclick="alert('删除')">删除</button>
+                      <button  class="btn btn-primary" onclick="alert('运行')">运行</button>
+                      <button name="<%-record.Task_name%>" class="btn btn-primary" onclick="showTaskDetailView(this.name)" >编辑</button>
+                      <button  class="btn btn-danger" onclick="alert('删除')">删除</button>
                     </div>
                   </td>
                 </tr>
                 <% }) %>
-
+                <% } %>
                 </tbody>
               </table>
             </div>

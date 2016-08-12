@@ -132,23 +132,20 @@ module.exports = {
     })
   },
 
+  /**
+   * 测试单个用例时的demo
+   * @param req
+   * @param res
+     */
   testCurrentCollection: function (req, res) {
     var reqBody = parseReqBody(req);
     console.log('item ---------------------------------------------------'+ reqBody);
-    //根据传入配置request
-    var request = RequestItemServices.configRequestItem(reqBody);
-    //配置前置脚本和后置脚本
-    var event = RequestItemServices.configEvent(reqBody);
-    //根据request配置item
-    var item = RequestItemServices.configItem(request, event);
 
-    var itemArr = [];
-    itemArr.push(item);
-
+    var item = RequestItemServices.creatItem(reqBody);
     Collection.findOne({name: "testCollection"}).exec(function (err, collection){
       //先取出本请求对应的 collection(task)
       //设置collection的item
-      collection.item = itemArr;
+      collection.item = [item];
       //根据collection对象生成能够进行测试的collection
       var collectionOBJ = CollectionServices.creatCollection(collection);
 
@@ -162,7 +159,6 @@ module.exports = {
         console.log('options -------------'+JSON.stringify(results));
         res.view('showdoc', {data:results});
       });
-
     })
   },
   showResponseOnView:function (req, res) {

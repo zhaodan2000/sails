@@ -2,6 +2,11 @@
  * Created by xiaodou_chenxiaoxiang on 16/8/9.
  */
 module.exports = {
+  /**
+   * 刷新task视图
+   * @param req
+   * @param res
+     */
   showTaskMangerView: function (req, res) {
     // console.log(req.param());
     mongoService.Find("TaskFolder", null, function (records) {
@@ -10,10 +15,11 @@ module.exports = {
     });
   },
 
-  runTask: function (req, res) {
-
-  },
-
+  /**
+   * 添加task任务
+   * @param req
+   * @param res
+     */
   addTask: function (req, res) {
     console.log('req.body:'+JSON.stringify(req.body, null, 4));
     var form = parseAddTaskBody(req.body);
@@ -22,9 +28,12 @@ module.exports = {
       if (records){
         //sucess
         console.log('insert sucess');
-        mongoService.Find("TaskFolder", null, function (records) {
-          res.view('task/index', {data:records});
-        });
+        console.log('insert records:'+JSON.stringify(records, null, 4));
+        return res.send(records);
+        // mongoService.Find("TaskFolder", null, function (records) {
+        //   // res.view('task/index', {data:records});
+        //   return res.send('sucess');
+        // });
       }else {
         //fail
         console.log('insert fail');
@@ -32,19 +41,73 @@ module.exports = {
     });
   },
 
+  /**
+   * 查找一个task任务
+   * @param req
+   * @param res
+     */
   selectTask: function (req, res) {
 
   },
 
+  /**
+   * 进入到编辑task页面
+   * @param req
+   * @param res
+     */
   editTask: function (req, res) {
-
+    console.log(req.param("Task_name"));
+    //根据taskId搜索task
+    mongoService.Find('TaskFolder',{Task_name:req.param("Task_name")}, function (records) {
+      if(records){
+        console.log("find sucess :"+JSON.stringify(records, null, 4));
+        res.view("task/groupDetailView", {data:records[0]});
+      }
+    })
   },
 
+  /**
+   * 删除task任务
+   * @param req
+   * @param res
+     */
   deleteTask: function (req, res) {
+    console.log(req.body.taskId);
+    //根据taskId搜索task
+    mongoService.Delete('TaskFolder',{id:req.body.taskId}, function (records) {
+      if(records){
+        console.log("delete sucess %s", records);
+        // 跳转页面并显示
+        // res.view("task/groupDetailView", {data:records});
+      }
+    })
+  },
+
+  /**
+   * 清空所有任务
+   * @param req
+   * @param res
+     */
+  deleteAllTasks: function (req, res) {
+    mongoService.Delete('TaskFolder', null);
+    res.view('task/index', {data:null});
+  },
+
+  /**
+   * run一个task
+   * @param req
+   * @param res
+     */
+  runTask: function (req, res) {
 
   }
 };
 
+/**
+ * 创建task时解析提交的表单数据
+ * @param body
+ * @returns {*}
+ */
 function parseAddTaskBody(body) {
   var form = body;
   form.schedule_ID = "";

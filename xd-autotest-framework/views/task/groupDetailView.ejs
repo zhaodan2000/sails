@@ -1,0 +1,89 @@
+
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      <%-data.Task_name%>
+      <small>任务详情</small>
+      <!-- Button to trigger modal -->
+        <a href="#addTaskModal" role="button" class="btn btn-primary" data-toggle="modal">搜索用例</a>
+        <a id="deleteAll" role="button" class="btn btn-danger" data-toggle="modal" onclick="deleteAllTasks()">删除全部用例</a>
+      <!-- Modal -->
+      <div id="addTaskModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+              <div class="modal-header"><button class="close" type="button" data-dismiss="modal">&times;</button>
+                <h4 id="myModalLabel" class="modal-title">添加用例</h4>
+              </div>
+
+            <form id="form" method="POST" >
+              <div class="modal-body" style="height: 300px; width: 500px">
+                  <label style="font-size: 18px">搜索用例</label>
+                <div class="form-group form-inline">
+                  <input name="case_name" type="text" class="form-control" placeholder="用例名">
+                  <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                </div>
+                <form class="form-search">
+                  <input type="text" class="input-medium search-query">
+                  <button type="submit" class="btn">Search</button>
+                </form>
+              </div>
+            </form>
+
+            <div class="modal-footer">
+              <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
+              <button class="btn btn-primary" type="button"  id="saveBtn">添加</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </h1>
+    <ol class="breadcrumb">
+      <li class="active">
+        <i class="fa fa-tasks"></i> <%-data.Task_name%>
+      </li>
+    </ol>
+  </div>
+</div>
+ <!--/.row -->
+<div class="row">
+  <div class="col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table id="taskTable" class="table table-bordered table-hover table-striped">
+
+            <thead>
+            <tr>
+              <th>用例</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% if (data) { %>
+            <% var cases =data.Cases; cases.forEach(function(caseItem,index){ %>
+            <tr>
+              <td ><%-caseItem.name%></td>
+
+              <td>
+                <div style="float: right">
+                  <button  class="btn btn-danger" onclick="alert('删除')">删除</button>
+                </div>
+              </td>
+            </tr>
+            <% }) %>
+            <% } %>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-right">
+          <a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/xd-autotest-framework/js/index/frame-right.js"></script>
+<script src="/task/task.js"></script>
