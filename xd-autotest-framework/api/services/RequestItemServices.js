@@ -7,6 +7,10 @@ require('../utils/string');
 
 module.exports = {
 
+  creatItem: function (obj) {
+    return this.configItem(this.configRequestItem(obj), this.configEvent(obj));
+  },
+
   configEvent: function (item) {
     //配置前置脚本和后置脚本 ----- 根据item是不是输入了文本来判断是否添加脚本
     // RequestItemServices.

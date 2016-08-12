@@ -8,7 +8,7 @@
 var formidable = require('formidable');
 var http = require('http');
 var util = require('util');
-var request = require('request');
+// var request = require('request');
 
 module.exports = {
   findRequestItemByID:function (req,res) {

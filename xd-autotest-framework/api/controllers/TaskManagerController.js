@@ -56,16 +56,14 @@ module.exports = {
    * @param res
      */
   editTask: function (req, res) {
-    console.log(req.body.taskId);
+    console.log(req.param("Task_name"));
     //根据taskId搜索task
-    mongoService.Find('TaskFolder',{id:req.body.taskId}, function (records) {
+    mongoService.Find('TaskFolder',{Task_name:req.param("Task_name")}, function (records) {
       if(records){
-        console.log("find sucess %s", records);
-        // 跳转页面并显示
-        // res.view("task/groupDetailView", {data:records});
+        console.log("find sucess :"+JSON.stringify(records, null, 4));
+        res.view("task/groupDetailView", {data:records[0]});
       }
     })
-
   },
 
   /**
