@@ -120,5 +120,42 @@ module.exports = {
     //   res.ok();
     // });
   },
+  addtestcase:function (req,res) {
+
+    // for(var key in req.body){
+    //   console.log("key" + key);
+    //   console.log("value" + req.body[key]);
+    // }
+
+    var item = {headers:{},queryParam:{}};
+    for(var key in req.body){
+      var re_header = new RegExp(/^header/);
+      var flag_header = key.match(re_header);
+      var re_queryParam = new RegExp(/^queryParam/);
+      var flag_queryParam = key.match(re_queryParam);
+      var headers = "headers";
+      var queryParam = "queryParam";
+      if (flag_header){
+        var headerkey = key.substring(6);
+        item[headers][headerkey] = req.body[key];
+      }
+      else if(flag_queryParam){
+        var queryParamkey = key.substring(10);
+        item[queryParam][queryParamkey] = req.body[key];
+      }else if(key == "disabled"){
+        if (req.body[key] == "YES"){
+          item[key] = true;
+        }else {
+          item[key] = false;
+        }
+      }else {
+        item[key] = req.body[key];
+      }
+    }
+
+    mongoService.Insert('RequestItem',item,function (record) {
+      console.log(record);
+    })
+  },
 };
 

@@ -24,16 +24,29 @@ $(document).ready(function () {
       alert('This request had been stored into DB!')
     }
   };
+  var option_submit = {
+    success:function (data) {
+      console.log('+++++++++++++++' + data);
+    }
+  };
 
   // ajaxSubmit 
+  //运行事件
   $("#runBtn").click(function () {
     console.log("ok");
     $("#form").ajaxSubmit(option_run);
   });
 
+  //保存事件
   $("#saveBtn").click(function () {
     console.log("ok");
     $("#form").ajaxSubmit(option_save);
+  });
+
+  //提交增加的用例
+  $("#submitBtn").click(function () {
+    console.log("ok");
+    $("#formModel").ajaxSubmit(option_submit);
   });
 });
 
@@ -89,41 +102,6 @@ function getImgURL(node) {
   alert(textHtml);
   $(".mark").after(textHtml);
   return imgURL;
-}
-
-function showpath(obj) {
-  var url = getPath(document.getElementById(uploadfile));
-
-  function getPath(obj) {
-    if (obj) {
-      if
-      (window.navigator.userAgent.indexOf("MSIE") >= 1) {
-        obj.select();
-        console.log(document.selection.createRange().text);
-      } else if
-      (window.navigator.userAgent.indexOf("Firefox") >= 1) {
-        if (obj.files) {
-          return console.log(obj.files.item(0).getAsDataURL());
-        }
-        return console.log(obj.value);
-      }
-      return console.log(obj.value);
-    }
-  }
-
-  console.log($('input[type="file"]').val());
-  var imgURL = "";
-  var file = null;
-  if (node.files && node.files[0]) {
-    file = node.files[0];
-  } else if (node.files && node.files.item(0)) {
-    file = node.files.item(0);
-  }
-
-  //这种获取方式支持IE10
-  node.select();
-  imgURL = document.selection.createRange().text;
-  console.log(imgURL);
 }
 
 function addFile(serverId) {
