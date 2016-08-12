@@ -149,12 +149,14 @@ module.exports = {
           item[key] = false;
         }
       }else {
+        console.log(key);
         item[key] = req.body[key];
       }
     }
 
     mongoService.Insert('RequestItem',item,function (record) {
       console.log(record);
+      return res.ok();
     })
   },
 };
