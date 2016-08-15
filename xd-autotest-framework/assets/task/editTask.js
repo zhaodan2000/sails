@@ -16,8 +16,15 @@ function selectedCaseWithName(caseName) {
   })
 }
 
-function updateOrderForCases(caseArray) {
-  $.post("/TaskManager/updateCasesOrder", {caseArray:caseArray}, function (result) {
+function addCaseToTask(item) {
+  console.log(JSON.stringify(item.item, null, 4));
+  console.log('-----'+item);
+  // console.log(item);
+  $.post("/TaskManager/addCaseToTask", {item:item}, function (result) {
     //根据result判断是否更新成功
   })
+}
+
+function updateOrderForCases(caseName) {
+
 }
