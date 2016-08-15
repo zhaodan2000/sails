@@ -118,10 +118,8 @@ module.exports = {
      */
   addCaseToTask: function (req, res) {
     // var ObjectId = require('mongodb').ObjectID;
-
     var item = req.param("item");
     console.log(JSON.stringify(item, null, 4));
-
     mongoService.Find("RequestItem", { name:item.itemName}, function (requestItem) {
       if(requestItem){
         console.log("requestItem:"+JSON.stringify(requestItem, null, 4));
