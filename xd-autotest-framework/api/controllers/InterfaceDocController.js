@@ -82,7 +82,6 @@ module.exports = {
         _doc={retcode:-1, retdesc:"find failed..",data:records};
       }
     });
-
     res.send(_doc);
   },
 
@@ -92,10 +91,38 @@ module.exports = {
   saveDoc2db: function(req,res){
     console.log("\r\nreq.body is:")
     console.log(req.body);
-    var filename=req.body.filename;
-    var requestItem=JSON.parse(req.body.reqItem);
-    //var requestItem=jQuery.parseJSON(req.body.reqItem);
+    var API_doc=req.body.api_doc;
+    var API_items=req.body.api_items;
 
+    /**创建API_doc与api_docitems */
+    if(!API_doc.id){
+      mongoService.Insert('APIdoc',API_doc,function(records){
+        var inserted_doc=records;
+        console.log("+++++++"+JSON.stringify(inserted_doc));
+        for(var i=0;i<API_items.length;i++) {
+          API_items[i].APIdocID=inserted_doc.id;
+          mongoService.Insert('APIdocitem',API_items[i],function(records){
+            console.log(records);
+            res.send(records);
+          });
+        }
+      });
+    }else{/**查找 **/
+      mongoService.Update('APIdoc',API_doc,null,function(records){
+          console.log(records);
+      });
+
+      for(var i=0;i<API_items.length;i++) {
+        API_items[i].APIdocID=API_doc.id;
+        mongoService.Insert('APIdocitem',API_items[i],function(records){
+          console.log(records);
+          res.send(records);
+        });
+      }
+    }
+
+
+    /***
     console.log("\r\nJSON.parse(req.body.reqItem) is:");
     console.log(requestItem);
 
@@ -168,6 +195,8 @@ module.exports = {
     });
 
     res.send(_docs);
+
+     ***/
 
   },
 

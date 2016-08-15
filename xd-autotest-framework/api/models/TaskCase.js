@@ -20,7 +20,7 @@ module.exports = {
       type: 'string',
       required: true,
       minLength: 1,
-      unique:false,
+      unique:true,
       maxLength: 60
     },
 

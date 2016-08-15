@@ -13,7 +13,10 @@ module.exports = {
     res.view('overview/index');
   },
   doc: function(req, res) {
-    res.view('doc/APIdoc');
+    mongoService.Find("ReqFolder",null,function (records) {
+      console.log(records);
+      res.view('doc/APIdoc',{data:records});
+    });
   },
   task: function(req, res) {
     mongoService.Find("TaskFolder", null, function (records) {

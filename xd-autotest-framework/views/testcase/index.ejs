@@ -19,8 +19,8 @@
     </li>
     <% data.forEach(function(record,index){ %>
     <li>
-      <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#info' + index%>" style="display:block"><i class="fa fa-fw fa-arrows-v"></i> <%=record.name%> <i
-          class="fa fa-fw fa-caret-up"></i></a>
+      <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#info' + index%>" style="display:block">
+        <i class="fa fa-fw fa-arrows-v"></i> <%=record.name%> <i class="fa fa-fw fa-caret-up"></i></a>
       <ul id="<%='info' + index%>" class="collapse">
         <li>
           <%record.ReqItems.forEach(function (reqItem,i) {%>

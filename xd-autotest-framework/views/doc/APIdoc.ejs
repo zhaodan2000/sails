@@ -10,36 +10,21 @@
 
   $('#addAPIbutton').click(function(){
 
-    /**
-     <li id="api_template">
-     <i class="fa fa-edit" id="apiTitle">接口</i>
-     <div class="form-group">
-     <label>接口名</label>
-     <input class="form-control" id="apiTitle_value" />
-     </div>
-     <div class="form-group">
-     <label>URL</label>
-     <input class="form-control" placeholder="Enter text" id="apiURL_value" />
-     </div>
-     </li>
-     *
-     */
-
     var testItem=$("li#api_template").clone(true);
-    var siblings_length=$("ol#APIs").children('li').length;
-    console.log('siblings_length=%d',siblings_length);
-    testItem.find('input#apiTitle_value').attr("id","apiTitle_"+siblings_length);
-    testItem.find('input#apiURL_value').attr("id","apiURL_"+siblings_length);
-    testItem.attr('id','api_'+siblings_length);
+    var apis_count=$("ol#APIs").children('li').length;
+    console.log('apis_count=%d',apis_count);
+    testItem.find('input#apiTitle_value').attr("id","apiTitle_"+apis_count);
+    testItem.find('input#apiURL_value').attr("id","apiURL_"+apis_count);
+    testItem.attr('id','api_'+apis_count);
+    testItem.attr('style',"display:");
     console.log(testItem);
     $('ol#APIs').prepend(testItem);
     console.log("完成咯~");
     /**
-    for(var i=0;i<siblings_length;i++){
+    for(var i=0;i<apis_count;i++){
   }**/
 
   });
-
 
   $('#find_docItem').click(function(){
     $.ajax({
@@ -148,7 +133,7 @@
    * 将用户的输入存md文件中。
    * */
   $('#save_doc').click(function() {
-    var file_name = $('#md_filename').val()+'.md';
+    var file_name = $('h1#docName').val()+'.md';
     var file_content = $('#md_filecontent').val();
     var param={'filename':file_name, 'filecontent':file_content};
     var queryString=JSON.parse(JSON.stringify(param));
@@ -174,16 +159,33 @@
    * 将用户的输入存入doc与docItem中。
    * */
   $('#save_doc_2_db').click(function(){
-    var file_name = $('#md_filename').val()+'.md';
-    var requestItemValue=$('textarea#textarea_requestItem').val();
-    var _json={filename:file_name, reqItem:requestItemValue};
+    /** 创建文档对象 **/
+    var file_name = $('input#docName').val()+'.md';
+    var doc_desc=$('input#docdesc').val();
+    var test_env=$('input#testenv').val();
+    var test_env_port=$('input#testenv_port').val();
+    var doc={id:"",name:file_name, testEnv:test_env, testEnvPort:test_env_port, docDesc:doc_desc};
+
+    /** 创建接口对象数组 **/
+    var apis_count=$("ol#APIs").children("li[id!='api_template']").length;
+    var apis=$("ol#APIs").children("li[id!='api_template']").clone();
+    var apiArray = new Array();
+    apiArray=$("ol#APIs").children("li[id!='api_template']").clone();
+    for(var i=0;i<apis_count;i++){
+      apiArray[i].find("input[name='api'").val();
+      var api_name=apis[i].clone().find('input[name="api"').val();
+      var api_url=apis[i].clone().find('input[name="URL"').val();
+      apiArray[i]={name:api_name, url:api_url, APIdocID:""};
+    }
+
+    var _jsonParam={api_doc:doc,api_items:apiArray};
 
     $.ajax({
       url:'/doc/savedocwithItem',
       method:"Post",
       dataType:"json",
       contentType: "application/json;charset=utf-8",
-      data: JSON.stringify(_json),
+      data: JSON.stringify(_jsonParam),
       success:function(data){
         $('textarea#textarea_response').val(JSON.stringify(data, null, "\t"));
       },
@@ -195,7 +197,7 @@
   });
 
   $('#find_doc').click(function(){
-    var queryString=$('#md_filename').val()+'.md';
+    var queryString=$('#docName').val()+'.md';
     console.log(queryString);
 
     $.ajax({
@@ -222,7 +224,7 @@
   });
 
   $('#create_doc').click(function(){
-    var queryString=$('#md_filename').val()+'.md';
+    var queryString=$('#docName').val()+'.md';
     console.log(queryString);
 
     $.ajax({
@@ -251,45 +253,70 @@
 
 </script>
 
+<!--左边目录 --->
+<ul class="nav navbar-nav side-nav">
+  <li>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" id="addtestcase" style="width: 225px;height: auto">添加用例</button>
+  </li>
+  <li>
+    <a href="javascript:void(0)" data-toggle="collapse" data-target="#test_1" style="display:block">
+      <i class="fa fa-fw fa-arrows-v"></i> 一级目录?<i class="fa fa-fw fa-caret-up"></i>
+    </a>
+    <ul data-toggle="collapse" id="test_1">
+      <li>
+        <a href="javascript:void(0)"  id="test123" >二级目录??</a>
+      </li>
+      <li>
+        <a href="javascript:void(0)"  id="test1234" >二级目录??</a>
+      </li>
+    </ul>
+  </li>
 
+</ul>
+
+<!--右边文档内容-->
+<div id="page-wrapper-right" aria-hidden="false" class="right-operation">
 <!-- Page Heading -->
-<div class="row">
+<div class="row" >
   <div class="col-lg-12">
-    <h1 class="page-header">
+    <h1 class="page-header" id="docName">
       业务接口文档
     </h1>
-
     <ol class="breadcrumb">
       <li>
-        <i class="fa fa-dashboard"></i>  测试环境
-        <a href="index.html">192.168.103.101</a>
+        <i class="fa fa-dashboard"></i>  文档描述
+        <input id="docdesc" value="暂无文档描述" />
       </li>
-      <li class="active">
-        <i class="fa fa-edit"></i> 端口号
-        <a href="index.html">具体接口端口号不同</a>
+      <li>
+        <i class="fa fa-dashboard"></i>  测试环境
+        <input id="testenv" value="192.168.103.101" />
+      </li>
+      <li class="inactive">
+        <!--<i class="fa fa-edit"></i> 端口号 -->
+        <i class="fa fa-dashboard"></i> 端口号
+        <input id="testenv_port" value="具体接口端口号不同" />
       </li>
     </ol>
   </div>
 </div>
-<!-- /.row -->
 
-<div class="row">
+<div class="row" >
   <div class="col-lg-6">
     <form role="form">
       <ol id="APIs">
         <li id="api_1">
-          <i class="fa fa-edit" id="api_1_apiTitle">登录接口</i>
+          <i class="fa fa-edit" id="api_1_apiTitle">接口</i>
           <div >
             <label>接口名</label>
             <input id="api_1_apiTitleValue" class="form-control" />
           </div>
           <div class="form-group">
             <label>URL</label>
-            <input class="form-control" placeholder="Enter text">
+            <input class="form-control" placeholder="Enter text" name="">
           </div>
-          <div class="form-group">
+          <div class="form-group" >
             <label>输入完整的requestItem json格式的字符串内容:</label>
-            <textarea id="textarea_requestItem" class="form-control" placeholder="Enter text" rows="25" >{
+            <textarea id="textarea_requestItem" class="form-control" style="visibility:hidden" placeholder="Enter text" rows="2" >{
     "id":"6",
     "dev":"lidehong",
     "disabled":false,
@@ -316,17 +343,28 @@
           </div>
         </li>
         <li id="api_2">
-          <i class="fa fa-edit" id="home_api">首页接口</i>
+          <i class="fa fa-edit" id="home_api">接口</i>
           <div class="form-group">
             <label>接口名</label>
-            <input class="form-control">
+            <input class="form-control" name="api">
           </div>
           <div class="form-group">
             <label>URL</label>
-            <input class="form-control" placeholder="Enter text" />
+            <input class="form-control" placeholder="Enter text" name="URL"/>
           </div>
         </li>
-        <li id="api_template">
+        <li id="api_3">
+          <i class="fa fa-edit" id="">接口</i>
+          <div class="form-group">
+            <label>接口名</label>
+            <input class="form-control" id="test_api" />
+          </div>
+          <div class="form-group">
+            <label>URL</label>
+            <input class="form-control" placeholder="Enter text" id="apiURL_value" />
+          </div>
+        </li>
+        <li id="api_template" style="display: none">
           <i class="fa fa-edit" id="apiTitle">接口</i>
           <div class="form-group">
             <label>接口名</label>
@@ -337,24 +375,11 @@
             <input class="form-control" placeholder="Enter text" id="apiURL_value" />
           </div>
         </li>
-        <li id="doc_node">
-          <i class="fa fa-edit" id="">文档属性</i>
-          <div class="form-group">
-            <label>文档名(不需要含.md后缀)</label>
-            <input class="form-control" id="md_filename" />
-            <label>文档内容(添加/追加)</label>
-            <input class="form-control" id="md_filecontent" />
-          </div>
-          <div class="form-group">
-            <label>URL</label>
-            <input class="form-control" placeholder="Enter text" id="apiURL_value" />
-          </div>
-        </li>
+
       </ol>
     </form>
   </div>
 </div>
-
 
 <div class="row">
   <div class="col-lg-6">
@@ -366,36 +391,8 @@
       <div class="btn btn-default" id="showMdFile">展示md文件</div>
       <div class="btn btn-default" id="addAPIbutton">增加API接口</div>
       <div class="btn btn-default" id="save_doc_2_db">保存文档2db</div>
-        <!--<button id="save_doc" name="save_doc_btn" text="无样式">查询ReqItem</button>-->
-      <div class="btn btn-default" text="主要效果" id="save_doc" >保存文档</div>
-
-      <div class="btn btn-default" type="button" id="findReqItem" name="test_finddb"
-             text="默认效果">查询ReqItem</div>
-        <div class="btn btn-default" type="button" id="test_insertrequestitem" name="test_insertdb"
-             text="默认效果">添加ReqItem记录</div>
-        <div id="delete_reqItemTable" class="btn btn-primary" text="主要效果">清空reqItem表</div>
-        <div class="btn btn-default" disabled="false">默认失效</div>
-        <div class="btn btn-primary" disabled="true">主要失效</div>
-      <!--  fieldset 换行效果置灰效果
-      <fieldset disabled>
-          <div class="btn btn-default">默认失效</div>
-          <div class="btn btn-primary">主要失效</div>
-        </fieldset>
-     -->
-
-
+      <div class="btn btn-default" text="主要效果" id="save_doc">保存文档</div>
     </form>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-lg-6">
-    <form role="form">
-      <div class="btn btn-default" id="find_doc">查询doc</div>
-      <div class="btn btn-default" id="create_doc">添加doc</div>
-      <div class="btn btn-default" id="find_docItem">查询docItem</div>
-      <div class="btn btn-default" id="create_docItem">添加docItem</div>
-     </form>
   </div>
 </div>
 
@@ -410,4 +407,4 @@
   </div>
 </div>
 
-
+</div>
