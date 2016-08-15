@@ -17,7 +17,7 @@ module.exports = {
     },
     name:{
       type:'string',
-      unique:false,
+      unique:true,
       required:true
     },
     desc:{

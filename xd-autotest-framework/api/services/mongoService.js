@@ -136,7 +136,33 @@ module.exports={
           }
         });
         break;
-
+      case "ReqFolder":
+        ReqFolder.destroy(dic).exec(function(err){
+          if (!err) {
+            console.log("destroy records success!");
+          } else {
+            console.log("destroy records failure!");
+          }
+        });
+        break;
+      case "APIdoc":
+        APIdoc.destroy(dic).exec(function(err){
+          if (!err) {
+            console.log("destroy records success!");
+          } else {
+            console.log("destroy records failure!");
+          }
+        });
+        break;
+      case "APIdocitem":
+        APIdoc.destroy(dic).exec(function(err){
+          if (!err) {
+            console.log("destroy records success!");
+          } else {
+            console.log("destroy records failure!");
+          }
+        });
+        break;
       default:
         break;
     }
