@@ -18,13 +18,14 @@ $(document).ready(function () {
     success: function(data) {
       // console.log('+++++++++++++++'+data);
       //刷新页面之后后出现遮罩
-      // $.main.refreshMain("/TaskManager/showTaskMangerView");
+      $.main.refreshMain("/TaskManager/showTaskMangerView");
       }
   };
 
   //ajaxSubmit 
   $("#saveBtn").click(function () {
     $('#addTaskModal').modal('hide');
+    $(".modal-backdrop").hide();
     $("#form").ajaxSubmit(option_save);
   });
 });

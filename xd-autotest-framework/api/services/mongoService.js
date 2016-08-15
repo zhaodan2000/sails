@@ -54,47 +54,48 @@ module.exports={
    * @param dic 为查找的条件,字典。
    * @param callback 将查找的结果以回调函数传回。
    * */
-  Find:function(modelType, dic, callback){
-    switch(modelType){
-      case "TaskFolder":
-        TaskFolder.find(dic).populate('Cases').exec(function(err,populated){
-          if(!err){
-            console.log("populated records:");
-            console.log(populated);
-            callback(populated);
-          }else{
-            console.log("populated failure...");
-            callback(null);
-          }
-        });
-        break;
-      case "TaskCase":
-        TaskCase.find(dic).exec(function (err,records) {
-          if (!err) {
-            console.log("find records success!");
-            callback(records);
-          } else {
-            console.log("find records failure!");
-            callback(null);
-          }
-        });
-        break;
-      case "RequestItem":
-        RequestItem.find(dic).exec(function(err,records){
-          if (!err) {
-            console.log("find records success!");
-            callback(records);
-          } else {
-            console.log("find records failure!");
-            callback(null);
-          }
-        });
-        break;
-
-      default:
-        break;
-    }
-  },
+  // Find:function(modelType, dic, callback){
+  //   switch(modelType){
+  //     case "TaskFolder":
+  //       TaskFolder.find(dic).populate('Cases').exec(function(err,populated){
+  //         if(!err){
+  //           console.log("populated records:");
+  //           console.log(populated);
+  //           callback(populated);
+  //         }else{
+  //           console.log("populated failure...");
+  //           callback(null);
+  //         }
+  //       });
+  //       break;
+  //     case "TaskCase":
+  //       TaskCase.find(dic).exec(function (err,records) {
+  //         if (!err) {
+  //           console.log("find records success!");
+  //           callback(records);
+  //         } else {
+  //           console.log("find records failure!");
+  //           callback(null);
+  //         }
+  //       });
+  //       break;
+  //     case "RequestItem":
+  //       RequestItem.find(dic).exec(function(err,records){
+  //         if (!err) {
+  //           console.log("find records success!");
+  //           console.log(records);
+  //           callback(records);
+  //         } else {
+  //           console.log("find records failure!");
+  //           callback(null);
+  //         }
+  //       });
+  //       break;
+  //
+  //     default:
+  //       break;
+  //   }
+  // },
 
   /**
    * 根据传入的model类型,以及查找的条件,
@@ -427,6 +428,7 @@ module.exports={
         RequestItem.find(dic).exec(function(err,records){
           if (!err) {
             console.log("find %s records success!", modelType);
+            // console.log(records);
             callback(records);
           } else {
             console.log("find %s records failure!", modelType);
