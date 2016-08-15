@@ -7,7 +7,7 @@
       </div>
     </li>
     <li style="height: 49px">
-      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal1" id="addtestcasecollection" style="width: 225px;height: 34px">添加用例集合</button>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalForCollect" id="addtestcasecollection" style="width: 225px;height: 34px">添加用例集合</button>
     </li>
     <li>
       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" id="addtestcase" style="width: 225px;height: auto">添加用例</button>
@@ -217,7 +217,7 @@
   </div>
 
   <!-- 模态框添加用例集合（Modal） -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+  <div class="modal fade" id="myModalForCollect" tabindex="-1" role="dialog"
        aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -230,12 +230,17 @@
             添加用例集合
           </h4>
         </div>
-        <form id="formModel" class="form-inline" action="/ShowDoc/addtestcase" method="POST">
+        <form id="formModelForCollect" class="form-inline" action="/ShowDoc/addtestcasecollect" method="POST">
+          <div class="modal-body">
+            <h2>用例集合名</h2>
+            <label style="width: 200px">用例集合名</label>
+            <input name="name" type="text"/>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default"
                     data-dismiss="modal">关闭
             </button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitBtn">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitcollect">
               提交用例集合
             </button>
           </div>

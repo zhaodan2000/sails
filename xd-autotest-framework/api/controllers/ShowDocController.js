@@ -120,13 +120,9 @@ module.exports = {
     //   res.ok();
     // });
   },
+
+  //增加用例
   addtestcase:function (req,res) {
-
-    // for(var key in req.body){
-    //   console.log("key" + key);
-    //   console.log("value" + req.body[key]);
-    // }
-
     var item = {headers:{},queryParam:{}};
     for(var key in req.body){
       var re_header = new RegExp(/^header/);
@@ -159,5 +155,14 @@ module.exports = {
       return res.ok();
     })
   },
+
+  //增加用例集合
+  addtestcasecollect:function (req,res) {
+    console.log(req.param('name'));
+    mongoService.Insert('ReqFolder',{name:req.param('name')},function (record) {
+      console.log(record);
+      return res.ok();
+    })
+  }
 };
 

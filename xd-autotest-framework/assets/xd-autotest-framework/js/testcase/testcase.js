@@ -31,6 +31,13 @@ $(document).ready(function () {
     }
   };
 
+  var option_submitForCollect = {
+    success:function (data) {
+      $.main.refreshMain("/Home/testcase");
+      console.log('+++++++++++++++' + data);
+    }
+  };
+
   // ajaxSubmit 
   //运行事件
   $("#runBtn").click(function () {
@@ -49,6 +56,13 @@ $(document).ready(function () {
     $('#myModal').modal('hide');
     console.log("ok");
     $("#formModel").ajaxSubmit(option_submit);
+  });
+
+  //增加用例集合
+  $("#submitcollect").click(function () {
+    $('#myModal').modal('hide');
+    console.log("ok");
+    $("#formModelForCollect").ajaxSubmit(option_submitForCollect);
   });
 });
 
