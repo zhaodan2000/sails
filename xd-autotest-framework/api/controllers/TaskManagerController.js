@@ -50,10 +50,18 @@ module.exports = {
   editTask: function (req, res) {
     console.log(req.param("Task_name"));
     //根据taskId搜索task
-    mongoService.Find('TaskFolder',{Task_name:req.param("Task_name")}, function (records) {
-      if(records){
-        console.log("find sucess :"+JSON.stringify(records, null, 4));
-        res.view("task/groupDetailView", {data:records[0]});
+    mongoService.Find('TaskFolder',{Task_name:req.param("Task_name")}, function (taskdatas) {
+      if(taskdatas){
+        console.log("find sucess :"+JSON.stringify(taskdatas, null, 4));
+
+        //搜索全部的用例显示在左边
+        mongoService.Find('ReqFolder',null, function (requestsdata) {
+          if(requestsdata){
+            console.log('all requests:'+JSON.stringify(requestsdata, null, 4));
+            res.view("task/groupDetailView", {data:taskdatas[0], reqs:requestsdata});
+          }
+        })
+
       }
     })
   },
