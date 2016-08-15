@@ -1,6 +1,7 @@
 /**
  * Created by xiaodou_chenxiaoxiang on 16/7/28.
  */
+
 /**
  * Interface.js
  *
@@ -25,7 +26,7 @@ module.exports = {
       type: 'string',
       required: true,
       minLength: 1,
-      // unique:true,
+      unique:true,
       maxLength: 60
     },
 

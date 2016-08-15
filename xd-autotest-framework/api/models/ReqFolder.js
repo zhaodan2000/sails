@@ -17,8 +17,8 @@ module.exports = {
     },
     name:{
       type:'string',
-      unique:false,
-      required:true
+      unique:true,
+      required:false
     },
     desc:{
       type:'string',
@@ -30,7 +30,6 @@ module.exports = {
       collection:'RequestItem',
       via:'ReqFolderID'
     }
-
   }
 };
 

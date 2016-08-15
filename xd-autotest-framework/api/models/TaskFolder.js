@@ -17,7 +17,7 @@ module.exports = {
     },
     Task_name:{
       type:'string',
-      unique:false,
+      unique:true,
       required:true
     },
     Task_desc:{
