@@ -70,24 +70,43 @@
       <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> 添加用例</h3>
       </div>
-      <div class="col-lg-6">
-        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Action <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <li><a >Action</a></li>
-          <li><a >Another action</a></li>
-          <li><a >Something else here</a></li>
-          <li class="divider"></li>
-          <li class="dropdown-submenu">
-            <a tabindex="0">More options</a>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="#">Something else here</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
+      <div class="col-lg-12 btn-toolbar" style="margin: 0;">
+        <% if(reqs) { %>
+        <% reqs.forEach(function (folderItem, index) { %>
+        <div class="btn-group">
+          <button class="btn btn-mini dropdown-toggle  btn-info" data-toggle="dropdown"><%-folderItem.name%> <span class="caret"></span></button>
+          <ul class="dropdown-menu pull-right">
+            <% if(folderItem.ReqItems) {%>
+            <% var items = folderItem.ReqItems; items.forEach(function (item, index) {%>
+            <li><a ><%- item.name%></a></li>
+            <% })%>
+            <% } %>
+          </ul>
+        </div>
+        <% }) %>
+        <% } %>
       </div>
     </div>
+    <!--<div class="bs-docs-example col-lg-12">-->
+      <!--<div class="tabbable tabs-left">-->
+        <!--<ul class="nav nav-tabs">-->
+          <!--<li class="active"><a href="#lA" data-toggle="tab">Section 1</a></li>-->
+          <!--<li><a href="#lB" data-toggle="tab">Section 2</a></li>-->
+          <!--<li><a href="#lC" data-toggle="tab">Section 3</a></li>-->
+        <!--</ul>-->
+        <!--<div class="tab-content">-->
+          <!--<div class="tab-pane active" id="lA">-->
+            <!--<p>I'm in Section A.</p>-->
+          <!--</div>-->
+          <!--<div class="tab-pane" id="lB">-->
+            <!--<p>Howdy, I'm in Section B.</p>-->
+          <!--</div>-->
+          <!--<div class="tab-pane" id="lC">-->
+            <!--<p>What up girl, this is Section C.</p>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div> &lt;!&ndash; /tabbable &ndash;&gt;-->
+    <!--</div>-->
   </div>
 </div>
 
