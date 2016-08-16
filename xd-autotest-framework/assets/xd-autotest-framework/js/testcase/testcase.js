@@ -3,7 +3,7 @@
  */
 //刷新右边页面
 function requestItem(data) {
-  $.main.refreshRight("/ShowDoc/findRequestItemByID", {data: {id: data.id}});
+  $.main.refreshRight("/ShowDoc/findRequestItemByID", {data: {name: data.id}});
 }
 
 //运行与保存
@@ -27,28 +27,38 @@ $(document).ready(function () {
   var option_submit = {
     success:function (data) {
       $.main.refreshMain("/Home/testcase");
-      console.log('+++++++++++++++' + data);
+    }
+  };
+
+  var option_submitForCollect = {
+    success:function (data) {
+      $.main.refreshMain("/Home/testcase");
     }
   };
 
   // ajaxSubmit 
   //运行事件
   $("#runBtn").click(function () {
-    console.log("ok");
     $("#form").ajaxSubmit(option_run);
   });
 
   //保存事件
   $("#saveBtn").click(function () {
-    console.log("ok");
     $("#form").ajaxSubmit(option_save);
   });
 
   //提交增加的用例
   $("#submitBtn").click(function () {
     $('#myModal').modal('hide');
-    console.log("ok");
+    $(".modal-backdrop").hide();
     $("#formModel").ajaxSubmit(option_submit);
+  });
+
+  //增加用例集合
+  $("#submitcollect").click(function () {
+    $('#myModal').modal('hide');
+    $(".modal-backdrop").hide();
+    $("#formModelForCollect").ajaxSubmit(option_submitForCollect);
   });
 });
 
