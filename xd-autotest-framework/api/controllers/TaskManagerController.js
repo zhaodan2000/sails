@@ -21,7 +21,7 @@ module.exports = {
   addTask: function (req, res) {
     // console.log('req.body:'+JSON.stringify(req.body, null, 4));
     var form = parseAddTaskBody(req.body);
-    var taskForm = {Task_name:form.task_name, type:form.type, Schedule_ID:form.schedule_ID, Schedule_desc:form.schedule_desc};
+    var taskForm = {Task_name:form.task_name, type:form.type, Schedule_ID:form.Schedule_ID, Schedule_desc:form.schedule_desc};
     mongoService.Insert("TaskFolder", taskForm, function (records) {
       if (records){
         //sucess
@@ -166,25 +166,25 @@ module.exports = {
  */
 function parseAddTaskBody(body) {
   var form = body;
-  form.schedule_ID = "";
+  form.Schedule_ID = "";
   console.log(body.schedule_desc);
   switch(body.schedule_desc){
     case '不会自动执行任务脚本':
-      form.schedule_ID = "1";
+      form.Schedule_ID = "1";
       break;
     case '每天07:30执行任务脚本':
-      form.schedule_ID = "2";
+      form.Schedule_ID = "2";
       break;
     case '每周日22：30执行任务':
-      form.schedule_ID = "3";
+      form.Schedule_ID = "3";
       break;
     case '每周周一到周五21:00执行任务脚本':
-      form.schedule_ID = "4";
+      form.Schedule_ID = "4";
       break;
     default:
       break;
   }
-  console.log('form.schedule_ID' +form.schedule_ID);
+  console.log('form.Schedule_ID' +form.Schedule_ID);
 
   switch(body.type_desc){
     case 'group':

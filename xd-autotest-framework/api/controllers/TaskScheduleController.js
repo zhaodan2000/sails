@@ -15,7 +15,7 @@ module.exports = {
       if(folders){
         var folder = folders[0];
         console.log(JSON.stringify(folder, null, 4)+'-------------');
-        folder.schedule_ID = taskFolder.schedule_ID;
+        folder.Schedule_ID = taskFolder.Schedule_ID;
         folder.Schedule_desc = taskFolder.Schedule_desc;
         var dic = {Task_name:taskFolder.Task_name};
         // delete folder.id;
@@ -36,16 +36,16 @@ function parseDesc(desc, name) {
   var task= {};
   switch(desc){
     case '不会自动执行任务脚本':
-      task.schedule_ID = "1";
+      task.Schedule_ID = "1";
       break;
     case '每天07:30执行任务脚本':
-      task.schedule_ID = "2";
+      task.Schedule_ID = "2";
       break;
     case '每周日22：30执行任务':
-      task.schedule_ID = "3";
+      task.Schedule_ID = "3";
       break;
     case '每周周一到周五21:00执行任务脚本':
-      task.schedule_ID = "4";
+      task.Schedule_ID = "4";
       break;
     default:
       break;

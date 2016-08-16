@@ -328,82 +328,82 @@ module.exports={
       case "TaskFolder":
         TaskFolder.update(dic,item).exec(function(err,records){
           if (!err) {
-            console.log("create TaskFolder records success!");
+            console.log("update TaskFolder records success!");
             callback(records);
           }else{
-            console.log("create TaskFolder records failure!");
+            console.log("update TaskFolder records failure!");
             console.log(err);
             callback(null);
           }
         });
         break;
       case "TaskCase":
-        TaskCase.create(item).exec(function (err,records) {
+        TaskCase.update(dic,item).exec(function (err,records) {
           if (!err) {
-            console.log("create TaskCase records success!");
+            console.log("update TaskCase records success!");
             callback(records);
           } else {
-            console.log("create TaskCase records failure!");
+            console.log("update TaskCase records failure!");
             console.log(err);
             callback(null);
           }
         });
         break;
       case "RequestItem":
-        RequestItem.create(item).exec(function(err,records){
+        RequestItem.update(dic,item).exec(function(err,records){
           if (!err) {
-            console.log("create RequestItem records success!");
+            console.log("update RequestItem records success!");
             callback(records);
           } else {
-            console.log("create RequestItem records failure!");
+            console.log("update RequestItem records failure!");
             console.log(err);
             callback(null);
           }
         });
         break;
       case "ReqFolder":
-        ReqFolder.create(item).exec(function(err,records){
+        ReqFolder.update(dic,item).exec(function(err,records){
           if (!err) {
-            console.log("create ReqFolder records success!");
+            console.log("update ReqFolder records success!");
             callback(records);
           } else {
-            console.log("create ReqFolder records failure!");
+            console.log("update ReqFolder records failure!");
             console.log(err);
             callback(null);
           }
         });
         break;
       case "APIdoc":
-        APIdoc.create(item).exec(function(err,records){
+        APIdoc.update(dic,item).exec(function(err,records){
           if (!err) {
-            console.log("create %s records success!", modelType);
+            console.log("update %s records success!", modelType);
             callback(records);
           } else {
-            console.log("create %s records failure!", modelType);
+            console.log("update %s records failure!", modelType);
             console.log(err);
             callback(null);
           }
         });
         break;
       case "APIdocitem":
-        APIdocitem.create(item).exec(function(err,records){
+        APIdocitem.update(dic,item).exec(function(err,records){
           if (!err) {
-            console.log("create %s records success!", modelType);
+            console.log("update %s records success!", modelType);
             callback(records);
           } else {
-            console.log("create %s records failure!", modelType);
+            console.log("update %s records failure!", modelType);
             console.log(err);
             callback(null);
           }
         });
         break;
       case "ScheduleStrategy":
-        ScheduleStrategy.create(item).exec(function(err,records){
+        ScheduleStrategy.update(dic,item).exec(function(err,records){
           if (!err) {
-            console.log("create %s records success!", modelType);
+            console.log("update %s records success!", modelType);
             callback(records);
           } else {
-            console.log("create %s records failure!", modelType);
+            console.log("update %s records failure!", modelType);
             console.log(err);
             callback(null);
           }
