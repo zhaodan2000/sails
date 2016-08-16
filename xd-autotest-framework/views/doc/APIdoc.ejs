@@ -13,17 +13,14 @@
     var testItem=$("li#api_template").clone(true);
     var apis_count=$("ol#APIs").children('li').length;
     console.log('apis_count=%d',apis_count);
-    testItem.find('input#apiTitle_value').attr("id","apiTitle_"+apis_count);
-    testItem.find('input#apiURL_value').attr("id","apiURL_"+apis_count);
+    testItem.find('input#api_title').attr("name","apiName_"+apis_count);
+    testItem.find('input#api_url').attr("name","URL_"+apis_count);
     testItem.attr('id','api_'+apis_count);
     testItem.attr('style',"display:");
     console.log(testItem);
-    $('ol#APIs').prepend(testItem);
-    console.log("完成咯~");
-    /**
-    for(var i=0;i<apis_count;i++){
-  }**/
-
+    //$('ol#APIs').prepend(testItem);
+    $('ol#APIs').append(testItem);
+    console.log("天津啊api_item完成咯~");
   });
 
   $('#find_docItem').click(function(){
@@ -133,7 +130,7 @@
    * 将用户的输入存md文件中。
    * */
   $('#save_doc').click(function() {
-    var file_name = $('h1#docName').val()+'.md';
+    var file_name = document.getElementById('docName').innerHTML+'.md';
     var file_content = $('#md_filecontent').val();
     var param={'filename':file_name, 'filecontent':file_content};
     var queryString=JSON.parse(JSON.stringify(param));
@@ -155,45 +152,20 @@
     })
   });
 
+  var option_submit = {
+    success:function (data) {
+      $.main.refreshMain("/Home/doc");
+      console.log('+++++++++++++++' + data);
+    }
+  };
+
   /**
    * 将用户的输入存入doc与docItem中。
    * */
   $('#save_doc_2_db').click(function(){
-    /** 创建文档对象 **/
-    var file_name = $('input#docName').val()+'.md';
-    var doc_desc=$('input#docdesc').val();
-    var test_env=$('input#testenv').val();
-    var test_env_port=$('input#testenv_port').val();
-    var doc={id:"",name:file_name, testEnv:test_env, testEnvPort:test_env_port, docDesc:doc_desc};
+      //to do 判断表单的输入不为空。
+    $("#apidoc_form").ajaxSubmit(option_submit);
 
-    /** 创建接口对象数组 **/
-    var apis_count=$("ol#APIs").children("li[id!='api_template']").length;
-    var apis=$("ol#APIs").children("li[id!='api_template']").clone();
-    var apiArray = new Array();
-    apiArray=$("ol#APIs").children("li[id!='api_template']").clone();
-    for(var i=0;i<apis_count;i++){
-      apiArray[i].find("input[name='api'").val();
-      var api_name=apis[i].clone().find('input[name="api"').val();
-      var api_url=apis[i].clone().find('input[name="URL"').val();
-      apiArray[i]={name:api_name, url:api_url, APIdocID:""};
-    }
-
-    var _jsonParam={api_doc:doc,api_items:apiArray};
-
-    $.ajax({
-      url:'/doc/savedocwithItem',
-      method:"Post",
-      dataType:"json",
-      contentType: "application/json;charset=utf-8",
-      data: JSON.stringify(_jsonParam),
-      success:function(data){
-        $('textarea#textarea_response').val(JSON.stringify(data, null, "\t"));
-      },
-      err:function(err){
-        $('textarea#textarea_response').val(JSON.stringify(err, null, "\t"));
-      }
-
-    });
   });
 
   $('#find_doc').click(function(){
@@ -203,20 +175,15 @@
     $.ajax({
       url: '/doc/findDocByName',
       type:"Get",
-      //data:"{'first':'蚂蚁部落','second':'欢迎您'}",
-      //data:queryString,
       data:{
         docName: queryString,
         //a: $('#a').val(),
         //b: $('#b').val()
       },
       success:function(data){
-        //返回的数据用data.d获取内容
-        //alert(data.d);
         $("textarea#textarea_response").val(JSON.stringify(data,null,"\t"));
       },
       error:function(err){
-        //alert(err);
         $("textarea#textarea_response").val(JSON.stringify(err,null,"\t"));
       }
     })
@@ -250,7 +217,6 @@
 
   });
 
-
 </script>
 
 <!--左边目录 --->
@@ -274,27 +240,31 @@
 
 </ul>
 
+<div>
+  <form id="apidoc_form" action="/InterfaceDoc/saveDoc2db" method="post">
 <!--右边文档内容-->
-<div id="page-wrapper-right" aria-hidden="false" class="right-operation">
+    <div id="page-wrapper-right" aria-hidden="false" class="right-operation">
 <!-- Page Heading -->
 <div class="row" >
   <div class="col-lg-12">
-    <h1 class="page-header" id="docName">
-      业务接口文档
-    </h1>
+    <h1 class="page-header" name="docName">业务接口文档</h1>
     <ol class="breadcrumb">
       <li>
-        <i class="fa fa-dashboard"></i>  文档描述
-        <input id="docdesc" value="暂无文档描述" />
+        <i class="fa fa-dashboard"></i>文档名
+        <input name="docName" value="教师资格考典接口文档" />
       </li>
       <li>
-        <i class="fa fa-dashboard"></i>  测试环境
-        <input id="testenv" value="192.168.103.101" />
+        <i class="fa fa-dashboard"></i>文档描述
+        <input name="docdesc" value="暂无文档描述" />
+      </li>
+      <li>
+        <i class="fa fa-dashboard"></i>测试环境
+        <input name="testEnv" value="192.168.103.101" />
       </li>
       <li class="inactive">
         <!--<i class="fa fa-edit"></i> 端口号 -->
-        <i class="fa fa-dashboard"></i> 端口号
-        <input id="testenv_port" value="具体接口端口号不同" />
+        <i class="fa fa-dashboard"></i>端口号
+        <input name="testEnvPort" value="具体接口端口号不同" />
       </li>
     </ol>
   </div>
@@ -302,17 +272,30 @@
 
 <div class="row" >
   <div class="col-lg-6">
-    <form role="form">
+    <form role="form" >
+      <input name="apis_count" type="hidden" value="3" />
       <ol id="APIs">
+        <li id="api_template" style="display: none">
+          <i class="fa fa-edit" id="apiTitle" >接口</i>
+          <div class="form-group">
+            <label>接口名</label>
+            <input name="apiName" class="form-control" id="api_title"  />
+          </div>
+          <div class="form-group">
+            <label>URL</label>
+            <input name="URL" class="form-control" placeholder="Enter text" id="api_url" />
+          </div>
+        </li>
+
         <li id="api_1">
           <i class="fa fa-edit" id="api_1_apiTitle">接口</i>
           <div >
             <label>接口名</label>
-            <input id="api_1_apiTitleValue" class="form-control" />
+            <input name="apiName_1" class="form-control"  />
           </div>
           <div class="form-group">
             <label>URL</label>
-            <input class="form-control" placeholder="Enter text" name="">
+            <input name="URL_1" class="form-control" placeholder="Enter text" >
           </div>
           <div class="form-group" >
             <label>输入完整的requestItem json格式的字符串内容:</label>
@@ -346,33 +329,22 @@
           <i class="fa fa-edit" id="home_api">接口</i>
           <div class="form-group">
             <label>接口名</label>
-            <input class="form-control" name="api">
+            <input name="apiName_2" class="form-control" />
           </div>
           <div class="form-group">
             <label>URL</label>
-            <input class="form-control" placeholder="Enter text" name="URL"/>
+            <input name="URL_2" class="form-control" placeholder="Enter text" />
           </div>
         </li>
         <li id="api_3">
           <i class="fa fa-edit" id="">接口</i>
           <div class="form-group">
             <label>接口名</label>
-            <input class="form-control" id="test_api" />
+            <input  name="apiName_3" class="form-control" id="test_api" />
           </div>
           <div class="form-group">
             <label>URL</label>
-            <input class="form-control" placeholder="Enter text" id="apiURL_value" />
-          </div>
-        </li>
-        <li id="api_template" style="display: none">
-          <i class="fa fa-edit" id="apiTitle">接口</i>
-          <div class="form-group">
-            <label>接口名</label>
-            <input class="form-control" id="apiTitle_value" />
-          </div>
-          <div class="form-group">
-            <label>URL</label>
-            <input class="form-control" placeholder="Enter text" id="apiURL_value" />
+            <input name="URL_3" class="form-control" placeholder="Enter text" id="api_url" />
           </div>
         </li>
 
@@ -396,6 +368,7 @@
   </div>
 </div>
 
+
 <div class="row">
   <div class="col-lg-6">
     <form role="form">
@@ -407,4 +380,7 @@
   </div>
 </div>
 
+</div>
+
+  </form>
 </div>
