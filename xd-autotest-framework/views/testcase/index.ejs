@@ -27,7 +27,7 @@
       <ul id="<%='info' + index%>" class="collapse">
         <li>
           <%record.ReqItems.forEach(function (reqItem,i) {%>
-            <a href="javascript:void(0)" id="<%=reqItem.id%>" onclick="requestItem(this)"><%=reqItem.name%></a>
+            <a href="javascript:void(0)" id="<%=reqItem.name%>" onclick="requestItem(this)"><%=reqItem.name%></a>
           <%})%>
         </li>
       </ul>
@@ -151,7 +151,10 @@
           <div class="modal-body">
             <h2>是否在用</h2>
             <label style="width: 200px">是否在用</label>
-            <input name="disabled" type="text"/>
+            <select class="form-control" name="disabled">
+              <option value="YES>">YES</option>
+              <option value="NO>">NO</option>
+            </select>
           </div>
           <div class="modal-body">
             <h2>接口说明</h2>
@@ -191,12 +194,33 @@
           <div class="modal-body">
             <h2>content-type</h2>
             <label style="width: 200px">content-type</label>
-            <input name="mode" type="text"/>
+            <select class="form-control" name="mode">
+              <option value="raw>">raw</option>
+              <option value="formdata>">formdata</option>
+              <option value="urlencoded>">urlencoded</option>
+              <option value="file>">file</option>
+            </select>
           </div>
           <div class="modal-body">
             <h2>请求方式</h2>
             <label style="width: 200px">请求方式</label>
-            <input name="method" type="text"/>
+            <select class="form-control" name="method">
+              <option value="POST>">POST</option>
+              <option value="GET>">GET</option>
+              <option value="PUT>">PUT</option>
+              <option value="PATCH>">PATCH</option>
+              <option value="DELETE>">DELETE</option>
+              <option value="COPY>">COPY</option>
+              <option value="HEAD>">HEAD</option>
+              <option value="OPTIONS>">OPTIONS</option>
+              <option value="LINK>">LINK</option>
+              <option value="UNLINK>">UNLINK</option>
+              <option value="PURGE>">PURGE</option>
+              <option value="LOCK>">LOCK</option>
+              <option value="UNLOCK>">UNLOCK</option>
+              <option value="PROPFIND>">PROPFIND</option>
+              <option value="VIEW>">VIEW</option>
+            </select>
           </div>
           <div class="modal-body">
             <h2>参数</h2>
@@ -207,7 +231,7 @@
             <button type="button" class="btn btn-default"
                     data-dismiss="modal">关闭
             </button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitBtn">
+            <button type="button" class="btn btn-primary" id="submitBtn">
               提交用例
             </button>
           </div>
@@ -240,7 +264,7 @@
             <button type="button" class="btn btn-default"
                     data-dismiss="modal">关闭
             </button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitcollect">
+            <button type="button" class="btn btn-primary" id="submitcollect">
               提交用例集合
             </button>
           </div>

@@ -12,7 +12,7 @@ var util = require('util');
 
 module.exports = {
   findRequestItemByID:function (req,res) {
-    var dic = {id:req.param("id")};
+    var dic = {name:req.param("name")};
     console.log(dic);
     mongoService.Find('RequestItem',dic,function (record) {
       console.log(record);
