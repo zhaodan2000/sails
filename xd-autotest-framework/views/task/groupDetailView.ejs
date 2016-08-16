@@ -52,15 +52,12 @@
           <% if (data) { %>
           <% var cases =data.Cases; cases.forEach(function(caseItem,index){ %>
           <a href="#" class="list-group-item">
-            <span class="badge">index</span>
-            <i class="fa fa-fw fa-check"></i> caseItem.name
+            <span class="badge btn">down</span>
+            <span class="badge btn">up</span>
+            <i class="fa fa-fw fa-check"></i>  <%- caseItem.name %>
           </a>
           <% }) %>
           <% } %>
-          <a href="#" class="list-group-item">
-            <span class="badge">just now</span>
-            <i class="fa fa-fw fa-check"></i> caseItem
-          </a>
         </div>
       </div>
     </div>

@@ -40,13 +40,13 @@
                 <td><%-record.Schedule_desc%></td>
                 <td>
                   <div class="form-inline">
-                    <select name="schedule_desc" class="form-control">
+                    <select id="schedule_desc" name="schedule_desc" class="form-control">
                       <option>不会自动执行任务脚本</option>
                       <option>每天07:30执行任务脚本</option>
                       <option>每周日22：30执行任务</option>
                       <option>每周周一到周五21:00执行任务脚本</option>
                     </select>
-                    <btn name="<%-record.Task_name%>" class="btn btn-primary" onclick="changeTaskSchedule()">save</btn>
+                    <btn name="<%-record.Task_name%>" class="btn btn-primary" onclick="changeTaskSchedule({taskName:'<%-record.Task_name%>'})">save</btn>
                   </div>
                 </td>
               </tr>
@@ -66,4 +66,5 @@
 
 </div>
 <!-- /.container-fluid -->
-<script src="/scheduke/scheduke.js"></script>
+<script src="/xd-autotest-framework/js/index/frame-right.js"></script>
+<script src="/schedule/schedule.js"></script>
