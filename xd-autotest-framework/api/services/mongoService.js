@@ -5,217 +5,7 @@
 var Math=require('mathjs');
 
 module.exports={
-
-  Insert:function(modelType, item, callback) {
-    switch(modelType){ 
-      case "TaskFolder": 
-        TaskFolder.create(item).exec(function(err,records){ 
-          if (!err) { 
-            console.log("create records success!"); 
-            callback(records); 
-          }else{ 
-            console.log("create records failure!"); 
-            callback(null); 
-          } 
-        }); 
-        break; 
-      case "TaskCase":
-        TaskCase.create(item).exec(function (err,records) { 
-          if (!err) {
-            console.log("create records success!");
-            callback(records);
-          } else { 
-            console.log("create records failure!"); 
-            callback(null); 
-          } 
-        }); 
-        break; 
-      case "RequestItem": 
-        RequestItem.create(item).exec(function(err,records){ 
-          if (!err) { 
-            console.log("create records success!"); 
-            callback(records); 
-          } else { 
-            console.log("create records failure!"); 
-            callback(null); 
-          } 
-        }); 
-        break;  
-      default: 
-        break; 
-    }
-  },
-
-
-  /**
-   * 根据传入的model类型,以及查找的条件,
-   * 将对应的model记录查找返回。
-   * @param modelType 为model类型,字符串。
-   * @param dic 为查找的条件,字典。
-   * @param callback 将查找的结果以回调函数传回。
-   * */
-  // Find:function(modelType, dic, callback){
-  //   switch(modelType){
-  //     case "TaskFolder":
-  //       TaskFolder.find(dic).populate('Cases').exec(function(err,populated){
-  //         if(!err){
-  //           console.log("populated records:");
-  //           console.log(populated);
-  //           callback(populated);
-  //         }else{
-  //           console.log("populated failure...");
-  //           callback(null);
-  //         }
-  //       });
-  //       break;
-  //     case "TaskCase":
-  //       TaskCase.find(dic).exec(function (err,records) {
-  //         if (!err) {
-  //           console.log("find records success!");
-  //           callback(records);
-  //         } else {
-  //           console.log("find records failure!");
-  //           callback(null);
-  //         }
-  //       });
-  //       break;
-  //     case "RequestItem":
-  //       RequestItem.find(dic).exec(function(err,records){
-  //         if (!err) {
-  //           console.log("find records success!");
-  //           console.log(records);
-  //           callback(records);
-  //         } else {
-  //           console.log("find records failure!");
-  //           callback(null);
-  //         }
-  //       });
-  //       break;
-  //
-  //     default:
-  //       break;
-  //   }
-  // },
-
-  /**
-   * 根据传入的model类型,以及查找的条件,
-   * 将对应的model记录删除掉。
-   * @param modelType 为model类型,字符串。
-   * @param dic 为查找的条件,字典。
-   * **/
-  Delete:function(modelType,dic){
-    switch(modelType){
-      case "TaskFolder":
-        TaskFolder.destroy(dic).exec(function(err){
-          if (!err) {
-            console.log("destroy records success!");
-
-          } else {
-            console.log("destroy records failure!");
-
-          }
-        });
-        break;
-      case "TaskCase":
-        TaskFolder.destroy(dic).exec(function (err) {
-          if (!err) {
-            console.log("destroy records success!");
-
-          } else {
-            console.log("destroy records failure!");
-
-          }
-        });
-        break;
-      case "RequestItem":
-        RequestItem.destroy(dic).exec(function(err){
-          if (!err) {
-            console.log("destroy records success!");
-          } else {
-            console.log("destroy records failure!");
-          }
-        });
-        break;
-      case "ReqFolder":
-        ReqFolder.destroy(dic).exec(function(err){
-          if (!err) {
-            console.log("destroy records success!");
-          } else {
-            console.log("destroy records failure!");
-          }
-        });
-        break;
-      case "APIdoc":
-        APIdoc.destroy(dic).exec(function(err){
-          if (!err) {
-            console.log("destroy records success!");
-          } else {
-            console.log("destroy records failure!");
-          }
-        });
-        break;
-      case "APIdocitem":
-        APIdoc.destroy(dic).exec(function(err){
-          if (!err) {
-            console.log("destroy records success!");
-          } else {
-            console.log("destroy records failure!");
-          }
-        });
-        break;
-      default:
-        break;
-    }
-  },
-
-  /**
-   * 根据传入的model类型,以及查找的条件,
-   * 将对应的model记录删除掉。
-   * @param modelType 为model类型,字符串。
-   * @param dic 为查找的条件,字典。
-   * **/
-  DeleteSingleTask:function(modelType,dic,callback){
-    switch(modelType){
-      case "TaskFolder":
-        TaskFolder.destroy(dic).exec(function(err){
-          if (!err) {
-            console.log("destroy records success!");
-            callback(err);
-          } else {
-            console.log("destroy records failure!");
-            callback(err);
-          }
-        });
-        break;
-      case "TaskCase":
-        TaskFolder.destroy(dic).exec(function (err) {
-          if (!err) {
-            console.log("destroy records success!");
-            callback(err);
-          } else {
-            console.log("destroy records failure!");
-            callback(err);
-          }
-        });
-        break;
-      case "RequestItem":
-        RequestItem.destroy(dic).exec(function(err){
-          if (!err) {
-            console.log("destroy records success!");
-          } else {
-            console.log("destroy records failure!");
-          }
-        });
-        break;
-
-      default:
-        break;
-    }
-  },
-
-
-
-
+  
   /**
    * 根据传入的model类型,以及查找的条件,
    * 将对应的model记录查找返回。

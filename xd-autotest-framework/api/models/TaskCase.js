@@ -1,4 +1,4 @@
-/**
+     /**
  * TaskOrderCaseFolder.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
@@ -20,7 +20,7 @@ module.exports = {
       type: 'string',
       required: true,
       minLength: 1,
-      unique:true,
+      unique:false,
       maxLength: 60
     },
 

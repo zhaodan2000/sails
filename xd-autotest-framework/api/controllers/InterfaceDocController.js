@@ -91,7 +91,62 @@ module.exports = {
   saveDoc2db: function(req,res){
     console.log("\r\nreq.body is:")
     console.log(req.body);
-    var API_doc=req.body.api_doc;
+    //构造APIdoc对象
+    var API_doc={name:req.body["docName"],docDesc:req.body["docdesc"],testenv:req.body["testEnv"], testEnvPort:req.body["testEnvPort"]};
+    console.log(JSON.stringify(API_doc));
+
+    //构造APIdocitem对象
+    var apisItemArray=new Array();
+    var apis_Count = req.body["apis_count"];
+    for (var i = 0; i < apis_Count; i++) {
+      var apiName = req.body["apiName_" + (i + 1)];
+      var url = req.body["URL_" + (i + 1)];
+      var apidocitem = {name: apiName, url: url,APIdocID:""};
+      apisItemArray.push(apidocitem);
+    }
+
+
+    console.log(JSON.stringify(apisItemArray));
+
+    var insertedAPIdocitem=new Array();
+
+    mongoService.Find('APIdoc',{name:req.body["docName"]},function (records) {
+      if(records) {//存在,则更新APIdoc, 同时更新(或添加)APIdocitem
+        for (var i = 0; i < apis_Count; i++) {
+          apisItemArray[i].APIdocID = records.id;
+          mongoService.Find('APIdocitem', {name: apisItemArray[i].name}, function (records) {
+            if (records){
+
+
+            }else{
+
+            }
+
+          });
+        }
+      }
+      else {//不存在该文档,则先添加APIdoc, 再添加APIdocitem
+        mongoService.Insert('APIdoc',API_doc,function(records){
+          if(records){
+            for (var i = 0; i < apis_Count; i++) {
+              apisItemArray[i].APIdocID=records.id;
+              mongoService.Insert('APIdocitem',apisItemArray[i],function(records){
+                if(records){
+                  insertedAPIdocitem.push(records);
+                }
+              });
+            }
+          }
+
+        });
+
+
+      }
+
+    });
+
+
+
     var API_items=req.body.api_items;
 
     /**创建API_doc与api_docitems */
@@ -121,83 +176,6 @@ module.exports = {
       }
     }
 
-
-    /***
-    console.log("\r\nJSON.parse(req.body.reqItem) is:");
-    console.log(requestItem);
-
-    var isDocExisted=false;
-    var record;
-    doc.find({name:req.body.filename}).exec(function(records){
-      if(records){
-        isDocExisted=true;
-        record=records;
-        console.log("doc.find({name:%s}) is %s",req.body.filename, records);
-      }else{
-        console.log("did not find doc with name '%s'", req.body.filename);
-      }
-    });
-
-    var _doc;
-    if(!isDocExisted){//创建doc对象
-      _doc={id:new Date().getTime().toString(), name:req.body.filename};
-      //var _docJson=JSON.stringify(_doc); **********教训: 将js中的object转换为jsonString后,插入mongodb的表中会报错"无法解析表的字段名"***************
-      //console.log(_docJson);
-
-      doc.create(_doc,function(err, records){
-        if(!err) {
-          console.log("inserted doc row is:"+JSON.stringify(records,null,"\t"));
-        }else{
-          console.log(err);
-        }
-      });
-    }else{
-      _doc=record;
-    }
-
-    var isDocItemExisted=false;
-    var docitem_record;
-    docItem.find({docID:_doc.id,name:requestItem['name']}).exec(function(records){
-      if(records){
-        isDocItemExisted=true;
-        docitem_record=records;
-        console.log("docItem.find({docID:%s,name:%s}) is %s",_doc.id, requestItem['name'], records);
-      }
-    });
-
-    var _docItem;
-    if(!isDocItemExisted){
-      console.log("requestItem.name="+requestItem['name']);
-      console.log("requestItem.name="+requestItem['url']);
-      _docItem={docID:_doc.id, name:requestItem['name'], url:requestItem['url']};
-      docItem.create(_docItem, function(err, records){
-        if(!err) {
-          console.log("\r\ninserted docItem is:");
-          console.log(records);
-        }else{
-          console.log(err);
-        }
-      });
-    }else{
-      _docItem=docitem_record;
-    }
-
-    var _docs;
-    doc.find().populate('doc_items').exec(function(err,docs){
-      if(!err){
-        console.log("try to find docs:");
-        console.log(docs);
-        _docs=docs;
-      }else{
-        console.log(err);
-        _docs=null;
-      }
-    });
-
-    res.send(_docs);
-
-     ***/
-
   },
 
 /**
@@ -226,7 +204,9 @@ module.exports = {
             return;
           }
         });
-      }else{console.log("目录已经存在,不需要再创建...");}
+      }else{
+        console.log("目录已经存在,不需要再创建...");
+      }
     });
 
     var filename=req.body.filename;
