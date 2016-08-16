@@ -25,6 +25,8 @@ $(document).ready(function () {
   //ajaxSubmit 
   $("#saveBtn").click(function () {
     $('#addTaskModal').modal('hide');
+    $('addTaskModal').css("overflow","show");
+    // $('addTaskModal').css("overflow","hidden");
     $(".modal-backdrop").hide();
     $("#form").ajaxSubmit(option_save);
   });

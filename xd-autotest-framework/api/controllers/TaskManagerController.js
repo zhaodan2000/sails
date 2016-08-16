@@ -54,7 +54,6 @@ module.exports = {
     mongoService.Find('TaskFolder',{Task_name:req.param("Task_name")}, function (taskdatas) {
       if(taskdatas){
         // console.log("find sucess :"+JSON.stringify(taskdatas, null, 4));
-
         //搜索全部的用例显示在左边
         mongoService.Find('ReqFolder',null, function (requestsdata) {
           if(requestsdata){
@@ -119,24 +118,27 @@ module.exports = {
   addCaseToTask: function (req, res) {
     // var ObjectId = require('mongodb').ObjectID;
     var item = req.param("item");
-    console.log(JSON.stringify(item, null, 4));
-    mongoService.Find("RequestItem", { name:item.itemName}, function (requestItem) {
-      if(requestItem){
-        console.log("requestItem:"+JSON.stringify(requestItem, null, 4));
-
+    // console.log(JSON.stringify(item, null, 4));
+    mongoService.Find("RequestItem", { name:item.itemName}, function (requestItems) {
+      if(requestItems){
+        var requestItem = requestItems[0];
+        requestItem.TaskID = item.taskId;
+        delete requestItem["id"];
+        // console.log("requestItem:"+JSON.stringify(requestItem, null, 4));
+        mongoService.Insert("TaskCase", requestItem, function (records) {
+          if (records){
+            //sucess
+            console.log('insert sucess');
+            // return res.send(records);
+          }else {
+            //fail
+            console.log('insert fail');
+          }
+        });
       }
     })
 
-    // mongoService.Insert("TaskCase", item, function (records) {
-    //   if (records){
-    //     //sucess
-    //     console.log('insert sucess');
-    //     // return res.send(records);
-    //   }else {
-    //     //fail
-    //     console.log('insert fail');
-    //   }
-    // });
+
   },
 
   /**
