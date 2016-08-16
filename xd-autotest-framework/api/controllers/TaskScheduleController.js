@@ -6,25 +6,40 @@
  */
 
 module.exports = {
+  refreshView: function (req, res) {
+    mongoService.Find("TaskFolder", null, function (records) {
+      // console.log('records:~~~~~'+ records);
+      res.view('schedule/index', {data:records});
+    });
+  },
+
 	changeScheduleForTask: function (req, res) {
-    console.log(req.param("taskName"));
-    console.log(req.param("desc"));
+    // console.log(req.param("taskName"));
+    // console.log(req.param("desc"));
     var taskFolder = parseDesc(req.param("desc"), req.param("taskName"));
 
     mongoService.Find('TaskFolder', {Task_name:taskFolder.Task_name}, function (folders) {
       if(folders){
         var folder = folders[0];
-        console.log(JSON.stringify(folder, null, 4)+'-------------');
+        // console.log(JSON.stringify(folder, null, 4)+'-------------');
         folder.Schedule_ID = taskFolder.Schedule_ID;
         folder.Schedule_desc = taskFolder.Schedule_desc;
         var dic = {Task_name:taskFolder.Task_name};
         // delete folder.id;
         // delete folder.Task_name;
-        console.log(JSON.stringify(folder, null, 4)+'~~~~~~~~~~~~~~~~');
-        console.log(JSON.stringify(dic, null, 4)+'~~~~~~~~~~~~~~~~');
+        delete folder.Cases;
+        // console.log(JSON.stringify(folder, null, 4)+'~~~~~~~~~~~~~~~~');
+        // console.log(JSON.stringify(dic, null, 4)+'~~~~~~~~~~~~~~~~');
         mongoService.Update('TaskFolder', folder, dic, function (records) {
           if(records){
-            console.log('-------------'+JSON.stringify(records, null, 4));
+            // console.log('-------------'+JSON.stringify(records, null, 4));
+            return res.send("sucess");
+            //成功之后刷新整个页面(以后可以做成只刷新单个表格)
+            mongoService.Find("TaskFolder", null, function (records) {
+              // console.log('records:'+ JSON.stringify(records, null, 4));
+              // res.view('schedule/index', {data:records});
+
+            });
           }
         });
       }
@@ -52,6 +67,6 @@ function parseDesc(desc, name) {
   }
   task.Task_name = name;
   task.Schedule_desc = desc;
-  console.log(JSON.stringify(task, null, 4)+'~~~~~~~');
+  // console.log(JSON.stringify(task, null, 4)+'~~~~~~~');
   return task;
 }
