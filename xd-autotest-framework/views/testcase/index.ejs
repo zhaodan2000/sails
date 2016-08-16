@@ -7,7 +7,7 @@
       </div>
     </li>
     <li style="height: 49px">
-      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal1" id="addtestcasecollection" style="width: 225px;height: 34px">添加用例集合</button>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalForCollect" id="addtestcasecollection" style="width: 225px;height: 34px">添加用例集合</button>
     </li>
     <li>
       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" id="addtestcase" style="width: 225px;height: auto">添加用例</button>
@@ -27,7 +27,7 @@
       <ul id="<%='info' + index%>" class="collapse">
         <li>
           <%record.ReqItems.forEach(function (reqItem,i) {%>
-            <a href="javascript:void(0)" id="<%=reqItem.id%>" onclick="requestItem(this)"><%=reqItem.name%></a>
+            <a href="javascript:void(0)" id="<%=reqItem.name%>" onclick="requestItem(this)"><%=reqItem.name%></a>
           <%})%>
         </li>
       </ul>
@@ -113,7 +113,8 @@
     <% } %>
 
 </div>
-  <!-- 模态框（Modal） -->
+
+  <!-- 模态框添加用例（Modal） -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
        aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -150,7 +151,10 @@
           <div class="modal-body">
             <h2>是否在用</h2>
             <label style="width: 200px">是否在用</label>
-            <input name="disabled" type="text"/>
+            <select class="form-control" name="disabled">
+              <option value="YES>">YES</option>
+              <option value="NO>">NO</option>
+            </select>
           </div>
           <div class="modal-body">
             <h2>接口说明</h2>
@@ -190,12 +194,33 @@
           <div class="modal-body">
             <h2>content-type</h2>
             <label style="width: 200px">content-type</label>
-            <input name="mode" type="text"/>
+            <select class="form-control" name="mode">
+              <option value="urlencoded">urlencoded</option>
+              <option value="raw">raw</option>
+              <option value="formdata">formdata</option>
+              <option value="file">file</option>
+            </select>
           </div>
           <div class="modal-body">
             <h2>请求方式</h2>
             <label style="width: 200px">请求方式</label>
-            <input name="method" type="text"/>
+            <select class="form-control" name="method">
+              <option value="POST">POST</option>
+              <option value="GET">GET</option>
+              <option value="PUT">PUT</option>
+              <option value="PATCH">PATCH</option>
+              <option value="DELETE">DELETE</option>
+              <option value="COPY">COPY</option>
+              <option value="HEAD">HEAD</option>
+              <option value="OPTIONS">OPTIONS</option>
+              <option value="LINK">LINK</option>
+              <option value="UNLINK">UNLINK</option>
+              <option value="PURGE">PURGE</option>
+              <option value="LOCK">LOCK</option>
+              <option value="UNLOCK">UNLOCK</option>
+              <option value="PROPFIND">PROPFIND</option>
+              <option value="VIEW">VIEW</option>
+            </select>
           </div>
           <div class="modal-body">
             <h2>参数</h2>
@@ -206,8 +231,41 @@
             <button type="button" class="btn btn-default"
                     data-dismiss="modal">关闭
             </button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitBtn">
+            <button type="button" class="btn btn-primary" id="submitBtn">
               提交用例
+            </button>
+          </div>
+        </form>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+
+  <!-- 模态框添加用例集合（Modal） -->
+  <div class="modal fade" id="myModalForCollect" tabindex="-1" role="dialog"
+       aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close"
+                  data-dismiss="modal" aria-hidden="true">
+            &times;
+          </button>
+          <h4 class="modal-title" id="myModalLabel">
+            添加用例集合
+          </h4>
+        </div>
+        <form id="formModelForCollect" class="form-inline" action="/ShowDoc/addtestcasecollect" method="POST">
+          <div class="modal-body">
+            <h2>用例集合名</h2>
+            <label style="width: 200px">用例集合名</label>
+            <input name="name" type="text"/>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default"
+                    data-dismiss="modal">关闭
+            </button>
+            <button type="button" class="btn btn-primary" id="submitcollect">
+              提交用例集合
             </button>
           </div>
         </form>
