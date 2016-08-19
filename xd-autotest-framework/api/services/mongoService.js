@@ -327,7 +327,7 @@ module.exports={
         });
         break;
       case "TaskCase":
-        TaskFolder.destroy(dic).exec(function (err) {
+        TaskCase.destroy(dic).exec(function (err) {
           if (!err) {
             console.log("destroy %s records success!", modelType);
 

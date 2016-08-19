@@ -87,12 +87,45 @@ module.exports = {
     mongoService.Find('TaskFolder',{Task_name:req.body.Task_name}, function (records) {
       if(records){
 
-        console.log(JSON.stringify(records, null, 4));
-        //使用records进行配置collection并运行
+        if(records.length > 0){
+          var task = records[0];
+          //根据task生成collection
+          console.log(JSON.stringify(task, null, 4)+"---------");
 
-        //成功运行之后返回成功信息
-        return res.send(records);
+          var cases = task.Cases;
+          var items = new Array;
+          console.log(JSON.stringify(cases, null, 4)+"----+----");
+          for(i=0; i< cases.length; i++){
+            var caseItem = cases[i];
+            delete caseItem.ReqFolderID;
+            delete caseItem.createdAt;
+            delete caseItem.updatedAt;
+            delete caseItem.TaskID;
+            delete caseItem.dirpath;
+            delete caseItem.id;
+            // console.log("~~~~"+JSON.stringify(caseItem, null, 4));
+            //根据caseItem生成requestItem并添加到collection中
+            // var item = RequestItem.create(caseItem);
+            // console.log(item);
+            var request = RequestItemServices.configRequestItem(caseItem);
+            var item = RequestItemServices.configItem(request, new Array);
+            items.push(item);
+            console.log("~~~~"+JSON.stringify(item, null, 4));
+          }
+          task.items = items;
+          // console.log(JSON.stringify(task, null, 4));
+          var collection = CollectionServices.creatCollectionWithTask(task);
+          console.log(JSON.stringify(collection, null, 4));
+          //设置option, 待完善
+          var option = CollectionServices.optionMake();
 
+          CollectionServices.testCollectionWithCallBack(collection, option, function (exitCode, results) {
+            console.log('exitcode:'+exitCode);
+            console.log('results:'+results);
+            //成功运行之后返回成功信息
+            return res.send(exitCode);
+          });
+        }
       }
     })
   },
@@ -128,8 +161,9 @@ module.exports = {
         mongoService.Insert("TaskCase", requestItem, function (records) {
           if (records){
             //sucess
+            console.log(JSON.stringify(records, null, 4));
             console.log('insert sucess');
-            // return res.send(records);
+            return res.send(records);
           }else {
             //fail
             console.log('insert fail');
@@ -147,7 +181,30 @@ module.exports = {
    * @param res
      */
   deleteAllCase: function (req, res) {
+    console.log("deleteAllCase------"+req.body.Task_ID);
+    var taskId = req.body.Task_ID;
+    // var taskId = ;
+    mongoService.Delete("TaskCase", {TaskID:taskId});
+    // mongoService.Delete("TaskCase", {TaskID:taskId.toString()}, function(record) {
+    //   console.log(record);
+    // });
+    return res.send("receive");
+  },
 
+  /**
+   * 删除单个用例
+   * @param req
+   * @param res
+     */
+  deleteSingleCase: function (req, res) {
+    console.log("deleteAllCase------"+req.body.caseId);
+    var caseId = req.body.caseId;
+    // var taskId = ;
+    mongoService.Delete("TaskCase", {id:caseId});
+    // mongoService.Delete("TaskCase", {TaskID:taskId.toString()}, function(record) {
+    //   console.log(record);
+    // });
+    return res.send("receive");
   },
   /**
    * 更新task中Cases数组中case顺序
@@ -207,4 +264,13 @@ function refreshTaskView(res) {
     // console.log('---------------find'+records);
     res.view('task/index', {data:records});
   })
+}
+
+/**
+ *
+ */
+function creatRequestItemWithCase(caseItem) {
+  var requestItem = {
+
+  }
 }

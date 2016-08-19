@@ -5,8 +5,13 @@
 /**
  * 删除所有用例
  */
-function deleteAllCases() {
-  $.main.refreshMain("/TaskManager/deleteAllCase");
+function deleteAllCases(data) {
+  console.log(data.taskId);
+  $.post("/TaskManager/deleteAllCase", {Task_ID:data.taskId}, function (result) {
+
+    //删除页面上所有的case
+    alert("删除成功")
+  }, "json");
 }
 
 
@@ -17,14 +22,66 @@ function selectedCaseWithName(caseName) {
 }
 
 function addCaseToTask(item) {
-  console.log(JSON.stringify(item.item, null, 4));
-  console.log('-----'+item);
-  // console.log(item);
   $.post("/TaskManager/addCaseToTask", {item:item}, function (result) {
     //根据result判断是否更新成功
-  })
+    // alert("sucess");
+    // console.log('------'+JSON.stringify(result, null, 4));
+    // console.log("sucess");
+    //向div中添加一条list
+
+    var $newcase = $('<a href="#" class="list-group-item"></a>');
+    $newcase.attr({"name":result.id});
+    $newcase.text(result.name);
+
+    var $deletespan = $('<span class="badge btn btn-danger" onclick="deleteCaseWithName(this)">delete</span>');
+    $deletespan.attr({"name":result.name});
+    // $deletespan.bind("click", function () {
+    //   //点击delete按钮的回调
+    //   var btnPara = {caseName:result.name, tasId:result.TaskID};
+    //   deleteCaseWithName(btnPara);
+    // });
+
+    var $newi = $('<i class="fa fa-fw fa-check"></i>');
+    $newcase.append($deletespan, $newi);
+    $("div#caseList").append($newcase);
+  }, "json");
 }
 
-function updateOrderForCases(caseName) {
+function downClicked(data) {
+
+}
+
+function upClicked() {
+
+}
+
+function deleteCaseWithName(data) {
+  //移除父节点
+  console.log(data);
+  console.log(data.caseId);
+  data.node.parentNode.remove();
+  // console.log(data.taskId);
+  $.post("/TaskManager/deleteSingleCase", {caseId:data.caseId}, function (result) {
+
+    //删除页面上所有的case
+    alert("删除成功")
+  }, "json");
+
+
+  // console.log(JSON.stringify(data, null, 4));
+  // console.log('-----'+data.caseName);
+  // console.log(data.tasId);
+  // var spanArr =  $("div#caseList").find("a");
+  // console.log(spanArr);
+  // for (i = 0; i < spanArr.length; i++){
+  //   // if (options[i].nodeName.toLowerCase() === 'option'){
+  //     var option = spanArr[i];
+  //     console.log('2222'+option);
+  //     if(option.name === data.caseName){
+  //       console.log(option.name);
+  //       option.remove();
+  //     }
+  //   // }
+  // }
 
 }
