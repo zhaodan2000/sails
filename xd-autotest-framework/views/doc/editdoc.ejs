@@ -1,0 +1,211 @@
+<div class="container-fluid">
+  <div id="page-wrapper-right" aria-hidden="false" class="right-operation">
+  <form id="apidoc_form" action="/InterfaceDoc/saveDoc2db" method="post">
+    <div class="row" >
+      <div class="col-lg-12">
+        <h1 class="page-header" id="api_doc_name"><%=api_docs.name%></h1>
+        <ol class="breadcrumb">
+          <li>
+            <i class="fa fa-dashboard"></i>文档描述
+            <input name="docdesc" value="<%=api_docs.docDesc%>" />
+          </li>
+          <li>
+            <i class="fa fa-dashboard"></i>测试环境
+            <input name="testEnv" value="<%=api_docs.testEnv%>" />
+          </li>
+          <li>
+            <i class="fa fa-dashboard"></i>端口号
+            <input name="testEnvPort" value="<%=api_docs.testEnvPort%>" />
+          </li>
+        </ol>
+
+
+      </div>
+    </div>
+
+    <div class="row" >
+      <div class="col-lg-6">
+          <input name="apis_count" type="hidden" value="<%=api_docs.APIdoc_items.length%>" />
+          <ol id="APIs">
+            <li id="api_template" style="display: none">
+              <i class="fa fa-edit" id="apiTitle" >接口</i>
+              <div class="form-group">
+                <label>接口名</label>
+                <input name="api_title" class="form-control"/>
+              </div>
+              <div class="form-group">
+                <label>URL</label>
+                <input name="api_url" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label>method</label>
+                <input name="api_method" class="form-control"  />
+              </div>
+              <div class="form-group">
+                <label>disabled</label>
+                <input name="api_disabled" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label>dataType</label>
+                <input name="api_dataType" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label>header</label>
+                <input name="api_header" class="form-control"  />
+              </div>
+              <div class="form-group">
+                <label>queryParams</label>
+                <input name="api_queryParams" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label>response</label>
+                <input name="api_response" class="form-control"/>
+              </div>
+            </li>
+            <%for(var i=0;i<api_docs.APIdoc_items.length;i++){%>
+            <li id="<%='api_'+(i+1)%>" >
+              <i class="fa fa-edit" id="apiTitle" >接口</i>
+              <div class="form-group">
+                <label>接口名</label>
+                <input name="api_title" required="required" class="form-control" id="<%='api_title_'+(i+1)%>"
+                       value="<%=api_docs.APIdoc_items[i].name%>" />
+              </div>
+              <div class="form-group">
+                <label>URL</label>
+                <input name="api_url" class="form-control"  id="<%='api_url_'+(i+1)%>"
+                       value="<%=api_docs.APIdoc_items[i].url%>"/>
+              </div>
+              <div class="form-group">
+                <label>method</label>
+                <input name="api_method" class="form-control" id="<%='api_method_'+(i+1)%>"
+                       value="<%=api_docs.APIdoc_items[i].method%>"/>
+              </div>
+              <div class="form-group">
+                <label>disabled</label>
+                <input name="api_disabled" class="form-control"  id="<%='api_disabled_'+(i+1)%>"
+                       value="<%=api_docs.APIdoc_items[i].disabled%>"/>
+              </div>
+              <div class="form-group">
+                <label>dataType</label>
+                <input name="api_dataType" class="form-control" id="<%='api_dataType_'+(i+1)%>"
+                       value="<%=api_docs.APIdoc_items[i].dataType%>"/>
+              </div>
+              <div class="form-group">
+                <label>header</label>
+                <textarea name="api_header" class="form-control" id="<%='api_header_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].header,null,4)%></textarea>
+              </div>
+              <div class="form-group">
+                <label>queryParams</label>
+                <textarea name="api_queryParams"  class="form-control" id="<%='api_queryParams_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].queryParams,null,4)%></textarea>
+              </div>
+              <div class="form-group">
+                <label>response</label>
+                <textarea name="api_response" class="form-control" id="<%='api_response_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].response,null,4)%></textarea>
+              </div>
+            </li>
+            <%}%>
+          </ol>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="btn btn-info" id="addAPIbutton">增加API接口</div>
+        <div class="btn btn-default" id="save_doc_2_db">保存文档2db</div>
+        <div class="btn btn-default" text="主要效果" id="save_doc">保存文档</div>
+      </div>
+    </div>
+  </form>
+</div>
+</div>
+
+<script>
+  /**
+   * 点击增加API接口的编辑入口。
+   * */
+  $('#addAPIbutton').click(function(){
+    /**
+    $('h1#123doc')[0].innerHTML="测试1234";
+    console.log($('h1#123doc')[0].innerHTML);
+**/
+    var testItem=$("li#api_template").clone(true);
+    var apis_count=$("ol#APIs").children('li').length;
+    console.log('apis_count=%d',apis_count);
+    testItem.find('input#api_title').attr("id","api_title"+apis_count);
+    testItem.find('input#api_url').attr("id","api_url"+apis_count);
+    testItem.find('input#api_method').attr("id","api_method_"+apis_count);
+    testItem.find('input#api_disabled').attr("id","api_disabled_"+apis_count);
+    testItem.find('input#api_dataType').attr("id","api_dataType_"+apis_count);
+    testItem.find('input#api_header').attr("id","api_header_"+apis_count);
+    testItem.find('input#api_queryParams').attr("id","api_queryParams_"+apis_count);
+    testItem.find('input#api_response').attr("id","api_response_"+apis_count);
+    testItem.attr('id','api_'+apis_count);
+    testItem.attr('style',"display:");
+    console.log(testItem);
+    //$('ol#APIs').prepend(testItem);
+    $('ol#APIs').append(testItem);
+    console.log("添加api_item完成咯~");
+  });
+
+  /** 保存APIdocitem */
+  $('#save_doc_2_db').click(function(){
+    /** 构造APIdoc对象*/
+    var docName=$('#api_doc_name')[0].innerHTML;
+    var docDesc=$('input[name="docdesc"]').val();
+    var testEnv=$('input[name="testEnv"]').val();
+    var testEnvPort=$('input[name="testEnvPort"]').val();
+
+    var APIdoc={name:docName,docDesc:docDesc,testEnv:testEnv,testEnvPort:testEnvPort};
+    console.log(JSON.stringify(APIdoc));
+
+    var apisDOM=$('#APIs').children('li[id!="api_template"]');
+    var apiItemsArray=new Array();
+
+    for(var i=0;i<apisDOM.length;i++){
+      //$('li#api_1').find('input[name="api_title"]').val();
+      var selector='li#api_'+(i+1);
+      var apiItem_name=$(selector).find('input[name="api_title"]').val();
+      var apiItem_url=$(selector).find('input[name="api_url"]').val();
+      var apiItem_disabled=$(selector).find('input[name="api_disabled"]').val();
+      var apiItem_method=$(selector).find('input[name="api_method"]').val();
+      var apiItem_dataType=$(selector).find('input[name="api_dataType"]').val();
+      var apiItem_header=$(selector).find('textarea[name="api_header"]').val();
+      var apiItem_queryParams=$(selector).find('textarea[name="api_queryParams"]').val();
+      var apiItem_response=$(selector).find('textarea[name="api_response"]').val();
+
+      var apiItem={
+        name:apiItem_name,
+        url:apiItem_url,
+        disabled:apiItem_disabled,
+        method:apiItem_method,
+        dataType:apiItem_dataType,
+        header:apiItem_header,
+        queryParams: apiItem_queryParams,
+        response:apiItem_response
+      };
+
+      apiItemsArray[i]=apiItem;
+    }
+    console.log("apiItemsArray:");
+    console.log(JSON.stringify(apiItemsArray));
+
+    $.ajax({
+      url:'/doc/savedocwithItem',
+      method:"post",
+      contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+      data: {
+        apiDoc: APIdoc,
+        apiItems:apiItemsArray
+      },
+      success: function (data) {
+        //返回的数据用data.d获取内容
+        //alert(data.d);
+        alert("保存成功!");
+      },
+      error:function(data){
+        alert("保存失败,错误日志:"+data);
+      }
+    });
+
+  });
+
+</script>

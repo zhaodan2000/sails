@@ -12,12 +12,7 @@ module.exports = {
   overview: function(req, res) {
     res.view('overview/index');
   },
-  doc: function(req, res) {
-    mongoService.Find("ReqFolder",null,function (records) {
-      console.log(records);
-      res.view('doc/APIdoc',{data:records});
-    });
-  },
+
   task: function(req, res) {
     mongoService.Find("TaskFolder", null, function (records) {
       console.log('records:'+ records);

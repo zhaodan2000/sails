@@ -5,7 +5,7 @@
 var Math=require('mathjs');
 
 module.exports={
-  
+
   /**
    * 根据传入的model类型,以及查找的条件,
    * 将对应的model记录查找返回。
@@ -290,6 +290,7 @@ module.exports={
           }
         });
         break;
+      
       case "ScheduleStrategy":
         ScheduleStrategy.find(dic).exec(function(err,records){
           if (!err) {
@@ -327,7 +328,7 @@ module.exports={
         });
         break;
       case "TaskCase":
-        TaskFolder.destroy(dic).exec(function (err) {
+        TaskCase.destroy(dic).exec(function (err) {
           if (!err) {
             console.log("destroy %s records success!", modelType);
 
