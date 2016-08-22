@@ -33,7 +33,7 @@
         <a href="#addTaskModal" role="button" class="btn btn-primary" data-toggle="modal">添加任务</a>
         <a id="deleteAll" role="button" class="btn btn-danger" data-toggle="modal" onclick="deleteAllTasks()">删除全部任务</a>
         <!-- Modal -->
-        <div id="addTaskModal" class="modal fade" tabindex="-1">
+        <div id="addTaskModal" class="modal fade" style="display: none;" tabindex="-1">
           <div class="modal-dialog">
             <div class="modal-content">
               <form id="form"  method="POST">
@@ -63,11 +63,13 @@
                     </select>
                   </div>
                 </div>
+                <div class="modal-footer">
+                  <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
+                  <!--<button onclick="demoClicked()" class="btn btn-primary" type="button" data-dismiss="modal">添加</button>-->
+                  <button class="btn btn-primary" type="button" id="saveBtn">添加</button>
+                </div>
               </form>
-              <div class="modal-footer">
-                <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
-                <button class="btn btn-primary" type="button"  id="saveBtn">添加</button>
-              </div>
+
             </div>
           </div>
         </div>
@@ -129,4 +131,4 @@
 <!-- /.container-fluid -->
 
 <script src="/xd-autotest-framework/js/index/frame-right.js"></script>
-<script src="/task/task.js"></script>
+<script src="/xd-autotest-framework/js/task/task.js"></script>

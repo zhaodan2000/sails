@@ -109,7 +109,7 @@ module.exports={
    * 根据传入的model类型,以及查找的条件,
    * 将对应的model记录查找返回。
    * @param modelType 为model类型,字符串。
-   * @param item 为model对象,字典。
+   * @param item 为model对象(不应该传入关联的属性),字典。
    * @param dic 为查询条件,字典。
    * @param callback 将查找的结果以回调函数传回。
    * */

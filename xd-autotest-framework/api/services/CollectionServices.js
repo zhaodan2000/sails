@@ -40,6 +40,20 @@ module.exports = {
     return collectionObj;
   },
 
+  creatCollectionWithTask: function (task) {
+    var collectionObj = {
+      variables:[],
+      info:{
+        name:task.Task_name,
+        _postman_id:task.id,
+        schema:"https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+        description:task.Task_desc
+      },
+      item:task.items
+    };
+    return collectionObj;
+  },
+
   /**
    * 生成Newman执行需要的option
    * @returns {{iterationCount: number, outputFile: string, responseHandler: string, asLibrary: boolean, stopOnError: boolean}}

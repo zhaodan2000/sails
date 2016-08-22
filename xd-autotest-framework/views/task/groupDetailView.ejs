@@ -2,11 +2,11 @@
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">
-      <%-data.Task_name%>
+      <%- data.Task_name %>
       <small>任务详情</small>
       <!-- Button to trigger modal -->
         <a href="#addTaskModal" role="button" class="btn btn-primary" data-toggle="modal">搜索用例</a>
-        <a id="deleteAll" role="button" class="btn btn-danger" data-toggle="modal" onclick="deleteAllCases()">删除全部用例</a>
+        <a id="deleteAll" role="button" class="btn btn-danger" data-toggle="modal" onclick="deleteAllCases({taskId:'<%- data.id %>'})">删除全部用例</a>
       <!-- Modal -->
       <div id="addTaskModal" class="modal fade" tabindex="-1">
         <div class="modal-dialog">
@@ -48,13 +48,15 @@
         <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> 用例列表</h3>
       </div>
       <div class="panel-body">
-        <div class="list-group">
+        <div id="caseList" name="<%- data.id %>" class="list-group">
           <% if (data) { %>
           <% var cases =data.Cases; cases.forEach(function(caseItem,index){ %>
-          <a href="#" class="list-group-item">
-            <span class="badge btn">down</span>
-            <span class="badge btn">up</span>
-            <i class="fa fa-fw fa-check"></i>  <%- caseItem.name %>
+          <a href="#" name="<%- caseItem.id %>" class="list-group-item"> <%- caseItem.name %>
+            <!--<span class="badge btn" onclick="downClicked()">down</span>-->
+            <!--<span class="badge btn" onclick="upClicked()">up</span>-->
+            <span name="<%- caseItem.id %>" class="badge btn btn-danger" onclick="deleteCaseWithName({node:this, caseId:'<%- caseItem.id %>'})">delete</span>
+            <!--<span class="badge btn btn-danger" onclick="deleteCaseWithName({caseName:'<%- caseItem.name %>', tasId:'<%- caseItem.TaskID %>'})">delete</span>-->
+            <i class="fa fa-fw fa-check"></i>
           </a>
           <% }) %>
           <% } %>
@@ -75,9 +77,7 @@
           <ul class="dropdown-menu pull-right">
             <% if(folderItem.ReqItems) {%>
             <% var items = folderItem.ReqItems; items.forEach(function (item, index) {%>
-            <!--<% item.taskId = data.id %>-->
-            <li><a name="<%- item.name%>" class="btn" onclick="addCaseToTask({itemName:'<%-item.name%>',taskId:'<%-data.id%>'})"><%- item.name%></a></li>
-            <!--<li><a name="<%- item.name%>" class="btn" onclick="addCaseToTask({item:'<%- item%>'})"><%- item.name%></a></li>-->
+            <li><a name="<%- item.name%>" onclick="addCaseToTask({itemName:'<%-item.name%>',taskId:'<%-data.id%>'})"><%- item.name%></a></li>
             <% })%>
             <% } %>
           </ul>
@@ -90,4 +90,4 @@
 </div>
 
 <script src="/xd-autotest-framework/js/index/frame-right.js"></script>
-<script src="/task/editTask.js"></script>
+<script src="/xd-autotest-framework/js/task/editTask.js"></script>

@@ -1,31 +1,57 @@
 {
     "id": "",
     "name": "Default",
-    "timestamp": 1470907616772,
-    "collection_id": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
+    "timestamp": 1471487817163,
+    "collection_id": "57b3d3f9b367197e2a363c49",
     "folder_id": 0,
     "target_type": "collection",
     "count": 1,
     "collection": {
-        "id": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
-        "name": "testCollection",
-        "description": "This is a description",
+        "id": "57b3d3f9b367197e2a363c49",
+        "name": "22",
+        "description": "暂时没有任务描述。",
         "order": [
-            "7f8f85aa-db54-4563-940b-2fc9c5d3eb08"
+            "effdfd46-ff28-4b2a-a160-8cb136adbe89",
+            "497e8cdb-6a4e-4a28-84db-23f4c07a19cf",
+            "843011fa-1cfa-4294-99a9-66b66a089e65"
         ],
         "folders": [],
         "requests": [
             {
-                "id": "7f8f85aa-db54-4563-940b-2fc9c5d3eb08",
-                "name": "首页接口业务场景用例",
-                "collectionId": "5c31aa29-ce80-40b7-bb22-d91480aeb43e",
-                "method": "",
+                "id": "effdfd46-ff28-4b2a-a160-8cb136adbe89",
+                "name": "个人资料修改接口",
+                "collectionId": "57b3d3f9b367197e2a363c49",
+                "method": "POST",
                 "headers": "",
                 "data": [],
                 "rawModeData": "",
                 "tests": "",
                 "preRequestScript": "",
-                "url": ""
+                "url": "http://192.168.31.88:8002/selftaught/user/modifyMyInfo"
+            },
+            {
+                "id": "497e8cdb-6a4e-4a28-84db-23f4c07a19cf",
+                "name": "个人资料修改接口",
+                "collectionId": "57b3d3f9b367197e2a363c49",
+                "method": "POST",
+                "headers": "",
+                "data": [],
+                "rawModeData": "",
+                "tests": "",
+                "preRequestScript": "",
+                "url": "http://192.168.31.88:8002/selftaught/user/modifyMyInfo"
+            },
+            {
+                "id": "843011fa-1cfa-4294-99a9-66b66a089e65",
+                "name": "个人资料修改接口",
+                "collectionId": "57b3d3f9b367197e2a363c49",
+                "method": "POST",
+                "headers": "",
+                "data": [],
+                "rawModeData": "",
+                "tests": "",
+                "preRequestScript": "",
+                "url": "http://192.168.31.88:8002/selftaught/user/modifyMyInfo"
             }
         ]
     },
@@ -35,9 +61,55 @@
     },
     "results": [
         {
-            "id": "7f8f85aa-db54-4563-940b-2fc9c5d3eb08",
-            "name": "首页接口业务场景用例",
-            "url": "",
+            "id": "effdfd46-ff28-4b2a-a160-8cb136adbe89",
+            "name": "个人资料修改接口",
+            "url": "http://192.168.31.88:8002/selftaught/user/modifyMyInfo",
+            "totalTime": 0,
+            "responseCode": {
+                "code": 0,
+                "name": "",
+                "detail": ""
+            },
+            "tests": {},
+            "totalPassFailCounts": {
+                "pass": 0,
+                "fail": 0
+            },
+            "testPassFailCounts": {},
+            "times": [],
+            "allTests": [
+                {}
+            ],
+            "time": 0,
+            "meanResponseTime": 0
+        },
+        {
+            "id": "497e8cdb-6a4e-4a28-84db-23f4c07a19cf",
+            "name": "个人资料修改接口",
+            "url": "http://192.168.31.88:8002/selftaught/user/modifyMyInfo",
+            "totalTime": 0,
+            "responseCode": {
+                "code": 0,
+                "name": "",
+                "detail": ""
+            },
+            "tests": {},
+            "totalPassFailCounts": {
+                "pass": 0,
+                "fail": 0
+            },
+            "testPassFailCounts": {},
+            "times": [],
+            "allTests": [
+                {}
+            ],
+            "time": 0,
+            "meanResponseTime": 0
+        },
+        {
+            "id": "843011fa-1cfa-4294-99a9-66b66a089e65",
+            "name": "个人资料修改接口",
+            "url": "http://192.168.31.88:8002/selftaught/user/modifyMyInfo",
             "totalTime": 0,
             "responseCode": {
                 "code": 0,

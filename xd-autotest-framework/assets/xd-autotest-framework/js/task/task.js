@@ -24,13 +24,13 @@ $(document).ready(function () {
 
   //ajaxSubmit 
   $("#saveBtn").click(function () {
-    $('#addTaskModal').modal('hide');
-    $('addTaskModal').css("overflow","show");
-    // $('addTaskModal').css("overflow","hidden");
-    $(".modal-backdrop").hide();
+    $("#addTaskModal").toggle();
+    $("div.modal-backdrop").remove();
+    $("body.modal-open").toggleClass("modal-open");
     $("#form").ajaxSubmit(option_save);
   });
 });
+
 
 /**
  * 删除所有任务
