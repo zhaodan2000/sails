@@ -39,27 +39,46 @@
               </div>
               <div class="form-group">
                 <label>接口请求方式method</label>
-                <input name="api_method" class="form-control"  />
+                <!--<input name="api_method" class="form-control"  />-->
+                <select class="form-control" name="api_method">
+                  <option value="POST" selected="selected">POST</option>
+                  <option value="GET">GET</option>
+                </select>
               </div>
               <div class="form-group">
                 <label>接口是否废弃disabled</label>
-                <input name="api_disabled" class="form-control" />
+                <!--<input name="api_disabled" class="form-control" />-->
+                <select class="form-control" name="api_disabled" >
+                  <option value="false">false</option>
+                  <option value="true">true</option>
+                </select>
               </div>
               <div class="form-group">
                 <label>接口请求格式content-type</label>
-                <input name="api_dataType" class="form-control" />
+                <!--<input name="api_dataType" class="form-control" />-->
+                <select class="form-control" name="api_dataType" >
+                  <option value="application/json">application/json</option>
+                  <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
+                  <option value="application/application/octet-stream">application/application/octet-stream</option>
+                  <option value="text/html">text/html</option>
+                  <option value="text/plain">text/plain</option>
+                  <option value="text/xml">text/xml</option>
+                  <option value="image/gif">image/gif</option>
+                  <option value="image/jpeg">image/jpeg</option>
+                  <option value="image/png">image/png</option>
+                </select>
               </div>
               <div class="form-group">
                 <label>接口请求头header</label>
-                <input name="api_header" class="form-control"  />
+                <textarea name="api_header" rows="8" class="form-control"  />
               </div>
               <div class="form-group">
                 <label>接口请求参数queryParams(以json格式输入)</label>
-                <input name="api_queryParams" class="form-control" />
+                <textarea name="api_queryParams" rows="8" class="form-control" />
               </div>
               <div class="form-group">
                 <label>接口返回结果response(以json格式输入)</label>
-                <input name="api_response" class="form-control"/>
+                <textarea name="api_response" rows="8" class="form-control"/>
               </div>
             </li>
             <%for(var i=0;i<api_docs.APIdoc_items.length;i++){%>
@@ -77,30 +96,52 @@
               </div>
               <div class="form-group">
                 <label>接口请求方式method</label>
-                <input name="api_method" class="form-control" id="<%='api_method_'+(i+1)%>"
-                       value="<%=api_docs.APIdoc_items[i].method%>"/>
+                <!--<input name="api_method" class="form-control" id="<%='api_method_'+(i+1)%>"-->
+                       <!--value="<%=api_docs.APIdoc_items[i].method%>"/>-->
+                <select class="form-control" name="api_method" >
+                  <option value="<%=api_docs.APIdoc_items[i].method%>"><%=api_docs.APIdoc_items[i].method%></option>
+                  <option value="POST" >POST</option>
+                  <option value="GET">GET</option>
+                </select>
               </div>
               <div class="form-group">
                 <label>接口是否废弃disabled</label>
-                <input name="api_disabled" class="form-control"  id="<%='api_disabled_'+(i+1)%>"
-                       value="<%=api_docs.APIdoc_items[i].disabled%>"/>
+                <!--<input name="api_disabled" class="form-control"  id="<%='api_disabled_'+(i+1)%>"-->
+                       <!--value="<%=api_docs.APIdoc_items[i].disabled%>"/>-->
+                <select class="form-control" name="api_disabled" >
+                  <option value="<%=api_docs.APIdoc_items[i].disabled%>"><%=api_docs.APIdoc_items[i].disabled%></option>
+                  <option value="false">false</option>
+                  <option value="true">true</option>
+                </select>
               </div>
               <div class="form-group">
                 <label>接口请求格式content-type</label>
-                <input name="api_dataType" class="form-control" id="<%='api_dataType_'+(i+1)%>"
-                       value="<%=api_docs.APIdoc_items[i].dataType%>"/>
+                <!--<input name="api_dataType" class="form-control" id="<%='api_dataType_'+(i+1)%>"-->
+                       <!--value="<%=api_docs.APIdoc_items[i].dataType%>"/>-->
+                <select class="form-control" name="api_dataType" >
+                  <option value="<%=api_docs.APIdoc_items[i].dataType%>" color="red"><%=api_docs.APIdoc_items[i].dataType%></option>
+                  <option value="application/json">application/json</option>
+                  <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
+                  <option value="application/application/octet-stream">application/application/octet-stream</option>
+                  <option value="text/html">text/html</option>
+                  <option value="text/plain">text/plain</option>
+                  <option value="text/xml">text/xml</option>
+                  <option value="image/gif">image/gif</option>
+                  <option value="image/jpeg">image/jpeg</option>
+                  <option value="image/png">image/png</option>
+                </select>
               </div>
               <div class="form-group">
                 <label>接口请求头header</label>
-                <textarea name="api_header" class="form-control" id="<%='api_header_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].header,null,4)%></textarea>
+                <textarea name="api_header" rows="8" class="form-control" id="<%='api_header_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].header,null,"\t")%></textarea>
               </div>
               <div class="form-group">
                 <label>接口请求参数queryParams(以json格式输入)</label>
-                <textarea name="api_queryParams"  class="form-control" id="<%='api_queryParams_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].queryParams,null,4)%></textarea>
+                <textarea name="api_queryParams" rows="8" class="form-control" id="<%='api_queryParams_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].queryParams,null,"\t")%></textarea>
               </div>
               <div class="form-group">
                 <label>接口请求参数response(以json格式输入)</label>
-                <textarea name="api_response" class="form-control" id="<%='api_response_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].response,null,4)%></textarea>
+                <textarea name="api_response" rows="8" class="form-control" id="<%='api_response_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].response,null,"\t")%></textarea>
               </div>
             </li>
             <%}%>
@@ -131,9 +172,9 @@
     console.log('apis_count=%d',apis_count);
     testItem.find('input#api_title').attr("id","api_title"+apis_count);
     testItem.find('input#api_url').attr("id","api_url"+apis_count);
-    testItem.find('input#api_method').attr("id","api_method_"+apis_count);
-    testItem.find('input#api_disabled').attr("id","api_disabled_"+apis_count);
-    testItem.find('input#api_dataType').attr("id","api_dataType_"+apis_count);
+    testItem.find('select#api_method').attr("id","api_method_"+apis_count);
+    testItem.find('select#api_disabled').attr("id","api_disabled_"+apis_count);
+    testItem.find('select#api_dataType').attr("id","api_dataType_"+apis_count);
     testItem.find('input#api_header').attr("id","api_header_"+apis_count);
     testItem.find('input#api_queryParams').attr("id","api_queryParams_"+apis_count);
     testItem.find('input#api_response').attr("id","api_response_"+apis_count);
@@ -164,9 +205,13 @@
       var selector='li#api_'+(i+1);
       var apiItem_name=$(selector).find('input[name="api_title"]').val();
       var apiItem_url=$(selector).find('input[name="api_url"]').val();
-      var apiItem_disabled=$(selector).find('input[name="api_disabled"]').val();
-      var apiItem_method=$(selector).find('input[name="api_method"]').val();
-      var apiItem_dataType=$(selector).find('input[name="api_dataType"]').val();
+//      var apiItem_disabled=$(selector).find('input[name="api_disabled"]').val();
+//      var apiItem_method=$(selector).find('input[name="api_method"]').val();
+//      var apiItem_dataType=$(selector).find('input[name="api_dataType"]').val();
+
+      var apiItem_disabled=$(selector).find('select[name="api_disabled"]').val();
+      var apiItem_method=$(selector).find('select[name="api_method"]').val();
+      var apiItem_dataType=$(selector).find('select[name="api_dataType"]').val();
       var apiItem_header=$(selector).find('textarea[name="api_header"]').val();
       var apiItem_queryParams=$(selector).find('textarea[name="api_queryParams"]').val();
       var apiItem_response=$(selector).find('textarea[name="api_response"]').val();

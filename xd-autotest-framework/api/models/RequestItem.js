@@ -18,18 +18,20 @@ module.exports = {
     id: {
       type: 'string',
       required: false,
-      primaryKey: true
+      primaryKey:true
     },
-
-    //request name
+    uniqID:{
+      type:'string',
+      required:false,
+      unique:true,
+      defaultsTo:(new Date().getTime()).toString()
+    },
     name: {
       type: 'string',
-      required: true,
+      required: false,
       minLength: 1,
-      unique:true,
       maxLength: 60
     },
-
     //auth 开发人员
     dev:{
       type:'string',
@@ -59,7 +61,7 @@ module.exports = {
     //url
     url: {
       type: 'string',
-      required: true,
+      required: false,
       minLength: 1,
       maxLength: 300
     },

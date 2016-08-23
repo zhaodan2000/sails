@@ -106,7 +106,7 @@ $('#delete_reqItemTable').click(function(){
     error:function(err){
       console.log(err);
       var retmsg={retcode:-1,retdesc:"error",data:data};
-      $("textarea#textarea_response").val(JSON.stringify(retmsg,null,4));
+      $("textarea#textarea_response").val(JSON.stringify(retmsg,null,"\t"));
     }
   });
 });

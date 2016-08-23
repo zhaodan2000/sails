@@ -15,10 +15,15 @@ module.exports = {
       required:false,
       primaryKey:true
     },
+    uniqID:{
+      type:'string',
+      required:false,
+      unique:true,
+      defaultsTo:(new Date().getTime()).toString()
+    },
     Task_name:{
       type:'string',
-      unique:true,
-      required:true
+      required:false
     },
     Task_desc:{
       type:'string',

@@ -8,13 +8,22 @@
 		* POST
 	* **接口是否废弃**
 		* false
-	* **接口请求格式content-type**
+	* **请求格式content-type**
 		* x-www-form-urlencoded
-	* **接口请求头header**
-		* [object Object]
-	* **接口请求参数queryParams(以json格式展示)**
-		* [object Object]
-	* **接口返回结果response(以json格式展示)**
+	* **请求头header**
+		* {
+	"module": "2",
+	"version": "1.0",
+	"clientType": "ios",
+	"clientIp": "192.168.1.1",
+	"deviceId": "888",
+	"sessionToken": ""
+}
+	* **请求参数queryParams(以json格式展示)**
+		* {
+	"req": ""
+}
+	* **返回结果response(以json格式展示)**
 		* undefined
 2. ate
 	* **请求url**
@@ -23,11 +32,20 @@
 		* POST
 	* **接口是否废弃**
 		* false
-	* **接口请求格式content-type**
+	* **请求格式content-type**
 		* x-www-form-urlencoded
-	* **接口请求头header**
-		* [object Object]
-	* **接口请求参数queryParams(以json格式展示)**
-		* [object Object]
-	* **接口返回结果response(以json格式展示)**
-		* undefined
+	* **请求头header**
+		* {
+	"module": "2",
+	"version": "1.0",
+	"clientType": "ios",
+	"clientIp": "192.168.1.1",
+	"deviceId": "888",
+	"sessionToken": ""
+}
+	* **请求参数queryParams(以json格式展示)**
+		* {
+	"参数1": "value1"
+}
+	* **返回结果response(以json格式展示)**
+		* "{\n\t\"参数1\": \"value1\"，\n\"参数2\"：\"value2\"\n}"

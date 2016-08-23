@@ -13,14 +13,19 @@ module.exports={
       unique:true,
       primaryKey:true
     },
+    uniqID:{
+      type:'string',
+      required:false,
+      unique:true,
+      defaultsTo:(new Date().getTime()).toString()
+    },
     name: {
       type: 'string',
-      unique: true,
-      required: true,
+      required: false,
     },
     url:{
       type:'string',
-      required:true
+      required:false
     },
     apiversion:{
       type:'string',

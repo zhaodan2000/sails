@@ -15,10 +15,15 @@ module.exports = {
       required:false,
       primaryKey:true
     },
-    name:{
+    uniqID:{
       type:'string',
+      required:false,
       unique:true,
-      required:true
+      defaultsTo:(new Date().getTime()).toString()
+    },
+    name: {
+      type: 'string',
+      required: false,
     },
     desc:{
       type:'string',
