@@ -162,7 +162,7 @@ module.exports = {
       console.log("插入问道文档\r\n" + JSON.stringify(records, null, "\t"));
     });
     var apiDocID='57bc409d7129b2a51af7c512';
-    var docItemRow={name:'首页接口', url:'http://192.168.103.101:8020/selftaught/home', APIdocID:apiDocID};
+    var docItemRow={name:'首页接口', uniqID:new Date().getTime().toString(),url:'http://192.168.103.101:8020/selftaught/home', APIdocID:apiDocID};
     mongoService.Insert('APIdocitem',docItemRow,function(records){
       res.send(records);
       res.ok();
