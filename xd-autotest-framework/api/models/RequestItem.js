@@ -89,7 +89,14 @@ module.exports = {
       enum:['raw', 'formdata', 'urlencoded','file'],
       required: false
     },
-
+    testscript:{
+      type:'string',
+      required: false
+    },
+    prescript:{
+      type:'string',
+      required: false
+    },
     //response
     response: {
       type: 'json',

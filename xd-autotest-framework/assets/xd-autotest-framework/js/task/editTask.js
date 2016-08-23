@@ -61,8 +61,7 @@ function deleteCaseWithName(data) {
   console.log(data.caseId);
   data.node.parentNode.remove();
   // console.log(data.taskId);
-  $.post("/TaskManager/deleteSingleCase", {caseId:data.caseId}, function (result) {
-
+  $.post("/TaskManager/deleteSingleCase", {caseId:data.caseId, taskId:data.taskId}, function (result) {
     //删除页面上所有的case
     alert("删除成功")
   }, "json");
