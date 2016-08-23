@@ -197,10 +197,10 @@ module.exports = {
    * @param res
      */
   deleteSingleCase: function (req, res) {
-    console.log("deleteAllCase------"+req.body.caseId);
+    console.log("deleteCase------"+req.body.caseId);
     var caseId = req.body.caseId;
-    // var taskId = ;
-    mongoService.Delete("TaskCase", {id:caseId});
+    var taskId = req.body.taskId;
+    mongoService.Delete("TaskCase", {id:caseId, TaskID:taskId});
     // mongoService.Delete("TaskCase", {TaskID:taskId.toString()}, function(record) {
     //   console.log(record);
     // });

@@ -54,7 +54,7 @@
           <a href="#" name="<%- caseItem.id %>" class="list-group-item"> <%- caseItem.name %>
             <!--<span class="badge btn" onclick="downClicked()">down</span>-->
             <!--<span class="badge btn" onclick="upClicked()">up</span>-->
-            <span name="<%- caseItem.id %>" class="badge btn btn-danger" onclick="deleteCaseWithName({node:this, caseId:'<%- caseItem.id %>'})">delete</span>
+            <span name="<%- caseItem.id %>" class="badge btn btn-danger" onclick="deleteCaseWithName({node:this, caseId:'<%- caseItem.name %>', taskId:'<%- caseItem.TaskID %>'})">delete</span>
             <!--<span class="badge btn btn-danger" onclick="deleteCaseWithName({caseName:'<%- caseItem.name %>', tasId:'<%- caseItem.TaskID %>'})">delete</span>-->
             <i class="fa fa-fw fa-check"></i>
           </a>

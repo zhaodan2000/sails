@@ -7,8 +7,30 @@ require('../utils/string');
 
 module.exports = {
 
-  creatItem: function (obj) {
-    return this.configItem(this.configRequestItem(obj), this.configEvent(obj));
+
+
+  /**
+   * 根据一个requestItem对象生成request
+   * @param requestItem
+   * @returns {{id: *, name: *, disabled: *, url: *, method: *, header, body: {mode: *, urlencoded}}}
+   */
+  configRequestItem: function (requestItem) {
+    var headers = requestItem.headers;  //type is json
+    var queryParam = requestItem.queryParam;  //type is json
+
+    var request = {
+      id:requestItem.id,
+      name:requestItem.name,
+      disabled: requestItem.disabled,
+      url:requestItem.url,
+      method:requestItem.method,
+      header:getHeaderWithJson(headers),
+      body:{
+        mode:requestItem.mode,
+        urlencoded:getQueryParamWithJson(queryParam)
+      }
+    }
+    return request;
   },
 
   configEvent: function (item) {
@@ -55,31 +77,10 @@ module.exports = {
     }
     return item;
   },
-
-  /**
-   * 根据一个requestItem对象生成request
-   * @param requestItem
-   * @returns {{id: *, name: *, disabled: *, url: *, method: *, header, body: {mode: *, urlencoded}}}
-     */
-  configRequestItem: function (requestItem) {
-    var headers = requestItem.headers;  //type is json
-    var queryParam = requestItem.queryParam;  //type is json
-
-    var request = {
-      id:requestItem.id,
-      name:requestItem.name,
-      disabled: requestItem.disabled,
-      url:requestItem.url,
-      method:requestItem.method,
-      header:getHeaderWithJson(headers),
-      body:{
-        mode:requestItem.mode,
-        urlencoded:getQueryParamWithJson(queryParam)
-      }
-    }
-    return request;
+  creatItem: function (obj) {
+    return this.configItem(this.configRequestItem(obj), this.configEvent(obj));
   },
-
+  
   /**
    * 将传入的prescript语句转化为event中prescript需要的语法
    * @param prestring

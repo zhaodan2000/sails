@@ -159,8 +159,7 @@ function parseHeaderString(headerString) {
 }
 
 //将传入的prescript语句转化为event中prescript需要的语法
-  function parseInputPreString(prestring) {
-
+function parseInputPreString(prestring) {
   var prescriptObj={global:{},evn:{}};
   eval(prestring);
   var returnString = '';
