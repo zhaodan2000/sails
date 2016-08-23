@@ -2,46 +2,32 @@
 ### 暂无文档描述
 ### 接口
 1. testee
-	* **url**
+	* **请求url**
 		* sdfsdf
-	* **method**
+	* **请求方式method**
 		* POST
-	* **disabled**
+	* **接口是否废弃**
 		* false
-	* **dataType**
+	* **接口请求格式content-type**
 		* x-www-form-urlencoded
-	* **header**
-		* {
-    "module": "2",
-    "version": "1.0",
-    "clientType": "ios",
-    "clientIp": "192.168.1.1",
-    "deviceId": "888",
-    "sessionToken": ""
-}
-	* **queryParams**
-		* {
-    "req": ""
-}
+	* **接口请求头header**
+		* [object Object]
+	* **接口请求参数queryParams(以json格式展示)**
+		* [object Object]
+	* **接口返回结果response(以json格式展示)**
+		* undefined
 2. ate
-	* **url**
+	* **请求url**
 		* asdf
-	* **method**
+	* **请求方式method**
 		* POST
-	* **disabled**
+	* **接口是否废弃**
 		* false
-	* **dataType**
+	* **接口请求格式content-type**
 		* x-www-form-urlencoded
-	* **header**
-		* {
-    "module": "2",
-    "version": "1.0",
-    "clientType": "ios",
-    "clientIp": "192.168.1.1",
-    "deviceId": "888",
-    "sessionToken": ""
-}
-	* **queryParams**
-		* {
-    "req": ""
-}
+	* **接口请求头header**
+		* [object Object]
+	* **接口请求参数queryParams(以json格式展示)**
+		* [object Object]
+	* **接口返回结果response(以json格式展示)**
+		* undefined
