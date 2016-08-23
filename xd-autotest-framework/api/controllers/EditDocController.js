@@ -157,12 +157,12 @@ module.exports = {
   },
 
   testInsert:function(req,res) {
-    var apiDoc={name:"问道",docDesc:"分享知识平台的接口文档(1.0版本)",testEnv:"192.168.103.101",testEnvPort:"8020"};
+    var apiDoc={name:"问道",uniqID:(new Date().getTime()).toString(), docDesc:"分享知识平台的接口文档(1.0版本)",testEnv:"192.168.103.101",testEnvPort:"8020"};
     mongoService.Insert("APIdoc",apiDoc, function(records) {
       console.log("插入问道文档\r\n" + JSON.stringify(records, null, "\t"));
     });
     var apiDocID='57bc409d7129b2a51af7c512';
-    var docItemRow={name:'首页接口', uniqID:new Date().getTime().toString(),url:'http://192.168.103.101:8020/selftaught/home', APIdocID:apiDocID};
+    var docItemRow={name:'首页接口', uniqID:(new Date().getTime()).toString(),url:'http://192.168.103.101:8020/selftaught/home', APIdocID:apiDocID};
     mongoService.Insert('APIdocitem',docItemRow,function(records){
       res.send(records);
       res.ok();
@@ -170,9 +170,9 @@ module.exports = {
   },
 
   testInsertDocItem:function(req,res){
-    var apiDocRow={name:"这是添加随机数ID之后的文档。。"};
+    var apiDocRow={name:"这是添加随机数ID之后的文档。。",uniqID:(new Date().getTime()).toString(),};
     mongoService.Insert("APIdoc",apiDocRow,function(records){
-      var docItemRow={name:'首页接口', url:'http://192.168.103.101:8020/selftaught/home', APIdocID:records.id};
+      var docItemRow={name:'首页接口',uniqID:(new Date().getTime()).toString(), url:'http://192.168.103.101:8020/selftaught/home', APIdocID:records.id};
       mongoService.Insert('APIdocitem',docItemRow,function(records){
         res.send(records);
         res.ok();

@@ -1,3 +1,32 @@
 # 问道
 ### 分享知识平台的接口文档(1.0版本)
 ### 接口
+1. 首页接口
+	* **请求url**
+		* http://192.168.103.101:8020/selftaught/home
+	* **请求方式method**
+		* POST
+	* **接口是否废弃**
+		* false
+	* **请求格式content-type**
+		* x-www-form-urlencoded
+	* **请求头header**
+		* {
+	"module": "2",
+	"version": "1.0",
+	"clientType": "ios",
+	"clientIp": "192.168.1.1",
+	"deviceId": "888",
+	"sessionToken": ""
+}
+	* **请求参数queryParams(以json格式展示)**
+		* {
+	"req": ""
+}
+	* **返回结果response(以json格式展示)**
+		* {
+	"retcode": "0",
+	"retOk": true,
+	"retdesc": "操作成功",
+	"message": ""
+}
