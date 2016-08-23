@@ -13,6 +13,7 @@ module.exports={
       unique: true,
       primaryKey: true
     },
+    
     name: {
       type: 'string',
       required: true,
@@ -30,7 +31,7 @@ module.exports={
     docDesc:{
       type:'string',
       required:false,
-      defaultsTo:'文档中所有接口参数传递均使用req包装的方式，所有参数指代req解析后的参数键值对。'
+      defaultsTo:'接口文档描述。'
     },
 
     /**
