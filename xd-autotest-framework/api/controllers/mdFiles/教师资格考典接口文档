@@ -1,0 +1,47 @@
+# 教师资格考典接口文档
+### 暂无文档描述
+### 接口
+1. testee
+	* **url**
+		* sdfsdf
+	* **method**
+		* POST
+	* **disabled**
+		* false
+	* **dataType**
+		* x-www-form-urlencoded
+	* **header**
+		* {
+    "module": "2",
+    "version": "1.0",
+    "clientType": "ios",
+    "clientIp": "192.168.1.1",
+    "deviceId": "888",
+    "sessionToken": ""
+}
+	* **queryParams**
+		* {
+    "req": ""
+}
+2. ate
+	* **url**
+		* asdf
+	* **method**
+		* POST
+	* **disabled**
+		* false
+	* **dataType**
+		* x-www-form-urlencoded
+	* **header**
+		* {
+    "module": "2",
+    "version": "1.0",
+    "clientType": "ios",
+    "clientIp": "192.168.1.1",
+    "deviceId": "888",
+    "sessionToken": ""
+}
+	* **queryParams**
+		* {
+    "req": ""
+}

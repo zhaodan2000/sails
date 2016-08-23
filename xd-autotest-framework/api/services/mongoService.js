@@ -290,6 +290,7 @@ module.exports={
           }
         });
         break;
+      
       case "ScheduleStrategy":
         ScheduleStrategy.find(dic).exec(function(err,records){
           if (!err) {

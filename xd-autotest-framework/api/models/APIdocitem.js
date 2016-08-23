@@ -25,11 +25,13 @@ module.exports={
     apiversion:{
       type:'string',
       unique:false,
-      required:false
+      required:false,
+      defaultsTo:"1.0.0"
     },
     dev:{
       type:'string',
-      required:false
+      required:false,
+      defaultsTo:""
     },
     disabled:{
       type:'boolean',
@@ -38,7 +40,8 @@ module.exports={
     },
     description:{
       type:'string',
-      required:false
+      required:false,
+      defaultsTo:"暂无接口描述"
     },
     method:{
       type:'string',
@@ -72,6 +75,11 @@ module.exports={
     response:{
       type:'json',
       //required:true
+      defaultsTo:{"retcode":"0",
+        "retOk":true,
+        "retdesc":"操作成功",
+        "message":""
+      }
     },
     /**
      * doc与docItem建立关联。

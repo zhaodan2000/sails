@@ -11,23 +11,14 @@ var path=require('path');
 module.exports = {
 
   testService:function(req,res){
-    res.view('doc/APIdoc');
-
-  },
-
-  test:function(req,res){
-    //mongoService.deletAllRecords(docItem);
-    var data;
-    mongoService.findAll('RequestItem', function(records){
-      data=records;
+    mongoService.Find('APIdoc',null,function (records) {
+      res.view('doc/APIdoc', {api_docs:records});
     });
-    res.send(data);
-    /**
-    mongoService.findAll(docItem, function(records){
-      data=records;
-    })**/
   },
 
+  /**
+   * 创建api doc.
+   * */
   createDoc:function(req,res){
     var queryString=req.param("docName");
     console.log(queryString);
@@ -62,182 +53,91 @@ module.exports = {
 
 
   /**
-   * 根据doc name查找doc.
-   * */
-  findDocByName:function(req,res){
-    var queryString=req.param("docName");
-    console.log(queryString);
-
-    var _doc;
-    if(queryString){
-
-    }
-    doc.find({name:queryString}).exec(function (records) {
-      if(records){
-        console.log("\r\n查找doc成功!");
-        console.log(records);
-        _doc={retcode:0,retdesc:'success',data:records};
-      }else{
-        console.log("\r\n查找doc失败...");
-        _doc={retcode:-1, retdesc:"find failed..",data:records};
-      }
-    });
-    res.send(_doc);
-  },
-
-  /**
    * 将doc与docItem存入db中,其中doc:docItem=1:N
+   * 入参:
+   * data: {
+      apiDoc: APIdoc,
+        apiItems:apiItemsArray
+    }
    * */
   saveDoc2db: function(req,res){
+
     console.log("\r\nreq.body is:")
     console.log(req.body);
     //构造APIdoc对象
-    var API_doc={name:req.body["docName"],docDesc:req.body["docdesc"],testenv:req.body["testEnv"], testEnvPort:req.body["testEnvPort"]};
-    console.log(JSON.stringify(API_doc));
+    //var API_doc={name:req.body["docName"],docDesc:req.body["docdesc"],testenv:req.body["testEnv"], testEnvPort:req.body["testEnvPort"]};
+    var API_doc=req.body["apiDoc"];
+    //console.log(JSON.stringify(API_doc));
 
     //构造APIdocitem对象
-    var apisItemArray=new Array();
-    var apis_Count = req.body["apis_count"];
-    for (var i = 0; i < apis_Count; i++) {
-      var apiName = req.body["apiName_" + (i + 1)];
-      var url = req.body["URL_" + (i + 1)];
-      var apidocitem = {name: apiName, url: url,APIdocID:""};
-      apisItemArray.push(apidocitem);
-    }
-
-
-    console.log(JSON.stringify(apisItemArray));
+    var apisItemArray=req.body["apiItems"];
+    //console.log(JSON.stringify(apisItemArray));
+    console.log("req.body['apiItems']的长度是"+req.body["apiItems"].length);
+    console.log("apisItemArray的长度是"+apisItemArray.length);
 
     var insertedAPIdocitem=new Array();
 
-    mongoService.Find('APIdoc',{name:req.body["docName"]},function (records) {
-      if(records) {//存在,则更新APIdoc, 同时更新(或添加)APIdocitem
-        for (var i = 0; i < apis_Count; i++) {
-          apisItemArray[i].APIdocID = records.id;
-          mongoService.Find('APIdocitem', {name: apisItemArray[i].name}, function (records) {
-            if (records){
+    mongoService.Find("APIdoc",{name:API_doc.name},function (records) {
 
-
-            }else{
-
-            }
-
-          });
-        }
+      /** 不存在APIdoc对象  */
+      if(!records||records.length==0){
+        mongoService.Insert("APIdoc",API_doc,function (insertedDOC) {
+          console.log("插入apidoc成功:\r\n"+JSON.stringify(insertedDOC, null, 4));
+          for (var i = 0; i < apisItemArray.length; i++) {
+            apisItemArray[i].APIdocID = insertedDOC.id;
+            var tempItem=apisItemArray[i];
+            mongoService.Insert('APIdocitem', tempItem,function (insertedItem) {
+              insertedAPIdocitem.push(insertedItem);
+              console.log("插入apiItem:\r\n"+JSON.stringify(insertedItem,null,4));
+            })
+          }
+        });
       }
-      else {//不存在该文档,则先添加APIdoc, 再添加APIdocitem
-        mongoService.Insert('APIdoc',API_doc,function(records){
-          if(records){
-            for (var i = 0; i < apis_Count; i++) {
-              apisItemArray[i].APIdocID=records.id;
-              mongoService.Insert('APIdocitem',apisItemArray[i],function(records){
-                if(records){
-                  insertedAPIdocitem.push(records);
+      /** 存在APIdoc对象**/
+      else {//存在APIdoc
+        mongoService.Update("APIdoc", API_doc, {name: API_doc.name}, function (updatedDOC) {
+          /** 更新APIdoc成功 */
+          if(updatedDOC && updatedDOC.length>0){
+            console.log("更新APIdoc成功,APIdoc.id="+records[0].id);
+            for (var i = 0; i < apisItemArray.length; i++){
+              apisItemArray[i].APIdocID = records[0].id;
+              var tempItem= apisItemArray[i];
+              console.log("\r\n"+i.toString()+"  apisItemArray[i]\r\n"+JSON.stringify(tempItem,null,4));
+              mongoService.Find("APIdocitem", {name: tempItem.name, APIdocID:tempItem.APIdocID}, function (found) {
+                console.log("\r\n"+i.toString()+"  找到APIdocitem成功,长度="+found.length);
+                /** 没有找到apiItem对象**/
+                if (!found || found.length == 0) {
+                  mongoService.Insert("APIdocitem", tempItem, function (insertedItem) {
+                    insertedAPIdocitem.push(insertedItem);
+                    console.log("插入apiItem成功\r\n"+JSON.stringify(insertedItem,null,4));
+                  });
+                }
+
+                /*** 找到apiItem对象***/
+                else {
+                  mongoService.Update("APIdocitem", tempItem, {APIdocID:tempItem.APIdocID,name: tempItem.name}, function (updatedItem) {
+                    insertedAPIdocitem.push(updatedItem);
+                    console.log("更新apiItem成功\r\n"+JSON.stringify(updatedItem,null,4));
+                  });
                 }
               });
+
             }
+            res.send(insertedAPIdocitem);
+          }
+
+          /** 更新APIdoc失败**/
+          else{
+            res.send({error:"update APIdoc failure..."});
           }
 
         });
-
-
       }
 
     });
-
-
-
-    var API_items=req.body.api_items;
-
-    /**创建API_doc与api_docitems */
-    if(!API_doc.id){
-      mongoService.Insert('APIdoc',API_doc,function(records){
-        var inserted_doc=records;
-        console.log("+++++++"+JSON.stringify(inserted_doc));
-        for(var i=0;i<API_items.length;i++) {
-          API_items[i].APIdocID=inserted_doc.id;
-          mongoService.Insert('APIdocitem',API_items[i],function(records){
-            console.log(records);
-            res.send(records);
-          });
-        }
-      });
-    }else{/**查找 **/
-      mongoService.Update('APIdoc',API_doc,null,function(records){
-          console.log(records);
-      });
-
-      for(var i=0;i<API_items.length;i++) {
-        API_items[i].APIdocID=API_doc.id;
-        mongoService.Insert('APIdocitem',API_items[i],function(records){
-          console.log(records);
-          res.send(records);
-        });
-      }
-    }
 
   },
 
-/**
- * 写文件或追加文件
- * */
-  handleFileWrite:function(req,res) {
-
-    console.log("current path:"+__dirname);
-    console.log(req);
-
-   /**
-    * 读取文件目录是否存在。
-    * */
-    var mdFiledir=__dirname+'/mdFiles';
-    fs.exists(mdFiledir,function(exists) {
-      /**
-       * 创建目录,如果目录不存在的话。
-       * */
-      if(!exists){
-        fs.mkdir(mdFiledir,function(err){
-          if(!err){
-            console.log("目录已经创建成功。");
-            return;
-          }else{
-            console.log("目录创建失败。");
-            return;
-          }
-        });
-      }else{
-        console.log("目录已经存在,不需要再创建...");
-      }
-    });
-
-    var filename=req.body.filename;
-    var filecontent=req.body.filecontent;
-    var w_data = new Buffer(filecontent);
-
-    /**
-     * filename, 必选参数，文件名
-     * data, 写入的数据，可以字符或一个Buffer对象
-     * [options],flag,mode(权限),encoding
-     * callback 读取文件后的回调函数，参数默认第一个err,第二个data 数据
-     */
-    /**
-     fs.writeFile(filename,data,[options],callback);
-     var w_data = '这是一段通过fs.writeFile函数写入的内容；\r\n';
-
-    fs.writeFile(mdFiledir + '/test.md', w_data, {flag: 'a'}, function (err) {
-      if(err) {
-        console.error(err);
-      } else {
-        console.log('写入成功');
-      }
-    }); */
-
-    // fs.appendFile(filename,data,[options],callback);
-
-    //fs.appendFile(mdFiledir + '/'+filename, '***使用fs.appendFile追加文件内容', function () {
-    fs.appendFile(mdFiledir + '/'+filename, filecontent,function () {
-      console.log('追加内容完成');
-    });
-  },
 
   /**
    * 根据入参的name, 来查找mongodb里的符合条件的记录。
@@ -308,7 +208,7 @@ module.exports = {
       var apiItem={id:"6",dev:"lidehong",disabled:false,name:"HOME6",
         url:"http://192.168.103.101:8020/selftaught/home",
         queryParam:{req:""},
-        version:"1.0.0",description:"test !!!",method:"POST",headers:{module:"2",
+        version:"1.0.0",description:" !!!",method:"POST",headers:{module:"2",
           clientType:"ios",version:"1.0.0",clientIp:"127.0.0.1",deviceId:"testDeviceId123456",sessionToken:"token123"},
         mode:"urlencoded",response:""};
 */

@@ -1,14 +1,220 @@
+
+<!--左边目录 --->
+<ul class="nav navbar-nav side-nav">
+  <li >
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#docModal" id="add_apidoc"  style="width: auto;height: auto">添加文档</button>
+  </li>
+
+  <%for(var i=0; i<api_docs.length;i++){%>
+  <li>
+    <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#doc_' + (i+1) %>" style="display:block">
+      <i class="fa fa-fw"></i><%=api_docs[i].name%>
+      <div>
+        <button id="<%='edit_api_doc_'+i%>" name="editMDfile" text="<%=api_docs[i].name%>"  class="fa fa-edit" style="width: auto;height: auto">编辑</button>
+        <button id="<%='view_api_doc_'+i%>" name="viewMDfile" text="<%=api_docs[i].name%>" class="fa fa-dashboard" style="width: auto;height: auto">查看</button>
+        <button id="<%='delete_api_doc_'+i%>" name="deleteMDfile" text="<%=api_docs[i].name%>"  disabled="true" class="fa fa-trash" style="width: auto;height:auto">删除</button>
+      </div>
+    </a>
+  </li>
+  <%}%>
+</ul>
+<div id="page-wrapper-right" aria-hidden="false" class="right-operation">
+    <form id="apidoc_form" action="/InterfaceDoc/saveDoc2db" method="post">
+      <!--右边文档内容-->
+      <!-- Page Heading -->
+      <div class="row" >
+        <div class="col-lg-12">
+          <h1 class="page-header" id="api_doc_name">业务接口文档</h1>
+          <ol class="breadcrumb">
+            <li>
+              <i class="fa fa-dashboard"></i>文档名
+              <input name="docName" value="教师资格考典接口文档" />
+            </li>
+            <li>
+              <i class="fa fa-dashboard"></i>文档描述
+              <input name="docdesc" value="暂无文档描述" />
+            </li>
+            <li>
+              <i class="fa fa-dashboard"></i>测试环境
+              <input name="testEnv" value="192.168.103.101" />
+            </li>
+            <li class="inactive">
+              <!--<i class="fa fa-edit"></i> 端口号 -->
+              <i class="fa fa-dashboard"></i>端口号
+              <input name="testEnvPort" value="具体接口端口号不同" />
+            </li>
+          </ol>
+        </div>
+      </div>
+          <!-- /.row -->
+
+      <div class="row" >
+        <div class="col-lg-6">
+          <form role="form" >
+            <input name="apis_count" type="hidden" value="3" />
+            <ol id="APIs">
+              <li id="api_template" style="display: none">
+                <i class="fa fa-edit" id="apiTitle" >接口</i>
+                <div class="form-group">
+                  <label>接口名</label>
+                  <input name="apiName" class="form-control" id="api_title" class="icon-trash" />
+
+                </div>
+                <div class="form-group">
+                  <label>URL</label>
+                  <input name="URL" class="form-control" placeholder="Enter text" id="api_url" />
+                </div>
+              </li>
+
+              <li id="api_1">
+                <i class="fa fa-edit" id="api_1_apiTitle">接口</i>
+                <div >
+                  <label>接口名</label>
+                  <input name="apiName_1" class="form-control"  />
+                </div>
+                <div class="form-group">
+                  <label>URL</label>
+                  <input name="URL_1" class="form-control" placeholder="Enter text" >
+                </div>
+                <div class="form-group" >
+                  <label>输入完整的requestItem json格式的字符串内容:</label>
+                  <textarea id="textarea_requestItem" class="form-control" style="visibility:hidden" placeholder="Enter text" rows="2" >{
+          "id":"6",
+          "dev":"lidehong",
+          "disabled":false,
+          "name":"HOME6",
+          "url":"http://192.168.103.101:8020/selftaught/home",
+          "queryParam":{
+              "req":""
+          },
+          "version":"1.0.0",
+          "description":"test !!!",
+          "method":"POST",
+          "headers":{
+              "module":"2",
+              "clientType":"iOS",
+              "version":"1.0.0",
+              "clientIp":"127.0.0.1",
+              "deviceId":"testDeviceId123456",
+              "sessionToken":"token123"
+          },
+          "mode":"urlencoded",
+          "response":""
+      }
+                  </textarea>
+                </div>
+              </li>
+              <li id="api_2">
+                <i class="fa fa-edit" id="home_api">接口</i>
+                <div class="form-group">
+                  <label>接口名</label>
+                  <input name="apiName_2" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label>URL</label>
+                  <input name="URL_2" class="form-control" placeholder="Enter text" />
+                </div>
+              </li>
+              <li id="api_3">
+                <i class="fa fa-edit" id="">接口</i>
+                <div class="form-group">
+                  <label>接口名</label>
+                  <input  name="apiName_3" class="form-control" id="test_api" />
+                </div>
+                <div class="form-group">
+                  <label>URL</label>
+                  <input name="URL_3" class="form-control" placeholder="Enter text" id="api_url" />
+                </div>
+              </li>
+
+            </ol>
+          </form>
+        </div>
+      </div>
+          <!-- /.row -->
+
+      <div class="row">
+        <div class="col-lg-6">
+            <div class="btn btn-default" id="showMdFile">展示md文件</div>
+            <div class="btn btn-default" id="addAPIbutton">增加API接口</div>
+            <div class="btn btn-default" id="save_doc_2_db">保存文档2db</div>
+            <div class="btn btn-default" text="主要效果" id="save_doc">保存文档</div>
+        </div>
+      </div>
+          <!-- /.row -->
+
+      <div class="row">
+        <div class="col-lg-6">
+          <form role="form">
+            <div class="form-group" >
+              <label>执行结果:</label>
+              <textarea id="textarea_response" class="form-control" placeholder="操作执行的结果" rows="25"></textarea>
+            </div>
+          </form>
+        </div>
+      </div>
+          <!-- /.row -->
+
+    </form>
+  </div>
+
+</div>
+
+
+
 <script type="text/javascript" >
   /**
    * Created by lyh on 8/8/16.
    */
 
-  $('#showMdFile').click(function(){
-    $.main.refreshMain('/EditDoc/testAPImd');
+  $("button[name='editMDfile']").click(function(){
+    var apiDocName=$(this).attr('text');
+    console.log(apiDocName);
+    $.ajax({
+      url:'/doc/editdoc',
+      method:"post",
+      data:{
+        docName:apiDocName
+      },
+      success:function(data){
+        console.log("编辑md文件成功!");
+        $("#page-wrapper-right").html(data);
+      }
+    });
 
   });
 
+  /**
+   * 点击查看当前md文档。
+   * **/
+  $("button[name='viewMDfile']").click(function(){
+    var apiDocName=$(this).attr('text');
+    console.log(apiDocName);
+    $.ajax({
+      url: '/doc/showmdfile',
+      method:"post",
+      contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+      data:{docName:apiDocName},
+      //data:"{'first':'蚂蚁部落','second':'欢迎您'}",
+      success:function(data){
+        console.log("查看md文件成功!");
+        $("#page-wrapper-right").html(data);
+      },
+      error:function(data){
+        console.log("查看md文件失败。。。");
+        console.log(JSON.stringify(data.responseText,null,"\t"));
+        $("#page-wrapper-right").html(data);
+      }
+    });
+
+  });
+
+  /**
+   * 点击增加API接口的编辑入口。
+   * */
   $('#addAPIbutton').click(function(){
+    $('h1#123doc')[0].innerHTML="测试1234";
+    console.log($('h1#123doc')[0].innerHTML);
 
     var testItem=$("li#api_template").clone(true);
     var apis_count=$("ol#APIs").children('li').length;
@@ -20,110 +226,7 @@
     console.log(testItem);
     //$('ol#APIs').prepend(testItem);
     $('ol#APIs').append(testItem);
-    console.log("天津啊api_item完成咯~");
-  });
-
-  $('#find_docItem').click(function(){
-    $.ajax({
-      url: '/doc/findDoc',
-      type:"Get",
-      //data:"{'first':'蚂蚁部落','second':'欢迎您'}",
-      //data:queryString,
-      data:{},
-      success:function(data){
-        //返回的数据用data.d获取内容
-        //alert(data.d);
-        $("textarea#textarea_response").val(JSON.stringify(data,null,"\t"));
-      },
-      error:function(err){
-        //alert(err);
-        $("textarea#textarea_response").val(JSON.stringify(err,null,"\t"));
-      }
-    });
-  });
-
-
-  /**
-   * 根据输入的requestName查询requestItem记录
-   * */
-  $('#findReqItem').click(function(){
-    //var queryString="newLogin";
-    var queryString=$('input#input_requestName').val();
-
-    console.log(" test ... :queryString="+queryString);
-
-    $.ajax({
-      url: '/doc/findRequestItemByName',
-      type:"Get",
-      //data:"{'first':'蚂蚁部落','second':'欢迎您'}",
-      //data:queryString,
-      data:{
-        requestName: queryString,
-        //a: $('#a').val(),
-        //b: $('#b').val()
-      },
-      success:function(data){
-        //返回的数据用data.d获取内容
-        //alert(data.d);
-        $("textarea#textarea_response").val(JSON.stringify(data,null,"\t"));
-      },
-      error:function(err){
-        //alert(err);
-        $("textarea#textarea_response").val(JSON.stringify(err,null,"\t"));
-      }
-    });
-
-    console.log("execute done service (/doc/findRequestItemByName) via ajax... this should be seen on front...");
-
-  });
-
-  /**
-   * 插入equestItem记录
-   * */
-  $('#test_insertrequestitem').click(function(){
-    //var requestItem=JSON.stringify($('textarea#textarea_requestItem').val());
-    console.log("requestItem="+$('textarea#textarea_requestItem').val());
-    var requestItemValue=$('textarea#textarea_requestItem').val();
-    console.log(requestItemValue);
-    var requestItem=JSON.parse(requestItemValue);
-    console.log(requestItem);
-    $.ajax({
-      url: "/doc/insertRequestItemService",
-      type: "Post",
-      data: {
-        req: requestItem
-      },
-      dataType: "urlencoded",
-      contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-      success: function (data) {
-        //返回的数据用data.d获取内容
-        //alert(data.d);
-        $("textarea#textarea_response").val(JSON.stringify(data,null,"\t"));
-      },
-      error: function (err) {
-        //alert(err);
-        $("textarea#textarea_response").val(JSON.stringify(err,null,"\t"));
-      }
-    });
-    console.log("execute done service (/doc/insertRequestItemService) via ajax... this should be seen on front...");
-  });
-
-  $('#delete_reqItemTable').click(function(){
-    $.ajax({
-      url:"/doc/deleteAllReqItem",
-      type:"Get",
-      data:{},
-      success:function(data){
-        console.log(data);
-        var retmsg={retcode:0,retdesc:"sucess",data:data};
-        $("textarea#textarea_response").val(JSON.stringify(retmsg,null,"\t"));
-      },
-      error:function(err){
-        console.log(err);
-        var retmsg={retcode:-1,retdesc:"error",data:data};
-        $("textarea#textarea_response").val(JSON.stringify(retmsg,null,4));
-      }
-    });
+    console.log("添加api_item完成咯~");
   });
 
   /**
@@ -139,14 +242,13 @@
 
     $.ajax({
       url: "/doc/savedoc",
-      type: "Post",
-      dataType: "json",
-      data: JSON.stringify(param),
+      method:"post",
       contentType: "application/json;charset=utf-8",
+      data: JSON.stringify(param),
       success: function (data) {
         $('textarea#textarea_response').val(JSON.stringify(data, null, "\t"));
       },
-      err: function (data) {
+      error: function (data) {
         $('#textarea_response').val(JSON.stringify(err, null, "\t"));
       }
     })
@@ -163,40 +265,21 @@
    * 将用户的输入存入doc与docItem中。
    * */
   $('#save_doc_2_db').click(function(){
-      //to do 判断表单的输入不为空。
+    //to do 判断表单的输入不为空。
     $("#apidoc_form").ajaxSubmit(option_submit);
 
   });
 
-  $('#find_doc').click(function(){
-    var queryString=$('#docName').val()+'.md';
-    console.log(queryString);
-
-    $.ajax({
-      url: '/doc/findDocByName',
-      type:"Get",
-      data:{
-        docName: queryString,
-        //a: $('#a').val(),
-        //b: $('#b').val()
-      },
-      success:function(data){
-        $("textarea#textarea_response").val(JSON.stringify(data,null,"\t"));
-      },
-      error:function(err){
-        $("textarea#textarea_response").val(JSON.stringify(err,null,"\t"));
-      }
-    })
-
-  });
-
+  /**
+   * 创建接口文档, 即生成APIdoc记录
+   * */
   $('#create_doc').click(function(){
-    var queryString=$('#docName').val()+'.md';
+    var queryString=$('#docName').val();
     console.log(queryString);
 
     $.ajax({
       url: '/doc/findDocByName',
-      type:"Get",
+      method:"get",
       //data:"{'first':'蚂蚁部落','second':'欢迎您'}",
       //data:queryString,
       data:{
@@ -219,168 +302,4 @@
 
 </script>
 
-<!--左边目录 --->
-<ul class="nav navbar-nav side-nav">
-  <li>
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" id="addtestcase" style="width: 225px;height: auto">添加用例</button>
-  </li>
-  <li>
-    <a href="javascript:void(0)" data-toggle="collapse" data-target="#test_1" style="display:block">
-      <i class="fa fa-fw fa-arrows-v"></i> 一级目录?<i class="fa fa-fw fa-caret-up"></i>
-    </a>
-    <ul data-toggle="collapse" id="test_1">
-      <li>
-        <a href="javascript:void(0)"  id="test123" >二级目录??</a>
-      </li>
-      <li>
-        <a href="javascript:void(0)"  id="test1234" >二级目录??</a>
-      </li>
-    </ul>
-  </li>
-
-</ul>
-
-<div>
-  <form id="apidoc_form" action="/InterfaceDoc/saveDoc2db" method="post">
-<!--右边文档内容-->
-    <div id="page-wrapper-right" aria-hidden="false" class="right-operation">
-<!-- Page Heading -->
-<div class="row" >
-  <div class="col-lg-12">
-    <h1 class="page-header" name="docName">业务接口文档</h1>
-    <ol class="breadcrumb">
-      <li>
-        <i class="fa fa-dashboard"></i>文档名
-        <input name="docName" value="教师资格考典接口文档" />
-      </li>
-      <li>
-        <i class="fa fa-dashboard"></i>文档描述
-        <input name="docdesc" value="暂无文档描述" />
-      </li>
-      <li>
-        <i class="fa fa-dashboard"></i>测试环境
-        <input name="testEnv" value="192.168.103.101" />
-      </li>
-      <li class="inactive">
-        <!--<i class="fa fa-edit"></i> 端口号 -->
-        <i class="fa fa-dashboard"></i>端口号
-        <input name="testEnvPort" value="具体接口端口号不同" />
-      </li>
-    </ol>
-  </div>
-</div>
-
-<div class="row" >
-  <div class="col-lg-6">
-    <form role="form" >
-      <input name="apis_count" type="hidden" value="3" />
-      <ol id="APIs">
-        <li id="api_template" style="display: none">
-          <i class="fa fa-edit" id="apiTitle" >接口</i>
-          <div class="form-group">
-            <label>接口名</label>
-            <input name="apiName" class="form-control" id="api_title"  />
-          </div>
-          <div class="form-group">
-            <label>URL</label>
-            <input name="URL" class="form-control" placeholder="Enter text" id="api_url" />
-          </div>
-        </li>
-
-        <li id="api_1">
-          <i class="fa fa-edit" id="api_1_apiTitle">接口</i>
-          <div >
-            <label>接口名</label>
-            <input name="apiName_1" class="form-control"  />
-          </div>
-          <div class="form-group">
-            <label>URL</label>
-            <input name="URL_1" class="form-control" placeholder="Enter text" >
-          </div>
-          <div class="form-group" >
-            <label>输入完整的requestItem json格式的字符串内容:</label>
-            <textarea id="textarea_requestItem" class="form-control" style="visibility:hidden" placeholder="Enter text" rows="2" >{
-    "id":"6",
-    "dev":"lidehong",
-    "disabled":false,
-    "name":"HOME6",
-    "url":"http://192.168.103.101:8020/selftaught/home",
-    "queryParam":{
-        "req":""
-    },
-    "version":"1.0.0",
-    "description":"test !!!",
-    "method":"POST",
-    "headers":{
-        "module":"2",
-        "clientType":"iOS",
-        "version":"1.0.0",
-        "clientIp":"127.0.0.1",
-        "deviceId":"testDeviceId123456",
-        "sessionToken":"token123"
-    },
-    "mode":"urlencoded",
-    "response":""
-}
-            </textarea>
-          </div>
-        </li>
-        <li id="api_2">
-          <i class="fa fa-edit" id="home_api">接口</i>
-          <div class="form-group">
-            <label>接口名</label>
-            <input name="apiName_2" class="form-control" />
-          </div>
-          <div class="form-group">
-            <label>URL</label>
-            <input name="URL_2" class="form-control" placeholder="Enter text" />
-          </div>
-        </li>
-        <li id="api_3">
-          <i class="fa fa-edit" id="">接口</i>
-          <div class="form-group">
-            <label>接口名</label>
-            <input  name="apiName_3" class="form-control" id="test_api" />
-          </div>
-          <div class="form-group">
-            <label>URL</label>
-            <input name="URL_3" class="form-control" placeholder="Enter text" id="api_url" />
-          </div>
-        </li>
-
-      </ol>
-    </form>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-lg-6">
-    <form role="form">
-      <div class="form-group">
-        <label>输入指定RequestItem的name:</label>
-        <input id="input_requestName" class="form-control">
-      </div>
-      <div class="btn btn-default" id="showMdFile">展示md文件</div>
-      <div class="btn btn-default" id="addAPIbutton">增加API接口</div>
-      <div class="btn btn-default" id="save_doc_2_db">保存文档2db</div>
-      <div class="btn btn-default" text="主要效果" id="save_doc">保存文档</div>
-    </form>
-  </div>
-</div>
-
-
-<div class="row">
-  <div class="col-lg-6">
-    <form role="form">
-      <div class="form-group" >
-        <label>执行结果:</label>
-        <textarea id="textarea_response" class="form-control" placeholder="操作执行的结果" rows="25"></textarea>
-      </div>
-    </form>
-  </div>
-</div>
-
-</div>
-
-  </form>
-</div>
+<script src="/xd-autotest-framework/js/index/frame-right.js"></script>
