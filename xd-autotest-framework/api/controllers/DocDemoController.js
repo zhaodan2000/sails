@@ -3,51 +3,6 @@
  */
 
 module.exports={
-  testAssociation:function(req,res){
-    var apiDocRow={ name:'测试'+apiDocID+'.md'};
-    var apiDoc_output;
-
-    var docItemRow={name:'首页接口'+ new Date().getMilliseconds().toString(),
-      url:'http://192.168.103.101:8020/selftaught/home',APIdocID:'184'};
-    var output;
-
-    APIdocServices.insertDocAssociation(apiDocRow, docItemRow,function(records){
-      console.log(records);
-    });
-  },
-
-  testDeleteAllDocItem:function(req,res){
-    APIdocItemServices.deleteAllAPIdocitemRecords();
-  },
-
-  testDeleteAllAPIdoc:function(req,res){
-    APIdocServices.deleteAllAPIdocRecords();
-  },
-
-
-  /**
-   * 根据doc name查找doc.
-   * */
-  findDocByName:function(req,res){
-    var queryString=req.param("docName");
-    console.log(queryString);
-
-    var _doc;
-    if(queryString){
-
-    }
-    doc.find({name:queryString}).exec(function (records) {
-      if(records){
-        console.log("\r\n查找doc成功!");
-        console.log(records);
-        _doc={retcode:0,retdesc:'success',data:records};
-      }else{
-        console.log("\r\n查找doc失败...");
-        _doc={retcode:-1, retdesc:"find failed..",data:records};
-      }
-    });
-    res.send(_doc);
-  },
 
   /**
    * 写文件或追加文件
@@ -109,5 +64,5 @@ module.exports={
       console.log('追加内容完成');
     });
 
-  } 
+  }
 }

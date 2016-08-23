@@ -10,19 +10,24 @@ var fs=require('fs');
 module.exports = {
 
   editDoc:function (req,res) {
-    console.log("hello,EditDoc.editDoc");
-    var docName=req.body['docName'];
-    console.log(docName);
-    mongoService.Find('APIdoc',{name:docName},function (records) {
-      res.view('doc/editdoc',{api_docs:records[0]});
-    });
+    var uniqId=req.body['uniqID'];
+    if(uniqId){
+      mongoService.Find('APIdoc',{uniqID:uniqId},function (records) {
+        res.view('doc/editdoc',{api_docs:records[0]});
+      });
+    }else{
+      res.errMsg="req.body['uniqID']为空。";
+      res.error();
+    }
+
+
   },
 
   showMdFile:function (req,res) {
-    if (req.body.hasOwnProperty("docName")) {
-      var mdFileName = req.body["docName"];
-      console.log("req.body.mdFileName=" + mdFileName);
-      mongoService.Find('APIdoc', {name: mdFileName}, function (found) {
+    if (req.body.hasOwnProperty("uniqid")) {
+      var uid=req.body["uniqid"];
+      console.log("req.body.uniqid=" + uid);
+      mongoService.Find('APIdoc', {uniqID:uid}, function (found) {
         if (found && found.length != 0) {
           var filename = __dirname + '/mdFiles/' + found[0].name;
           var data = '# ' + found[0].name;
@@ -38,6 +43,8 @@ module.exports = {
             data += '\r\n\t\t* ' + docItem.method;
             data += '\r\n\t* **接口是否废弃**';
             data += '\r\n\t\t* ' + docItem.disabled;
+            data += '\r\n\t* **开发者**';
+            data += '\r\n\t\t* ' + (docItem.dev?docItem.dev:"未标明");
             data += '\r\n\t* **请求格式content-type**';
             data += '\r\n\t\t* ' + docItem.dataType;
             data += '\r\n\t* **请求头header**';
@@ -62,7 +69,8 @@ module.exports = {
       });
     }
     else {
-      res.send({retcode: -1, message: 'APIdoc查询报错........',data:null});
+
+      res.send({retcode: -1, message: '传入的参数里缺少uniqid........',data:null});
     }
 
   },
@@ -119,15 +127,13 @@ module.exports = {
   },
 
   testUpdate:function(req,res) {
-    var modelType = req.param("modelType");
-    var queryString=req.param("param");
-    var param2
-    var item = {Task_name: "1", type: "1", Schedule_ID: param2, Schedule_desc: queryString};
-    mongoService.Update(modelType, item,{Task_name:"1"},function(records){
+
+    var item = {"uniqID":"1471967913424","name":"发起挑战","url":"djfal;sdf","disabled":"false","method":"POST","dataType":"application/json","header":"\"\"","queryParams":"\"\"","response":"\"\"","APIdocID":"1471957311617"};
+    mongoService.Update("APIdocitem", item,{uniqID:"1471967913424"},function(records){
       if(records){
-        console.log("更新TaskFolder没有问题。。。");
+        res.send(records);
       }else{
-        console.log("有问题???");
+        res.send({errMsg:"更新失败"});
 
       }
     });
@@ -144,12 +150,10 @@ module.exports = {
     if(modelType=='TaskCase'){
       var taskID=req.param("TaskID");
       mongoService.Find(modelType,{TaskID:taskID},function(records){
-        console.log(records);
         res.send(records);
       });
     }else{
       mongoService.Find(modelType,null,function(records){
-        console.log(records);
         res.send(records);
       });
     }

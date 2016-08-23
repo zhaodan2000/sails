@@ -51,12 +51,9 @@ module.exports.routes = {
   '/schedule': 'Home.schedule',
   'get /doc/findRequestItemByName':'InterfaceDoc.findRequestItemByName',
   'post /doc/insertRequestItemService':'InterfaceDoc.insertRequestItemService',
-  'get /doc/deleteAllReqItem':'InterfaceDoc.deleteAllRequestItemRecords',
   'post /doc/savedocwithItem':'InterfaceDoc.saveDoc2db',
-  'get /doc/createDoc' :'InterfaceDoc.createDoc',
   'post /doc/showmdfile':'EditDoc.showMdFile',
-  'post /doc/editdoc':'EditDoc.editDoc',
-
+  'post /doc/editdoc':"EditDoc.editDoc",
 
   /*
   '/apidoc':{

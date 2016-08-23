@@ -6,13 +6,13 @@
   </li>
 
   <%for(var i=0; i<api_docs.length;i++){%>
-  <li>
+  <li >
     <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#doc_' + (i+1) %>" style="display:block">
       <i class="fa fa-fw"></i><%=api_docs[i].name%>
       <div>
-        <button id="<%='edit_api_doc_'+i%>" name="editMDfile" text="<%=api_docs[i].name%>"  class="fa fa-edit" style="width: auto;height: auto">编辑</button>
-        <button id="<%='view_api_doc_'+i%>" name="viewMDfile" text="<%=api_docs[i].name%>" class="fa fa-dashboard" style="width: auto;height: auto">查看</button>
-        <button id="<%='delete_api_doc_'+i%>" name="deleteMDfile" text="<%=api_docs[i].name%>"  disabled="true" class="fa fa-trash" style="width: auto;height:auto">删除</button>
+        <button id="<%='edit_api_doc_'+i%>" name="editMDfile" uniqid="<%=api_docs[i].uniqID%>" class="fa fa-edit" style="width: auto;height: auto">编辑</button>
+        <button id="<%='view_api_doc_'+i%>" name="viewMDfile" uniqid="<%=api_docs[i].uniqID%>" class="fa fa-dashboard" style="width: auto;height: auto">查看</button>
+        <!--<button id="<%='delete_api_doc_'+i%>" name="deleteMDfile" uniqid="<%=api_docs[i].uniqID%>" disabled="true" class="fa fa-trash" style="width: auto;height:auto">删除</button>-->
       </div>
     </a>
   </li>
@@ -39,13 +39,13 @@
    */
 
   $("button[name='editMDfile']").click(function(){
-    var apiDocName=$(this).attr('text');
-    console.log(apiDocName);
+    var apiDoc_uniqid=$(this).attr('uniqid');
+    console.log(apiDoc_uniqid);
     $.ajax({
       url:'/doc/editdoc',
       method:"post",
       data:{
-        docName:apiDocName
+        uniqID:apiDoc_uniqid
       },
       success:function(data){
         console.log("编辑md文件成功!");
@@ -59,13 +59,13 @@
    * 点击查看当前md文档。
    * **/
   $("button[name='viewMDfile']").click(function(){
-    var apiDocName=$(this).attr('text');
-    console.log(apiDocName);
+    var apiDoc_uniqid=$(this).attr('uniqid');
+    console.log(apiDoc_uniqid);
     $.ajax({
       url: '/doc/showmdfile',
       method:"post",
       contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-      data:{docName:apiDocName},
+      data:{uniqid:apiDoc_uniqid},
       //data:"{'first':'蚂蚁部落','second':'欢迎您'}",
       success:function(data){
         console.log("查看md文件成功!");

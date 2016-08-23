@@ -17,41 +17,6 @@ module.exports = {
     });
   },
 
-  /**
-   * 创建api doc.
-   * */
-  createDoc:function(req,res){
-    var queryString=req.param("docName");
-    console.log(queryString);
-
-    var isExisted=false;
-    var _doc;
-    doc.find({name:queryString}).exec(function (records) {
-      if(records){
-        console.log("\r\n查找doc成功!");
-        console.log(records);
-        isExisted=true;
-        _doc={retcode:0,retdesc:'success',data:records};
-      }else{
-        console.log("\r\n查找doc失败...");
-        _doc={retcode:-1, retdesc:"find failed..",data:records};
-      }
-    });
-
-    if(_doc.retcode===-1){
-      doc.create({id:new Date().getMilliseconds().toString(),name:queryString}).exec(function(err,records){
-        if(!err){
-          console.log("插入成功");
-          console.log(records);
-        }else{
-          console.log("插入失败...");
-        }
-      })
-    }
-    res.send(_doc);
-
-  },
-
 
   /**
    * 将doc与docItem存入db中,其中doc:docItem=1:N
@@ -62,80 +27,74 @@ module.exports = {
     }
    * */
   saveDoc2db: function(req,res){
-
-    console.log("\r\nreq.body is:")
-    console.log(req.body);
     //构造APIdoc对象
-    //var API_doc={name:req.body["docName"],docDesc:req.body["docdesc"],testenv:req.body["testEnv"], testEnvPort:req.body["testEnvPort"]};
     var API_doc=req.body["apiDoc"];
-    //console.log(JSON.stringify(API_doc));
 
     //构造APIdocitem对象
     var apisItemArray=req.body["apiItems"];
-    //console.log(JSON.stringify(apisItemArray));
-    console.log("req.body['apiItems']的长度是"+req.body["apiItems"].length);
-    console.log("apisItemArray的长度是"+apisItemArray.length);
 
-    var insertedAPIdocitem=new Array();
+    /** 前端传入的API_doc.uniqID不为空*/
+    if(API_doc.uniqID){
+      mongoService.Find("APIdoc",{uniqID:API_doc.uniqID},function (records) {
 
-    mongoService.Find("APIdoc",{name:API_doc.name},function (records) {
+        /** 不存在APIdoc对象  */
+        if(!records||records.length==0){
+          res.errMsg="APIdoc的uniqID在DB中找不到:"+API_doc.uniqID;
+          res.error();
+        }
+        /** 存在APIdoc对象**/
+        else {//存在APIdoc
+          mongoService.Update("APIdoc", API_doc, {uniqID: API_doc.uniqID}, function (updatedDOC) {
+            /** 更新APIdoc成功 */
+            if(updatedDOC && updatedDOC.length>0){
 
-      /** 不存在APIdoc对象  */
-      if(!records||records.length==0){
-        mongoService.Insert("APIdoc",API_doc,function (insertedDOC) {
-          console.log("插入apidoc成功:\r\n"+JSON.stringify(insertedDOC, null, 4));
-          for (var i = 0; i < apisItemArray.length; i++) {
-            apisItemArray[i].APIdocID = insertedDOC.id;
-            var tempItem=apisItemArray[i];
-            mongoService.Insert('APIdocitem', tempItem,function (insertedItem) {
-              insertedAPIdocitem.push(insertedItem);
-              console.log("插入apiItem:\r\n"+JSON.stringify(insertedItem,null,"\t"));
-            })
-          }
-        });
-      }
-      /** 存在APIdoc对象**/
-      else {//存在APIdoc
-        mongoService.Update("APIdoc", API_doc, {name: API_doc.name}, function (updatedDOC) {
-          /** 更新APIdoc成功 */
-          if(updatedDOC && updatedDOC.length>0){
-            console.log("更新APIdoc成功,APIdoc.id="+records[0].id);
-            for (var i = 0; i < apisItemArray.length; i++){
-              apisItemArray[i].APIdocID = records[0].id;
-              var tempItem= apisItemArray[i];
-              console.log("\r\n"+i.toString()+"  apisItemArray[i]\r\n"+JSON.stringify(tempItem,null,"\t"));
-              mongoService.Find("APIdocitem", {name: tempItem.name, APIdocID:tempItem.APIdocID}, function (found) {
-                console.log("\r\n"+i.toString()+"  找到APIdocitem成功,长度="+found.length);
-                /** 没有找到apiItem对象**/
-                if (!found || found.length == 0) {
-                  mongoService.Insert("APIdocitem", tempItem, function (insertedItem) {
-                    insertedAPIdocitem.push(insertedItem);
-                    console.log("插入apiItem成功\r\n"+JSON.stringify(insertedItem,null,"\t"));
-                  });
-                }
+              apisItemArray.forEach(function(tempItem,index,array){
+                if(tempItem.uniqID){
+                      mongoService.Find("APIdocitem", {uniqID: tempItem.uniqID}, function (found) {
+                        /** 没有找到apiItem对象**/
+                        if (!found || found.length == 0) {
+                          res.send({retcode:-1,errMsg:"APIdocitem的uniqID在DB中找不到:"+apisItemArray[i].uniqID});
+                        }
 
-                /*** 找到apiItem对象***/
-                else {
-                  mongoService.Update("APIdocitem", tempItem, {APIdocID:tempItem.APIdocID,name: tempItem.name}, function (updatedItem) {
-                    insertedAPIdocitem.push(updatedItem);
-                    console.log("更新apiItem成功\r\n"+JSON.stringify(updatedItem,null,"\t"));
-                  });
-                }
+                        /*** 找到apiItem对象***/
+                        else {
+                          mongoService.Update("APIdocitem", tempItem, {uniqID: tempItem.uniqID}, function (updatedItem) {
+                            console.log("*********************\r\n用户更新了APIdocitem:\r\n"+tempItem.name);
+                          });
+                        }
+                      });
+
+                    }
+
+                    /** APIdocitem的uniqID为空,表示是新元素,需要直接添加到DB中**/
+                    else{
+                      tempItem.uniqID=(new Date().getTime()).toString();
+                      tempItem["APIdocID"]=updatedDOC[0].id;
+                      console.log("=====================================id="+tempItem["APIdocID"]);
+                      mongoService.Insert("APIdocitem", tempItem, function (insertedItem) {
+                        console.log("*********************\r\n用户添加了APIdocitem:\r\n"+tempItem.name);
+                      });
+                    }
+
               });
-
+              res.send({retcode:0,msg:"更新APIdoc成功,且更新APIdocitem成功。"});
             }
-            res.send(insertedAPIdocitem);
-          }
 
-          /** 更新APIdoc失败**/
-          else{
-            res.send({error:"update APIdoc failure..."});
-          }
+            /** 更新APIdoc失败**/
+            else{
+              res.send({retcode:-1,errMsg:"更新APIdoc失败,API_doc.uniqID="+API_doc.uniqID});
+            }
 
-        });
-      }
+          });
+        }
 
-    });
+      });
+    }
+
+    /** 前端传入的API_doc.uniqID为空 */
+    else{
+      res.send({retcode:-1,errMsg:"前端传入的API_doc.uniqID为空"});
+    }
 
   },
 
@@ -169,34 +128,6 @@ module.exports = {
 
 
   },
-
-  /**
-   * 删除MongoDB中的记录。
-   * @param req
-   * @param res
-     */
-    deleteRecordsByID:function(req,res){
-        //var name="";
-      RequestItem.destroy({name:'home'}).exec(function(err){
-          //console.log("删除，ID："+name);
-          //cb(null);
-        });
-
-      },
-
-  /**
-    * 删除所有MongoDB中的requestItem记录。
-    * */
-  deleteAllRequestItemRecords:function(req,res){
-    RequestItem.destroy().exec(function(err){
-      if(!err){
-        console.log("删除所有requestItem records成功!");
-      }else{
-        console.log("删除所有requestItem records失败。。。");
-      }
-    });
-
-},
 
 
   /***
@@ -268,40 +199,7 @@ module.exports = {
       return res.send(item);
     });
 
-  },
-
-  testmydb: function(req,res){
-    var item={name:"Polly",wingspn:"168.5"};
-    console.log('info.........');
-
-    var req={name:"Polly",wingspn:"168.5"};
-    hello(req,res);
-    console.log("invoke Interface.hello()function successfully!!");
-    //
-    InterfaceDoc.create(item).exec(function createCB(err,records){
-      if(err){
-        //res.send("create item record in mongo db failed!");
-        res.send(err);
-        //console.log(err);
-      }
-      else{
-
-        InterfaceDoc.findOne({name:"Polly"}).exec(function (err, records) {
-          if (!err) {
-            // 刷新下一页
-            res.send("success");
-          }
-          else {
-            console.log(err);
-            res.view('apidoc'); //输入route.js里的定义的路径名。
-          }
-        });
-
-      }
-    });
-  },
-
-
+  }
 
 };
 
