@@ -31,7 +31,12 @@ module.exports = {
         if (found && found.length != 0) {
           var filename = __dirname + '/mdFiles/' + found[0].name;
           var data = '# ' + found[0].name;
-          data += '\r\n### ' + (found[0].docDesc?found[0].docDesc:"暂无文档描述。");
+          data += '\r\n### 文档描述\r\n';
+          data += (found[0].docDesc?found[0].docDesc:"暂无文档描述。");
+          data +='\r\n### 测试环境\r\n';
+          data +=(found[0].testEnv?found[0].testEnv:"n/a");
+          data +='\r\n### 端口号\r\n';
+          data +=(found[0].testEnvPort?found[0].testEnvPort:"n/a");
           data += '\r\n### 接口';
 
           for (var i = 0; i < found[0].APIdoc_items.length; i++) {
@@ -128,8 +133,9 @@ module.exports = {
 
   testUpdate:function(req,res) {
 
-    var item = {"uniqID":"1471967913424","name":"发起挑战","url":"djfal;sdf","disabled":"false","method":"POST","dataType":"application/json","header":"\"\"","queryParams":"\"\"","response":"\"\"","APIdocID":"1471957311617"};
-    mongoService.Update("APIdocitem", item,{uniqID:"1471967913424"},function(records){
+    //var item = {"uniqID":"1471957467806","name":"自考君接口文档","url":"djfal;sdf","disabled":"false","method":"POST","dataType":"application/json","header":"\"\"","queryParams":"\"\"","response":"\"\"","APIdocID":"1471957311617"};
+    var item={"uniqID":"1471957467806","name":"自考君接口文档"};
+    mongoService.Update("APIdoc", item,{uniqID:item.uniqID},function(records){
       if(records){
         res.send(records);
       }else{
@@ -161,7 +167,7 @@ module.exports = {
   },
 
   testInsert:function(req,res) {
-    var apiDoc={name:"问道",uniqID:(new Date().getTime()).toString(), docDesc:"分享知识平台的接口文档(1.0版本)",testEnv:"192.168.103.101",testEnvPort:"8020"};
+    var apiDoc={name:"问道接口文档",uniqID:(new Date().getTime()).toString(), docDesc:"分享知识平台的接口文档(1.0版本)",testEnv:"192.168.103.101",testEnvPort:"8020"};
     mongoService.Insert("APIdoc",apiDoc, function(records) {
       console.log("插入问道文档\r\n" + JSON.stringify(records, null, "\t"));
     });
