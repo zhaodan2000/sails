@@ -1,29 +1,7 @@
 # 教师资格考典接口文档
 ### 暂无文档描述
 ### 接口
-1. est
-	* **url**
-		* ssfdf
-	* **method**
-		* POST
-	* **disabled**
-		* false
-	* **dataType**
-		* x-www-form-urlencoded
-	* **header**
-		* {
-    "module": "2",
-    "version": "1.0",
-    "clientType": "ios",
-    "clientIp": "192.168.1.1",
-    "deviceId": "888",
-    "sessionToken": ""
-}
-	* **queryParams**
-		* {
-    "req": ""
-}
-2. testee
+1. testee
 	* **url**
 		* sdfsdf
 	* **method**
@@ -45,7 +23,7 @@
 		* {
     "req": ""
 }
-3. ate
+2. ate
 	* **url**
 		* asdf
 	* **method**
@@ -54,28 +32,6 @@
 		* false
 	* **dataType**
 		* x-www-form-urlencoded
-	* **header**
-		* {
-    "module": "2",
-    "version": "1.0",
-    "clientType": "ios",
-    "clientIp": "192.168.1.1",
-    "deviceId": "888",
-    "sessionToken": ""
-}
-	* **queryParams**
-		* {
-    "req": ""
-}
-4. 李月华测试第四个接口
-	* **url**
-		* 说对啦涉及到廊坊
-	* **method**
-		* POST
-	* **disabled**
-		* false
-	* **dataType**
-		* 
 	* **header**
 		* {
     "module": "2",
