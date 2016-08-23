@@ -38,14 +38,14 @@ module.exports = {
             data += '\r\n\t\t* ' + docItem.method;
             data += '\r\n\t* **接口是否废弃**';
             data += '\r\n\t\t* ' + docItem.disabled;
-            data += '\r\n\t* **接口请求格式content-type**';
+            data += '\r\n\t* **请求格式content-type**';
             data += '\r\n\t\t* ' + docItem.dataType;
-            data += '\r\n\t* **接口请求头header**';
-            data += '\r\n\t\t* ' + docItem.header;//JSON.stringify(docItem.header, null, 4);
-            data += '\r\n\t* **接口请求参数queryParams(以json格式展示)**';
-            data += '\r\n\t\t* ' + docItem.queryParams;//JSON.stringify(docItem.queryParams, null, 4);
-            data += '\r\n\t* **接口返回结果response(以json格式展示)**';
-            data += '\r\n\t\t* ' + docItem.response;
+            data += '\r\n\t* **请求头header**';
+            data += '\r\n\t\t* ' + JSON.stringify(docItem.header, null, "\t"); //JdocItem.header;
+            data += '\r\n\t* **请求参数queryParams(以json格式展示)**';
+            data += '\r\n\t\t* ' + JSON.stringify(docItem.queryParams, null, "\t");//docItem.queryParams;
+            data += '\r\n\t* **返回结果response(以json格式展示)**';
+            data += '\r\n\t\t* ' + JSON.stringify(docItem.response,null,"\t");
           }
 
           fs.writeFile(filename, data, function () {
@@ -159,45 +159,25 @@ module.exports = {
   testInsert:function(req,res) {
     var apiDoc={name:"问道",docDesc:"分享知识平台的接口文档(1.0版本)",testEnv:"192.168.103.101",testEnvPort:"8020"};
     mongoService.Insert("APIdoc",apiDoc, function(records) {
-      console.log("插入问道文档\r\n" + JSON.stringify(records, null, 4));
+      console.log("插入问道文档\r\n" + JSON.stringify(records, null, "\t"));
+    });
+    var apiDocID='57bc409d7129b2a51af7c512';
+    var docItemRow={name:'首页接口', url:'http://192.168.103.101:8020/selftaught/home', APIdocID:apiDocID};
+    mongoService.Insert('APIdocitem',docItemRow,function(records){
+      res.send(records);
+      res.ok();
     });
   },
 
   testInsertDocItem:function(req,res){
-    var apiDocRow={ name:''+apiDocID+'.md'};
-    var apiDoc_output;
-
-    var isExisted=false;
-    var foundRecords;
-    APIdocServices.findAPIdocByName(APIdocItem.name,function(records){
-      foundRecords=records;
-    });
-    if(isExisted){
-
-
-    }else{
-
-    }
-
-    APIdocServices.insertAPIdocRecord(apiDocRow,function(records){
-      apiDoc_output=records;
-    });
-
-
-    var docItemRow={name:'首页接口'+docItemID,
-      url:'http://192.168.103.101:8020/selftaught/home', };
-    var output;
-    APIdocItemServices.insertAPIdocitemRecord(docItemRow,function(records){
-      output=records;
-    });
-
-
-    APIdocServices.findAPIdocByName('',function(records){
-      console.log(records);
-    })
-    //res.send(output);
-    res.ok();
-
+    var apiDocRow={name:"这是添加随机数ID之后的文档。。"};
+    mongoService.Insert("APIdoc",apiDocRow,function(records){
+      var docItemRow={name:'首页接口', url:'http://192.168.103.101:8020/selftaught/home', APIdocID:records.id};
+      mongoService.Insert('APIdocitem',docItemRow,function(records){
+        res.send(records);
+        res.ok();
+        });
+      });
   },
 
 };

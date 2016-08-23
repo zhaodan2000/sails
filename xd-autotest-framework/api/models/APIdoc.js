@@ -4,20 +4,24 @@
 
 module.exports={
   connection: 'someMongodbServer',
-  tableName: 'xd_autotest_apidoc',
-  autoPK:true,
+  tableName: 'xd_autotest_doc',
+  autoPK: true,
   attributes: {
     id: {
       type: 'string',
       required: false,
       unique: true,
-      primaryKey: true
+      primaryKey:true
     },
-    
+    uniqID:{
+      type:'string',
+      required:false,
+      unique:true,
+      defaultsTo:(new Date().getTime()).toString()
+    },
     name: {
       type: 'string',
-      required: true,
-      unique: true
+      required: false
     },
     testEnv:{
       type:'string',

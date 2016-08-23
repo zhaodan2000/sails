@@ -89,7 +89,7 @@ module.exports = {
             var tempItem=apisItemArray[i];
             mongoService.Insert('APIdocitem', tempItem,function (insertedItem) {
               insertedAPIdocitem.push(insertedItem);
-              console.log("插入apiItem:\r\n"+JSON.stringify(insertedItem,null,4));
+              console.log("插入apiItem:\r\n"+JSON.stringify(insertedItem,null,"\t"));
             })
           }
         });
@@ -103,14 +103,14 @@ module.exports = {
             for (var i = 0; i < apisItemArray.length; i++){
               apisItemArray[i].APIdocID = records[0].id;
               var tempItem= apisItemArray[i];
-              console.log("\r\n"+i.toString()+"  apisItemArray[i]\r\n"+JSON.stringify(tempItem,null,4));
+              console.log("\r\n"+i.toString()+"  apisItemArray[i]\r\n"+JSON.stringify(tempItem,null,"\t"));
               mongoService.Find("APIdocitem", {name: tempItem.name, APIdocID:tempItem.APIdocID}, function (found) {
                 console.log("\r\n"+i.toString()+"  找到APIdocitem成功,长度="+found.length);
                 /** 没有找到apiItem对象**/
                 if (!found || found.length == 0) {
                   mongoService.Insert("APIdocitem", tempItem, function (insertedItem) {
                     insertedAPIdocitem.push(insertedItem);
-                    console.log("插入apiItem成功\r\n"+JSON.stringify(insertedItem,null,4));
+                    console.log("插入apiItem成功\r\n"+JSON.stringify(insertedItem,null,"\t"));
                   });
                 }
 
@@ -118,7 +118,7 @@ module.exports = {
                 else {
                   mongoService.Update("APIdocitem", tempItem, {APIdocID:tempItem.APIdocID,name: tempItem.name}, function (updatedItem) {
                     insertedAPIdocitem.push(updatedItem);
-                    console.log("更新apiItem成功\r\n"+JSON.stringify(updatedItem,null,4));
+                    console.log("更新apiItem成功\r\n"+JSON.stringify(updatedItem,null,"\t"));
                   });
                 }
               });

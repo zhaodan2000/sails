@@ -15,14 +15,18 @@ module.exports = {
       required:false,
       primaryKey:true
     },
-    //request name
+    uniqID:{
+      type:'string',
+      required:false,
+      unique:true,
+      defaultsTo:(new Date().getTime()).toString()
+    },
     name: {
       type: 'string',
-      required: true,
+      required: false,
       minLength: 1,
       maxLength: 60
     },
-
     //auth 开发人员
     dev:{
       type:'string',
