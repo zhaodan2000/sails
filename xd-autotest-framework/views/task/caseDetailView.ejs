@@ -1,0 +1,84 @@
+
+<div>
+
+  <!-- Page Heading -->
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">
+        <small>用例详情</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li class="active">
+          <i class="fa fa-table"></i> 用例
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="row">
+
+  </div>
+
+  <% if (data.length) { %>
+  <% var object = data[0]; %>
+  <form id="form" name="<%- object.TaskID %>" class="form-inline" method="POST">
+    <div>
+      <h2>url</h2>
+      <label style="width: 200px">url</label>
+      <input name="url" type="text" value="<%- object.url %>" />
+    </div>
+    <div>
+      <h2>header</h2>
+      <% for(var key in object.headers){
+        var value = object.headers[key];%>
+      <label style="width: 200px"><%- key %></label>
+      <input name="<%- "header" + key %>" type="text" value="<%- value %>" /><br />
+      <% } %>
+    </div>
+    <div>
+      <h2>queryParam</h2>
+      <% for(var key in object.queryParam){
+        var value = object.queryParam[key];%>
+      <label style="width: 200px"><%- key %></label>
+      <input name="<%- "queryParam" + key %>" style="width:30%" type="text" value='<%- value %>' /><br />
+      <% } %>
+    </div>
+    <div>
+      <h2>other</h2>
+      <label style="width: 200px">method</label>
+      <input name="method" type="text" value="<%- object.method %>" /><br />
+
+      <label style="width: 200px">dev</label>
+      <input name="dev" type="text" value="<%- object.dev %>" /><br />
+
+      <label style="width: 200px">disabled</label>
+      <input id="disabled" type="text" value="<%- object.disabled %>" /><br />
+
+      <label style="width: 200px">name</label>
+      <input name="name" type="text" value="<%- object.name %>" /><br />
+
+      <!--<label style="width: 200px">version</label>-->
+      <!--<input name="version" type="text" value="<%- object.version %>" /><br />-->
+
+      <label style="width: 200px">description</label>
+      <input name="description" type="text" value="<%- object.description %>" /><br />
+
+      <label style="width: 200px">mode</label>
+      <input name="mode" type="text" value="<%- object.mode %>" /><br />
+    </div>
+    <div>
+      <h2>prescript</h2>
+      <textarea name="prescript" style="width: 40%;height: 200px"></textarea><br />
+      <h2>testscript</h2>
+      <textarea name="testscript" style="width: 40%;height: 200px"></textarea><br />
+    </div>
+    <div>
+      <div class="btn" id="runBtn">运行</div>
+      <div class="btn" id="saveBtn" onclick="saveButtonClicked()">保存</div>
+    </div>
+  </form>
+  <% } %>
+
+</div>
+
+<script src="/xd-autotest-framework/js/task/task.js"></script>

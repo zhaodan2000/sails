@@ -41,7 +41,7 @@ module.exports = {
   },
 
   /**
-   * 单个用例的对象生成collection对象
+   * 单个request的对象生成collection对象
    * @param requestItem   用例的信息
    * @param reqFolder     reqFolder为所属集合的信息
    * @returns {{variables: Array, info: {name: string, _postman_id: *, schema: string, description: (*|desc|string|module.exports.attributes.desc|{type, unique, required, defaultsTo})}, item: *[]}}
@@ -99,9 +99,69 @@ module.exports = {
       item:[item]
     };
     return collectionObj;
+  },
+
+  /**
+   * 单个case的对象生成collection对象
+   * @param requestItem   用例的信息
+   * @param reqFolder     reqFolder为所属集合的信息
+   * @returns {{variables: Array, info: {name: string, _postman_id: *, schema: string, description: (*|desc|string|module.exports.attributes.desc|{type, unique, required, defaultsTo})}, item: *[]}}
+   */
+  creatCollectionwithSingleCase: function (caseItem, taskFolder) {
+    var headers = caseItem.headers;  //type is json
+    var queryParam = caseItem.queryParam;  //type is json
+
+    var request = {
+      id:caseItem.id,
+      name:caseItem.name,
+      disabled: caseItem.disabled,
+      url:caseItem.url,
+      method:caseItem.method,
+      header:getHeaderWithJson(headers),
+      body:{
+        mode:caseItem.mode,
+        urlencoded:getQueryParamWithJson(queryParam)
+      }
+    };
+    //配置前置脚本和后置脚本 ----- 根据item是不是输入了文本来判断是否添加脚本
+    var event =[];
+    var test = {
+      listen: 'test',
+      script: {
+        type: "text/javascript",
+        exec: caseItem.testscript
+      }
+    };
+    var preScript = {
+      listen: 'prerequest',
+      script: {
+        type: "text/javascript",
+        exec: parseInputPreString(caseItem.prescript)
+      }
+    };
+    event.push(preScript);
+    event.push(test);
+
+    var item = {
+      id : request.id,
+      name : request.name,
+      disabled : request.disabled,
+      request : request,
+      event:event
+    };
+    var collectionObj = {
+      variables:[],
+      info:{
+        name:taskFolder.Task_name,
+        _postman_id:taskFolder.Task_ID,
+        schema:"https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+        description:taskFolder.Task_desc
+      },
+      item:[item]
+    };
+    return collectionObj;
   }
   ,
-
   /**
    * 根据一个任务创建一个collection
    * @param task

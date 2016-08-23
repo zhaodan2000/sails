@@ -144,6 +144,20 @@ module.exports = {
   },
 
   /**
+   * 通过name显示用例详情
+   * @param req
+   * @param res
+     */
+  findRequestItemByID:function (req,res) {
+    var dic = {name:req.param("name")};
+    console.log(dic);
+    mongoService.Find('TaskCase',dic,function (record) {
+      console.log('case is'+JSON.stringify(record, null, 4));
+      res.view('task/caseDetailView', {data:record});
+    })
+  },
+
+  /**
    * 更新task, 向task的Cases数组中添加case
    * @param req
    * @param res
@@ -213,7 +227,27 @@ module.exports = {
      */
   updateCasesOrder: function (req, res) {
 
+  },
+
+  /**
+   * 单个接口的测试
+   * @param req
+   * @param res
+     */
+  runSingleCase: function (req, res) {
+
+
+  },
+
+  /**
+   * 保存本次的修改
+   * @param req
+   * @param res
+     */
+  saveSingleCase:function (req, res) {
+
   }
+
 };
 
 /**
@@ -266,11 +300,3 @@ function refreshTaskView(res) {
   })
 }
 
-/**
- *
- */
-function creatRequestItemWithCase(caseItem) {
-  var requestItem = {
-
-  }
-}

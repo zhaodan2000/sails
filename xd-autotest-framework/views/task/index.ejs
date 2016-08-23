@@ -11,7 +11,7 @@
       <ul id="<%='info' + index%>" class="collapse">
         <% var cases = record.Cases; cases.forEach(function(caseItem,recordIndex){ %>
         <li>
-          <a href="javascript:void(0)" id="<%=caseItem.id%>"><%=caseItem.name%></a>
+          <a id="<%=caseItem.name%>" name="<%=caseItem.name%>" onclick="requestItem(this)"><%=caseItem.name%></a>
         </li>
         <% }) %>
       </ul>

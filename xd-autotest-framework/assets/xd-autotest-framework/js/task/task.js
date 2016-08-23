@@ -86,3 +86,56 @@ function deleteSelectedTask(name) {
   }, "json");
 }
 
+/**
+ * 显示单个用例详情
+ * @param data
+ */
+function requestItem(data) {
+  console.log('---------'+data.name);
+  $.main.refreshRight("/TaskManager/findRequestItemByID", {data: {name: data.name}});
+}
+
+/**
+ * 运行单个测试用例并展示
+ * @param data
+ */
+function runsingleCase(data) {
+
+}
+
+//运行与保存
+$(document).ready(function () {
+  var option_run = {
+    url: '/TaskManager/runSingleCase',
+    data: null,
+    success: function (data) {
+
+    }
+  };
+  var option_save = {
+    url: "/TaskManager/saveSingleCase",
+    success: function (data) {
+      console.log('+++++++++++++++' + data);
+      alert('This request had been stored into DB!')
+    }
+  };
+
+  // ajaxSubmit 
+  //运行事件
+  $("#runBtn").click(function () {
+    $("#form").ajaxSubmit(option_run);
+  });
+
+  //保存事件
+  $("#saveBtn").click(function () {
+    $("#form").ajaxSubmit(option_save);
+  });
+});
+
+
+function saveButtonClicked() {
+  $('#myModal').modal('hide');
+  $(".modal-backdrop").hide();
+  // console.log(JSON.stringify(data, null, 4));
+  console.log($("#form").name);
+}
