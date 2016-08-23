@@ -34,31 +34,31 @@
                 <input name="api_title" class="form-control"/>
               </div>
               <div class="form-group">
-                <label>URL</label>
+                <label>接口请求URL</label>
                 <input name="api_url" class="form-control" />
               </div>
               <div class="form-group">
-                <label>method</label>
+                <label>接口请求方式method</label>
                 <input name="api_method" class="form-control"  />
               </div>
               <div class="form-group">
-                <label>disabled</label>
+                <label>接口是否废弃disabled</label>
                 <input name="api_disabled" class="form-control" />
               </div>
               <div class="form-group">
-                <label>dataType</label>
+                <label>接口请求格式content-type</label>
                 <input name="api_dataType" class="form-control" />
               </div>
               <div class="form-group">
-                <label>header</label>
+                <label>接口请求头header</label>
                 <input name="api_header" class="form-control"  />
               </div>
               <div class="form-group">
-                <label>queryParams</label>
+                <label>接口请求参数queryParams(以json格式输入)</label>
                 <input name="api_queryParams" class="form-control" />
               </div>
               <div class="form-group">
-                <label>response</label>
+                <label>接口返回结果response(以json格式输入)</label>
                 <input name="api_response" class="form-control"/>
               </div>
             </li>
@@ -71,35 +71,35 @@
                        value="<%=api_docs.APIdoc_items[i].name%>" />
               </div>
               <div class="form-group">
-                <label>URL</label>
+                <label>接口请求URL</label>
                 <input name="api_url" required="required" class="form-control"  id="<%='api_url_'+(i+1)%>"
                        value="<%=api_docs.APIdoc_items[i].url%>"/>
               </div>
               <div class="form-group">
-                <label>method</label>
+                <label>接口请求方式method</label>
                 <input name="api_method" class="form-control" id="<%='api_method_'+(i+1)%>"
                        value="<%=api_docs.APIdoc_items[i].method%>"/>
               </div>
               <div class="form-group">
-                <label>disabled</label>
+                <label>接口是否废弃disabled</label>
                 <input name="api_disabled" class="form-control"  id="<%='api_disabled_'+(i+1)%>"
                        value="<%=api_docs.APIdoc_items[i].disabled%>"/>
               </div>
               <div class="form-group">
-                <label>dataType</label>
+                <label>接口请求格式content-type</label>
                 <input name="api_dataType" class="form-control" id="<%='api_dataType_'+(i+1)%>"
                        value="<%=api_docs.APIdoc_items[i].dataType%>"/>
               </div>
               <div class="form-group">
-                <label>header</label>
+                <label>接口请求头header</label>
                 <textarea name="api_header" class="form-control" id="<%='api_header_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].header,null,4)%></textarea>
               </div>
               <div class="form-group">
-                <label>queryParams</label>
+                <label>接口请求参数queryParams(以json格式输入)</label>
                 <textarea name="api_queryParams"  class="form-control" id="<%='api_queryParams_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].queryParams,null,4)%></textarea>
               </div>
               <div class="form-group">
-                <label>response</label>
+                <label>接口请求参数response(以json格式输入)</label>
                 <textarea name="api_response" class="form-control" id="<%='api_response_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].response,null,4)%></textarea>
               </div>
             </li>
@@ -110,8 +110,7 @@
     <div class="row">
       <div class="col-lg-6">
         <div class="btn btn-info" id="addAPIbutton">增加API接口</div>
-        <div class="btn btn-default" id="save_doc_2_db">保存文档2db</div>
-        <div class="btn btn-default" text="主要效果" id="save_doc">保存文档</div>
+        <div class="btn btn-default" id="save_doc_2_db">保存文档</div>
       </div>
     </div>
   </form>

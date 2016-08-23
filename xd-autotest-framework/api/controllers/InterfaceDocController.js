@@ -13,6 +13,7 @@ module.exports = {
   testService:function(req,res){
     mongoService.Find('APIdoc',null,function (records) {
       res.view('doc/APIdoc', {api_docs:records});
+     // res.view('doc/docWelcome', {api_docs:records});
     });
   },
 

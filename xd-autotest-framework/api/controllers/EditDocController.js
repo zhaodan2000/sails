@@ -32,18 +32,20 @@ module.exports = {
           for (var i = 0; i < found[0].APIdoc_items.length; i++) {
             var docItem = found[0].APIdoc_items[i];
             data += '\r\n' + (i + 1) + '. ' + docItem.name;
-            data += '\r\n\t* **url**';
+            data += '\r\n\t* **请求url**';
             data += '\r\n\t\t* ' + docItem.url;
-            data += '\r\n\t* **method**';
+            data += '\r\n\t* **请求方式method**';
             data += '\r\n\t\t* ' + docItem.method;
-            data += '\r\n\t* **disabled**';
+            data += '\r\n\t* **接口是否废弃**';
             data += '\r\n\t\t* ' + docItem.disabled;
-            data += '\r\n\t* **dataType**';
+            data += '\r\n\t* **接口请求格式content-type**';
             data += '\r\n\t\t* ' + docItem.dataType;
-            data += '\r\n\t* **header**';
-            data += '\r\n\t\t* ' + JSON.stringify(docItem.header, null, 4);
-            data += '\r\n\t* **queryParams**';
-            data += '\r\n\t\t* ' + JSON.stringify(docItem.queryParams, null, 4);
+            data += '\r\n\t* **接口请求头header**';
+            data += '\r\n\t\t* ' + docItem.header;//JSON.stringify(docItem.header, null, 4);
+            data += '\r\n\t* **接口请求参数queryParams(以json格式展示)**';
+            data += '\r\n\t\t* ' + docItem.queryParams;//JSON.stringify(docItem.queryParams, null, 4);
+            data += '\r\n\t* **接口返回结果response(以json格式展示)**';
+            data += '\r\n\t\t* ' + docItem.response;
           }
 
           fs.writeFile(filename, data, function () {
