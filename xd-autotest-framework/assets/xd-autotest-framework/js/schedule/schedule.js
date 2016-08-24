@@ -26,7 +26,7 @@ function changeTaskSchedule(data) {
   }
   // console.log(desc);
   // console.log(data.taskName);
-  $.post("/TaskSchedule/changeScheduleForTask", {taskName:data.taskName,desc:desc}, function (result) {
+  $.post("/TaskSchedule/changeScheduleForTask", {uniqID:data.uniqID,desc:desc}, function (result) {
     console.log('update schedule sucess!');
     refreshView();
   })
