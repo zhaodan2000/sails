@@ -1,29 +1,130 @@
 # 自考君接口文档
-### 暂无文档描述
+### 文档描述
+分享知识平台的接口文档(1.0版本)
+### 测试环境
+192.168.103.101
+### 端口号
+8020
 ### 接口
-1. 测试1
+1. 首页接口
 	* **请求url**
-		* www.baidu.com
+		* http://192.168.31.88:8020/selftaught/home
 	* **请求方式method**
-		* GET
+		* POST
 	* **接口是否废弃**
 		* false
+	* **开发者**
+		* 请选择
 	* **请求格式content-type**
-		* x-www-form-urlencoded
+		* application/x-www-form-urlencoded
 	* **请求头header**
 		* {
-	"module": "2",
-	"version": "1.0",
-	"clientType": "ios",
-	"clientIp": "192.168.1.1",
-	"deviceId": "888",
-	"sessionToken": ""
+	"hello": "world",
+	"key": "value"
 }
 	* **请求参数queryParams(以json格式展示)**
 		* {
-	"req": ""
+	"参数1": "value1",
+	"参数2": "value2"
 }
 	* **返回结果response(以json格式展示)**
 		* {
-	"hello": "world"
+	"retcode": 0
 }
+2. 发起挑战接口222
+	* **请求url**
+		* http://192.168.31.88:8020/selftaught/challenge
+	* **请求方式method**
+		* GET
+	* **接口是否废弃**
+		* true
+	* **开发者**
+		* 请选择
+	* **请求格式content-type**
+		* application/json
+	* **请求头header**
+		* {
+	"参数1": "value1",
+	"参数2": "value2"
+}
+	* **请求参数queryParams(以json格式展示)**
+		* {
+	"参数1": "value1",
+	"参数2": "value2"
+}
+	* **返回结果response(以json格式展示)**
+		* ""
+3. 测试接口44445555
+	* **请求url**
+		* 而且测啊
+	* **请求方式method**
+		* POST
+	* **接口是否废弃**
+		* false
+	* **开发者**
+		* 请选择
+	* **请求格式content-type**
+		* application/json
+	* **请求头header**
+		* {
+	"参数1": "value1",
+	"参数2": "value2"
+}
+	* **请求参数queryParams(以json格式展示)**
+		* {
+	"参数1": "value1",
+	"参数2": "value2"
+}
+	* **返回结果response(以json格式展示)**
+		* ""
+4. 出题接口
+	* **请求url**
+		* http://192.168.31.101:8102/quesbk/exam_detail
+	* **请求方式method**
+		* POST
+	* **接口是否废弃**
+		* false
+	* **开发者**
+		* 赵聃
+	* **请求格式content-type**
+		* application/json
+	* **请求头header**
+		* ""
+	* **请求参数queryParams(以json格式展示)**
+		* ""
+	* **返回结果response(以json格式展示)**
+		* ""
+5. 你好
+	* **请求url**
+		* 
+	* **请求方式method**
+		* POST
+	* **接口是否废弃**
+		* false
+	* **开发者**
+		* 赵聃
+	* **请求格式content-type**
+		* application/json
+	* **请求头header**
+		* ""
+	* **请求参数queryParams(以json格式展示)**
+		* ""
+	* **返回结果response(以json格式展示)**
+		* ""
+6. 服务器测试。。。
+	* **请求url**
+		* 服务器测试url
+	* **请求方式method**
+		* POST
+	* **接口是否废弃**
+		* false
+	* **开发者**
+		* 赵聃
+	* **请求格式content-type**
+		* application/json
+	* **请求头header**
+		* ""
+	* **请求参数queryParams(以json格式展示)**
+		* ""
+	* **返回结果response(以json格式展示)**
+		* ""

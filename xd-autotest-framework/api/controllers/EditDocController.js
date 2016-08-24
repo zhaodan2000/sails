@@ -10,23 +10,33 @@ var fs=require('fs');
 module.exports = {
 
   editDoc:function (req,res) {
-    console.log("hello,EditDoc.editDoc");
-    var docName=req.body['docName'];
-    console.log(docName);
-    mongoService.Find('APIdoc',{name:docName},function (records) {
-      res.view('doc/editdoc',{api_docs:records[0]});
-    });
+    var uniqId=req.body['uniqID'];
+    if(uniqId){
+      mongoService.Find('APIdoc',{uniqID:uniqId},function (records) {
+        res.view('doc/editdoc',{api_docs:records[0]});
+      });
+    }else{
+      res.errMsg="req.body['uniqID']为空。";
+      res.error();
+    }
+
+
   },
 
   showMdFile:function (req,res) {
-    if (req.body.hasOwnProperty("docName")) {
-      var mdFileName = req.body["docName"];
-      console.log("req.body.mdFileName=" + mdFileName);
-      mongoService.Find('APIdoc', {name: mdFileName}, function (found) {
+    if (req.body.hasOwnProperty("uniqid")) {
+      var uid=req.body["uniqid"];
+      console.log("req.body.uniqid=" + uid);
+      mongoService.Find('APIdoc', {uniqID:uid}, function (found) {
         if (found && found.length != 0) {
           var filename = __dirname + '/mdFiles/' + found[0].name;
           var data = '# ' + found[0].name;
-          data += '\r\n### ' + (found[0].docDesc?found[0].docDesc:"暂无文档描述。");
+          data += '\r\n### 文档描述\r\n';
+          data += (found[0].docDesc?found[0].docDesc:"暂无文档描述。");
+          data +='\r\n### 测试环境\r\n';
+          data +=(found[0].testEnv?found[0].testEnv:"n/a");
+          data +='\r\n### 端口号\r\n';
+          data +=(found[0].testEnvPort?found[0].testEnvPort:"n/a");
           data += '\r\n### 接口';
 
           for (var i = 0; i < found[0].APIdoc_items.length; i++) {
@@ -38,6 +48,8 @@ module.exports = {
             data += '\r\n\t\t* ' + docItem.method;
             data += '\r\n\t* **接口是否废弃**';
             data += '\r\n\t\t* ' + docItem.disabled;
+            data += '\r\n\t* **开发者**';
+            data += '\r\n\t\t* ' + (docItem.dev?docItem.dev:"未标明");
             data += '\r\n\t* **请求格式content-type**';
             data += '\r\n\t\t* ' + docItem.dataType;
             data += '\r\n\t* **请求头header**';
@@ -62,7 +74,8 @@ module.exports = {
       });
     }
     else {
-      res.send({retcode: -1, message: 'APIdoc查询报错........',data:null});
+
+      res.send({retcode: -1, message: '传入的参数里缺少uniqid........',data:null});
     }
 
   },
@@ -119,15 +132,14 @@ module.exports = {
   },
 
   testUpdate:function(req,res) {
-    var modelType = req.param("modelType");
-    var queryString=req.param("param");
-    var param2
-    var item = {Task_name: "1", type: "1", Schedule_ID: param2, Schedule_desc: queryString};
-    mongoService.Update(modelType, item,{Task_name:"1"},function(records){
+
+    //var item = {"uniqID":"1471957467806","name":"自考君接口文档","url":"djfal;sdf","disabled":"false","method":"POST","dataType":"application/json","header":"\"\"","queryParams":"\"\"","response":"\"\"","APIdocID":"1471957311617"};
+    var item={"uniqID":"1471957467806","name":"自考君接口文档"};
+    mongoService.Update("APIdoc", item,{uniqID:item.uniqID},function(records){
       if(records){
-        console.log("更新TaskFolder没有问题。。。");
+        res.send(records);
       }else{
-        console.log("有问题???");
+        res.send({errMsg:"更新失败"});
 
       }
     });
@@ -144,12 +156,10 @@ module.exports = {
     if(modelType=='TaskCase'){
       var taskID=req.param("TaskID");
       mongoService.Find(modelType,{TaskID:taskID},function(records){
-        console.log(records);
         res.send(records);
       });
     }else{
       mongoService.Find(modelType,null,function(records){
-        console.log(records);
         res.send(records);
       });
     }
@@ -157,12 +167,12 @@ module.exports = {
   },
 
   testInsert:function(req,res) {
-    var apiDoc={name:"问道",docDesc:"分享知识平台的接口文档(1.0版本)",testEnv:"192.168.103.101",testEnvPort:"8020"};
+    var apiDoc={name:"问道接口文档",uniqID:(new Date().getTime()).toString(), docDesc:"分享知识平台的接口文档(1.0版本)",testEnv:"192.168.103.101",testEnvPort:"8020"};
     mongoService.Insert("APIdoc",apiDoc, function(records) {
       console.log("插入问道文档\r\n" + JSON.stringify(records, null, "\t"));
     });
     var apiDocID='57bc409d7129b2a51af7c512';
-    var docItemRow={name:'首页接口', url:'http://192.168.103.101:8020/selftaught/home', APIdocID:apiDocID};
+    var docItemRow={name:'首页接口', uniqID:(new Date().getTime()).toString(),url:'http://192.168.103.101:8020/selftaught/home', APIdocID:apiDocID};
     mongoService.Insert('APIdocitem',docItemRow,function(records){
       res.send(records);
       res.ok();
@@ -170,9 +180,9 @@ module.exports = {
   },
 
   testInsertDocItem:function(req,res){
-    var apiDocRow={name:"这是添加随机数ID之后的文档。。"};
+    var apiDocRow={name:"这是添加随机数ID之后的文档。。",uniqID:(new Date().getTime()).toString(),};
     mongoService.Insert("APIdoc",apiDocRow,function(records){
-      var docItemRow={name:'首页接口', url:'http://192.168.103.101:8020/selftaught/home', APIdocID:records.id};
+      var docItemRow={name:'首页接口',uniqID:(new Date().getTime()).toString(), url:'http://192.168.103.101:8020/selftaught/home', APIdocID:records.id};
       mongoService.Insert('APIdocitem',docItemRow,function(records){
         res.send(records);
         res.ok();

@@ -18,8 +18,7 @@ module.exports = {
     uniqID:{
       type:'string',
       required:false,
-      unique:true,
-      defaultsTo:(new Date().getTime()).toString()
+      unique:true
     },
     Task_name:{
       type:'string',

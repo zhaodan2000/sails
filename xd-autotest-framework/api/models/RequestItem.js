@@ -23,8 +23,7 @@ module.exports = {
     uniqID:{
       type:'string',
       required:false,
-      unique:true,
-      defaultsTo:(new Date().getTime()).toString()
+      unique:true
     },
     name: {
       type: 'string',
@@ -88,8 +87,8 @@ module.exports = {
     //body
     mode: {
       type: 'string',
-      enum:['raw', 'formdata', 'urlencoded','file'],
-      required: false
+      required: false,
+      defaultsTo:"application/json"
     },
     testscript:{
       type:'string',

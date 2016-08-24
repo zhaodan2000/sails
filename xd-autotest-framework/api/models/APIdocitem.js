@@ -16,8 +16,7 @@ module.exports={
     uniqID:{
       type:'string',
       required:false,
-      unique:true,
-      defaultsTo:(new Date().getTime()).toString()
+      unique:true
     },
     name: {
       type: 'string',
@@ -56,9 +55,8 @@ module.exports={
     },
     dataType:{
       type:'string',
-      enum:['json','x-www-form-urlencoded','form-data','raw','binary'],
       required:false,
-      defaultsTo:'x-www-form-urlencoded'
+      defaultsTo:'application/json'
     },
     header:{
       type:'json',
@@ -75,7 +73,7 @@ module.exports={
     queryParams:{
       type:'json',
       required:false,
-      defaultsTo:{"req":""}
+      defaultsTo:{"param1":"value1"}
     },
     response:{
       type:'json',
