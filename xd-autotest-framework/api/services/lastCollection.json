@@ -1,50 +1,10 @@
 {
   "variables": [],
   "info": {
-    "name": "22",
-    "_postman_id": "57b3d3f9b367197e2a363c49",
+    "name": "1",
+    "_postman_id": "57bd0a316f7e0b43578bbb25",
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
     "description": "暂时没有任务描述。"
   },
-  "item": [
-    {
-      "name": "个人资料修改接口",
-      "request": {
-        "name": "个人资料修改接口",
-        "url": "http://192.168.31.88:8002/selftaught/user/modifyMyInfo",
-        "method": "POST",
-        "header": [],
-        "body": {
-          "urlencoded": []
-        }
-      },
-      "event": []
-    },
-    {
-      "name": "个人资料修改接口",
-      "request": {
-        "name": "个人资料修改接口",
-        "url": "http://192.168.31.88:8002/selftaught/user/modifyMyInfo",
-        "method": "POST",
-        "header": [],
-        "body": {
-          "urlencoded": []
-        }
-      },
-      "event": []
-    },
-    {
-      "name": "个人资料修改接口",
-      "request": {
-        "name": "个人资料修改接口",
-        "url": "http://192.168.31.88:8002/selftaught/user/modifyMyInfo",
-        "method": "POST",
-        "header": [],
-        "body": {
-          "urlencoded": []
-        }
-      },
-      "event": []
-    }
-  ]
+  "item": []
 }

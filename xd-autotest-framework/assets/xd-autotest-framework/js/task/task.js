@@ -59,9 +59,9 @@ function showCaseInfo() {
  * 根据任务名运行任务
  * @param taskName
  */
-function runSelectedTask(name) {
-  console.log('name:%s',name);
-  $.post("/TaskManager/runTask", {Task_name:name}, function (result) {
+function runSelectedTask(uniqID) {
+  console.log('uniqID:%s',uniqID);
+  $.post("/TaskManager/runTask", {uniqID:uniqID}, function (result) {
     // $.main.refreshMain("/TaskManager/showTaskMangerView");
     alert("收到开始运行信息")
   }, "json");
@@ -70,17 +70,17 @@ function runSelectedTask(name) {
 /**
  * 根据任务名显示task的详情页面
  */
-function showTaskDetailView(name) {
-  console.log('name:%s',name);
-  $.main.refreshRight("/TaskManager/editTask", {data:{Task_name:name}});
+function showTaskDetailView(uniqID) {
+  console.log('uniqID:%s',uniqID);
+  $.main.refreshRight("/TaskManager/editTask", {data:{uniqID:uniqID}});
 }
 
 /**
  * 根据任务名删除任务
  * @param taskName
  */
-function deleteSelectedTask(name) {
-  $.post("/TaskManager/deleteTask", {Task_name:name}, function (result) {
+function deleteSelectedTask(uniqID) {
+  $.post("/TaskManager/deleteTask", {uniqID:uniqID}, function (result) {
     $.main.refreshMain("/TaskManager/showTaskMangerView");
     alert("删除成功")
   }, "json");

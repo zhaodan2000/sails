@@ -35,11 +35,6 @@ function addCaseToTask(item) {
 
     var $deletespan = $('<span class="badge btn btn-danger" onclick="deleteCaseWithName(this)">delete</span>');
     $deletespan.attr({"name":result.name});
-    // $deletespan.bind("click", function () {
-    //   //点击delete按钮的回调
-    //   var btnPara = {caseName:result.name, tasId:result.TaskID};
-    //   deleteCaseWithName(btnPara);
-    // });
 
     var $newi = $('<i class="fa fa-fw fa-check"></i>');
     $newcase.append($deletespan, $newi);
@@ -58,10 +53,10 @@ function upClicked() {
 function deleteCaseWithName(data) {
   //移除父节点
   console.log(data);
-  console.log(data.caseId);
+  console.log(data.uniqID);
   data.node.parentNode.remove();
   // console.log(data.taskId);
-  $.post("/TaskManager/deleteSingleCase", {caseId:data.caseId, taskId:data.taskId}, function (result) {
+  $.post("/TaskManager/deleteSingleCase", {uniqID:data.uniqID}, function (result) {
     //删除页面上所有的case
     alert("删除成功")
   }, "json");
