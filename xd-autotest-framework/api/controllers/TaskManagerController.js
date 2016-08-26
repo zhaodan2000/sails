@@ -26,6 +26,9 @@ module.exports = {
       if (records){
         //sucess
         console.log('insert sucess');
+        //创建任务成功之后需要设置任务的调度策略
+        //在这里查找调度策略
+
         return res.send(records);
       }else {
         //fail
@@ -299,4 +302,3 @@ function refreshTaskView(res) {
     res.view('task/index', {data:records});
   })
 }
-

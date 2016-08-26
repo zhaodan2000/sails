@@ -22,6 +22,7 @@ function selectedCaseWithName(caseName) {
 }
 
 function addCaseToTask(item) {
+  console.log('-----'+JSON.stringify(item, null, 4));
   $.post("/TaskManager/addCaseToTask", {item:item}, function (result) {
     //根据result判断是否更新成功
     // alert("sucess");
