@@ -3,6 +3,7 @@
  */
 //刷新右边页面
 function requestItem(data) {
+  console.log(data.id);
   $.main.refreshRight("/ShowDoc/findRequestItemByID", {data: {name: data.id}});
 }
 

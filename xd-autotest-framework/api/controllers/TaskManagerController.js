@@ -21,11 +21,14 @@ module.exports = {
   addTask: function (req, res) {
     // console.log('req.body:'+JSON.stringify(req.body, null, 4));
     var form = parseAddTaskBody(req.body);
-    var taskForm = {Task_name:form.task_name, type:form.type, Schedule_ID:form.Schedule_ID, Schedule_desc:form.schedule_desc};
+    var taskForm = {Task_name:form.task_name, type:form.type, Schedule_ID:form.Schedule_ID, Schedule_desc:form.schedule_desc,uniqID:(new Date().getTime()).toString()};
     mongoService.Insert("TaskFolder", taskForm, function (records) {
       if (records){
         //sucess
         console.log('insert sucess');
+        //创建任务成功之后需要设置任务的调度策略
+        //在这里查找调度策略
+
         return res.send(records);
       }else {
         //fail
@@ -49,9 +52,9 @@ module.exports = {
    * @param res
      */
   editTask: function (req, res) {
-    console.log(req.param("Task_name"));
+    console.log(req.param("uniqID"));
     //根据taskId搜索task
-    mongoService.Find('TaskFolder',{Task_name:req.param("Task_name")}, function (taskdatas) {
+    mongoService.Find('TaskFolder',{uniqID:req.param("uniqID")}, function (taskdatas) {
       if(taskdatas){
         // console.log("find sucess :"+JSON.stringify(taskdatas, null, 4));
         //搜索全部的用例显示在左边
@@ -84,7 +87,7 @@ module.exports = {
   runTask: function (req, res) {
     console.log(req.body);
     //根据taskId搜索task
-    mongoService.Find('TaskFolder',{Task_name:req.body.Task_name}, function (records) {
+    mongoService.Find('TaskFolder',{uniqID:req.body.uniqID}, function (records) {
       if(records){
 
         if(records.length > 0){
@@ -135,11 +138,25 @@ module.exports = {
    * @param res
    */
   deleteTask: function (req, res) {
-    mongoService.Delete('TaskFolder',{Task_name:req.body.Task_name});
+    mongoService.Delete('TaskFolder',{uniqID:req.body.uniqID});
     mongoService.Find("TaskFolder", null, function (records) {
       if(records){
         return res.send(records);
       }
+    })
+  },
+
+  /**
+   * 通过name显示用例详情
+   * @param req
+   * @param res
+     */
+  findRequestItemByID:function (req,res) {
+    var dic = {name:req.param("name")};
+    console.log(dic);
+    mongoService.Find('TaskCase',dic,function (record) {
+      console.log('case is'+JSON.stringify(record, null, 4));
+      res.view('task/caseDetailView', {data:record});
     })
   },
 
@@ -197,10 +214,10 @@ module.exports = {
    * @param res
      */
   deleteSingleCase: function (req, res) {
-    console.log("deleteCase------"+req.body.caseId);
-    var caseId = req.body.caseId;
-    var taskId = req.body.taskId;
-    mongoService.Delete("TaskCase", {id:caseId, TaskID:taskId});
+    console.log("deleteCase------"+req.body.uniqID);
+    var uniqID = req.body.uniqID;
+    // var taskId = req.body.taskId;
+    mongoService.Delete("TaskCase", {uniqID:uniqID});
     // mongoService.Delete("TaskCase", {TaskID:taskId.toString()}, function(record) {
     //   console.log(record);
     // });
@@ -213,7 +230,27 @@ module.exports = {
      */
   updateCasesOrder: function (req, res) {
 
+  },
+
+  /**
+   * 单个接口的测试
+   * @param req
+   * @param res
+     */
+  runSingleCase: function (req, res) {
+
+
+  },
+
+  /**
+   * 保存本次的修改
+   * @param req
+   * @param res
+     */
+  saveSingleCase:function (req, res) {
+
   }
+
 };
 
 /**
@@ -264,13 +301,4 @@ function refreshTaskView(res) {
     // console.log('---------------find'+records);
     res.view('task/index', {data:records});
   })
-}
-
-/**
- *
- */
-function creatRequestItemWithCase(caseItem) {
-  var requestItem = {
-
-  }
 }

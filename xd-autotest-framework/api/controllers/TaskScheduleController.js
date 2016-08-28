@@ -16,15 +16,15 @@ module.exports = {
 	changeScheduleForTask: function (req, res) {
     // console.log(req.param("taskName"));
     // console.log(req.param("desc"));
-    var taskFolder = parseDesc(req.param("desc"), req.param("taskName"));
+    var taskFolder = parseDesc(req.param("desc"), req.param("uniqID"));
 
-    mongoService.Find('TaskFolder', {Task_name:taskFolder.Task_name}, function (folders) {
+    mongoService.Find('TaskFolder', {uniqID:taskFolder.uniqID}, function (folders) {
       if(folders){
         var folder = folders[0];
         // console.log(JSON.stringify(folder, null, 4)+'-------------');
         folder.Schedule_ID = taskFolder.Schedule_ID;
         folder.Schedule_desc = taskFolder.Schedule_desc;
-        var dic = {Task_name:taskFolder.Task_name};
+        var dic = {uniqID:taskFolder.uniqID};
         // delete folder.id;
         // delete folder.Task_name;
         delete folder.Cases;
@@ -47,7 +47,7 @@ module.exports = {
   }
 };
 
-function parseDesc(desc, name) {
+function parseDesc(desc, uniqID) {
   var task= {};
   switch(desc){
     case '不会自动执行任务脚本':
@@ -65,8 +65,9 @@ function parseDesc(desc, name) {
     default:
       break;
   }
-  task.Task_name = name;
+  task.uniqID = uniqID;
   task.Schedule_desc = desc;
   // console.log(JSON.stringify(task, null, 4)+'~~~~~~~');
   return task;
 }
+

@@ -51,10 +51,10 @@
         <div id="caseList" name="<%- data.id %>" class="list-group">
           <% if (data) { %>
           <% var cases =data.Cases; cases.forEach(function(caseItem,index){ %>
-          <a href="#" name="<%- caseItem.id %>" class="list-group-item"> <%- caseItem.name %>
+          <a href="#" name="<%- caseItem.uniqID %>" class="list-group-item"> <%- caseItem.name %>
             <!--<span class="badge btn" onclick="downClicked()">down</span>-->
             <!--<span class="badge btn" onclick="upClicked()">up</span>-->
-            <span name="<%- caseItem.id %>" class="badge btn btn-danger" onclick="deleteCaseWithName({node:this, caseId:'<%- caseItem.name %>', taskId:'<%- caseItem.TaskID %>'})">delete</span>
+            <span name="<%- caseItem.id %>" class="badge btn btn-danger" onclick="deleteCaseWithName({node:this, uniqID:'<%- caseItem.uniqID %>', taskId:'<%- caseItem.TaskID %>'})">delete</span>
             <!--<span class="badge btn btn-danger" onclick="deleteCaseWithName({caseName:'<%- caseItem.name %>', tasId:'<%- caseItem.TaskID %>'})">delete</span>-->
             <i class="fa fa-fw fa-check"></i>
           </a>
@@ -77,7 +77,7 @@
           <ul class="dropdown-menu pull-right">
             <% if(folderItem.ReqItems) {%>
             <% var items = folderItem.ReqItems; items.forEach(function (item, index) {%>
-            <li><a name="<%- item.name%>" onclick="addCaseToTask({itemName:'<%-item.name%>',taskId:'<%-data.id%>'})"><%- item.name%></a></li>
+            <li><a name="<%- item.uniqID%>" onclick="addCaseToTask({uniqID:'<%-item.uniqID%>'})"><%- item.name%></a></li>
             <% })%>
             <% } %>
           </ul>

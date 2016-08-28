@@ -59,9 +59,9 @@ function showCaseInfo() {
  * 根据任务名运行任务
  * @param taskName
  */
-function runSelectedTask(name) {
-  console.log('name:%s',name);
-  $.post("/TaskManager/runTask", {Task_name:name}, function (result) {
+function runSelectedTask(uniqID) {
+  console.log('uniqID:%s',uniqID);
+  $.post("/TaskManager/runTask", {uniqID:uniqID}, function (result) {
     // $.main.refreshMain("/TaskManager/showTaskMangerView");
     alert("收到开始运行信息")
   }, "json");
@@ -70,19 +70,72 @@ function runSelectedTask(name) {
 /**
  * 根据任务名显示task的详情页面
  */
-function showTaskDetailView(name) {
-  console.log('name:%s',name);
-  $.main.refreshRight("/TaskManager/editTask", {data:{Task_name:name}});
+function showTaskDetailView(uniqID) {
+  console.log('uniqID:%s',uniqID);
+  $.main.refreshRight("/TaskManager/editTask", {data:{uniqID:uniqID}});
 }
 
 /**
  * 根据任务名删除任务
  * @param taskName
  */
-function deleteSelectedTask(name) {
-  $.post("/TaskManager/deleteTask", {Task_name:name}, function (result) {
+function deleteSelectedTask(uniqID) {
+  $.post("/TaskManager/deleteTask", {uniqID:uniqID}, function (result) {
     $.main.refreshMain("/TaskManager/showTaskMangerView");
     alert("删除成功")
   }, "json");
 }
 
+/**
+ * 显示单个用例详情
+ * @param data
+ */
+function requestItem(data) {
+  console.log('---------'+data.name);
+  $.main.refreshRight("/TaskManager/findRequestItemByID", {data: {name: data.name}});
+}
+
+/**
+ * 运行单个测试用例并展示
+ * @param data
+ */
+function runsingleCase(data) {
+
+}
+
+//运行与保存
+$(document).ready(function () {
+  var option_run = {
+    url: '/TaskManager/runSingleCase',
+    data: null,
+    success: function (data) {
+
+    }
+  };
+  var option_save = {
+    url: "/TaskManager/saveSingleCase",
+    success: function (data) {
+      console.log('+++++++++++++++' + data);
+      alert('This request had been stored into DB!')
+    }
+  };
+
+  // ajaxSubmit 
+  //运行事件
+  $("#runBtn").click(function () {
+    $("#form").ajaxSubmit(option_run);
+  });
+
+  //保存事件
+  $("#saveBtn").click(function () {
+    $("#form").ajaxSubmit(option_save);
+  });
+});
+
+
+function saveButtonClicked() {
+  $('#myModal').modal('hide');
+  $(".modal-backdrop").hide();
+  // console.log(JSON.stringify(data, null, 4));
+  console.log($("#form").name);
+}
