@@ -12,7 +12,6 @@ module.exports = {
   overview: function(req, res) {
     res.view('overview/index');
   },
-
   task: function(req, res) {
     mongoService.Find("TaskFolder", null, function (records) {
       console.log('records:'+ records);

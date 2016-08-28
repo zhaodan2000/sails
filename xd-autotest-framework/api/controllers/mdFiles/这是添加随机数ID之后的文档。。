@@ -1,4 +1,4 @@
-# 自考君接口文档
+# 这是添加随机数ID之后的文档。。
 ### 文档描述
 接口文档描述。
 ### 测试环境
@@ -6,9 +6,9 @@
 ### 端口号
 undefined
 ### 接口
-1. 首页接口
+1. test
 	* **请求url**
-		* http://192.168.31.88:8020/selftaught/home
+		* 
 	* **请求方式method**
 		* POST
 	* **接口是否废弃**
@@ -18,17 +18,13 @@ undefined
 	* **请求格式content-type**
 		* application/json
 	* **请求头header**
-		* <pre><code style="width: auto;height: auto">{
-	"参数1": "value1"
-}
+		* ""
+		* <pre><code style="width: auto;height: auto">""
 </code></pre>
 	* **请求参数queryParams**
-		* <pre><code style="width: auto;height: auto">{
-	"参数1": "value1",
-	"参数2": "value2",
-	"参数3": "value13"
-}
+		* <pre><code style="width: auto;height: auto">""
 </code></pre>
 	* **返回结果response**
+		* ""
 		* <pre><code style="width: auto;height: auto">""
 </code></pre>

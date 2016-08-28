@@ -3,6 +3,7 @@
  * CRUD
  */
 var Math=require('mathjs');
+var ObjectId=require('sails-mongo');
 
 module.exports={
 
@@ -290,7 +291,7 @@ module.exports={
           }
         });
         break;
-      
+
       case "ScheduleStrategy":
         ScheduleStrategy.find(dic).exec(function(err,records){
           if (!err) {
@@ -306,6 +307,19 @@ module.exports={
       default:
         break;
     }
+  },
+
+  FindByObjId:function(modelType,dic,callback){
+    var _id="57bd5fcaf3146ed921e27613";
+    ScheduleStrategy.findById(_id,function(err,records) {
+      if (!err) {
+        callback(records);
+        return records;
+      } else {
+        callback(null);
+        return err;
+      }
+    });
   },
 
   /**

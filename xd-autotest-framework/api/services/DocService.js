@@ -6,9 +6,14 @@ var JSON5 = require('json5');
 
 
 module.exports= {
-  test:function(){
 
-   var modelType=doc;
+  testCrossService:function (req,res) {
+    var request={url:'http://192.168.103.101:8002/user/newLogin'};
+
+  },
+
+  test:function(){
+    var modelType=doc;
     var dic={name:'abc'};
     testcallback2(requestName,modelType,dic );
   },

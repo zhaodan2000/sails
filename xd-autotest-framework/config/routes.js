@@ -49,23 +49,17 @@ module.exports.routes = {
   '/task': 'Home.task',
   '/case': 'Home.testcase',
   '/schedule': 'Home.schedule',
-  'get /doc/findRequestItemByName':'InterfaceDoc.findRequestItemByName',
-  'post /doc/insertRequestItemService':'InterfaceDoc.insertRequestItemService',
   'post /doc/savedocwithItem':'InterfaceDoc.saveDoc2db',
   'post /doc/showmdfile':'EditDoc.showMdFile',
   'post /doc/editdoc':"EditDoc.editDoc",
-
-  /*
-  '/apidoc':{
-    view:'APIdoc'
-  },
-  '/uitemplate':{
-    view:'uitemplate'
-  },
-  '/homeindex':{
-    view:'homeindex'
-  },
-  */
+  'post /doc/remove':"InterfaceDoc.remove",
+  
+  /**
+   * doc test url
+   * **/
+  'get /doc/findRequestItemByName':'InterfaceDoc.findRequestItemByName',
+  'post /doc/insertRequestItemService':'InterfaceDoc.insertRequestItemService',
+  
   '/response': {
     view: 'response'
   },

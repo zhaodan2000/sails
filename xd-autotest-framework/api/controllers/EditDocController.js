@@ -5,21 +5,22 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 var markdown = require('markdown-js');
+//var markdown= require("markdown").main(system);
+//var markdown=require('markdown-to-html');
 var fs=require('fs');
 
 module.exports = {
+
 
   editDoc:function (req,res) {
     var uniqId=req.body['uniqID'];
     if(uniqId){
       mongoService.Find('APIdoc',{uniqID:uniqId},function (records) {
-        res.view('doc/editdoc',{api_docs:records[0]});
+        res.render('doc/editdoc',{api_docs:records[0]});
       });
     }else{
-      res.errMsg="req.body['uniqID']为空。";
-      res.error();
+      res.send({retcode:-1,message:"前端传入的uniqID为空.",data:null});
     }
-
 
   },
 
@@ -38,7 +39,6 @@ module.exports = {
           data +='\r\n### 端口号\r\n';
           data +=(found[0].testEnvPort?found[0].testEnvPort:"n/a");
           data += '\r\n### 接口';
-
           for (var i = 0; i < found[0].APIdoc_items.length; i++) {
             var docItem = found[0].APIdoc_items[i];
             data += '\r\n' + (i + 1) + '. ' + docItem.name;
@@ -53,11 +53,18 @@ module.exports = {
             data += '\r\n\t* **请求格式content-type**';
             data += '\r\n\t\t* ' + docItem.dataType;
             data += '\r\n\t* **请求头header**';
-            data += '\r\n\t\t* ' + JSON.stringify(docItem.header, null, "\t"); //JdocItem.header;
-            data += '\r\n\t* **请求参数queryParams(以json格式展示)**';
-            data += '\r\n\t\t* ' + JSON.stringify(docItem.queryParams, null, "\t");//docItem.queryParams;
-            data += '\r\n\t* **返回结果response(以json格式展示)**';
-            data += '\r\n\t\t* ' + JSON.stringify(docItem.response,null,"\t");
+            data +='\r\n\t\t* <pre><code style="width: auto;height: auto">';
+            data +=JSON.stringify(docItem.header, null, "\t");
+            data +='\r\n</code></pre>';
+            data += '\r\n\t* **请求参数queryParams**';
+            data +='\r\n\t\t* <pre><code style="width: auto;height: auto">';
+            data +=JSON.stringify(docItem.queryParams, null, "\t");
+            data +='\r\n</code></pre>';
+            data += '\r\n\t* **返回结果response**';
+            data +='\r\n\t\t* <pre><code style="width: auto;height: auto">';
+            data +=JSON.stringify(docItem.response, null, "\t");
+            data +='\r\n</code></pre>';
+
           }
 
           fs.writeFile(filename, data, function () {
@@ -65,6 +72,7 @@ module.exports = {
             // 读入 Markdown 源文件
             var fileContent = fs.readFileSync(filename, 'utf8');
             var html = markdown.makeHtml(fileContent);
+
             res.send(html);
           });
         }
@@ -171,7 +179,7 @@ module.exports = {
     mongoService.Insert("APIdoc",apiDoc, function(records) {
       console.log("插入问道文档\r\n" + JSON.stringify(records, null, "\t"));
     });
-    var apiDocID='57bc409d7129b2a51af7c512';
+    var apiDocID='57c26c65d4685fab0ea165c0';
     var docItemRow={name:'首页接口', uniqID:(new Date().getTime()).toString(),url:'http://192.168.103.101:8020/selftaught/home', APIdocID:apiDocID};
     mongoService.Insert('APIdocitem',docItemRow,function(records){
       res.send(records);
@@ -180,15 +188,61 @@ module.exports = {
   },
 
   testInsertDocItem:function(req,res){
-    var apiDocRow={name:"这是添加随机数ID之后的文档。。",uniqID:(new Date().getTime()).toString(),};
+    var apiDocRow={name:"自考君接口文档",uniqID:(new Date().getTime()).toString(),};
     mongoService.Insert("APIdoc",apiDocRow,function(records){
-      var docItemRow={name:'首页接口',uniqID:(new Date().getTime()).toString(), url:'http://192.168.103.101:8020/selftaught/home', APIdocID:records.id};
-      mongoService.Insert('APIdocitem',docItemRow,function(records){
-        res.send(records);
-        res.ok();
+      if(records&&records.length>0){
+        var docItemRow={name:'首页接口',uniqID:(new Date().getTime()).toString(), url:'http://192.168.103.101:8020/selftaught/home', APIdocID:records.id};
+        mongoService.Insert('APIdocitem',docItemRow,function(records){
+          res.send(records);
+          res.ok();
         });
+      }
+
+      else{
+        res.send({retcode:-1,msg:"添加失败data失败",data:apiDocRow});
+      }
+
       });
   },
+
+  testInsertSS:function (req,res) {
+   var ss= [
+      {
+        "schedule_time": "-",
+        "day_of_week": [1,2],
+        "schedule_period": "-",
+        "schedule_desc": "选择此策略则表示不会自动执行任务脚本。",
+        "uniqID": "ss00"
+      },
+      {
+        "schedule_time": "07:30",
+        "schedule_period": "daily",
+        "schedule_desc": "选择此策略则表示每天07:30执行任务脚本。",
+        "uniqID": "ss01"
+      },
+      {
+        "schedule_time": "22:30",
+        "day_of_week": [1,2,3,4,5],
+        "schedule_period": "weekly",
+        "schedule_desc": "选择此策略则每周日22：30执行任务。",
+        "uniqID": "ss02"
+      },
+      {
+        "schedule_time": "21:00",
+        "day_of_week": [0],
+        "schedule_period": "weekly",
+        "schedule_desc": "选择此策略则表示每周周一到周五21:00执行任务脚。",
+        "uniqID": "ss03"
+      }
+    ];
+
+    ss.forEach(function(item,index,array){
+      mongoService.Insert('ScheduleStrategy',item,function(record){
+        console.log("*******"+ record.uniqID);
+      })
+    });
+
+  }
 
 };
 

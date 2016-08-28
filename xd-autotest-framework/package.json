@@ -28,6 +28,7 @@
     "json5": "^0.5.0",
     "kerberos": "0.0.21",
     "markdown-js": ">= 0.0.1",
+    "markdown-to-html": "0.0.11",
     "mathjs": "^3.3.0",
     "mongodb": "^2.2.5",
     "node-uuid": "^1.4.7",

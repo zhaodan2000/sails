@@ -1,8 +1,40 @@
 /**
  * Created by lyh on 8/22/16.
  */
+var fs=require('fs');
 
 module.exports={
+
+  testService:function (req,res) {
+    res.view('doc/postmanUI');
+  },
+
+  testMD:function (req,res) {
+    var Markdown = require('markdown-to-html').Markdown;
+    var md = new Markdown();
+    //md.bufmax = 2048;
+    var filename = __dirname + '/mdFiles/test.md';
+    var opts = {title: 'File $BASENAME in $DIRNAME', stylesheet: 'test/style.css'};
+
+    // Write a header.
+    console.log('===============================');
+    // Write a trailer at eof.
+    md.once('end', function() {
+      console.log('===============================');
+    });
+    md.render(filename, opts, function(err) {
+      if (err) {
+        console.error('>>>' + err);
+        process.exit();
+      }
+      //md.pipe(process.stdout.save());
+      //md.pipe(process.browser);
+      console.info("开始打印了~~~");
+      res.send(md.html);
+
+    });
+
+  },
 
   /**
    * 写文件或追加文件

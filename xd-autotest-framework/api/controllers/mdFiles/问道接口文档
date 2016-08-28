@@ -6,37 +6,3 @@
 ### 端口号
 8020
 ### 接口
-1. 第三方登录接口newLogin
-	* **请求url**
-		* /user/newLogin
-	* **请求方式method**
-		* POST
-	* **接口是否废弃**
-		* false
-	* **开发者**
-		* 赵聃
-	* **请求格式content-type**
-		* application/json
-	* **请求头header**
-		* ""
-	* **请求参数queryParams(以json格式展示)**
-		* ""
-	* **返回结果response(以json格式展示)**
-		* ""
-2. 出题接口MAPI
-	* **请求url**
-		* 
-	* **请求方式method**
-		* POST
-	* **接口是否废弃**
-		* false
-	* **开发者**
-		* 赵聃
-	* **请求格式content-type**
-		* application/json
-	* **请求头header**
-		* ""
-	* **请求参数queryParams(以json格式展示)**
-		* ""
-	* **返回结果response(以json格式展示)**
-		* ""

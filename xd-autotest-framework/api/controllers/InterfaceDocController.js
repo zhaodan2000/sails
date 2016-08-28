@@ -39,8 +39,7 @@ module.exports = {
 
         /** 不存在APIdoc对象  */
         if(!records||records.length==0){
-          res.errMsg="APIdoc的uniqID在DB中找不到:"+API_doc.uniqID;
-          res.error();
+          res.send({retcode:-1,message:"不存在data对象",data:API_doc});
         }
         /** 存在APIdoc对象**/
         else {//存在APIdoc
@@ -53,7 +52,10 @@ module.exports = {
                       mongoService.Find("APIdocitem", {uniqID: tempItem.uniqID}, function (found) {
                         /** 没有找到apiItem对象**/
                         if (!found || found.length == 0) {
-                          res.send({retcode:-1,errMsg:"APIdocitem的uniqID在DB中找不到:"+apisItemArray[i].uniqID});
+                          tempItem["APIdocID"]=updatedDOC[0].id;
+                          mongoService.Insert("APIdocitem", tempItem, function (insertedItem) {
+                            console.log("*********************\r\n用户添加了APIdocitem:\r\n"+tempItem.name);
+                          });
                         }
 
                         /*** 找到apiItem对象***/
@@ -66,14 +68,9 @@ module.exports = {
 
                     }
 
-                    /** APIdocitem的uniqID为空,表示是新元素,需要直接添加到DB中**/
+                    /** APIdocitem的uniqID为空**/
                     else{
-                      tempItem.uniqID=(new Date().getTime()).toString();
-                      tempItem["APIdocID"]=updatedDOC[0].id;
-                      console.log("=====================================id="+tempItem["APIdocID"]);
-                      mongoService.Insert("APIdocitem", tempItem, function (insertedItem) {
-                        console.log("*********************\r\n用户添加了APIdocitem:\r\n"+tempItem.name);
-                      });
+                      res.send({retcode:-1,message:"前端传入apidocitem的uniqID为空,若不刷新前端,会重复添加apidocitem"});
                     }
 
               });
@@ -96,6 +93,21 @@ module.exports = {
       res.send({retcode:-1,errMsg:"前端传入的API_doc.uniqID为空"});
     }
 
+  },
+
+  /**
+   * 根据用户输入的modelType,以及uniqID来删除指定的model对象。
+   * */
+  remove:function(req,res){
+    var modelType=req.body["modelType"];
+    var uniqId=req.body["uniqID"];
+    var dic={uniqID:uniqId};
+    mongoService.Find(modelType,dic,function (records) {
+      if(records&&records.length>0){
+        mongoService.Delete(modelType,dic);
+      }
+      res.ok();
+    });
   },
 
 
