@@ -1,76 +1,85 @@
-<form id="apidoc_form" action="/InterfaceDoc/saveDoc2db" method="post">
-    <div class="row" >
-      <div class="col-lg-12">
-        <h1 class="page-header" id="api_doc_name" uniqid="<%=api_docs.uniqID%>"><%=api_docs.name%></h1>
-        <ol class="breadcrumb">
-          <li>
-            <i class="fa fa-dashboard"></i>文档描述
-            <input name="docdesc" value="<%=api_docs.docDesc%>" />
-          </li>
-          <li>
-            <i class="fa fa-dashboard"></i>测试环境
-            <input name="testEnv" value="<%=api_docs.testEnv%>" />
-          </li>
-          <li>
-            <i class="fa fa-dashboard"></i>端口号
-            <input name="testEnvPort" value="<%=api_docs.testEnvPort%>" />
-          </li>
-        </ol>
+<div>
 
-
+  <form id="apidoc_form" action="/InterfaceDoc/saveDoc2db" method="post" style="width:auto; height:auto">
+    <fieldset>
+      <!--文档基本信息 -->
+      <div class="row" >
+        <div class="col-lg-12">
+          <h1 class="page-header" id="api_doc_name" uniqid="<%=api_docs.uniqID%>"><%=api_docs.name%></h1>
+          <ol class="breadcrumb">
+            <li>
+              <i class="fa fa-dashboard"></i>文档描述
+              <input name="docdesc" value="<%=api_docs.docDesc%>" />
+            </li>
+            <li>
+              <i class="fa fa-dashboard"></i>测试环境
+              <input name="testEnv" value="<%=api_docs.testEnv%>" />
+            </li>
+            <li>
+              <i class="fa fa-dashboard"></i>端口号
+              <input name="testEnvPort" value="<%=api_docs.testEnvPort%>" />
+            </li>
+          </ol>
+        </div>
       </div>
-    </div>
-    <div class="row">
-    <div class="col-lg-6">
-      <div class="btn btn-info" id="addAPIbutton">增加API接口</div>
-      <div class="btn btn-default" id="save_doc_2_db">保存文档</div>
-    </div>
-  </div>
-    <div class="row" >
-      <div class="col-lg-6">
+      <!--保存文档按钮。 -->
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="btn btn-info" id="addAPIbutton">增加API接口</div>
+          <div class="btn btn-default" id="save_doc_2_db">保存文档</div>
+        </div>
+      </div>
+      <!--所有接口内容 -->
+      <div class="row" >
+        <div class="col-lg-12">
           <input name="apis_count" type="hidden" value="<%=api_docs.APIdoc_items.length%>" />
           <ol id="APIs" reversed>
             <li id="api_template" uniqid="" style="display: none">
               <i class="fa fa-edit" id="apiTitle" >接口</i>
               <div type="button" class="close" data-dismiss="modal" aria-hidden="true">×</div>
               <div class="form-group">
-                <label class="col-lg-8 control-label">接口名</label>
-                <div class="col-lg-20">
+                <label class="col-lg-4 control-label">接口名</label>
+                <div class="col-lg-8">
                   <input name="api_title" class="form-control"/>
                 </div>
               </div>
               <div class="form-group">
-                <label>接口请求URL</label>
-                <input name="api_url" class="form-control" />
+                <label class="col-lg-4 control-label">请求URL</label>
+                <div class="col-lg-8">
+                  <input name="api_url" class="form-control" />
+                </div>
               </div>
               <div class="form-group">
-                <label>接口请求方式method</label>
-                <!--<input name="api_method" class="form-control"  />-->
-                <select class="form-control" name="api_method">
-                  <option value="POST" selected="selected">POST</option>
-                  <option value="GET">GET</option>
-                </select>
+                <label class="col-lg-4 control-label">请求method</label>
+                <div class="col-lg-8">
+                  <!--<input name="api_method" class="form-control"  />-->
+                  <select class="col-lg-8 form-control" name="api_method">
+                    <option value="POST" selected="selected">POST</option>
+                    <option value="GET">GET</option>
+                  </select>
+                </div>
+
               </div>
               <div class="form-group">
-                <label>接口是否废弃disabled</label>
+                <label class="col-lg-4 control-label">是否废弃</label>
                 <!--<input name="api_disabled" class="form-control" />-->
-                <select class="form-control" name="api_disabled" >
+                <select class="col-lg-8 form-control" name="api_disabled" >
                   <option value="false">false</option>
                   <option value="true">true</option>
                 </select>
               </div>
               <div class="form-group">
-                <label>开发dev</label>
-                <select class="form-control" name="api_dev" >
+                <label class="col-lg-4 control-label">Dev</label>
+                <select class="col-lg-8 form-control" name="api_dev" >
                   <option value="赵聃">赵聃</option>
                   <option value="李德洪">李德洪</option>
                   <option value="周欢">周欢</option>
                 </select>
               </div>
               <div class="form-group">
-                <label>接口请求格式content-type</label>
+                <label class="col-lg-4 control-label">请求格式content-type</label>
                 <!--<input name="api_dataType" class="form-control" />-->
-                <select class="form-control" name="api_dataType" >
+                <select class="col-lg-8 form-control" name="api_dataType" >
                   <option value="application/json">application/json</option>
                   <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
                   <option value="application/application/octet-stream">application/application/octet-stream</option>
@@ -83,15 +92,23 @@
                 </select>
               </div>
               <div class="form-group">
-                <label>接口请求头header</label>
+                <label class="col-lg-2 control-label">请求头header</label>
                 <textarea name="api_header" rows="8" class="form-control"  />
               </div>
               <div class="form-group">
-                <label>接口请求参数queryParams(以json格式输入)</label>
+                <label class="col-lg-2 control-label">请求参数</label>
+                <div name="header_keyvalue">
+                  <div name="header_keyvalue-row">
+                    <input type="text" class="col-lg-2" placeholder="Key" name="keyvalueeditor-key"  style="display: inline-block;">
+                    <input type="text" class="col-lg-2" placeholder="Value" name="keyvalueeditor-value" style="display: inline-block;">
+                    <input type="text" class="col-lg-2" placeholder="Desc" name="keyvalueeditor-value" style="display: inline-block;">
+                  </div>
+                </div>
+
                 <textarea name="api_queryParams" rows="8" class="form-control" />
               </div>
               <div class="form-group">
-                <label>接口返回结果response(以json格式输入)</label>
+                <label class="col-lg-2 control-label">接口返回结果response(以json格式输入)</label>
                 <textarea name="api_response" rows="8" class="form-control"/>
               </div>
             </li>
@@ -101,8 +118,8 @@
               <button type="button" class="fa fa-edit" aria-hidden="false">编辑</button>
               <div type="button" class="close" aria-hidden="true">×</div>
               <div class="form-group">
-                <label class="col-lg-2 control-label">接口名</label>
-                <div class="col-lg-10">
+                <label class="col-lg-4 control-label">接口名</label>
+                <div class="col-lg-8">
                   <!--<input type="text" class="form-control" id="inputEmail" placeholder="Email">-->
                   <input name="api_title" required="required" class="form-control" id="<%='api_title_'+(i+1)%>"
                          value="<%=api_docs.APIdoc_items[i].name%>" />
@@ -110,33 +127,35 @@
 
               </div>
               <div class="form-group">
-                <label>接口请求URL</label>
-                <input name="api_url" required="required" class="form-control"  id="<%='api_url_'+(i+1)%>"
-                       value="<%=api_docs.APIdoc_items[i].url%>"/>
+                <label class="col-lg-4 control-label">请求URL</label>
+                <div class="col-lg-8">
+                  <input name="api_url" required="required" class="form-control"  id="<%='api_url_'+(i+1)%>"
+                         value="<%=api_docs.APIdoc_items[i].url%>"/>
+                </div>
               </div>
               <div class="form-group">
-                <label>接口请求方式method</label>
+                <label class="col-lg-4 control-label">请求method</label>
                 <!--<input name="api_method" class="form-control" id="<%='api_method_'+(i+1)%>"-->
-                       <!--value="<%=api_docs.APIdoc_items[i].method%>"/>-->
-                <select class="form-control" name="api_method" >
+                <!--value="<%=api_docs.APIdoc_items[i].method%>"/>-->
+                <select class="col-lg-6 form-control" name="api_method" >
                   <option value="<%=api_docs.APIdoc_items[i].method%>"><%=api_docs.APIdoc_items[i].method%></option>
                   <option value="POST" >POST</option>
                   <option value="GET">GET</option>
                 </select>
               </div>
               <div class="form-group">
-                <label>接口是否废弃disabled</label>
+                <label class="col-lg-4 control-label">是否废弃</label>
                 <!--<input name="api_disabled" class="form-control"  id="<%='api_disabled_'+(i+1)%>"-->
-                       <!--value="<%=api_docs.APIdoc_items[i].disabled%>"/>-->
-                <select class="form-control" name="api_disabled" >
+                <!--value="<%=api_docs.APIdoc_items[i].disabled%>"/>-->
+                <select class="col-lg-6 form-control" name="api_disabled" >
                   <option value="<%=api_docs.APIdoc_items[i].disabled%>"><%=api_docs.APIdoc_items[i].disabled%></option>
                   <option value="false">false</option>
                   <option value="true">true</option>
                 </select>
               </div>
               <div class="form-group">
-                <label>开发dev</label>
-                <select  id="selectDev" class="form-control" name="api_dev" >
+                <label class="col-lg-4 control-label">Dev</label>
+                <select  id="selectDev" class="col-lg-6 form-control" name="api_dev" >
                   <!--<option value="<%=api_docs.APIdoc_items[i].dev%>"><%=api_docs.APIdoc_items[i].dev?api_docs.APIdoc_items[i].dev:"请选择"%></option>-->
                   <option value="赵聃">赵聃</option>
                   <option value="李德洪">李德洪</option>
@@ -144,113 +163,125 @@
                 </select>
               </div>
               <div class="form-group">
-                <label>接口请求格式content-type</label>
+                <label class="col-lg-4 control-label">请求格式content-type</label>
                 <!--<input name="api_dataType" class="form-control" id="<%='api_dataType_'+(i+1)%>"-->
-                       <!--value="<%=api_docs.APIdoc_items[i].dataType%>"/>-->
-                <select class="form-control" name="api_dataType" >
-                  <option value="<%=api_docs.APIdoc_items[i].dataType%>" color="red"><%=api_docs.APIdoc_items[i].dataType%></option>
-                  <option value="application/json">application/json</option>
-                  <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
-                  <option value="application/application/octet-stream">application/application/octet-stream</option>
-                  <option value="text/html">text/html</option>
-                  <option value="text/plain">text/plain</option>
-                  <option value="text/xml">text/xml</option>
-                  <option value="image/gif">image/gif</option>
-                  <option value="image/jpeg">image/jpeg</option>
-                  <option value="image/png">image/png</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>接口请求头header</label>
+                <!--value="<%=api_docs.APIdoc_items[i].dataType%>"/>-->
+                <div class="col-lg-8 form-control">
+                  <select class="col-lg-6 form-control" name="api_dataType" >
+                    <option value="<%=api_docs.APIdoc_items[i].dataType%>" color="red"><%=api_docs.APIdoc_items[i].dataType%></option>
+                    <option value="application/json">application/json</option>
+                    <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
+                    <option value="application/application/octet-stream">application/application/octet-stream</option>
+                    <option value="text/html">text/html</option>
+                    <option value="text/plain">text/plain</option>
+                    <option value="text/xml">text/xml</option>
+                    <option value="image/gif">image/gif</option>
+                    <option value="image/jpeg">image/jpeg</option>
+                    <option value="image/png">image/png</option>
+                  </select>
 
-                <textarea name="api_header" rows="8" class="form-control" id="<%='api_header_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].header,null,"\t")%></textarea>
+                </div>
               </div>
               <div class="form-group">
-                <label>接口请求参数queryParams(以json格式输入)</label>
-                <textarea name="api_queryParams" rows="8" class="form-control" id="<%='api_queryParams_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].queryParams,null,"\t")%></textarea>
+                <label class="col-lg-4 control-label">请求header</label>
+                <div class="col-lg-8 form-control">
+                  <textarea name="api_header" rows="8" class="col-lg-8 form-control" id="<%='api_header_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].header,null,"\t")%></textarea>
+                </div>
               </div>
               <div class="form-group">
-                <label>接口请求参数response(以json格式输入)</label>
-                <textarea name="api_response" rows="8" class="form-control" id="<%='api_response_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].response,null,"\t")%></textarea>
+                <label class="col-lg-2 control-label">请求参数</label>
+                <div class="col-lg-8 form-control">
+                  <textarea name="api_queryParams" rows="8" class="form-control" id="<%='api_queryParams_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].queryParams,null,"\t")%></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-lg-4 control-label">Response</label>
+                <div class="col-lg-8 form-control">
+                  <textarea name="api_response" rows="8" class="form-control" id="<%='api_response_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].response,null,"\t")%></textarea>
+                </div>
               </div>
             </li>
             <%}%>
           </ol>
+        </div>
       </div>
-    </div>
-    <form class="form-horizontal">
-      <fieldset>
-        <legend>Legend</legend>
-        <div class="form-group">
-          <label for="inputEmail" class="col-lg-2 control-label">Email</label>
-          <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputEmail" placeholder="Email">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputPassword" class="col-lg-2 control-label">Password</label>
-          <div class="col-lg-10">
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox"> Checkbox
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="textArea" class="col-lg-2 control-label">Textarea</label>
-          <div class="col-lg-10">
-            <textarea class="form-control" rows="3" id="textArea"></textarea>
-            <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-2 control-label">Radios</label>
-          <div class="col-lg-10">
-            <div class="radio">
-              <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                Option one is this
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                Option two can be something else
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="select" class="col-lg-2 control-label">Selects</label>
-          <div class="col-lg-10">
-            <select class="form-control" id="select">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-            <br>
-            <select multiple="" class="form-control">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-lg-10 col-lg-offset-2">
-            <button type="reset" class="btn btn-default">Cancel</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </div>
-      </fieldset>
-    </form>
+    </fieldset>
+    <!--<form class="form-horizontal">-->
+    <!--<fieldset>-->
+    <!--<legend>Legend</legend>-->
+    <!--<div class="form-group">-->
+    <!--<label for="inputEmail" class="col-lg-2 control-label">Email</label>-->
+    <!--<div class="col-lg-10">-->
+    <!--<input type="text" class="form-control" id="inputEmail" placeholder="Email">-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+    <!--<label for="inputPassword" class="col-lg-2 control-label">Password</label>-->
+    <!--<div class="col-lg-10">-->
+    <!--<input type="password" class="form-control" id="inputPassword" placeholder="Password">-->
+    <!--<div class="checkbox">-->
+    <!--<label class="col-lg-2 control-label">-->
+    <!--<input type="checkbox"> Checkbox-->
+    <!--</label>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+    <!--<label for="textArea" class="col-lg-2 control-label">Textarea</label>-->
+    <!--<div class="col-lg-10">-->
+    <!--<textarea class="form-control" rows="3" id="textArea"></textarea>-->
+    <!--<span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+    <!--<label class="col-lg-2 control-label">Radios</label>-->
+    <!--<div class="col-lg-10">-->
+    <!--<div class="radio">-->
+    <!--<label class="col-lg-2 control-label">-->
+    <!--<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">-->
+    <!--Option one is this-->
+    <!--</label>-->
+    <!--</div>-->
+    <!--<div class="radio">-->
+    <!--<label class="col-lg-2 control-label">-->
+    <!--<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">-->
+    <!--Option two can be something else-->
+    <!--</label>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+    <!--<label for="select" class="col-lg-2 control-label">Selects</label>-->
+    <!--<div class="col-lg-10">-->
+    <!--<select class="form-control" id="select">-->
+    <!--<option>1</option>-->
+    <!--<option>2</option>-->
+    <!--<option>3</option>-->
+    <!--<option>4</option>-->
+    <!--<option>5</option>-->
+    <!--</select>-->
+    <!--<br>-->
+    <!--<select multiple="" class="form-control">-->
+    <!--<option>1</option>-->
+    <!--<option>2</option>-->
+    <!--<option>3</option>-->
+    <!--<option>4</option>-->
+    <!--<option>5</option>-->
+    <!--</select>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+    <!--<div class="col-lg-10 col-lg-offset-2">-->
+    <!--<button type="reset" class="btn btn-default">Cancel</button>-->
+    <!--<button type="submit" class="btn btn-primary">Submit</button>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</fieldset>-->
+    <!--</form>-->
   </form>
+
+
+</div>
 
 
 
