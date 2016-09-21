@@ -4,6 +4,41 @@
  *
  */
 
+
+$(document).ready(function() {
+  /**
+   * 更新下拉菜单
+   * */
+  $('select').each(function(){
+    var _value=$(this).attr('text');
+    $(this).find("option[value='"+_value+"']").attr("selected","selected");
+  });
+
+});
+
+
+
+/*** 添加 header 的key-value **/
+$("#header_kv_add").click(function(e){
+  var length=$('ol#api_header_kv').children('li').length;
+  var newKV=$('li#kv_template').clone(true);
+  newKV.removeAttr('style');
+  var id="header_kv_"+length;
+  newKV.attr('id',id);
+  $('#api_header_kv').prepend(newKV);
+});
+
+/*** 添加 params 的key-value **/
+$("#params_kv_add").click(function(e){
+  var length=$('ol#api_params_kv').children('li').length;
+  var newKV=$('li#kv_template').clone(true);
+  newKV.removeAttr('style');
+  var id="params_kv_"+length;
+  newKV.attr('id',id);
+  $('#api_params_kv').prepend(newKV);
+});
+
+
 /**
  * 删除指定的接口,前端以及后台都删除。
  * **/
@@ -57,13 +92,29 @@ $('#addAPIbutton').click(function(){
   testItem.find('input#api_header').attr("id","api_header_"+apis_count);
   testItem.find('input#api_queryParams').attr("id","api_queryParams_"+apis_count);
   testItem.find('input#api_response').attr("id","api_response_"+apis_count);
+  testItem.find('div[name="jsoneditor_queryParams_"]').attr("id","jsoneditor_queryParams_"+apis_count);
   testItem.attr('id','api_'+apis_count);
   testItem.attr('style',"display:");
 
   $('ol#APIs').prepend(testItem);//在被选元素$('ol#APIs')的直接后代的开头添加。
   //$('ol#APIs').append(testItem);//在被选元素$('ol#APIs')的直接后代的末尾添加。
-
   console.log("添加api_item完成");
+
+  //create the json editor
+  var container =document.getElementById('jsoneditor_queryParams_'+apis_count);
+  var options = {
+    mode: 'code',
+    modes: ['code', 'form', 'text', 'tree', 'view'], // allowed modes
+    onError: function (err) {
+      alert(err.toString());
+    },
+    onModeChange: function (newMode, oldMode) {
+      console.log('Mode switched from', oldMode, 'to', newMode);
+    }
+  };
+  var editor = new JSONEditor(container, options);
+  jsoneditors.push(editor);
+
 });
 
 /** 保存APIdocitem */
@@ -91,12 +142,14 @@ $('#save_doc_2_db').click(function(){
     var apiItem_method=$(selector).find('select[name="api_method"] option:selected').text();
     var apiItem_dataType=$(selector).find('select[name="api_dataType"] option:selected').text();
     var apiItem_header=$(selector).find('textarea[name="api_header"]').val();
-    var apiItem_queryParams=$(selector).find('textarea[name="api_queryParams"]').val();
     var apiItem_response=$(selector).find('textarea[name="api_response"]').val();
     if(!$(selector).attr("uniqid")){
       $(selector).attr("uniqid",(new Date().getTime()).toString());
     }
     var apiItem_uniqId=$(selector).attr("uniqid");
+
+    var apiItem_queryParams=jsoneditors[i.toString()].getText(); //jsoneditors为全局变量。
+    console.log(apiItem_queryParams);
 
     var apiItem={
       uniqID:apiItem_uniqId,
@@ -113,8 +166,9 @@ $('#save_doc_2_db').click(function(){
 
     apiItemsArray[i]=apiItem;
   }
-  console.log("apiItemsArray:");
-  console.log(JSON.stringify(apiItemsArray));
+  //console.log("apiItemsArray:");
+  //console.log(JSON.stringify(apiItemsArray));
+  //console.log(jsoneditors[0]);
 
   $.ajax({
     url:'/doc/savedocwithItem',
