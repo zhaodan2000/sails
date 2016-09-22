@@ -54,7 +54,7 @@ module.exports = {
             data += '\r\n\t\t* ' + docItem.dataType;
             data += '\r\n\t* **请求头header**';
             data +='\r\n\t\t* <pre><code style="width: auto;height: auto">';
-            data +=JSON.stringify(docItem.header, null, "\t");
+            data +=JSON.stringify(docItem.header, null, 4);
             data +='\r\n</code></pre>';
             data += '\r\n\t* **请求参数queryParams**';
             data +='\r\n\t\t* <pre><code style="width: auto;height: auto">';

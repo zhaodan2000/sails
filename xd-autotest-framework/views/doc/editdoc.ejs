@@ -1,7 +1,3 @@
-<link href="/xd-autotest-framework/css/jsoneditor.css" rel="stylesheet" type="text/css">
-<script src="/xd-autotest-framework/js/jsoneditor.js"></script>
-<script src="/xd-autotest-framework/js/docs/editdoc.js"></script>
-
 <!-- 文档基本信息 -->
   <div class="row" >
       <div class="col-lg-12">
@@ -96,20 +92,23 @@
                 </select>
               </div>
               <div class="form-group">
-                <label>接口请求头header</label>
-                <textarea name="api_header" rows="8" class="form-control" id="<%='api_header_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].header,null,"\t")%></textarea>
+                <label>请求头header</label>
+                <!--<textarea name="api_header" rows="8" class="form-control" id="<%='api_header_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].header,null,"\t")%></textarea>-->
+                <div id="<%='jsoneditor_header_'+(i+1)%>" style="width:auto; height:auto;"
+                     content='<%=JSON.stringify(api_docs.APIdoc_items[i].header,null)%>'></div>
               </div>
               <div class="form-group">
-                <label>接口请求参数queryParams</label>
+                <label>请求参数queryParams</label>
                 <!--<textarea name="api_queryParams" class="form-control" id="<%='api_queryParams_'+(i+1)%>"-->
                           <!--content='<%=JSON.stringify(api_docs.APIdoc_items[i].queryParams,null)%>'><%=JSON.stringify(api_docs.APIdoc_items[i].queryParams,null)%></textarea>-->
-                <div id="<%='jsoneditor_queryParams_'+(i+1)%>" style="width:500px; height:300px;"
+                <div id="<%='jsoneditor_queryParams_'+(i+1)%>" style="width:auto; height:auto;"
                      content='<%=JSON.stringify(api_docs.APIdoc_items[i].queryParams,null)%>'></div>
-
               </div>
               <div class="form-group">
-                <label>接口请求参数response</label>
-                <textarea name="api_response" rows="8" class="form-control" id="<%='api_response_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].response,null,"\t")%></textarea>
+                <label>返回结果response</label>
+                <!--<textarea name="api_response" rows="8" class="form-control" id="<%='api_response_'+(i+1)%>"><%=JSON.stringify(api_docs.APIdoc_items[i].response,null,"\t")%></textarea>-->
+                <div id="<%='jsoneditor_response_'+(i+1)%>" style="width:auto; height:auto;"
+                     content='<%=JSON.stringify(api_docs.APIdoc_items[i].response,null)%>'></div>
               </div>
             </li>
             <%}%>
@@ -167,9 +166,10 @@
                 </select>
               </div>
               <div class="form-group">
-                <label class="control-label">header</label>
+                <label class="control-label">请求头header</label>
                 <button id="header_kv_add" class="fa fa-plus" data-dismiss="modal" aria-hidden="true"></button>
-                <ol id="api_header_kv">
+                <div name="jsoneditor_header_" style="width: auto; height: auto;"></div>
+                <ol id="api_header_kv" style="display: none">
                   <li id="header_kv_1" >
                     <input placeholder="key" required="required" />
                     <input placeholder="value" />
@@ -181,24 +181,28 @@
               <div class="form-group">
                 <label class="control-label">请求参数</label>
                 <button id="params_kv_add" class="fa fa-plus" data-dismiss="modal" aria-hidden="true"></button>
-                <div name="jsoneditor_queryParams_" style="width: 500px; height: 300px;"></div>
+                <div name="jsoneditor_queryParams_" style="width: auto; height: auto;"></div>
               </div>
               <div class="form-group">
-                <label class="control-label">Response</label>
-                <!--<div name="jsoneditor" style="width: 500px; height: 100px;" text=""></div>-->
-                <textarea name="api_response" rows="8" class="form-control"/>
+                <label class="control-label">返回结果Response</label>
+                <div name="jsoneditor_response_" style="width: auto; height: auto;"></div>
               </div>
             </li>
           </ol>
       </div>
     </div>
 
+
+<link href="/xd-autotest-framework/css/jsoneditor.css" rel="stylesheet" type="text/css">
+<script src="/xd-autotest-framework/js/jsoneditor.js"></script>
+<script src="/xd-autotest-framework/js/docs/editdoc.js"></script>
+
 <!-- 添加jsoneditor -->
 <script>
-  var jsoneditors=new Array();
 
-  for(var i=0;i<document.getElementById('APIs').childElementCount-1;i++){
-    var container = document.getElementById('jsoneditor_queryParams_'+(i+1));
+  function createJSONeditor(container_id, json){
+    //var container = document.getElementById('jsoneditor_queryParams_'+(i+1));
+    var container=document.getElementById(container_id);
 
     var options = {
       mode: 'code',
@@ -210,15 +214,50 @@
         console.log('Mode switched from', oldMode, 'to', newMode);
       }
     };
-    var json=JSON.parse($('div#jsoneditor_queryParams_'+(i+1)).attr('content'));
 
     var editor_temp = new JSONEditor(container, options, json);
     editor_temp.set(json);
-    jsoneditors.push(editor_temp);
-
-    console.log(editor_temp.getText());
+    return editor_temp;
   }
-  console.log("end  jsoneditors.push(ALL);");
+
+  var temp_container_id='jsoneditor_1';
+  var temp_json1={"name":"jsoneditor_1"};
+
+  var temp_editor=createJSONeditor(temp_container_id,temp_json1);
+
+  var container2=document.getElementById('jsoneditor_2');
+  temp_editor.container=container2;
+  temp_editor.con
+  temp_editor.set({"name":"jsoneditor_2"});
+
+
+  var header_jsoneditors=new Array();
+  var queryParams_jsoneditors=new Array();
+  var response_jsoneditors=new Array();
+
+  var array_length=document.getElementById('APIs').childElementCount-1;
+  for(var i=0;i<array_length;i++){
+    //添加header的jsoneditors.
+    var header_container_id='jsoneditor_header_'+(i+1);
+    var header_json=JSON.parse($('#'+header_container_id).attr('content'));
+    var header_editor_temp=createJSONeditor(header_container_id,header_json);
+    header_jsoneditors.push(header_editor_temp);
+
+    //添加queryParmas的jsoneditor.
+    var param_container_id='jsoneditor_queryParams_'+(i+1);
+    var param_json=JSON.parse($('#'+param_container_id).attr('content'));
+    var param_editor_temp=createJSONeditor(param_container_id,param_json);
+    queryParams_jsoneditors.push(param_editor_temp);
+
+    //添加response的jsoneditor.
+    var response_container_id='jsoneditor_response_'+(i+1);
+    var response_json=JSON.parse($('#'+response_container_id).attr('content'));
+    var response_editor_temp=createJSONeditor(response_container_id,response_json);
+    response_jsoneditors.push(response_editor_temp);
+
+  }
+
+  console.log("end****** jsoneditors.push(ALL);");
 </script>
 
 
@@ -228,4 +267,9 @@
    <input placeholder="字段名描述" />
    <div type="button" class="close" data-dismiss="modal" aria-hidden="true">×</div>
  </li>
+<div id="jsoneditor_1" style="height: auto;width: auto"></div>
+<div id="jsoneditor_2" style="height: auto;width: auto"></div>
+<div id="jsoneditor_3" style="height: auto;width: auto"></div>
+
+
 
