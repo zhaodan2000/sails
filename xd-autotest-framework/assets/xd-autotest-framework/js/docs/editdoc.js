@@ -16,6 +16,11 @@ $(document).ready(function() {
 
 });
 
+/** 加载模态框 **/
+function editHost(){
+  $('#myModal').modal();
+};
+
 /** 添加 jsoneditor 控件 **/
 function createJSONeditor(container_id, json) {
   //var container = document.getElementById('jsoneditor_queryParams_'+(i+1));

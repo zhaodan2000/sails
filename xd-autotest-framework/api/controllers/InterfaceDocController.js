@@ -12,18 +12,88 @@ module.exports = {
 
   testService:function(req,res){
     mongoService.Find('APIdoc',null,function (records) {
-      res.view('doc/APIdoc', {api_docs:records});
-     // res.view('doc/docWelcome', {api_docs:records});
+      res.view('doc/APIdoc', {api_docs:records, curr_doc:records[0]});
     });
   },
 
+  /**
+   * 将新增的一行docitem记录,存入db中。
+   * 入参:
+   * data:{
+   *  apiItem:API_docitem
+   * }
+   * **/
+  addDocItem:function (req,res) {
+    var APIdoc_uniqid=req.body["doc_uniqId"];
+    mongoService.Find("APIdoc",{uniqID:APIdoc_uniqid},function (records) {
+
+      /** 不存在APIdoc对象  */
+      if (!records || records.length == 0) {
+        res.send({retcode: -1, message: "不存在data对象", data:"APIdoc_uniqID="+APIdoc_uniqid});
+      }
+      /** 存在APIdoc对象**/
+      else {//存在APIdoc
+        var API_docitem=req.body["apiItem"];
+        API_docitem["APIdocID"]=records[0].id;
+        if(API_docitem.uniqID){
+          mongoService.Find("APIdocitem",{uniqID:API_docitem.uniqID},function(records){
+
+            /** 不存在API_docitem记录,可以插入到db中 **/
+            if(!records||records.length==0){
+              mongoService.Insert("APIdocitem",API_docitem,function (insertedItem) {
+                console.log("*********************\r\n用户添加了APIdocitem:\r\n"+API_docitem.name);
+                mongoService.Find("APIdoc",{uniqID:APIdoc_uniqid},function (records){
+                  mongoService.Find("APIdoc",{},function (docs_records) {
+                    res.view('doc/APIdoc', {api_docs:docs_records, curr_doc:records[0]});
+                  })
+                });
+              });
+            }
+            /** 存在API_docitem, 则提示不可重复添加 **/
+            else{
+              res.send({retcode:-1,message:"不可重复添加apidocitem"});
+            }
+
+          })
+        }
+      }
+    });
+
+  },
+
+  /**
+   * 更新docitem记录。
+   * 入参:
+   * data:{
+   *  apiItem:API_docitem
+   * }
+   * **/
+  updateDocItem:function (req,res) {
+    var API_docitem=req.body["apiItem"];
+    if(API_docitem.uniqID){
+      mongoService.Find("APIdocitem",{uniqID:API_docitem.uniqID},function(records){
+
+        /** 不存在API_docitem记录,可以插入到db中 **/
+        if(!records||records.length==0){
+          res.send({retcode:-1,message:"不存在apidocitem,无法更新。"});
+        }
+        /** 存在API_docitem **/
+        else{
+          mongoService.Update("APIdocitem",API_docitem,{uniqID:API_docitem.uniqID},function (insertedItem) {
+            console.log("*********************\r\n用户更新了APIdocitem:\r\n"+API_docitem.name);
+          });
+        }
+
+      })
+    }
+  },
 
   /**
    * 将doc与docItem存入db中,其中doc:docItem=1:N
    * 入参:
    * data: {
       apiDoc: APIdoc,
-        apiItems:apiItemsArray
+      apiItems:apiItemsArray
     }
    * */
   saveDoc2db: function(req,res){
@@ -50,7 +120,7 @@ module.exports = {
               apisItemArray.forEach(function(tempItem,index,array){
                 if(tempItem.uniqID){
                       mongoService.Find("APIdocitem", {uniqID: tempItem.uniqID}, function (found) {
-                        /** 没有找到apiItem对象**/
+                        /** 没有找到apiItem对象 **/
                         if (!found || found.length == 0) {
                           tempItem["APIdocID"]=updatedDOC[0].id;
                           mongoService.Insert("APIdocitem", tempItem, function (insertedItem) {

@@ -11,12 +11,15 @@ var fs=require('fs');
 
 module.exports = {
 
-
   editDoc:function (req,res) {
     var uniqId=req.body['uniqID'];
     if(uniqId){
       mongoService.Find('APIdoc',{uniqID:uniqId},function (records) {
-        res.render('doc/editdoc',{api_docs:records[0]});
+        //res.render('doc/editdoc',{curr_doc:records[0]});
+        mongoService.Find('APIdoc',{},function (docs_records){
+          //res.render('doc/APIdoc',{api_docs:docs_records, curr_doc:records[0]});
+          res.view('doc/APIdoc',{api_docs:docs_records, curr_doc:records[0]});
+        });
       });
     }else{
       res.send({retcode:-1,message:"前端传入的uniqID为空.",data:null});
@@ -64,7 +67,6 @@ module.exports = {
             data +='\r\n\t\t* <pre><code style="width: auto;height: auto">';
             data +=JSON.stringify(docItem.response, null, "\t");
             data +='\r\n</code></pre>';
-
           }
 
           fs.writeFile(filename, data, function () {

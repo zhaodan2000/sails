@@ -15,7 +15,7 @@ $(document).ready(function () {
       $.post("/Interface/showResponseOnView", {collection: data}, function (result) {
         $("body").html(result);
       });
-      //$.main.refreshRight("/Interface/showResponseOnView?id="+data.id);
+      $.main.refreshRight("/Interface/showResponseOnView?id="+data.id);
     }
   };
   var option_save = {
