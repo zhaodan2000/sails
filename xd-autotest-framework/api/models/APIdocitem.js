@@ -44,8 +44,7 @@ module.exports={
     },
     description:{
       type:'string',
-      required:false,
-      defaultsTo:"暂无接口描述"
+      required:false
     },
     method:{
       type:'string',

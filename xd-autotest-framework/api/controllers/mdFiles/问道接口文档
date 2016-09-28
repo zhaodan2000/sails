@@ -8,13 +8,13 @@
 ### 接口
 1. 出题接口MAPI
 	* **请求url**
-		* 
+		* www
 	* **请求方式method**
 		* POST
 	* **接口是否废弃**
 		* false
 	* **开发者**
-		* 周欢
+		* 赵聃
 	* **请求格式content-type**
 		* application/json
 	* **请求头header**
@@ -23,10 +23,10 @@
 }
 </code></pre>
 	* **请求参数queryParams**
-		* <pre><code style="width: auto;height: auto">""
+		* <pre><code style="width: auto;height: auto">{}
 </code></pre>
 	* **返回结果response**
-		* <pre><code style="width: auto;height: auto">""
+		* <pre><code style="width: auto;height: auto">{}
 </code></pre>
 2. 首页-文章分类接口
 	* **请求url**

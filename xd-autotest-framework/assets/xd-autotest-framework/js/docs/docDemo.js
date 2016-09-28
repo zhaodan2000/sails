@@ -4,9 +4,6 @@
  * 在APIdoc.ejs业务中并不需要。
  */
 
-
-
-
 $('#showMdFile').click(function(){
   $.main.refreshMain('/EditDoc/testAPImd');
 
