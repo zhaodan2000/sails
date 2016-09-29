@@ -6,47 +6,7 @@
 ### 端口号
 8020
 ### 接口
-1. test modal 444
-	* **请求url**
-		* 
-	* **请求方式method**
-		* POST
-	* **接口是否废弃**
-		* false
-	* **开发者**
-		* 赵聃
-	* **请求格式content-type**
-		* application/json
-	* **请求头header**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **请求参数queryParams**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **返回结果response**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-2. test modal 555
-	* **请求url**
-		* 
-	* **请求方式method**
-		* POST
-	* **接口是否废弃**
-		* false
-	* **开发者**
-		* 赵聃
-	* **请求格式content-type**
-		* application/json
-	* **请求头header**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **请求参数queryParams**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **返回结果response**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-3. hall??
+1. hall??
 	* **请求url**
 		* 
 	* **请求方式method**
@@ -68,7 +28,7 @@
 	* **返回结果response**
 		* <pre><code style="width: auto;height: auto">{}
 </code></pre>
-4. hello,I'm testing jsoneditor for saving data.
+2. hello,I'm testing jsoneditor for saving data.
 	* **请求url**
 		* www.jsoneditor.org
 	* **请求方式method**
@@ -104,7 +64,7 @@
 	"sessionToken": ""
 }
 </code></pre>
-5. 出题接口
+3. 出题接口
 	* **请求url**
 		* http://192.168.31.101:8102/quesbk/exam_detail
 	* **请求方式method**
@@ -141,7 +101,7 @@
 	"sessionToken": ""
 }
 </code></pre>
-6. API_1
+4. API_1
 	* **请求url**
 		* 
 	* **请求方式method**
@@ -177,7 +137,7 @@
 	"sessionToken": ""
 }
 </code></pre>
-7. 服务器测试。。。
+5. 服务器测试。。。
 	* **请求url**
 		* 服务器测试url
 	* **请求方式method**
@@ -213,7 +173,7 @@
 	"sessionToken": ""
 }
 </code></pre>
-8. 你好
+6. API_2
 	* **请求url**
 		* 
 	* **请求方式method**
@@ -249,43 +209,7 @@
 	"sessionToken": ""
 }
 </code></pre>
-9. API_2
-	* **请求url**
-		* 
-	* **请求方式method**
-		* POST
-	* **接口是否废弃**
-		* false
-	* **开发者**
-		* 赵聃
-	* **请求格式content-type**
-		* application/json
-	* **请求头header**
-		* <pre><code style="width: auto;height: auto">{
-    "module": "2",
-    "version": "1.0",
-    "clientType": "ios",
-    "clientIp": "192.168.1.1",
-    "deviceId": "888",
-    "sessionToken": ""
-}
-</code></pre>
-	* **请求参数queryParams**
-		* <pre><code style="width: auto;height: auto">{
-	"key1": "value1"
-}
-</code></pre>
-	* **返回结果response**
-		* <pre><code style="width: auto;height: auto">{
-	"module": "2",
-	"version": "1.0",
-	"clientType": "ios",
-	"clientIp": "192.168.1.1",
-	"deviceId": "888",
-	"sessionToken": ""
-}
-</code></pre>
-10. 李月华测试第四个接口1
+7. 李月华测试第四个接口1
 	* **请求url**
 		* www.baidu.com
 	* **请求方式method**
@@ -307,147 +231,7 @@
 	* **返回结果response**
 		* <pre><code style="width: auto;height: auto">{}
 </code></pre>
-11. 测试模态框1
-	* **请求url**
-		* 
-	* **请求方式method**
-		* POST
-	* **接口是否废弃**
-		* false
-	* **开发者**
-		* 赵聃
-	* **请求格式content-type**
-		* application/json
-	* **请求头header**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **请求参数queryParams**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **返回结果response**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-12. 测试模态框.2.
-	* **请求url**
-		* 
-	* **请求方式method**
-		* POST
-	* **接口是否废弃**
-		* false
-	* **开发者**
-		* 赵聃
-	* **请求格式content-type**
-		* application/json
-	* **请求头header**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **请求参数queryParams**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **返回结果response**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-13. 测试模态框.3
-	* **请求url**
-		* 
-	* **请求方式method**
-		* POST
-	* **接口是否废弃**
-		* false
-	* **开发者**
-		* 赵聃
-	* **请求格式content-type**
-		* application/json
-	* **请求头header**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **请求参数queryParams**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **返回结果response**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-14. test modal 3
-	* **请求url**
-		* 
-	* **请求方式method**
-		* POST
-	* **接口是否废弃**
-		* false
-	* **开发者**
-		* 赵聃
-	* **请求格式content-type**
-		* application/json
-	* **请求头header**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **请求参数queryParams**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **返回结果response**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-15. modal 4
-	* **请求url**
-		* 
-	* **请求方式method**
-		* POST
-	* **接口是否废弃**
-		* false
-	* **开发者**
-		* 赵聃
-	* **请求格式content-type**
-		* application/json
-	* **请求头header**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **请求参数queryParams**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **返回结果response**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-16. modal 5555
-	* **请求url**
-		* 
-	* **请求方式method**
-		* POST
-	* **接口是否废弃**
-		* false
-	* **开发者**
-		* 赵聃
-	* **请求格式content-type**
-		* application/json
-	* **请求头header**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **请求参数queryParams**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **返回结果response**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-17. a_modal 1111
-	* **请求url**
-		* 
-	* **请求方式method**
-		* POST
-	* **接口是否废弃**
-		* false
-	* **开发者**
-		* 赵聃
-	* **请求格式content-type**
-		* application/json
-	* **请求头header**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **请求参数queryParams**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **返回结果response**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-18. 发起挑战接口222
+8. 发起挑战接口222
 	* **请求url**
 		* http://192.168.31.88:8020/selftaught/challenge
 	* **请求方式method**
@@ -516,7 +300,7 @@
 	"retdesc": "操作成功"
 }
 </code></pre>
-19. 测试jsoneditor+++++
+9. 测试jsoneditor+++++
 	* **请求url**
 		* 
 	* **请求方式method**
@@ -554,7 +338,7 @@
 	"sessionToken": ""
 }
 </code></pre>
-20. aa
+10. aa
 	* **请求url**
 		* 
 	* **请求方式method**
@@ -590,7 +374,7 @@
 	"sessionToken": ""
 }
 </code></pre>
-21. 获取个人信息接口
+11. 获取个人信息接口
 	* **请求url**
 		* 
 	* **请求方式method**
@@ -626,7 +410,7 @@
 	"sessionToken": ""
 }
 </code></pre>
-22. 个人信息资料修改接口
+12. 个人信息资料修改接口
 	* **请求url**
 		* 
 	* **请求方式method**

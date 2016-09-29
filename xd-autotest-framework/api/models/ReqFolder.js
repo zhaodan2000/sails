@@ -27,8 +27,22 @@ module.exports = {
     desc:{
       type:'string',
       unique:false,
-      required:false,
-      defaultsTo:'暂时没有任务描述。'
+      required:false
+    },
+    docName:{
+      type:'string',
+      unique:false,
+      required:false
+    },
+    testEnv:{
+      type:'string',
+      unique:false,
+      required:false
+    },
+    testEnvPort:{
+      type:'string',
+      unique:false,
+      required:false
     },
     ReqItems:{
       collection:'RequestItem',

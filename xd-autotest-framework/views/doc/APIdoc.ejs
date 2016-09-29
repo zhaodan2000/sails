@@ -11,7 +11,7 @@
       <i class="fa fa-fw"></i><%=api_docs[i].name%>
       <div>
         <button id="<%='edit_api_doc_'+i%>" name="getCurDoc" uniqid="<%=api_docs[i].uniqID%>" class="fa fa-edit" style="width: auto;height: auto">编辑</button>
-        <button id="<%='view_api_doc_'+i%>" name="viewMDfile" uniqid="<%=api_docs[i].uniqID%>" class="fa fa-dashboard" style="width: auto;height: auto">查看</button>
+        <button id="<%='view_api_doc_'+i%>" name="viewMDfile" uniqid="<%=api_docs[i].uniqID%>" class="fa fa-dashboard" style="width: auto;height: auto">查看全部</button>
         <!--<button id="<%='delete_api_doc_'+i%>" name="deleteMDfile" uniqid="<%=api_docs[i].uniqID%>" disabled="true" class="fa fa-trash" style="width: auto;height:auto">删除</button>-->
       </div>
     </a>
@@ -55,8 +55,8 @@
             <th>接口名</th>
             <th>接口描述</th>
             <th>接口请求URL</th>
-            <th>开发者</th>
-            <th>操作</th>
+            <th style="width:8%">开发者</th>
+            <th style="width:10%">操作</th>
           </tr>
           </thead>
           <tbody>
@@ -82,7 +82,7 @@
   </div>
 
   <!-- 弹modal框, 新增接口 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -156,17 +156,100 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_save_api" ></span>保存</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_add_api" ></span>保存</button>
       </div>
     </div>
   </div>
 </div>
 
+
+  <!-- 弹modal框, 保存接口 -->
+  <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <h4 class="modal-title" id="myModalLabel">修改接口</h4>
+        </div>
+        <div class="modal-body">
+          <div id="api_template2" uniqid="" class="form-group" >
+            <div class="form-group">
+              <label class="control-label" style="text-align:right">接口名</label>
+              <input name="api_title" class="form-control" required="required" />
+            </div>
+            <div class="form-group">
+              <label class="control-label" style="text-align:right">接口描述</label>
+              <input name="api_desc" class="form-control" required="required" />
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求URL</label>
+              <input name="api_url" class="form-control" required="required" />
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求content-type</label>
+              <select class="form-control" name="api_dataType" >
+                <option value="application/json" style=" ">application/json</option>
+                <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
+                <option value="application/application/octet-stream">application/application/octet-stream</option>
+                <option value="text/html">text/html</option>
+                <option value="text/plain">text/plain</option>
+                <option value="text/xml">text/xml</option>
+                <option value="image/gif">image/gif</option>
+                <option value="image/jpeg">image/jpeg</option>
+                <option value="image/png">image/png</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求method</label>
+              <select class="form-control" name="api_method">
+                <option value="POST" selected="selected">POST</option>
+                <option value="GET">GET</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label">是否废弃</label>
+              <select class="col-3 form-control" name="api_disabled">
+                <option value="false">false</option>
+                <option value="true">true</option>
+              </select>
+              <label class="control-label">开发者</label>
+              <select class="col-3 form-control" name="api_dev" >
+                <option value="赵聃">赵聃</option>
+                <option value="李德洪">李德洪</option>
+                <option value="周欢">周欢</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求头header</label>
+              <button id="header_kv_add" class="fa fa-plus" data-dismiss="modal" aria-hidden="true"></button>
+              <div id="jsoneditor_header_" style="width: auto; height: auto;"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求参数</label>
+              <button id="params_kv_add" class="fa fa-plus" data-dismiss="modal" aria-hidden="true"></button>
+              <div id="jsoneditor_queryParams_" style="width: auto; height: auto;"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">返回结果Response</label>
+              <div id="jsoneditor_response_" style="width: auto; height: auto;"></div>
+            </div>
+            <!--</li>-->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_update_api" ></span>保存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <script>
   //定义全局变量, 来保存请求头、请求参数、请求response的jsoneditors.
-  var global_header_jsoneditor, global_param_jsoneditor,global_response_jsoneditor;
+  var global_add_header_jsoneditor=null, global_add_param_jsoneditor=null,global_add_response_jsoneditor=null,
+    global_update_header_jsoneditor=null,global_update_param_jsoneditor=null,global_update_response_jsoneditor=null;
 </script>
 
 <link href="/xd-autotest-framework/css/jsoneditor.css" rel="stylesheet" type="text/css">

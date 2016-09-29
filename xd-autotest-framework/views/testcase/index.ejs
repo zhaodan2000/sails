@@ -1,38 +1,39 @@
 <div class="container-fluid">
 
   <ul class="nav navbar-nav side-nav">
-    <li id="12121">
-      <div class="form-group input-group">
-        <input type="text" class="form-control" placeholder="搜索用例" onkeydown="onKeyDown(data)" id="search-input" style="width: 225px">
-      </div>
-    </li>
     <li style="height: 49px">
-      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalForCollect" id="addtestcasecollection" style="width: 225px;height: 34px">添加用例集合</button>
-    </li>
-    <li>
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" id="addtestcase" style="width: 225px;height: auto">添加用例</button>
-    </li>
-    <li>
-      <div class="modal-body">
-        <form action='/ShowDoc/operatfile' method="post" id="fileForm" enctype="multipart/form-data">
-          <label class="control-label" for="inputSuccess"><font color="#FFFFFF" size="4">导入用例</font></label>
-          <input type="file" id="uploadfile" name="submit" accept=".postman_collection" onchange="upfile()">
-        </form>
-      </div>
-    </li>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalForCollect" id="append_tc_coll_ui" style="width: auto;height: auto">添加用例集合</button>
+     </li>
+    <!--<li>-->
+      <!--<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" id="addtestcase" style="width: 225px;height: auto">添加用例</button>-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--<div class="modal-body">-->
+        <!--&lt;!&ndash;<form action='/ShowDoc/operatfile' method="post" id="fileForm" enctype="multipart/form-data">&ndash;&gt;-->
+          <!--&lt;!&ndash;<label class="control-label" for="inputSuccess"><font color="#FFFFFF" size="4">导入用例</font></label>&ndash;&gt;-->
+          <!--&lt;!&ndash;<input type="file" id="uploadfile" name="submit" accept=".postman_collection" onchange="upfile()">&ndash;&gt;-->
+        <!--&lt;!&ndash;</form>&ndash;&gt;-->
+      <!--</div>-->
+    <!--</li>-->
     <% data.forEach(function(record,index){ %>
     <li>
       <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#info' + index%>" style="display:block">
-        <i class="fa fa-fw fa-arrows-v"></i> <%=record.name%> <i class="fa fa-fw fa-caret-up"></i></a>
+        <i class="fa fa-fw"></i> <%=record.name%><i class="fa fa-fw"></i>
+        <!--<i class="fa fa-fw fa-caret-up"></i>-->
+        <div>
+          <button id="<%='edit_tc_coll_'+index%>" name="" uniqid="<%=record.uniqID%>" class="fa fa-edit" style="width: auto;height: auto">查看</button>
+          <button id="<%='export_tc_coll_'+index%>" name="export" uniqid="<%=record.uniqID%>" class="fa fa-dashboard" style="width: auto;height: auto">导出</button>
+        </div>
+      </a>
       <ul id="<%='info' + index%>" class="collapse">
-        <li>
-          <%record.ReqItems.forEach(function (reqItem,i) {%>
-            <a href="javascript:void(0)" id="<%=reqItem.name%>" onclick="requestItem(this)"><%=reqItem.name%></a>
-          <%})%>
-        </li>
+        <!--<li>-->
+          <!--<%record.ReqItems.forEach(function (reqItem,i) {%>-->
+            <!--<a href="javascript:void(0)" id="<%=reqItem.name%>" onclick="requestItem(this)"><%=reqItem.name%></a>-->
+          <!--<%})%>-->
+        <!--</li>-->
       </ul>
     </li>
-    <% }) %>
+    <%})%>
   </ul>
 
   <div id="page-wrapper-right" aria-hidden="false" class="right-operation">
@@ -40,205 +41,146 @@
     <!-- Page Heading -->
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="page-header">
-          <small>用例详情</small>
-        </h1>
+        <h1 class="page-header" id="tc_coll_name" uniqid="<%=curr_tc_coll.uniqID%>"><%=curr_tc_coll.name%></h1>
         <ol class="breadcrumb">
-          <li class="active">
-            <i class="fa fa-table"></i> 用例
+          <li>
+            <i class="fa fa-dashboard"></i>所属文档
+            <input name="tc_coll_doc" value="<%=curr_tc_coll.docName%>" style="width:230px; height:auto;"/>
           </li>
+          <li>
+            <i class="fa fa-dashboard"></i>服务器
+            <input name="testEnv" value="<%=curr_tc_coll.testEnv%>" style="width:130px; height:auto;" />
+          </li>
+          <li>
+            <i class="fa fa-dashboard"></i>端口号
+            <input name="testEnvPort" value="<%=curr_tc_coll.testEnvPort%>" style="width:50px; height:auto;" />
+          </li>
+          <div style="float:right">
+            <div class="btn btn-info" id="add_tc_ui" style="width: auto;height: auto">新增用例</div>
+            <div class="btn btn-info" id="save_tc_coll" style="width: auto;height: auto">保存文档</div>
+          </div>
         </ol>
       </div>
-    </div>
     <!-- /.row -->
 
-    <% if (data.length) { %>
-    <% var object = data[0];console.log(object) %>
-    <form id="form" class="form-inline" action="/Interface/showreq" method="POST">
-      <div>
-        <h2>url</h2>
-        <label style="width: 200px">url</label>
-        <input name="url" type="text" value="<%- object.url %>"/>
+      <!-- 接口表格 -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th style="display:none">uniqid</th>
+                <th>用例名</th>
+                <th>用例描述</th>
+                <th>请求URL</th>
+                <th style="width:8%">开发者</th>
+                <th style="width:10%">操作</th>
+              </tr>
+              </thead>
+              <tbody>
+              <%for(var i=curr_tc_coll.ReqItems.length-1;i>=0;i--){%>
+              <tr>
+                <td  style="display:none"><%=curr_tc_coll.ReqItems[i].uniqID%></td>
+                <td><%=curr_tc_coll.ReqItems[i].name%></td>
+                <td><%=curr_tc_coll.ReqItems[i].description%></td>
+                <td><%=curr_tc_coll.ReqItems[i].url%></td>
+                <td><%=curr_tc_coll.ReqItems[i].dev%></td>
+                <td uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">
+                  <a style="cursor: pointer" name="editAPI" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">修改</a>
+                  <a style="cursor: pointer" name="removeAPI" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">删除</a>
+                </td>
+                </td>
+              </tr>
+              <%}%>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <div>
-        <h2>header</h2>
-        <% for(var key in object.headers){
-          var value = object.headers[key]; %>
-        <label style="width: 200px"><%- key %></label>
-        <input name="<%- "header" + key %>" type="text" value="<%- value %>"/><br/>
-        <% } %>
-      </div>
-      <div>
-        <h2>queryParam</h2>
-        <% for(var key in object.queryParam){
-          var value = object.queryParam[key]; %>
-        <label style="width: 200px"><%- key %></label>
-        <input name="<%- "queryParam" + key %>" style="width:30%" type="text" value='<%- value %>'/><br/>
-        <% } %>
-      </div>
-      <div>
-        <h2>other</h2>
-        <label style="width: 200px">method</label>
-        <input name="method" type="text" value="<%- object.method %>"/><br/>
-
-        <label style="width: 200px">dev</label>
-        <input name="dev" type="text" value="<%- object.dev %>"/><br/>
-
-        <label style="width: 200px">disabled</label>
-        <input id="disabled" type="text" value="<%- object.disabled %>"/><br/>
-
-        <label style="width: 200px">name</label>
-        <input name="name" type="text" value="<%- object.name %>"/><br/>
-
-        <!--<label style="width: 200px">version</label>-->
-        <!--<input name="version" type="text" value="<%- object.version %>" /><br />-->
-
-        <label style="width: 200px">description</label>
-        <input name="description" type="text" value="<%- object.description %>"/><br/>
-
-        <label style="width: 200px">mode</label>
-        <input name="mode" type="text" value="<%- object.mode %>"/><br/>
-      </div>
-      <div>
-        <h2>prescript</h2>
-        <textarea name="prescript" style="width: 40%;height: 200px"></textarea><br/>
-        <h2>testscript</h2>
-        <textarea name="testscript" style="width: 40%;height: 200px"></textarea><br/>
-      </div>
-      <div>
-        <div class="btn" id="runBtn">运行</div>
-        <div class="btn" id="saveBtn">保存</div>
-      </div>
-    </form>
-    <% } %>
-
 </div>
 
-  <!-- 模态框添加用例（Modal） -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-       aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close"
-                  data-dismiss="modal" aria-hidden="true">
-            &times;
-          </button>
-          <h4 class="modal-title" id="myModalLabel">
-            添加用例
-          </h4>
-        </div>
-        <form id="formModel" class="form-inline" action="/ShowDoc/addtestcase" method="POST">
-          <div class="modal-body">
-          <label>选择所属集合</label>
-
-          <select class="form-control" name="ReqFolderID">s
-          <%data.forEach(function (record) {%>
-          <option id="<%=record.id%>" value="<%=record.id%>"><%=record.name%></option>
-          <%})%>
-          </select>
+    <!-- 弹modal框, 新增接口 -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="modal-title" id="myModalLabel">新增用例</h4>
           </div>
           <div class="modal-body">
-            <h2>api版本号</h2>
-            <label style="width: 200px">api版本号</label>
-            <input name="version" type="text"/>
-          </div>
-          <div class="modal-body">
-            <h2>name</h2>
-            <label style="width: 200px">name</label>
-            <input name="name" type="text"/>
-          </div>
-          <div class="modal-body">
-            <h2>是否在用</h2>
-            <label style="width: 200px">是否在用</label>
-            <select class="form-control" name="disabled">
-              <option value="YES>">YES</option>
-              <option value="NO>">NO</option>
-            </select>
-          </div>
-          <div class="modal-body">
-            <h2>接口说明</h2>
-            <label style="width: 200px">接口说明</label>
-            <input name="description" type="text"/>
-          </div>
-          <div class="modal-body">
-            <h2>开发人员</h2>
-            <label style="width: 200px">开发人员</label>
-            <input name="dev" type="text"/>
-          </div>
-          <div class="modal-body">
-            <h2>测试人员</h2>
-            <label style="width: 200px">测试人员</label>
-            <input name="tester" type="text"/>
-          </div>
-          <div class="modal-body">
-            <h2>url</h2>
-            <label style="width: 200px">url</label>
-            <input name="url" type="text"/>
-          </div>
-          <div class="modal-body">
-            <h2>header</h2>
-            <label style="width: 200px">clientIp</label>
-            <input name="headerclientIp" type="text"/><br/>
-            <label style="width: 200px">module</label>
-            <input name="headermodule" type="text"/><br/>
-            <label style="width: 200px">version</label>
-            <input name="headerversion" type="text"/><br/>
-            <label style="width: 200px">clientType</label>
-            <input name="headerclientType" type="text"/><br/>
-            <label style="width: 200px">sessionToken</label>
-            <input name="headersessionToken" type="text"/><br/>
-            <label style="width: 200px">deviceId</label>
-            <input name="headerdeviceId" type="text"/><br/>
-          </div>
-          <div class="modal-body">
-            <h2>content-type</h2>
-            <label style="width: 200px">content-type</label>
-            <select class="form-control" name="mode">
-              <option value="urlencoded">urlencoded</option>
-              <option value="raw">raw</option>
-              <option value="formdata">formdata</option>
-              <option value="file">file</option>
-            </select>
-          </div>
-          <div class="modal-body">
-            <h2>请求方式</h2>
-            <label style="width: 200px">请求方式</label>
-            <select class="form-control" name="method">
-              <option value="POST">POST</option>
-              <option value="GET">GET</option>
-              <option value="PUT">PUT</option>
-              <option value="PATCH">PATCH</option>
-              <option value="DELETE">DELETE</option>
-              <option value="COPY">COPY</option>
-              <option value="HEAD">HEAD</option>
-              <option value="OPTIONS">OPTIONS</option>
-              <option value="LINK">LINK</option>
-              <option value="UNLINK">UNLINK</option>
-              <option value="PURGE">PURGE</option>
-              <option value="LOCK">LOCK</option>
-              <option value="UNLOCK">UNLOCK</option>
-              <option value="PROPFIND">PROPFIND</option>
-              <option value="VIEW">VIEW</option>
-            </select>
-          </div>
-          <div class="modal-body">
-            <h2>参数</h2>
-            <label style="width: 200px">参数</label>
-            <input name="queryParamreq" type="text" style="width: 300px"/>
+            <div id="tc_template" uniqid="" class="form-group" >
+              <div class="form-group">
+                <label class="control-label" style="text-align:right">用例名</label>
+                <input name="api_title" class="form-control" required="required" />
+              </div>
+              <div class="form-group">
+                <label class="control-label" style="text-align:right">用例描述</label>
+                <input name="api_desc" class="form-control" required="required" />
+              </div>
+              <div class="form-group">
+                <label class="control-label">请求URL</label>
+                <input name="api_url" class="form-control" required="required" />
+              </div>
+              <div class="form-group">
+                <label class="control-label">请求content-type</label>
+                <select class="form-control" name="api_dataType" >
+                  <option value="application/json" style=" ">application/json</option>
+                  <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
+                  <option value="application/application/octet-stream">application/application/octet-stream</option>
+                  <option value="text/html">text/html</option>
+                  <option value="text/plain">text/plain</option>
+                  <option value="text/xml">text/xml</option>
+                  <option value="image/gif">image/gif</option>
+                  <option value="image/jpeg">image/jpeg</option>
+                  <option value="image/png">image/png</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="control-label">请求method</label>
+                <select class="form-control" name="api_method">
+                  <option value="POST" selected="selected">POST</option>
+                  <option value="GET">GET</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="control-label">是否废弃</label>
+                <select class="col-3 form-control" name="api_disabled">
+                  <option value="false">false</option>
+                  <option value="true">true</option>
+                </select>
+                <label class="control-label">开发者</label>
+                <select class="col-3 form-control" name="api_dev" >
+                  <option value="赵聃">赵聃</option>
+                  <option value="李德洪">李德洪</option>
+                  <option value="周欢">周欢</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="control-label">请求头header</label>
+                <button id="header_kv_add" class="fa fa-plus" data-dismiss="modal" aria-hidden="true"></button>
+                <div id="jsoneditor_header_" style="width: auto; height: auto;"></div>
+              </div>
+              <div class="form-group">
+                <label class="control-label">请求参数</label>
+                <button id="params_kv_add" class="fa fa-plus" data-dismiss="modal" aria-hidden="true"></button>
+                <div id="jsoneditor_queryParams_" style="width: auto; height: auto;"></div>
+              </div>
+              <div class="form-group">
+                <label class="control-label">返回结果Response</label>
+                <div id="jsoneditor_response_" style="width: auto; height: auto;"></div>
+              </div>
+              <!--</li>-->
+            </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default"
-                    data-dismiss="modal">关闭
-            </button>
-            <button type="button" class="btn btn-primary" id="submitBtn">
-              提交用例
-            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_add_api" ></span>保存</button>
           </div>
-        </form>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-  </div>
+        </div>
+      </div>
+    </div>
 
   <!-- 模态框添加用例集合（Modal） -->
   <div class="modal fade" id="myModalForCollect" tabindex="-1" role="dialog"

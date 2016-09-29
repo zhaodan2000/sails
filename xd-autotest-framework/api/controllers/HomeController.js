@@ -20,7 +20,7 @@ module.exports = {
   },
   testcase: function(req, res) {
     mongoService.Find("ReqFolder",null,function (records) {
-      res.view('testcase/index', {data:records});
+      res.view('testcase/index', {data:records,curr_tc_coll:records[0]});
     });
   },
   schedule: function(req, res) {

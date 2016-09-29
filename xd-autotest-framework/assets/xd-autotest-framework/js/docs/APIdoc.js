@@ -2,6 +2,14 @@
    * Created by lyh on 8/8/16.
    */
 
+
+ // $(document).ready(function() {
+ //   console.log(++counter);
+ //   global_header_jsoneditor=null;
+ //   global_param_jsoneditor=null;
+ //   global_response_jsoneditor=null;
+ // });
+
  /** 在UI上添加 jsoneditor 控件 **/
  function createJSONeditor(container_id, json) {
    //var container = document.getElementById('jsoneditor_queryParams_'+(i+1));
@@ -37,9 +45,9 @@
      },
      success:function(data){
        $("#page-wrapper").html(data);
-       global_header_jsoneditor=null;
-       global_param_jsoneditor=null;
-       global_response_jsoneditor=null;
+       // global_header_jsoneditor=null;
+       // global_param_jsoneditor=null;
+       // global_response_jsoneditor=null;
        console.log("获取指定文件的所有接口成功!");
      }
    });
@@ -101,31 +109,210 @@
 
  });
 
-
- /** 通过弹出模态框, 来提供添加新接口的UI **/
+ /**
+  * 通过弹出模态框, 来提供添加新接口的UI
+  * */
  $("#addAPI_ui").click(function () {
-   $('#myModalLabel').html('新增接口');
    $('#myModal').modal();
 
-   if(!global_header_jsoneditor){
+   if(!global_add_header_jsoneditor){
      //create the json editor: createJSONeditor
      var header_container_id='jsoneditor_header_';
      var header_editor = createJSONeditor(header_container_id, {});
-     global_header_jsoneditor=header_editor;
+     global_add_header_jsoneditor=header_editor;
    }
 
-   if(!global_param_jsoneditor){
+   if(!global_add_param_jsoneditor){
      var param_container_id='jsoneditor_queryParams_';
      var param_editor = createJSONeditor(param_container_id, {});
-     global_param_jsoneditor=param_editor;
+     global_add_param_jsoneditor=param_editor;
    }
 
-   if(!global_response_jsoneditor){
+   if(!global_add_response_jsoneditor){
      var response_container_id='jsoneditor_response_';
      var response_editor = createJSONeditor(response_container_id, {});
-     global_response_jsoneditor=response_editor;
+     global_add_response_jsoneditor=response_editor;
    }
 
+ });
+
+ /**
+  * 保存新增的接口到DB。
+  * ***/
+ $('#btn_add_api').click(function(){
+   var doc_uniqId=$('h1#api_doc_name').attr("uniqid");
+
+   var selector='#api_template';
+   var apiItem_name=$(selector).find('input[name="api_title"]').val();
+   var apiItem_description=$(selector).find('input[name="api_desc"]').val();
+   var apiItem_url=$(selector).find('input[name="api_url"]').val();
+   var apiItem_disabled=$(selector).find('select[name="api_disabled"] option:selected').text();
+   var apiItem_dev=$(selector).find('select[name="api_dev"] option:selected').text();
+   var apiItem_method=$(selector).find('select[name="api_method"] option:selected').text();
+   var apiItem_dataType=$(selector).find('select[name="api_dataType"] option:selected').text();
+
+   if(!$(selector).attr("uniqid")){
+     $(selector).attr("uniqid",(new Date().getTime()).toString());
+   }
+   var apiItem_uniqId=$(selector).attr("uniqid");
+
+   var apiItem_header=global_add_header_jsoneditor.getText();//global_header_jsoneditor 为全局变量。
+   var apiItem_queryParams=global_add_param_jsoneditor.getText(); //global_param_jsoneditor 为全局变量。
+   var apiItem_response=global_add_response_jsoneditor.getText(); //global_response_jsoneditor 为全局变量。
+
+   var apiItem={
+     uniqID:apiItem_uniqId,
+     name:apiItem_name,
+     description:apiItem_description,
+     url:apiItem_url,
+     disabled:apiItem_disabled,
+     dev:apiItem_dev,
+     method:apiItem_method,
+     dataType:apiItem_dataType,
+     header:apiItem_header,
+     queryParams: apiItem_queryParams,
+     response:apiItem_response
+   };
+
+   console.log(apiItem);
+
+   $.ajax({
+     url:'/doc/save_api',
+     method:"post",
+     contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+     data: {
+       doc_uniqId:doc_uniqId,
+       apiItem:apiItem
+     },
+     success: function (data) {
+       alert("保存成功!");
+       $("#page-wrapper").html(data);
+     },
+     error:function(data){
+       alert("保存失败,错误日志:"+JSON.stringify(data,null,"\t"));
+     }
+   });
+ });
+
+ /**
+  * 修改指定的接口。
+  * */
+ $('a[name="editAPI"]').click(function(){
+   $('#myModal2').modal();
+
+   if(!global_update_header_jsoneditor){
+     //create the json editor: createJSONeditor
+     var header_container_id='jsoneditor_header_';
+     var header_editor = createJSONeditor(header_container_id, {});
+     global_update_header_jsoneditor=header_editor;
+   }
+
+   if(!global_update_param_jsoneditor){
+     var param_container_id='jsoneditor_queryParams_';
+     var param_editor = createJSONeditor(param_container_id, {});
+     global_update_param_jsoneditor=param_editor;
+   }
+
+   if(!global_update_response_jsoneditor){
+     var response_container_id='jsoneditor_response_';
+     var response_editor = createJSONeditor(response_container_id, {});
+     global_update_response_jsoneditor=response_editor;
+   }
+
+   var apiItem_uniqID=$(this).parent().attr("uniqid");
+   console.log(apiItem_uniqID);
+   if(!apiItem_uniqID){
+     alert("uniqid is null??");
+   }else{
+     $.ajax({
+       url: '/doc/query_api',
+       method: "post",
+       contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+       data: {
+         modelType: "APIdocitem",
+         uniqID: apiItem_uniqID
+       },
+       success: function (data) {
+         console.log("succeed!");
+         var selector='#api_template2';
+         $(selector).find('input[name="api_title"]').val(data.name);
+         $(selector).find('input[name="api_desc"]').val(data.description);
+         $(selector).find('input[name="api_url"]').val(data.url);
+         $(selector).find('select[name="api_disabled"]').find("option[value='"+data.disabled+"']").attr("selected","selected");
+         $(selector).find('select[name="api_dev"]').find("option[value='"+data.dev+"']").attr("selected","selected");
+         $(selector).find('select[name="api_method"]').find("option[value='"+data.method+"']").attr("selected","selected");
+         $(selector).find('select[name="api_dataType"]').find("option[value='"+data.dataType+"']").attr("selected","selected");
+         $(selector).attr("uniqid", apiItem_uniqID);
+
+         global_update_header_jsoneditor.set(data.header);
+         global_update_param_jsoneditor.set(data.queryParams);
+         global_update_response_jsoneditor.set(data.response);
+
+       },
+       error: function (data) {
+         console.log("fail???");
+         alert("后台查询失败" + JSON.stringify(data));
+       }
+     });
+   }
+ });
+
+ /**
+  * 更新接口到DB。
+  * ***/
+ $('#btn_update_api').click(function(){
+   var doc_uniqId=$('h1#api_doc_name').attr("uniqid");
+
+   var selector='#api_template2';
+   var apiItem_name=$(selector).find('input[name="api_title"]').val();
+   var apiItem_description=$(selector).find('input[name="api_desc"]').val();
+   var apiItem_url=$(selector).find('input[name="api_url"]').val();
+   var apiItem_disabled=$(selector).find('select[name="api_disabled"] option:selected').text();
+   var apiItem_dev=$(selector).find('select[name="api_dev"] option:selected').text();
+   var apiItem_method=$(selector).find('select[name="api_method"] option:selected').text();
+   var apiItem_dataType=$(selector).find('select[name="api_dataType"] option:selected').text();
+
+   if(!$(selector).attr("uniqid")){
+     $(selector).attr("uniqid",(new Date().getTime()).toString());
+   }
+   var apiItem_uniqId=$(selector).attr("uniqid");
+
+   var apiItem_header=global_update_header_jsoneditor.getText();//global_header_jsoneditor 为全局变量。
+   var apiItem_queryParams=global_update_param_jsoneditor.getText(); //global_param_jsoneditor 为全局变量。
+   var apiItem_response=global_update_response_jsoneditor.getText(); //global_response_jsoneditor 为全局变量。
+
+   var apiItem={
+     uniqID:apiItem_uniqId,
+     name:apiItem_name,
+     description:apiItem_description,
+     url:apiItem_url,
+     disabled:apiItem_disabled,
+     dev:apiItem_dev,
+     method:apiItem_method,
+     dataType:apiItem_dataType,
+     header:apiItem_header,
+     queryParams: apiItem_queryParams,
+     response:apiItem_response
+   };
+
+   console.log(apiItem);
+
+   $.ajax({
+     url:'/doc/save_api',
+     method:"post",
+     contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+     data: {
+       doc_uniqId:doc_uniqId,
+       apiItem:apiItem
+     },
+     success: function (data) {
+       alert("保存成功!");
+       $("#page-wrapper").html(data);
+     },
+     error:function(data){
+       alert("保存失败,错误日志:"+JSON.stringify(data,null,"\t"));
+     }
+   });
  });
 
  /**
@@ -158,151 +345,6 @@
  });
 
  /**
-  * 更新指定的接口。
-  * */
- $('a[name="editAPI"]').click(function(){
-   $('#myModalLabel').html('修改接口');
-   $('#myModal').modal();
-
-   if(!global_header_jsoneditor){
-     //create the json editor: createJSONeditor
-     var header_container_id='jsoneditor_header_';
-     var header_editor = createJSONeditor(header_container_id, {});
-     global_header_jsoneditor=header_editor;
-   }
-
-   if(!global_param_jsoneditor){
-     var param_container_id='jsoneditor_queryParams_';
-     var param_editor = createJSONeditor(param_container_id, {});
-     global_param_jsoneditor=param_editor;
-   }
-
-   if(!global_response_jsoneditor){
-     var response_container_id='jsoneditor_response_';
-     var response_editor = createJSONeditor(response_container_id, {});
-     global_response_jsoneditor=response_editor;
-   }
-
-   var apiItem_uniqID=$(this).parent().attr("uniqid");
-   console.log(apiItem_uniqID);
-   if(!apiItem_uniqID){
-     alert("uniqid is null??");
-   }else{
-     $.ajax({
-       url: '/doc/query_api',
-       method: "post",
-       contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-       data: {
-         modelType: "APIdocitem",
-         uniqID: apiItem_uniqID
-       },
-       success: function (data) {
-         console.log("succeed!");
-         var selector='#api_template';
-         $(selector).find('input[name="api_title"]').val(data.name);
-         $(selector).find('input[name="api_desc"]').val(data.description);
-         $(selector).find('input[name="api_url"]').val(data.url);
-         $(selector).find('select[name="api_disabled"]').find("option[value='"+data.disabled+"']").attr("selected","selected");
-         $(selector).find('select[name="api_dev"]').find("option[value='"+data.dev+"']").attr("selected","selected");
-         $(selector).find('select[name="api_method"]').find("option[value='"+data.method+"']").attr("selected","selected");
-         $(selector).find('select[name="api_dataType"]').find("option[value='"+data.dataType+"']").attr("selected","selected");
-         $(selector).attr("uniqid", apiItem_uniqID);
-
-         global_header_jsoneditor.set(data.header);
-         global_param_jsoneditor.set(data.queryParams);
-         global_response_jsoneditor.set(data.response);
-
-       },
-       error: function (data) {
-         console.log("fail???");
-         alert("后台查询失败" + JSON.stringify(data));
-       }
-     });
-   }
- });
-
- /**
-  * 保存接口到DB。
-  * ***/
- $('#btn_save_api').click(function(){
-   var doc_uniqId=$('h1#api_doc_name').attr("uniqid");
-
-   var selector='#api_template';
-   var apiItem_name=$(selector).find('input[name="api_title"]').val();
-   var apiItem_description=$(selector).find('input[name="api_desc"]').val();
-   var apiItem_url=$(selector).find('input[name="api_url"]').val();
-   var apiItem_disabled=$(selector).find('select[name="api_disabled"] option:selected').text();
-   var apiItem_dev=$(selector).find('select[name="api_dev"] option:selected').text();
-   var apiItem_method=$(selector).find('select[name="api_method"] option:selected').text();
-   var apiItem_dataType=$(selector).find('select[name="api_dataType"] option:selected').text();
-
-   if(!$(selector).attr("uniqid")){
-     $(selector).attr("uniqid",(new Date().getTime()).toString());
-   }
-   var apiItem_uniqId=$(selector).attr("uniqid");
-
-   var apiItem_header=global_header_jsoneditor.getText();//global_header_jsoneditor 为全局变量。
-   var apiItem_queryParams=global_param_jsoneditor.getText(); //global_param_jsoneditor 为全局变量。
-   var apiItem_response=global_response_jsoneditor.getText(); //global_response_jsoneditor 为全局变量。
-
-   var apiItem={
-     uniqID:apiItem_uniqId,
-     name:apiItem_name,
-     description:apiItem_description,
-     url:apiItem_url,
-     disabled:apiItem_disabled,
-     dev:apiItem_dev,
-     method:apiItem_method,
-     dataType:apiItem_dataType,
-     header:apiItem_header,
-     queryParams: apiItem_queryParams,
-     response:apiItem_response
-   };
-
-   console.log(apiItem);
-
-   $.ajax({
-     url:'/doc/save_api',
-     method:"post",
-     contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-     data: {
-       doc_uniqId:doc_uniqId,
-       apiItem:apiItem
-     },
-     success: function (data) {
-       alert("保存成功!");
-       $("#page-wrapper").html(data);
-       global_header_jsoneditor=null;
-       global_param_jsoneditor=null;
-       global_response_jsoneditor=null;
-     },
-     error:function(data){
-       alert("保存失败,错误日志:"+JSON.stringify(data,null,"\t"));
-     }
-   });
- });
-
- /**
-  * UI上点击增加API接口的编辑入口。
-  * 已废弃。
-  * */
- $('#append_api_ui').click(function(){
-   var testItem=$("li#api_template").clone(true);
-   var apis_count=$("ol#APIs").children('li').length;
-   console.log('apis_count=%d',apis_count);
-   testItem.find('input#api_title').attr("name","apiName_"+apis_count);
-   testItem.find('input#api_url').attr("name","URL_"+apis_count);
-   testItem.attr('id','api_'+apis_count);
-   testItem.attr('style',"display:");
-
-   //$('ol#APIs').prepend(testItem);
-   $('ol#APIs').append(testItem);
-   console.log("UI上添加api_item完成咯~");
- });
-
-
-
- /**
   * 将用户的输入存md文件中。
   * */
  $('#save_doc').click(function() {
@@ -326,3 +368,24 @@
      }
    })
  });
+
+ /**
+  * UI上点击增加API接口的编辑入口。
+  * 已废弃。
+  * */
+ $('#append_api_ui').click(function(){
+   var testItem=$("li#api_template").clone(true);
+   var apis_count=$("ol#APIs").children('li').length;
+   console.log('apis_count=%d',apis_count);
+   testItem.find('input#api_title').attr("name","apiName_"+apis_count);
+   testItem.find('input#api_url').attr("name","URL_"+apis_count);
+   testItem.attr('id','api_'+apis_count);
+   testItem.attr('style',"display:");
+
+   //$('ol#APIs').prepend(testItem);
+   $('ol#APIs').append(testItem);
+   console.log("UI上添加api_item完成咯~");
+ });
+
+
+

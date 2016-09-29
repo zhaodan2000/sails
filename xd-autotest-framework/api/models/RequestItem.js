@@ -49,14 +49,12 @@ module.exports = {
       minLength: 1,
       maxLength: 20
     },
-
     description: {
       type: 'string',
       required: false,
       minLength: 1,
       maxLength: 300
     },
-
     //url
     url: {
       type: 'string',
@@ -64,7 +62,6 @@ module.exports = {
       minLength: 1,
       maxLength: 300
     },
-
     //param json
     queryParam:{
       type:'json',
@@ -81,9 +78,16 @@ module.exports = {
     //header Json
     headers: {
       type: 'json',
-      required: false
+      required: false,
+      defaultsTo:{
+        "module":"",
+        "version":"",
+        "clientType":"",
+        "clientIp":"",
+        "deviceId":"",
+        "sessionToken":""
+      }
     },
-
     //body
     mode: {
       type: 'string',
@@ -101,9 +105,14 @@ module.exports = {
     //response
     response: {
       type: 'json',
-      required: false
+      required: false,
+      defaultsTo: {
+        "retcode":"0",
+        "retOk":true,
+        "retdesc":"操作成功",
+        "message":""
+      }
     },
-
     ReqFolderID:{
       model:'ReqFolder'
     }

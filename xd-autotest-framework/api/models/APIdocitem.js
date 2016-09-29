@@ -20,7 +20,7 @@ module.exports={
     },
     name: {
       type: 'string',
-      required: false,
+      required: false
     },
     url:{
       type:'string',
@@ -76,8 +76,9 @@ module.exports={
     },
     response:{
       type:'json',
-      //required:true
-      defaultsTo:{"retcode":"0",
+      required:false,
+      defaultsTo: {
+        "retcode":"0",
         "retOk":true,
         "retdesc":"操作成功",
         "message":""
