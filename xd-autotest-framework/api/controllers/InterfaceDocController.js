@@ -84,7 +84,6 @@ module.exports = {
 
     //构造APIdocitem对象
     var apisItemArray=req.body["apiItems"];
-    
 
     /** 前端传入的API_doc.uniqID不为空*/
     if(API_doc.uniqID){
