@@ -5,11 +5,8 @@
     <list id="9156f57d-db6f-4473-a93b-005641086486" name="Rejected commit: Default" comment="test&#10;" />
     <list id="30671141-3d32-486f-9871-9a9b296840ce" name="add ui template" comment="ui template" />
     <list default="true" id="cfdaaf85-5a99-4586-a431-9bb990667f6e" name="lyh testpush" comment="test push.">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/npm-debug.log" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/xd-autotest-framework/api/controllers/InterfaceDocController.js" afterPath="$PROJECT_DIR$/xd-autotest-framework/api/controllers/InterfaceDocController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/xd-autotest-framework/config/routes.js" afterPath="$PROJECT_DIR$/xd-autotest-framework/config/routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/xd-autotest-framework/views/doc/APIdoc.ejs" afterPath="$PROJECT_DIR$/xd-autotest-framework/views/doc/APIdoc.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/xd-autotest-framework/views/doc/testdoc.ejs" afterPath="$PROJECT_DIR$/xd-autotest-framework/views/doc/testdoc.ejs" />
     </list>
     <ignored path="sails.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,18 +27,8 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="InterfaceDocController.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/InterfaceDocController.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="78" column="9" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InterfaceInputController.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/InterfaceInputController.js">
+      <file leaf-file-name="ScheduleStrategy.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/ScheduleStrategy.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -50,94 +37,93 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/config/routes.js">
+      <file leaf-file-name="ScheduleResult.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/ScheduleResult.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="52" column="7" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="APIdoc.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/doc/APIdoc.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="response.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/response.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InterfaceController.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/InterfaceController.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-585">
+            <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testdoc.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/doc/testdoc.ejs">
+      <file leaf-file-name="InterfaceDoc.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/InterfaceDoc.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="28" selection-start-line="0" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="showdoc.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/showdoc.ejs">
+      <file leaf-file-name="Interface.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/Interface.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Collection.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/Collection.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-255">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <element signature="n#style#0;n#label#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#0;n#div#1;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#0;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#0;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#1;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#2;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#3;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#4;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#5;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#textarea#0;n#div#4;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#textarea#1;n#div#4;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#!!doc" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/overview/index.ejs">
+      <file leaf-file-name="connections.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/config/connections.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="269" column="8" selection-start-line="260" selection-start-column="2" selection-end-line="269" selection-end-column="8" />
+            <state relative-caret-position="120">
+              <caret line="61" column="4" selection-start-line="61" selection-start-column="4" selection-end-line="61" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/index.ejs">
+      <file leaf-file-name="CaseServices.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/services/CaseServices.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrderCase.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/OrderCase.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1045">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrderCaseCollection.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/OrderCaseCollection.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="23" column="20" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mysqlManager.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/datasource/mysqlManager.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -148,8 +134,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -164,36 +150,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/models/TCOrderCaseFolder.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/models/TCFolder.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/services/TaskandCaseServices.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/services/_AdocTest.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/services/APIdocServices.js" />
         <option value="$PROJECT_DIR$/xd-autotest-framework/package.json" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/api/controllers/MdFileController.js" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/views/animate-custom.css" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/views/postmanUI.ejs" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/views/lyhtest.ejs" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/assets/styles/style.css" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/assets/styles/animate-custom.css" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/views/APIdoc.ejs" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/views/uitemplate.ejs" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/views/layout.ejs" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/api/responses/created.js" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/views/postman.ejs" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/config/models.js" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/config/local.js" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/api/models/RequestItem.js" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/api/services/CollectionServices.js" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/views/homeindex.ejs" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/api/models/InterfaceDoc.js" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/api/services/mongoDbOperaton.js" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/api/services/DocService.js" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/api/services/mongoService.js" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/api/controllers/InterfaceController.js" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/api/controllers/test.md" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/controllers/ShowDocController.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/controllers/mdFiles/李月华测试.md" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/controllers/DocsDemo.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/.tmp/public/xd-autotest-framework/css/bootstrap.min.css" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/css/bootstrap.min.css" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/views/doc/docWelcome.ejs" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/.tmp/public/xd-autotest-framework/js/docs/docDemo.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/views/common/framework-css.ejs" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/models/APIdoc.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/models/TaskCase.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/controllers/mdFiles/问道" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/models/ScheduleStrategy.js" />
         <option value="$PROJECT_DIR$/xd-autotest-framework/api/controllers/mdFiles/test.md" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/views/doc/testdoc.ejs.html" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/views/doc/testdoc.ejs" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/api/controllers/HomeController.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/controllers/mdFiles/问道接口文档" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/views/index.ejs" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/views/doc/postmanUI.ejs" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/views/doc/demoUI.ejs" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/node_modules/jsoneditor/docs/usage.md" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/css/jsoneditor.css" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/js/docs/editdoc.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/js/docs/comOps.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/views/doc/editdoc.ejs" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/controllers/EditDocController.js" />
+        <option value="$USER_HOME$/Downloads/jsoneditor-master/examples/06_custom_styling.html" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/js/docs/docDemo.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/controllers/DocDemoController.js" />
         <option value="$PROJECT_DIR$/xd-autotest-framework/config/routes.js" />
-        <option value="$PROJECT_DIR$/xd-autotest-framework/views/doc/APIdoc.ejs" />
         <option value="$PROJECT_DIR$/xd-autotest-framework/api/controllers/InterfaceDocController.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/models/ReqFolder.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/models/RequestItem.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/models/APIdocitem.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/views/doc/APIdoc.ejs" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/js/docs/APIdoc.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/js/testcase/testcase.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/controllers/HomeController.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/views/testcase/index.ejs" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/models/TaskFolder.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/models/OrderCase.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/models/OrderCaseCollection.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/models/Case.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/models/CaseCollection.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/services/mongoService.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/services/RequestItemServices.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/api/services/DocService.js" />
+        <option value="$PROJECT_DIR$/xd-autotest-framework/config/connections.js" />
       </list>
     </option>
   </component>
@@ -204,9 +211,27 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="728" />
+    <option name="height" value="800" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Spelling</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>SpellCheckingInspection</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -236,6 +261,7 @@
       <pane id="ProjectPane">
         <subPane />
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -243,6 +269,32 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="External Dependencies">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="/">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Users">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="lyh">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Desktop">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="sails">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
@@ -258,90 +310,6 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="xd-autotest-framework">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="sails">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="xd-autotest-framework">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="views">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="sails">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="xd-autotest-framework">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="views">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="overview">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="sails">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="xd-autotest-framework">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="views">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="doc">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="sails">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="xd-autotest-framework">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="views">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="common">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -377,24 +345,6 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="assets">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="sails">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="xd-autotest-framework">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="api">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
@@ -417,39 +367,64 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="controllers">
+            <PATH_ELEMENT USER_OBJECT="services">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="sails">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="xd-autotest-framework">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="api">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="newman">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="editor.config.accepted" value="true" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/xd-autotest-framework/views/doc" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/xd-autotest-framework/api/controllers" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SearchEverywhereHistoryKey" value=".log&#9;FILE&#9;file:///Users/lyh/Desktop/sails/xd-autotest-framework/node_modules/argparse/node_modules/underscore.string/libpeerconnection.log" />
+    <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/xd-autotest-framework/assets/font" />
-      <recent name="$PROJECT_DIR$/xd-autotest-framework/assets/js" />
+      <recent name="$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/css" />
+      <recent name="$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework" />
+      <recent name="$PROJECT_DIR$/xd-autotest-framework/.tmp/public/xd-autotest-framework" />
       <recent name="$PROJECT_DIR$/xd-autotest-framework/assets" />
-      <recent name="$PROJECT_DIR$/xd-autotest-framework/assets/fonts" />
-      <recent name="$PROJECT_DIR$/xd-autotest-framework/assets/styles" />
+      <recent name="$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/js" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/xd-autotest-framework/views/doc" />
-      <recent name="$PROJECT_DIR$/xd-autotest-framework/assets/js" />
-      <recent name="$PROJECT_DIR$/xd-autotest-framework/assets/styles" />
+      <recent name="$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/css/img" />
+      <recent name="$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework" />
+      <recent name="$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/js" />
+      <recent name="$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/css" />
+      <recent name="$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/img" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.InterfaceDocController.js">
@@ -538,6 +513,16 @@
       <workItem from="1470234622075" duration="11906000" />
       <workItem from="1470297901476" duration="8613000" />
       <workItem from="1470350210285" duration="10560000" />
+      <workItem from="1470368847152" duration="90623000" />
+      <workItem from="1470807658732" duration="18412000" />
+      <workItem from="1470915665435" duration="12080000" />
+      <workItem from="1470985915824" duration="72523000" />
+      <workItem from="1471761912537" duration="55056000" />
+      <workItem from="1471954233643" duration="32072000" />
+      <workItem from="1472099011732" duration="1064000" />
+      <workItem from="1472125939550" duration="86183000" />
+      <workItem from="1473830488985" duration="43694000" />
+      <workItem from="1474629118767" duration="58846000" />
     </task>
     <task id="LOCAL-00001" summary="test&#10;">
       <created>1469692509848</created>
@@ -550,7 +535,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105561000" />
+    <option name="totallyTimeSpent" value="576114000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -562,19 +547,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="728" extended-state="6" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28038126" sideWeight="0.49344262" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27164418" sideWeight="0.49344262" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.49722" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5032787" sideWeight="0.528197" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43606558" sideWeight="0.4940429" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.503268" sideWeight="0.528197" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4147541" sideWeight="0.48451152" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32459018" sideWeight="0.49086577" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295082" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40359476" sideWeight="0.471803" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5226629" sideWeight="0.75853854" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29864973" sideWeight="0.5065574" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3627451" sideWeight="0.49245432" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5226629" sideWeight="0.24146147" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295082" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -589,18 +574,18 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295082" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5032787" sideWeight="0.528197" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.503268" sideWeight="0.528197" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32459018" sideWeight="0.49086577" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295082" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38398692" sideWeight="0.471803" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28038126" sideWeight="0.49344262" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5084986" sideWeight="0.5154885" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22954726" sideWeight="0.49344262" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43606558" sideWeight="0.4940429" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4147541" sideWeight="0.48451152" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29864973" sideWeight="0.5065574" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3627451" sideWeight="0.49245432" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5229508" sideWeight="0.38125497" order="3" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -623,382 +608,300 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/EditDocController.js</url>
+          <line>191</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/js/docs/editdoc.js</url>
+          <line>156</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/EditDocController.js</url>
+          <line>143</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/js/docs/editdoc.js</url>
+          <line>111</line>
+          <properties />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="3" />
+      <option name="time" value="24" />
     </breakpoint-manager>
-    <watches-manager />
+    <watches-manager>
+      <configuration name="NodeJSConfigurationType">
+        <watch expression="req" language="JavaScript" />
+        <watch expression="param" language="JavaScript" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/config/sockets.js">
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/.tmp/public/xd-autotest-framework/js/jsoneditor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1833">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="421">
+          <caret line="16822" column="39" selection-start-line="16822" selection-start-column="39" selection-end-line="16822" selection-end-column="39" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/config/views.js">
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/jsoneditor/dist/jsoneditor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="72" column="41" selection-start-line="72" selection-start-column="41" selection-end-line="72" selection-end-column="41" />
+        <state relative-caret-position="-9242">
+          <caret line="33973" column="45" selection-start-line="33973" selection-start-column="45" selection-end-line="33973" selection-end-column="45" />
+          <folding>
+            <marker date="1471462168000" expanded="true" signature="1003315:1003405" ph="..." />
+            <marker date="1471462168000" expanded="true" signature="1003689:1003779" ph="..." />
+            <marker date="1471462168000" expanded="true" signature="1240159:1241349" ph="..." />
+            <marker date="1471462168000" expanded="true" signature="1240275:1240659" ph="..." />
+            <marker date="1471462168000" expanded="true" signature="1240696:1240994" ph="..." />
+            <marker date="1471462168000" expanded="true" signature="1241033:1241340" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/TaskScheduleController.js">
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/mathjs/dist/math.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4831">
+          <caret line="30573" column="13" selection-start-line="30573" selection-start-column="13" selection-end-line="30573" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/jsoneditor/dist/jsoneditor-minimalist.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2805">
+          <caret line="215" column="4" selection-start-line="215" selection-start-column="4" selection-end-line="215" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/doc/demoUI.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/services/_AdocTest.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/InterfaceOutputController.js">
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/js/index/frame-main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/sails/lib/hooks/views/res.view.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1710">
+          <caret line="69" column="2" selection-start-line="69" selection-start-column="2" selection-end-line="69" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/.tmp/public/xd-autotest-framework/js/plugins/morris/morris.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="674" column="4" selection-start-line="674" selection-start-column="4" selection-end-line="674" selection-end-column="4" />
+          <folding>
+            <marker date="1475205404000" expanded="true" signature="28599:28639" ph="..." />
+            <marker date="1475205404000" expanded="true" signature="55221:55261" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/ShowDocController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+          <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/.tmp/public/xd-autotest-framework/js/index/frame-right.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="13" column="46" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/js/docs/comOps.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-975">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/outfile.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="51" column="28" selection-start-line="51" selection-start-column="28" selection-end-line="51" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/ScheduleResult.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/doc/homepage.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/common/footer.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/config/policies.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/file-type/license">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/file-type/readme.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-165">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/fs-extra/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="79" column="31" selection-start-line="78" selection-start-column="48" selection-end-line="79" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/collection.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/test/file.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/services/CollectionServices.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="64" selection-start-line="15" selection-start-column="64" selection-end-line="15" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/services/outfile.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/services/RequestItemServices.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/services/mongoDbOperation.js" />
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/InterfaceBodyController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/services/DocService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/lodash/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/InterfaceDoc.js">
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DOMTraversalAndRange.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/Interface.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="32" />
+        <state relative-caret-position="94">
+          <caret line="196" column="0" selection-start-line="196" selection-start-column="0" selection-end-line="196" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/services/lastCollection.json">
+    <entry file="file://$USER_HOME$/Downloads/jsoneditor-master/examples/02_viewer.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/RequestItem.js">
+    <entry file="file://$USER_HOME$/Downloads/jsoneditor-master/examples/04_load_and_save.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state relative-caret-position="-320">
+          <caret line="40" column="67" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/jsoneditor-master/examples/06_custom_styling.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="48" column="14" selection-start-line="48" selection-start-column="14" selection-end-line="48" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/js/docs/docDemo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding>
-            <marker date="1470301845000" expanded="true" signature="0:55" ph="/** Created by xiaodou_chenxiaoxiang on 16/7/28. ...*/" />
-            <marker date="1470301845000" expanded="true" signature="56:275" ph="/** Interface.js ...*/" />
-            <marker date="1470301845000" expanded="true" signature="327:1998" ph="{&quot;connection&quot;: 'someMongodbServer'...}" />
-            <marker date="1470301845000" expanded="true" signature="414:416" ph="{...}" />
+            <element signature="e#3049#3502#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/math-interval-parser/package.json">
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/jsoneditor/src/js/JSONEditor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="106">
+          <caret line="128" column="2" selection-start-line="128" selection-start-column="2" selection-end-line="128" selection-end-column="2" />
+          <folding>
+            <element signature="n#!!block;n#JSONEditor#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/math-interval-parser/README.md">
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/doc/editdoc.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-564">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="134">
+          <caret line="68" column="48" selection-start-line="68" selection-start-column="36" selection-end-line="68" selection-end-column="48" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#li#0;n#ol#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#input#0;n#li#1;n#ol#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#input#0;n#li#2;n#ol#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#ol#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#label#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#label#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#6;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#7;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#8;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/mathjs/ROADMAP.md">
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/EditDocController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-84">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="-1215">
+          <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+          <folding>
+            <element signature="e#3520#4998#0" expanded="false" />
+            <element signature="e#5032#5513#0" expanded="false" />
+            <marker date="1475032451000" expanded="true" signature="2371:2395" ph="..." />
+            <marker date="1475032451000" expanded="true" signature="2599:2623" ph="..." />
+            <marker date="1475032451000" expanded="true" signature="2832:2856" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/mathjs/NOTICE">
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/DocDemoController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="1984">
+          <caret line="196" column="5" selection-start-line="196" selection-start-column="5" selection-end-line="196" selection-end-column="5" />
+          <folding>
+            <element signature="e#3349#3759#0" expanded="false" />
+            <element signature="e#3817#4297#0" expanded="false" />
+            <element signature="e#4700#5024#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/mathjs/HISTORY.md">
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/sails/lib/router/res.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/mathjs/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/fs.realpath/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/mdFiles/test.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/test.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/doc/homeindex.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/services/mongoService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
+        <state relative-caret-position="106">
+          <caret line="168" column="2" selection-start-line="168" selection-start-column="2" selection-end-line="168" selection-end-column="2" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/package.json">
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/.tmp/public/xd-autotest-framework/js/testcase/testcase.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/sails-mongo/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/node_modules/mongodb/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="23" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/doc/index.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="16" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/HomeController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/overview/index.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="269" column="8" selection-start-line="260" selection-start-column="2" selection-end-line="269" selection-end-column="8" />
+        <state relative-caret-position="106">
+          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/xd-autotest-framework/config/routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="52" column="7" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="33" />
+        <state relative-caret-position="120">
+          <caret line="51" column="9" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/index.ejs">
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/InterfaceDocController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/showdoc.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+        <state relative-caret-position="229">
+          <caret line="156" column="4" selection-start-line="156" selection-start-column="4" selection-end-line="156" selection-end-column="4" />
           <folding>
-            <element signature="n#style#0;n#label#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#label#0;n#div#1;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#label#0;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#label#0;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#label#1;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#label#2;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#label#3;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#label#4;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#label#5;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#textarea#0;n#div#4;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#textarea#1;n#div#4;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#2431#2562#0" expanded="false" />
+            <element signature="e#2594#4881#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/doc/testdoc.ejs">
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/js/docs/editdoc.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="28" selection-start-line="0" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="90">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="16" selection-end-column="3" />
+          <folding>
+            <element signature="e#1044#1270#0" expanded="false" />
+            <element signature="e#1341#1567#0" expanded="false" />
+            <element signature="e#1572#1604#0" expanded="false" />
+            <element signature="e#1645#2718#0" expanded="false" />
+            <element signature="e#2722#2750#0" expanded="false" />
+            <element signature="e#2786#4952#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/InterfaceInputController.js">
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/response.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/InterfaceController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-585">
+        <state relative-caret-position="-195">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1006,16 +909,250 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/doc/APIdoc.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+        <state relative-caret-position="269">
+          <caret line="255" column="63" selection-start-line="255" selection-start-column="63" selection-end-line="255" selection-end-column="63" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#li#0;n#ol#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#li#1;n#ol#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#li#2;n#ol#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#ol#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#div#1;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#4;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#5;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#6;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#7;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#6;n#div#0;n#div#1;n#div#0;n#div#0;n#div#3;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#7;n#div#0;n#div#1;n#div#0;n#div#0;n#div#3;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/js/docs/APIdoc.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="306" column="6" selection-start-line="255" selection-start-column="3" selection-end-line="306" selection-end-column="6" />
+          <folding>
+            <element signature="n#!!block;n#createJSONeditor#0" expanded="false" />
+            <element signature="e#728#768#0" expanded="false" />
+            <element signature="e#1126#1153#0" expanded="false" />
+            <element signature="e#1202#1793#0" expanded="false" />
+            <element signature="e#1798#1832#0" expanded="false" />
+            <element signature="e#1867#2477#0" expanded="false" />
+            <element signature="e#2482#2517#0" expanded="false" />
+            <element signature="e#3286#3314#0" expanded="false" />
+            <element signature="e#3350#5262#0" expanded="false" />
+            <element signature="e#5267#5290#0" expanded="false" />
+            <element signature="e#9701#9735#0" expanded="false" />
+            <element signature="e#9780#10384#0" expanded="false" />
+            <element signature="e#11162#11204#0" expanded="false" />
+            <element signature="e#11242#11721#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/assets/xd-autotest-framework/js/testcase/testcase.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="84" column="31" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="31" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!block;n#createJSONeditor#0" expanded="false" />
+            <element signature="e#716#1428#0" expanded="false" />
+            <element signature="e#1488#2318#0" expanded="false" />
+            <element signature="n#!!block;n#onKeyDown#0" expanded="false" />
+            <element signature="n#!!block;n#upfile#0" expanded="false" />
+            <element signature="n#!!block;n#getImgURL#0" expanded="false" />
+            <element signature="n#!!block;n#addFile#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/HomeController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="21" column="59" selection-start-line="21" selection-start-column="59" selection-end-line="21" selection-end-column="59" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/controllers/InterfaceDocController.js">
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/views/testcase/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="78" column="9" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
+        <state relative-caret-position="300">
+          <caret line="22" column="56" selection-start-line="22" selection-start-column="56" selection-end-line="22" selection-end-column="56" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#label#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#6;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#7;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#8;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#6;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#7;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#8;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#3;n#div#0;n#div#1;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <marker date="1475202877000" expanded="false" signature="1444:1468" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/APIdocitem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/APIdoc.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/Case.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="116" column="27" selection-start-line="116" selection-start-column="27" selection-end-line="116" selection-end-column="27" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/CaseCollection.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="46" column="13" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/services/mongoService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3896">
+          <caret line="503" column="4" selection-start-line="503" selection-start-column="4" selection-end-line="503" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/services/lastCollection.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/services/DocService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/services/ScheduleServices.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/services/APIdocServices.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/ScheduleStrategy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/ScheduleResult.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/InterfaceDoc.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/Interface.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/Collection.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-255">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/services/CaseServices.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/OrderCase.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1045">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/models/OrderCaseCollection.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="23" column="20" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/api/datasource/mysqlManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xd-autotest-framework/config/connections.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="61" column="4" selection-start-line="61" selection-start-column="4" selection-end-line="61" selection-end-column="4" />
           <folding />
         </state>
       </provider>
