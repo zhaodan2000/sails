@@ -10,23 +10,23 @@ module.exports = {
 
 
   /**
-   * 根据一个requestItem对象生成request
-   * @param requestItem
+   * 根据一个caseItem对象生成request
+   * @param caseItem
    * @returns {{id: *, name: *, disabled: *, url: *, method: *, header, body: {mode: *, urlencoded}}}
    */
-  configRequestItem: function (requestItem) {
-    var headers = requestItem.headers;  //type is json
-    var queryParam = requestItem.queryParam;  //type is json
+  configCaseItem: function (caseItem) {
+    var headers = caseItem.headers;  //type is json
+    var queryParam = caseItem.queryParam;  //type is json
 
     var request = {
-      id:requestItem.id,
-      name:requestItem.name,
-      disabled: requestItem.disabled,
-      url:requestItem.url,
-      method:requestItem.method,
+      id:caseItem.id,
+      name:caseItem.name,
+      disabled: caseItem.disabled,
+      url:caseItem.url,
+      method:caseItem.method,
       header:getHeaderWithJson(headers),
       body:{
-        mode:requestItem.mode,
+        mode:caseItem.mode,
         urlencoded:getQueryParamWithJson(queryParam)
       }
     }
@@ -35,7 +35,7 @@ module.exports = {
 
   configEvent: function (item) {
     //配置前置脚本和后置脚本 ----- 根据item是不是输入了文本来判断是否添加脚本
-    // RequestItemServices.
+    // CaseItemServices.
 
     console.log('item.testscript:'+item.testscript);
     console.log('item.prescript:'+item.prescript);
@@ -45,7 +45,7 @@ module.exports = {
       script: {
         type: "text/javascript",
         exec: item.testscript
-        // exec: RequestItemServices.parseIntputTestString(item.testscript)
+        // exec: CaseItemServices.parseIntputTestString(item.testscript)
       }
     };
     var preScript = {
@@ -53,7 +53,7 @@ module.exports = {
       script: {
         type: "text/javascript",
         // exec: item.prescript
-        exec: RequestItemServices.parseInputPreString(item.prescript)
+        exec: CaseItemServices.parseInputPreString(item.prescript)
       }
     };
     event.push(preScript);
@@ -78,9 +78,9 @@ module.exports = {
     return item;
   },
   creatItem: function (obj) {
-    return this.configItem(this.configRequestItem(obj), this.configEvent(obj));
+    return this.configItem(this.configCaseItem(obj), this.configEvent(obj));
   },
-  
+
   /**
    * 将传入的prescript语句转化为event中prescript需要的语法
    * @param prestring

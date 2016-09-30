@@ -16,49 +16,49 @@ module.exports={
    * */
   Insert:function(modelType, item, callback) {
     switch(modelType){ 
-      case "TaskFolder": 
-        TaskFolder.create(item).exec(function(err,records){ 
+      case "OrderCaseCollection": 
+        OrderCaseCollection.create(item).exec(function(err,records){ 
           if (!err) { 
-            console.log("create TaskFolder records success!"); 
+            console.log("create OrderCaseCollection records success!"); 
             callback(records); 
           }else{ 
-            console.log("create TaskFolder records failure!");
+            console.log("create OrderCaseCollection records failure!");
             console.log(err);
             callback(null); 
           } 
         }); 
         break; 
-      case "TaskCase":
-        TaskCase.create(item).exec(function (err,records) { 
+      case "OrderCase":
+        OrderCase.create(item).exec(function (err,records) { 
           if (!err) {
-            console.log("create TaskCase records success!");
+            console.log("create OrderCase records success!");
             callback(records);
           } else { 
-            console.log("create TaskCase records failure!");
+            console.log("create OrderCase records failure!");
             console.log(err);
             callback(null); 
           } 
         }); 
         break; 
-      case "RequestItem": 
-        RequestItem.create(item).exec(function(err,records){ 
+      case "Case": 
+        Case.create(item).exec(function(err,records){ 
           if (!err) { 
-            console.log("create RequestItem records success!"); 
+            console.log("create Case records success!"); 
             callback(records); 
           } else { 
-            console.log("create RequestItem records failure!");
+            console.log("create Case records failure!");
             console.log(err);
             callback(null); 
           } 
         }); 
         break;  
-      case "ReqFolder":
-        ReqFolder.create(item).exec(function(err,records){
+      case "CaseCollection":
+        CaseCollection.create(item).exec(function(err,records){
           if (!err) {
-            console.log("create ReqFolder records success!");
+            console.log("create CaseCollection records success!");
             callback(records);
           } else {
-            console.log("create ReqFolder records failure!");
+            console.log("create CaseCollection records failure!");
             console.log(err);
             callback(null);
           }
@@ -116,49 +116,49 @@ module.exports={
    * */
   Update:function(modelType, item, dic, callback){
     switch(modelType){
-      case "TaskFolder":
-        TaskFolder.update(dic,item).exec(function(err,records){
+      case "OrderCaseCollection":
+        OrderCaseCollection.update(dic,item).exec(function(err,records){
           if (!err) {
-            console.log("update TaskFolder records success!");
+            console.log("update OrderCaseCollection records success!");
             callback(records);
           }else{
-            console.log("update TaskFolder records failure!");
+            console.log("update OrderCaseCollection records failure!");
             console.log(err);
             callback(null);
           }
         });
         break;
-      case "TaskCase":
-        TaskCase.update(dic,item).exec(function (err,records) {
+      case "OrderCase":
+        OrderCase.update(dic,item).exec(function (err,records) {
           if (!err) {
-            console.log("update TaskCase records success!");
+            console.log("update OrderCase records success!");
             callback(records);
           } else {
-            console.log("update TaskCase records failure!");
+            console.log("update OrderCase records failure!");
             console.log(err);
             callback(null);
           }
         });
         break;
-      case "RequestItem":
-        RequestItem.update(dic,item).exec(function(err,records){
+      case "Case":
+        Case.update(dic,item).exec(function(err,records){
           if (!err) {
-            console.log("update RequestItem records success!");
+            console.log("update Case records success!");
             callback(records);
           } else {
-            console.log("update RequestItem records failure!");
+            console.log("update Case records failure!");
             console.log(err);
             callback(null);
           }
         });
         break;
-      case "ReqFolder":
-        ReqFolder.update(dic,item).exec(function(err,records){
+      case "CaseCollection":
+        CaseCollection.update(dic,item).exec(function(err,records){
           if (!err) {
-            console.log("update ReqFolder records success!");
+            console.log("update CaseCollection records success!");
             callback(records);
           } else {
-            console.log("update ReqFolder records failure!");
+            console.log("update CaseCollection records failure!");
             console.log(err);
             callback(null);
           }
@@ -216,8 +216,8 @@ module.exports={
    * */
   Find:function(modelType, dic, callback){
     switch(modelType){
-      case "TaskFolder":
-        TaskFolder.find(dic).populate('Cases').exec(function(err,populated){
+      case "OrderCaseCollection":
+        OrderCaseCollection.find(dic).populate('Cases').exec(function(err,populated){
           if(!err){
             console.log("populated  %s records:",modelType);
             // console.log(populated);
@@ -229,8 +229,8 @@ module.exports={
           }
         });
         break;
-      case "TaskCase":
-        TaskCase.find(dic).exec(function (err,records) {
+      case "OrderCase":
+        OrderCase.find(dic).exec(function (err,records) {
           if (!err) {
             console.log("find %s records success!", modelType);
             callback(records);
@@ -241,8 +241,8 @@ module.exports={
           }
         });
         break;
-      case "RequestItem":
-        RequestItem.find(dic).exec(function(err,records){
+      case "Case":
+        Case.find(dic).exec(function(err,records){
           if (!err) {
             console.log("find %s records success!", modelType);
             // console.log(records);
@@ -254,8 +254,8 @@ module.exports={
           }
         });
         break;
-      case "ReqFolder":
-        ReqFolder.find(dic).populate('ReqItems').exec(function(err,records){
+      case "CaseCollection":
+        CaseCollection.find(dic).populate('CaseItems').exec(function(err,records){
           if (!err) {
             console.log("find %s records success!", modelType);
             callback(records);
@@ -309,19 +309,6 @@ module.exports={
     }
   },
 
-  FindByObjId:function(modelType,dic,callback){
-    var _id="57bd5fcaf3146ed921e27613";
-    ScheduleStrategy.findById(_id,function(err,records) {
-      if (!err) {
-        callback(records);
-        return records;
-      } else {
-        callback(null);
-        return err;
-      }
-    });
-  },
-
   /**
    * 根据传入的model类型,以及查找的条件,
    * 将对应的model记录删除掉。
@@ -330,8 +317,8 @@ module.exports={
    * **/
   Delete:function(modelType,dic){
     switch(modelType){
-      case "TaskFolder":
-        TaskFolder.destroy(dic).exec(function(err){
+      case "OrderCaseCollection":
+        OrderCaseCollection.destroy(dic).exec(function(err){
           if (!err) {
             console.log("destroy %s records success!", modelType);
 
@@ -341,8 +328,8 @@ module.exports={
           }
         });
         break;
-      case "TaskCase":
-        TaskCase.destroy(dic).exec(function (err) {
+      case "OrderCase":
+        OrderCase.destroy(dic).exec(function (err) {
           if (!err) {
             console.log("destroy %s records success!", modelType);
 
@@ -352,8 +339,8 @@ module.exports={
           }
         });
         break;
-      case "RequestItem":
-        RequestItem.destroy(dic).exec(function(err){
+      case "Case":
+        Case.destroy(dic).exec(function(err){
           if (!err) {
             console.log("destroy %s records success!", modelType);
           } else {
@@ -362,8 +349,8 @@ module.exports={
           }
         });
         break;
-      case "ReqFolder":
-        ReqFolder.destroy(dic).exec(function(err){
+      case "CaseCollection":
+        CaseCollection.destroy(dic).exec(function(err){
           if (!err) {
             console.log("destroy %s records success!", modelType);
           } else {
@@ -411,10 +398,10 @@ module.exports={
   /**
    * 根据入参的name, 来查找mongodb里的符合条件的记录。
    **/
-  findRequestItemByName:function(requestName, callback) {
-    //var requestName="newLogin_API";
-    if(requestName) {
-      RequestItem.find({name: requestName}).exec(function (err, records) {
+  findCaseByName:function(caseName, callback) {
+    //var caseName="newLogin_API";
+    if(caseName) {
+      Case.find({name: caseName}).exec(function (err, records) {
         if (!err) {
           console.log("find records success!");
           callback(records);
@@ -424,7 +411,7 @@ module.exports={
         }
       })
     }else{
-      RequestItem.find({}).exec(function (err, records) {
+      Case.find({}).exec(function (err, records) {
         if (!err) {
           console.log("find records success!");
           callback(records);
@@ -440,10 +427,10 @@ module.exports={
   /**
    * 根据入参的id, 来查找mongodb里的符合条件的记录。
    **/
-  findRequestItemByID:function(reqid, callback) {
-    //var requestName="newLogin_API";
+  findCaseByID:function(reqid, callback) {
+    //var caseName="newLogin_API";
     if(reqid) {
-      RequestItem.find({id: reqid}).exec(function (err, records) {
+      Case.find({id: reqid}).exec(function (err, records) {
         if (!err) {
           console.log("find records success!");
           callback(records);
@@ -454,7 +441,7 @@ module.exports={
         }
       })
     }else{
-      RequestItem.find({}).exec(function (err, records) {
+      Case.find({}).exec(function (err, records) {
         if (!err) {
           console.log("find records success!");
           callback(records);
@@ -472,14 +459,14 @@ module.exports={
    * @param req
    * @param res
    */
-  insertRequestItemRecord:function(requestItem, callback){
-    RequestItem.create(requestItem).exec(function(err,records){
+  insertCaseRecord:function(caseItem, callback){
+    Case.create(caseItem).exec(function(err,records){
       if(!err){
-        console.log("添加requestItem记录成功! records.name is :"+records.name);
+        console.log("添加Case记录成功! records.name is :"+records.name);
         callback(records);
         return ;
       }
-      console.log("添加requestItem记录失败。。。错误原因为:\r\n"+err);
+      console.log("添加Case记录失败。。。错误原因为:\r\n"+err);
       callback(null);
       return ;
     });
@@ -491,8 +478,8 @@ module.exports={
    * @param
    * @param
    * */
-  updateRequestItem: function(requestItem){
-    RequestItem.update({id:requestItem.id},requestItem,function(err,updated){
+  updateCase: function(caseItem){
+    Case.update({id:caseItem.id},caseItem,function(err,updated){
         if(!err){
           console.log(updated);
           return;
@@ -504,27 +491,27 @@ module.exports={
   },
 
   /**
-   * 根据输入的requestName, 删除MongoDB中的记录。
-   * @param requestName
+   * 根据输入的caseName, 删除MongoDB中的记录。
+   * @param caseName
    */
-  deleteRecordsByName:function(requestName){
-    RequestItem.destroy({name:requestName}).exec(function(err){
-      if(err){console.log("删除指定requestName记录失败。。。");
+  deleteRecordsByName:function(caseName){
+    Case.destroy({name:caseName}).exec(function(err){
+      if(err){console.log("删除指定caseName记录失败。。。");
         console.log(err);
       }
-      else{console.log("删除指定requestName记录成功!")}
+      else{console.log("删除指定caseName记录成功!")}
     });
   },
 
   /**
-   * 删除MongoDB中requestItem表的所有记录。
+   * 删除MongoDB中caseItem表的所有记录。
    * */
-  deleteAllRequestItemRecords:function(){
-    RequestItem.destroy().exec(function(err){
+  deleteAllCaseRecords:function(){
+    Case.destroy().exec(function(err){
       if(!err){
-        console.log("删除所有requestItem records成功!");
+        console.log("删除所有caseItem records成功!");
       }else{
-        console.log("删除所有requestItem records失败。。。");
+        console.log("删除所有caseItem records失败。。。");
         console.log(err);
       }
     });
