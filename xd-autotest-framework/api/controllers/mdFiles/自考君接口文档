@@ -231,27 +231,7 @@
 	* **返回结果response**
 		* <pre><code style="width: auto;height: auto">{}
 </code></pre>
-8. aaaa
-	* **请求url**
-		* 
-	* **请求方式method**
-		* POST
-	* **接口是否废弃**
-		* false
-	* **开发者**
-		* 赵聃
-	* **请求格式content-type**
-		* application/json
-	* **请求头header**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **请求参数queryParams**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-	* **返回结果response**
-		* <pre><code style="width: auto;height: auto">{}
-</code></pre>
-9. 发起挑战接口222
+8. 发起挑战接口222
 	* **请求url**
 		* http://192.168.31.88:8020/selftaught/challenge
 	* **请求方式method**
@@ -320,7 +300,7 @@
 	"retdesc": "操作成功"
 }
 </code></pre>
-10. 测试jsoneditor+++++
+9. 测试jsoneditor+++++
 	* **请求url**
 		* 
 	* **请求方式method**
@@ -358,43 +338,7 @@
 	"sessionToken": ""
 }
 </code></pre>
-11. aa
-	* **请求url**
-		* 
-	* **请求方式method**
-		* POST
-	* **接口是否废弃**
-		* false
-	* **开发者**
-		* 周欢
-	* **请求格式content-type**
-		* application/json
-	* **请求头header**
-		* <pre><code style="width: auto;height: auto">{
-    "module": "2",
-    "version": "1.0",
-    "clientType": "ios",
-    "clientIp": "192.168.1.1",
-    "deviceId": "888",
-    "sessionToken": ""
-}
-</code></pre>
-	* **请求参数queryParams**
-		* <pre><code style="width: auto;height: auto">{
-	"key1": "value1"
-}
-</code></pre>
-	* **返回结果response**
-		* <pre><code style="width: auto;height: auto">{
-	"module": "2",
-	"version": "1.0",
-	"clientType": "ios",
-	"clientIp": "192.168.1.1",
-	"deviceId": "888",
-	"sessionToken": ""
-}
-</code></pre>
-12. 获取个人信息接口
+10. 获取个人信息接口
 	* **请求url**
 		* 
 	* **请求方式method**
@@ -430,7 +374,7 @@
 	"sessionToken": ""
 }
 </code></pre>
-13. 个人信息资料修改接口
+11. 个人信息资料修改接口
 	* **请求url**
 		* www.baidu.com222
 	* **请求方式method**

@@ -135,6 +135,11 @@ $('#btn_add_tc').click(function () {
 
 });
 
+/** 添加用例集合 **/
+// $('#append_tc_coll_ui').click(function () {
+//   $('#myModalForCollect').modal();
+// });
+
 //刷新右边页面
 function requestItem(data) {
   console.log(data.id);

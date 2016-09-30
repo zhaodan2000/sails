@@ -17,8 +17,7 @@
       </div>
     </a>
   </li>
-  <%}
-  }%>
+  <%} }%>
 </ul>
 
 <div id="page-wrapper-right" aria-hidden="false" class="right-operation">
@@ -37,7 +36,7 @@
       </li>
       <li>
         <i class="fa fa-dashboard"></i>端口号
-        <input name="testEnvPort" value="<%=curr_doc:curr_doc.testEnvPort:'无'%>" style="width:50px; height:auto;" />
+        <input name="testEnvPort" value="<%=curr_doc?curr_doc.testEnvPort:'无'%>" style="width:50px; height:auto;" />
       </li>
       <div style="float:right">
         <div class="btn btn-info" id="addAPI_ui" >新增后台接口</div>
