@@ -89,7 +89,7 @@ module.exports = {
      */
   parseInputPreString: function (prestring, callback) {
 
-    var Pre={global:{},evn:{}};
+    var Pre={global:{},env:{}};
     eval(prestring);
 
     var returnString = '';
@@ -105,13 +105,13 @@ module.exports = {
             returnString = returnString.concat(tmpString.format(key, value) + '\n');
           }
         }
-      }else if(Pre.hasOwnProperty(prop) && prop === 'evn'){
-        var evn = Pre[prop];
+      }else if(Pre.hasOwnProperty(prop) && prop === 'env'){
+        var env = Pre[prop];
         //当属性名为evn时,再次遍历
-        for (var key in evn) {
-          if (evn.hasOwnProperty(key)){
+        for (var key in env) {
+          if (env.hasOwnProperty(key)){
             var tmpString = "postman.setEnvironmentVariable(\"{0}\", '{1}');";
-            var value = (isJson(evn[key]))? JSON.stringify(evn[key]):evn[key];
+            var value = (isJson(env[key]))? JSON.stringify(env[key]):env[key];
             returnString = returnString.concat(tmpString.format(key, value) + '\n');
           }
         }
@@ -127,7 +127,7 @@ module.exports = {
    * @returns {string}
      */
   parseIntputTestString: function (teststring) {
-    var Test={global:{},evn:{},test:{}};
+    var Test={global:{},env:{},test:{}};
     eval(teststring);
 
     var returnString = '';
@@ -143,13 +143,13 @@ module.exports = {
             returnString = returnString.concat(tmpString.format(key, value) + '\n');
           }
         }
-      }else if(Test.hasOwnProperty(prop) && prop === 'evn'){
-        var evn = Test[prop];
+      }else if(Test.hasOwnProperty(prop) && prop === 'env'){
+        var env = Test[prop];
         //当属性名为evn时,再次遍历
-        for (var key in evn) {
-          if (evn.hasOwnProperty(key)){
+        for (var key in env) {
+          if (env.hasOwnProperty(key)){
             var tmpString = "postman.setEnvironmentVariable(\"{0}\", '{1}');";
-            var value = (isJson(evn[key]))? JSON.stringify(evn[key]):evn[key];
+            var value = (isJson(env[key]))? JSON.stringify(env[key]):env[key];
             returnString = returnString.concat(tmpString.format(key, value) + '\n');
           }
         }
@@ -213,7 +213,7 @@ function getQueryParamWithJson(paramJson) {
  * @param obj
  * @returns {boolean}
  */
-isJson = function(obj){
+function isJson(obj){
   var isjson = typeof(obj) == "object" && Object.prototype.toString.call(obj).toLowerCase() == "[object object]" && !obj.length;
   return isjson;
 }

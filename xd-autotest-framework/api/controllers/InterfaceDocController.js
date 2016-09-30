@@ -154,7 +154,7 @@ module.exports = {
     var modelType=req.body["modelType"];
     var uniqId=req.body["uniqID"];
     var dic={uniqID:uniqId};
-    
+
     mongoService.Find(modelType,dic,function (records) {
       if(records&&records.length>0){
         res.send(records[0]);
