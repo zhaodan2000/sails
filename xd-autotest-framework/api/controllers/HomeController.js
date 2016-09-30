@@ -13,20 +13,20 @@ module.exports = {
     res.view('overview/index');
   },
   task: function(req, res) {
-    mongoService.Find("OrderCaseCollection", null, function (records) {
+    mongoService.Find("TaskFolder", null, function (records) {
       console.log('records:'+ records);
       res.view('task/index', {data:records});
     });
   },
   testcase: function(req, res) {
-    mongoService.Find("CaseCollection",null,function (records) {
+    mongoService.Find("ReqFolder",null,function (records) {
       res.view('testcase/index', {data:records,curr_tc_coll:records[0]});
     });
   },
   schedule: function(req, res) {
-    mongoService.Find("OrderCaseCollection", null, function (records) {
+    mongoService.Find("TaskFolder", null, function (records) {
       console.log('records:'+ records);
-      res.view('schedule/index', {data:records, curr_tc_coll:null});
+      res.view('schedule/index', {data:records});
     });
   },
 };

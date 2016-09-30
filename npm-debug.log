@@ -1,0 +1,66 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@3.10.5
+3 info using node@v4.4.7
+4 verbose config Skipping project config: /Users/lyh/.npmrc. (matches userconfig)
+5 silly loadCurrentTree Starting
+6 silly install loadCurrentTree
+7 silly install readLocalPackageData
+8 silly install normalizeTree
+9 silly loadCurrentTree Finishing
+10 silly loadIdealTree Starting
+11 silly install loadIdealTree
+12 silly cloneCurrentTree Starting
+13 silly install cloneCurrentTreeToIdealTree
+14 silly cloneCurrentTree Finishing
+15 silly loadShrinkwrap Starting
+16 silly install loadShrinkwrap
+17 silly loadShrinkwrap Finishing
+18 silly loadAllDepsIntoIdealTree Starting
+19 silly install loadAllDepsIntoIdealTree
+20 silly loadAllDepsIntoIdealTree Finishing
+21 silly loadIdealTree Finishing
+22 silly currentTree lyh
+23 silly idealTree lyh
+24 silly generateActionsToTake Starting
+25 silly install generateActionsToTake
+26 silly generateActionsToTake Finishing
+27 silly diffTrees action count 0
+28 silly decomposeActions action count 0
+29 silly executeActions Starting
+30 silly install executeActions
+31 silly doSerial global-install 0
+32 silly doParallel fetch 0
+33 verbose correctMkdir /Users/lyh/.npm/_locks correctMkdir not in flight; initializing
+34 verbose lock using /Users/lyh/.npm/_locks/staging-ed3b8374a007ba05.lock for /Users/lyh/node_modules/.staging
+35 verbose unlock done using /Users/lyh/.npm/_locks/staging-ed3b8374a007ba05.lock for /Users/lyh/node_modules/.staging
+36 silly rollbackFailedOptional Starting
+37 silly rollbackFailedOptional Finishing
+38 silly runTopLevelLifecycles Starting
+39 silly runTopLevelLifecycles Finishing
+40 silly install printInstalled
+41 warn enoent ENOENT: no such file or directory, open '/Users/lyh/package.json'
+42 warn lyh No description
+43 warn lyh No repository field.
+44 warn lyh No README data
+45 warn lyh No license field.
+46 verbose stack Error: EACCES: permission denied, mkdir '/Users/lyh/node_modules/.staging'
+46 verbose stack     at Error (native)
+47 verbose cwd /Users/lyh/Desktop/sails
+48 error Darwin 15.0.0
+49 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+50 error node v4.4.7
+51 error npm  v3.10.5
+52 error path /Users/lyh/node_modules/.staging
+53 error code EACCES
+54 error errno -13
+55 error syscall mkdir
+56 error Error: EACCES: permission denied, mkdir '/Users/lyh/node_modules/.staging'
+56 error     at Error (native)
+56 error  { [Error: EACCES: permission denied, mkdir '/Users/lyh/node_modules/.staging']
+56 error   errno: -13,
+56 error   code: 'EACCES',
+56 error   syscall: 'mkdir',
+56 error   path: '/Users/lyh/node_modules/.staging' }
+57 error Please try running this command again as root/Administrator.
+58 verbose exit [ -13, true ]

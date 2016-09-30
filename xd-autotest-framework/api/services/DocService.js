@@ -15,10 +15,10 @@ module.exports= {
   test:function(){
     var modelType=doc;
     var dic={name:'abc'};
-    testcallback2(caseName,modelType,dic );
+    testcallback2(requestName,modelType,dic );
   },
 
-  testcallback2: function (caseName, modelType,dic, res, callback) {
+  testcallback2: function (requestName, modelType,dic, res, callback) {
     console.log("went into testcallback");
     modelType.find(dic).exec(function (err, records) {
       if (!err) {
@@ -33,9 +33,9 @@ module.exports= {
     });
   },
 
-  testcallback: function (caseName,  res, callback) {
+  testcallback: function (requestName,  res, callback) {
     console.log("went into testcallback");
-    RequestItem.find({name: caseName}).exec(function (err, records) {
+    RequestItem.find({name: requestName}).exec(function (err, records) {
       if (!err) {
         console.log("find records success!");
         callback(records);

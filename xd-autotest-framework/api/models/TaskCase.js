@@ -1,23 +1,18 @@
-/**
- * Created by xiaodou_chenxiaoxiang on 16/7/28.
- */
-
-/**
- * Interface.js
+     /**
+ * TaskOrderCaseFolder.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
-var uuid = require('node-uuid');
 
 module.exports = {
   connection: 'someMongodbServer',
-  tableName: 'xd_autotest_Case',
+  tableName: 'xd_autotest_TaskCase',
   autoPK:true,
   attributes: {
-    id: {
-      type: 'string',
-      required: false,
+    id:{
+      type:'string',
+      required:false,
       primaryKey:true
     },
     uniqID:{
@@ -49,19 +44,22 @@ module.exports = {
       minLength: 1,
       maxLength: 20
     },
+
     description: {
       type: 'string',
       required: false,
       minLength: 1,
       maxLength: 300
     },
+
     //url
     url: {
       type: 'string',
-      required: false,
+      required: true,
       minLength: 1,
       maxLength: 300
     },
+
     //param json
     queryParam:{
       type:'json',
@@ -78,46 +76,40 @@ module.exports = {
     //header Json
     headers: {
       type: 'json',
-      required: false,
-      defaultsTo:{
-        "module":"",
-        "version":"",
-        "clientType":"",
-        "clientIp":"",
-        "deviceId":"",
-        "sessionToken":""
-      }
+      required: false
     },
+
     //body
     mode: {
       type: 'string',
       required: false,
       defaultsTo:"application/json"
     },
-    testscript:{
-      type:'string',
-      required: false
-    },
-    prescript:{
-      type:'string',
-      required: false
-    },
+
     //response
     response: {
       type: 'json',
-      required: false,
-      defaultsTo: {
-        "retcode":"0",
-        "retOk":true,
-        "retdesc":"操作成功",
-        "message":""
-      }
+      required: false
     },
-    CaseCollectionID:{
-      model:'CaseCollection'
+
+    dirpath:{
+      type:'string',
+      required:false,
+      defaultsTo:'/默认'
+    },
+    //preScript 前置脚本
+    prescript:{
+     type:'string',
+     required:false
+    },
+    //testscript  后置脚本
+    testscript:{
+       type:'string',
+       required:false
+    },
+    TaskID:{
+      model:'TaskFolder'
     }
-
-
   }
 };
 

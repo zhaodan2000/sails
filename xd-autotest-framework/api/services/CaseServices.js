@@ -1,12 +1,15 @@
 /**
  * Created by xiaodou_chenxiaoxiang on 16/8/1.
  */
+"use strict"
 
-var fs = require('fs');
 require('../utils/string');
+var fs = require('fs');
+var mysqlhelper = require('../utils/mysqlhelper')
+var eventproxy = require('../utils/eventproxyhelper')
+var newManHelper = require('../newman/NewMan')
 
 module.exports = {
-
 
 
   /**
@@ -19,46 +22,36 @@ module.exports = {
     var queryParam = caseItem.queryParam;  //type is json
 
     var request = {
-      id:caseItem.id,
-      name:caseItem.name,
+      id: caseItem.id,
+      name: caseItem.name,
       disabled: caseItem.disabled,
-      url:caseItem.url,
-      method:caseItem.method,
-      header:getHeaderWithJson(headers),
-      body:{
-        mode:caseItem.mode,
-        urlencoded:getQueryParamWithJson(queryParam)
+      url: caseItem.url,
+      method: caseItem.method,
+      header: getHeaderWithJson(headers),
+      body: {
+        mode: caseItem.mode,
+        urlencoded: getQueryParamWithJson(queryParam)
       }
     }
     return request;
   },
 
-  configEvent: function (item) {
+  configEvent: function (item, callback) {
     //配置前置脚本和后置脚本 ----- 根据item是不是输入了文本来判断是否添加脚本
-    // CaseItemServices.
-
-    console.log('item.testscript:'+item.testscript);
-    console.log('item.prescript:'+item.prescript);
-    var event =[];
-    var test = {
-      listen: 'test',
-      script: {
-        type: "text/javascript",
-        exec: item.testscript
-        // exec: CaseItemServices.parseIntputTestString(item.testscript)
-      }
-    };
-    var preScript = {
-      listen: 'prerequest',
-      script: {
-        type: "text/javascript",
-        // exec: item.prescript
-        exec: CaseItemServices.parseInputPreString(item.prescript)
-      }
-    };
-    event.push(preScript);
-    event.push(test);
-    return event;
+    // RequestItemServices.
+    var event = [];
+    var ep = eventproxy.create();
+    ep.after(2, function () {
+      callback(event)
+    });
+    this.parseInputPreString(item.prescript, function (preEvent) {
+      event.push(preEvent);
+      ep.emit('1');
+    });
+    this.parseIntputTestString(item.testscript, function (testEvent) {
+      event.push(testEvent);
+      ep.emit('1');
+    });
   },
 
   /**
@@ -66,14 +59,14 @@ module.exports = {
    * @param request type is obj
    * @param event  type is array
    * @returns {{id: *, name: *, disabled: *, request: *, event: *}}
-     */
+   */
   configItem: function (request, event) {
     var item = {
-      id : request.id,
-      name : request.name,
-      disabled : request.disabled,
-      request : request,
-      event:event
+      id: request.id,
+      name: request.name,
+      disabled: request.disabled,
+      request: request,
+      event: event
     }
     return item;
   },
@@ -86,79 +79,40 @@ module.exports = {
    * @param prestring
    * @param callback
    * @returns {string}
-     */
+   */
   parseInputPreString: function (prestring, callback) {
-
-    var Pre={global:{},env:{}};
+    var pre = new newManHelper.newPreEventProxy();
+    pre._event = {listen: "prerequest", script: {type: "text/javascript", exec: ""}};
+    var ep = eventproxy.create();
+    var mysql = mysqlhelper.create(ep);
     eval(prestring);
-
-    var returnString = '';
-    //第一层遍历prescriptObj
-    for (var prop in Pre) {
-      if (Pre.hasOwnProperty(prop) && prop === 'global') {
-        var global = Pre[prop];
-        //当属性名为global时,再次遍历
-        for (var key in global) {
-          if (global.hasOwnProperty(key)){
-            var tmpString = "postman.setGlobalVariable(\"{0}\", '{1}');"
-            var value = (isJson(global[key]))? JSON.stringify(global[key]):global[key];
-            returnString = returnString.concat(tmpString.format(key, value) + '\n');
-          }
-        }
-      }else if(Pre.hasOwnProperty(prop) && prop === 'env'){
-        var env = Pre[prop];
-        //当属性名为evn时,再次遍历
-        for (var key in env) {
-          if (env.hasOwnProperty(key)){
-            var tmpString = "postman.setEnvironmentVariable(\"{0}\", '{1}');";
-            var value = (isJson(env[key]))? JSON.stringify(env[key]):env[key];
-            returnString = returnString.concat(tmpString.format(key, value) + '\n');
-          }
-        }
-      }
+    if (ep.getLength() > 0) {
+      ep.after(ep.getLength(), function () {
+        callback(JSON.stringify(pre._event))
+      });
+    } else {
+      callback(JSON.stringify(pre._event));
     }
-    console.log(returnString);
-    return returnString;
   },
 
   /**
    * 将传入的testscript语句转化为event中testscript需要的语法
    * @param teststring
    * @returns {string}
-     */
-  parseIntputTestString: function (teststring) {
-    var Test={global:{},env:{},test:{}};
+   */
+  parseIntputTestString: function (teststring, callback) {
+    var test = new newManHelper.newTestEventProxy();
+    test._event = {listen: "test", script: {type: "text/javascript", exec: ""}};
+    var ep = eventproxy.create();
+    var mysql = mysqlhelper.create(ep);
     eval(teststring);
-
-    var returnString = '';
-    //第一层遍历testscriptObj
-    for (var prop in Test) {
-      if (Test.hasOwnProperty(prop) && prop === 'global') {
-        var global = Test[prop];
-        //当属性名为global时,再次遍历
-        for (var key in global) {
-          if (global.hasOwnProperty(key)){
-            var tmpString = "postman.setGlobalVariable(\"{0}\", '{1}');"
-            var value = (isJson(global[key]))? JSON.stringify(global[key]):global[key];
-            returnString = returnString.concat(tmpString.format(key, value) + '\n');
-          }
-        }
-      }else if(Test.hasOwnProperty(prop) && prop === 'env'){
-        var env = Test[prop];
-        //当属性名为evn时,再次遍历
-        for (var key in env) {
-          if (env.hasOwnProperty(key)){
-            var tmpString = "postman.setEnvironmentVariable(\"{0}\", '{1}');";
-            var value = (isJson(env[key]))? JSON.stringify(env[key]):env[key];
-            returnString = returnString.concat(tmpString.format(key, value) + '\n');
-          }
-        }
-      }else if(Test.hasOwnProperty(prop) && prop === 'test'){
-
-      }
+    if (ep.getLength() > 0) {
+      ep.after(ep.getLength(), function () {
+        callback(JSON.stringify(test._event))
+      });
+    } else {
+      callback(JSON.stringify(test._event));
     }
-    console.log(returnString);
-    return returnString;
   }
 }
 
@@ -174,8 +128,8 @@ function getHeaderWithJson(headerJson) {
       // or if (Object.prototype.hasOwnProperty.call(obj,prop)) for safety...
       // console.log("prop: " + prop + " value: " + headerJson[prop]);
       var header = {
-        key:prop,
-        value:headerJson[prop]
+        key: prop,
+        value: headerJson[prop]
       }
       headerArray.push(header);
     }
@@ -196,10 +150,10 @@ function getQueryParamWithJson(paramJson) {
       // or if (Object.prototype.hasOwnProperty.call(obj,prop)) for safety...
       // console.log("prop: " + prop + " value: " + paramJson[prop]);
       var param = {
-        key:prop,
-        value:paramJson[prop],
-        type:'text',
-        enabled:true
+        key: prop,
+        value: paramJson[prop],
+        type: 'text',
+        enabled: true
       }
       paramArray.push(param);
     }
@@ -213,7 +167,7 @@ function getQueryParamWithJson(paramJson) {
  * @param obj
  * @returns {boolean}
  */
-function isJson(obj){
+function isJson(obj) {
   var isjson = typeof(obj) == "object" && Object.prototype.toString.call(obj).toLowerCase() == "[object object]" && !obj.length;
   return isjson;
 }

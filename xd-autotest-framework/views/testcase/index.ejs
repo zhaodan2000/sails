@@ -1,11 +1,12 @@
 <div class="container-fluid">
 
-  <!-- 左侧栏: 用例集合列表。 -->
   <ul class="nav navbar-nav side-nav">
     <li style="height: 49px">
       <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalForCollect" id="append_tc_coll_ui" style="width: auto;height: auto">添加用例集合</button>
      </li>
-
+    <!--<li>-->
+      <!--<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" id="addtestcase" style="width: 225px;height: auto">添加用例</button>-->
+    <!--</li>-->
     <!--<li>-->
       <!--<div class="modal-body">-->
         <!--&lt;!&ndash;<form action='/ShowDoc/operatfile' method="post" id="fileForm" enctype="multipart/form-data">&ndash;&gt;-->
@@ -14,8 +15,7 @@
         <!--&lt;!&ndash;</form>&ndash;&gt;-->
       <!--</div>-->
     <!--</li>-->
-    <%if(data&&data.length>0) {
-    data.forEach(function(record,index){ %>
+    <% data.forEach(function(record,index){ %>
     <li>
       <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#info' + index%>" style="display:block">
         <i class="fa fa-fw"></i> <%=record.name%><i class="fa fa-fw"></i>
@@ -27,34 +27,33 @@
       </a>
       <ul id="<%='info' + index%>" class="collapse">
         <!--<li>-->
-          <!--<%record.CaseItems.forEach(function (caseItem,i) {%>-->
-            <!--<a href="javascript:void(0)" id="<%=caseItem.name%>" onclick="requestItem(this)"><%=caseItem.name%></a>-->
+          <!--<%record.ReqItems.forEach(function (reqItem,i) {%>-->
+            <!--<a href="javascript:void(0)" id="<%=reqItem.name%>" onclick="requestItem(this)"><%=reqItem.name%></a>-->
           <!--<%})%>-->
         <!--</li>-->
       </ul>
     </li>
-    <%})}%>
+    <%})%>
   </ul>
 
   <div id="page-wrapper-right" aria-hidden="false" class="right-operation">
 
-
+    <!-- Page Heading -->
     <div class="row">
       <div class="col-lg-12">
-        <!-- Page Heading -->
-        <h1 class="page-header" id="tc_coll_name" uniqid="<%=curr_tc_coll?curr_tc_coll.uniqID:''%>"><%=curr_tc_coll?curr_tc_coll.name:'默认'%></h1>
+        <h1 class="page-header" id="tc_coll_name" uniqid="<%=curr_tc_coll.uniqID%>"><%=curr_tc_coll.name%></h1>
         <ol class="breadcrumb">
           <li>
             <i class="fa fa-dashboard"></i>所属文档
-            <input name="tc_coll_doc" value="<%=curr_tc_coll?curr_tc_coll.docName:'无'%>" style="width:230px; height:auto;"/>
+            <input name="tc_coll_doc" value="<%=curr_tc_coll.docName%>" style="width:230px; height:auto;"/>
           </li>
           <li>
             <i class="fa fa-dashboard"></i>服务器
-            <input name="testEnv" value="<%=curr_tc_coll?curr_tc_coll.testEnv:'无'%>" style="width:130px; height:auto;" />
+            <input name="testEnv" value="<%=curr_tc_coll.testEnv%>" style="width:130px; height:auto;" />
           </li>
           <li>
             <i class="fa fa-dashboard"></i>端口号
-            <input name="testEnvPort" value="<%=curr_tc_coll?curr_tc_coll.testEnvPort:'无'%>" style="width:50px; height:auto;" />
+            <input name="testEnvPort" value="<%=curr_tc_coll.testEnvPort%>" style="width:50px; height:auto;" />
           </li>
           <div style="float:right">
             <div class="btn btn-info" id="add_tc_ui" style="width: auto;height: auto">新增用例</div>
@@ -80,21 +79,20 @@
               </tr>
               </thead>
               <tbody>
-              <%if(curr_tc_coll && curr_tc_coll.CaseItems){
-              for(var i=curr_tc_coll.CaseItems.length-1;i>=0;i--){%>
+              <%for(var i=curr_tc_coll.ReqItems.length-1;i>=0;i--){%>
               <tr>
-                <td  style="display:none"><%=curr_tc_coll.CaseItems[i].uniqID%></td>
-                <td><%=curr_tc_coll.CaseItems[i].name%></td>
-                <td><%=curr_tc_coll.CaseItems[i].description%></td>
-                <td><%=curr_tc_coll.CaseItems[i].url%></td>
-                <td><%=curr_tc_coll.CaseItems[i].dev%></td>
-                <td uniqid="<%=curr_tc_coll.CaseItems[i].uniqID%>">
-                  <a style="cursor: pointer" name="editTC" uniqid="<%=curr_tc_coll.CaseItems[i].uniqID%>">修改</a>
-                  <a style="cursor: pointer" name="removeTC" uniqid="<%=curr_tc_coll.CaseItems[i].uniqID%>">删除</a>
+                <td  style="display:none"><%=curr_tc_coll.ReqItems[i].uniqID%></td>
+                <td><%=curr_tc_coll.ReqItems[i].name%></td>
+                <td><%=curr_tc_coll.ReqItems[i].description%></td>
+                <td><%=curr_tc_coll.ReqItems[i].url%></td>
+                <td><%=curr_tc_coll.ReqItems[i].dev%></td>
+                <td uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">
+                  <a style="cursor: pointer" name="editAPI" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">修改</a>
+                  <a style="cursor: pointer" name="removeAPI" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">删除</a>
                 </td>
                 </td>
               </tr>
-              <%}}%>
+              <%}%>
 
               </tbody>
             </table>
@@ -103,7 +101,7 @@
       </div>
 </div>
 
-    <!-- 弹modal框, 新增用例 -->
+    <!-- 弹modal框, 新增接口 -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -115,19 +113,19 @@
             <div id="tc_template" uniqid="" class="form-group" >
               <div class="form-group">
                 <label class="control-label" style="text-align:right">用例名</label>
-                <input name="tc_title" class="form-control" required="required" />
+                <input name="api_title" class="form-control" required="required" />
               </div>
               <div class="form-group">
                 <label class="control-label" style="text-align:right">用例描述</label>
-                <input name="tc_desc" class="form-control" required="required" />
+                <input name="api_desc" class="form-control" required="required" />
               </div>
               <div class="form-group">
                 <label class="control-label">请求URL</label>
-                <input name="tc_url" class="form-control" required="required" />
+                <input name="api_url" class="form-control" required="required" />
               </div>
               <div class="form-group">
                 <label class="control-label">请求content-type</label>
-                <select class="form-control" name="tc_dataType" >
+                <select class="form-control" name="api_dataType" >
                   <option value="application/json" style=" ">application/json</option>
                   <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
                   <option value="application/application/octet-stream">application/application/octet-stream</option>
@@ -141,19 +139,19 @@
               </div>
               <div class="form-group">
                 <label class="control-label">请求method</label>
-                <select class="form-control" name="tc_method">
+                <select class="form-control" name="api_method">
                   <option value="POST" selected="selected">POST</option>
                   <option value="GET">GET</option>
                 </select>
               </div>
               <div class="form-group">
                 <label class="control-label">是否废弃</label>
-                <select class="col-3 form-control" name="tc_disabled">
+                <select class="col-3 form-control" name="api_disabled">
                   <option value="false">false</option>
                   <option value="true">true</option>
                 </select>
                 <label class="control-label">开发者</label>
-                <select class="col-3 form-control" name="tc_dev" >
+                <select class="col-3 form-control" name="api_dev" >
                   <option value="赵聃">赵聃</option>
                   <option value="李德洪">李德洪</option>
                   <option value="周欢">周欢</option>
@@ -161,10 +159,12 @@
               </div>
               <div class="form-group">
                 <label class="control-label">请求头header</label>
+                <button id="header_kv_add" class="fa fa-plus" data-dismiss="modal" aria-hidden="true"></button>
                 <div id="jsoneditor_header_" style="width: auto; height: auto;"></div>
               </div>
               <div class="form-group">
                 <label class="control-label">请求参数</label>
+                <button id="params_kv_add" class="fa fa-plus" data-dismiss="modal" aria-hidden="true"></button>
                 <div id="jsoneditor_queryParams_" style="width: auto; height: auto;"></div>
               </div>
               <div class="form-group">
@@ -176,146 +176,46 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_add_tc" ></span>保存</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_add_api" ></span>保存</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 弹modal框, 修改用例 -->
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <h4 class="modal-title" id="myModalLabel">修改用例</h4>
-          </div>
-          <div class="modal-body">
-            <div id="tc_template2" uniqid="" class="form-group" >
-              <div class="form-group">
-                <label class="control-label" style="text-align:right">用例名</label>
-                <input name="tc_title" class="form-control" required="required" />
-              </div>
-              <div class="form-group">
-                <label class="control-label" style="text-align:right">用例描述</label>
-                <input name="tc_desc" class="form-control" required="required" />
-              </div>
-              <div class="form-group">
-                <label class="control-label">请求URL</label>
-                <input name="tc_url" class="form-control" required="required" />
-              </div>
-              <div class="form-group">
-                <label class="control-label">请求content-type</label>
-                <select class="form-control" name="tc_dataType" >
-                  <option value="application/json" style=" ">application/json</option>
-                  <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
-                  <option value="application/application/octet-stream">application/application/octet-stream</option>
-                  <option value="text/html">text/html</option>
-                  <option value="text/plain">text/plain</option>
-                  <option value="text/xml">text/xml</option>
-                  <option value="image/gif">image/gif</option>
-                  <option value="image/jpeg">image/jpeg</option>
-                  <option value="image/png">image/png</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="control-label">请求method</label>
-                <select class="form-control" name="tc_method">
-                  <option value="POST" selected="selected">POST</option>
-                  <option value="GET">GET</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="control-label">是否废弃</label>
-                <select class="col-3 form-control" name="tc_disabled">
-                  <option value="false">false</option>
-                  <option value="true">true</option>
-                </select>
-                <label class="control-label">开发者</label>
-                <select class="col-3 form-control" name="tc_dev" >
-                  <option value="赵聃">赵聃</option>
-                  <option value="李德洪">李德洪</option>
-                  <option value="周欢">周欢</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="control-label">请求头header</label>
-                <div id="update_jsoneditor_header_" style="width: auto; height: auto;"></div>
-              </div>
-              <div class="form-group">
-                <label class="control-label">请求参数</label>
-                <div id="update_jsoneditor_queryParams_" style="width: auto; height: auto;"></div>
-              </div>
-              <div class="form-group">
-                <label class="control-label">返回结果Response</label>
-                <div id="update_jsoneditor_response_" style="width: auto; height: auto;"></div>
-              </div>
-              <!--</li>-->
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_edit_tc" ></span>保存</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 添加用例集合（弹Modal框） -->
-    <div class="modal fade" id="myModalForCollect" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <!-- 模态框添加用例集合（Modal） -->
+  <div class="modal fade" id="myModalForCollect" tabindex="-1" role="dialog"
+       aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-          <h4 class="modal-title" id="myModalLabel">添加用例集合</h4>
+          <button type="button" class="close"
+                  data-dismiss="modal" aria-hidden="true">
+            &times;
+          </button>
+          <h4 class="modal-title" id="myModalLabel">
+            添加用例集合
+          </h4>
         </div>
-        <!--<form id="formModelForCollect" class="form-inline" action="/ShowDoc/addtestcasecollect" method="POST">-->
-        <!--</form>-->
-        <div class="modal-body">
-          <div id="tc_template" uniqid="" class="form-group">
-            <div>
-              <label class="control-label" style="text-align:right">用例名</label>
-              <input name="tc_title" class="form-control" required="required" />
-            </div>
-            <div>
-              <label class="control-label" style="text-align:right">服务器</label>
-              <input name="tc_testEnv" class="form-control" required="required" />
-            </div>
-            <div>
-              <label class="control-label" style="text-align:right">端口号</label>
-              <input name="tc_testEnvPort" class="form-control" required="required" />
-            </div>
-            <div>
-              <label class="control-label" style="text-align:right">端口号</label>
-              <select id="test_select" name="tc_docName" class="form-control" required="required" />
-                <!--<option value="">赵聃</option>-->
-                <!--<option value="">李德洪</option>-->
-                <!--<option value="">周欢</option>-->
-              </select>
-            </div>
+        <form id="formModelForCollect" class="form-inline" action="/ShowDoc/addtestcasecollect" method="POST">
+          <div class="modal-body">
+            <h2>用例集合名</h2>
+            <label style="width: 200px">用例集合名</label>
+            <input name="name" type="text"/>
           </div>
-
-          <label style="width: auto">集合名</label>
-          <input name="name" placeholder="legacy input"/>
-          <input name="tc_coll_name" type="text"/>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-          <button type="button" class="btn btn-primary" id="submitcollect">提交</button>
-        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default"
+                    data-dismiss="modal">关闭
+            </button>
+            <button type="button" class="btn btn-primary" id="submitcollect">
+              提交用例集合
+            </button>
+          </div>
+        </form>
       </div><!-- /.modal-content -->
     </div><!-- /.modal -->
   </div>
 
 </div>
 
-  <link href="/xd-autotest-framework/css/jsoneditor.css" rel="stylesheet" type="text/css">
-  <script src="/xd-autotest-framework/js/jsoneditor.js"></script>
-  <script src="/xd-autotest-framework/js/testcase/testcase.js"></script>
-
-  <script>
-    //定义全局变量, 来保存请求头、请求参数、请求response的jsoneditors.
-    var global_add_header_jsoneditor=null, global_add_param_jsoneditor=null,global_add_response_jsoneditor=null,
-      global_update_header_jsoneditor=null,global_update_param_jsoneditor=null,global_update_response_jsoneditor=null;
-  </script>
- </div>
+<script src="/xd-autotest-framework/js/index/frame-right.js"></script>
+<script src="/xd-autotest-framework/js/testcase/testcase.js"></script>

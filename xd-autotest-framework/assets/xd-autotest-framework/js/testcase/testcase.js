@@ -146,62 +146,60 @@ function requestItem(data) {
   $.main.refreshRight("/ShowDoc/findRequestItemByID", {data: {name: data.id}});
 }
 
-//
+//运行与保存
 $(document).ready(function () {
-  //$('#test_select').
-});
+  var option_run = {
+    url: '/Interface/testCurrentCollection',
+    success: function (data) {
+      $.post("/Interface/showResponseOnView", {collection: data}, function (result) {
+        $("body").html(result);
+      });
+      $.main.refreshRight("/Interface/showResponseOnView?id="+data.id);
+    }
+  };
+  var option_save = {
+    url: "/Interface/saveCurrentCollection",
+    success: function (data) {
+      console.log('+++++++++++++++' + data);
+      alert('This request had been stored into DB!')
+    }
+  };
+  var option_submit = {
+    success:function (data) {
+      $.main.refreshMain("/Home/testcase");
+    }
+  };
 
-var option_run = {
-  url: '/Interface/testCurrentCollection',
-  success: function (data) {
-    $.post("/Interface/showResponseOnView", {collection: data}, function (result) {
-      $("body").html(result);
-    });
-    $.main.refreshRight("/Interface/showResponseOnView?id="+data.id);
-  }
-};
-var option_save = {
-  url: "/Interface/saveCurrentCollection",
-  success: function (data) {
-    console.log('+++++++++++++++' + data);
-    alert('This request had been stored into DB!')
-  }
-};
-var option_submit = {
-  success:function (data) {
-    $.main.refreshMain("/Home/testcase");
-  }
-};
+  var option_submitForCollect = {
+    success:function (data) {
+      $.main.refreshMain("/Home/testcase");
+    }
+  };
 
-var option_submitForCollect = {
-  success:function (data) {
-    $.main.refreshMain("/Home/testcase");
-  }
-};
+  // ajaxSubmit 
+  //运行事件
+  $("#runBtn").click(function () {
+    $("#form").ajaxSubmit(option_run);
+  });
 
-// ajaxSubmit 
-//运行事件
-$("#runBtn").click(function () {
-  $("#form").ajaxSubmit(option_run);
-});
+  //保存事件
+  $("#saveBtn").click(function () {
+    $("#form").ajaxSubmit(option_save);
+  });
 
-//保存事件
-$("#saveBtn").click(function () {
-  $("#form").ajaxSubmit(option_save);
-});
+  //提交增加的用例
+  $("#submitBtn").click(function () {
+    $('#myModal').modal('hide');
+    $(".modal-backdrop").hide();
+    $("#formModel").ajaxSubmit(option_submit);
+  });
 
-//提交增加的用例
-$("#submitBtn").click(function () {
-  $('#myModal').modal('hide');
-  $(".modal-backdrop").hide();
-  $("#formModel").ajaxSubmit(option_submit);
-});
-
-//增加用例集合
-$("#submitcollect").click(function () {
-  $('#myModal').modal('hide');
-  $(".modal-backdrop").hide();
-  $("#formModelForCollect").ajaxSubmit(option_submitForCollect);
+  //增加用例集合
+  $("#submitcollect").click(function () {
+    $('#myModal').modal('hide');
+    $(".modal-backdrop").hide();
+    $("#formModelForCollect").ajaxSubmit(option_submitForCollect);
+  });
 });
 
 //搜索用例
