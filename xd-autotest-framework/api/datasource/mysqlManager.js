@@ -13,7 +13,7 @@ function getPool(options) {
     'database': options.db,
     'charset': options.charset
   };
-  var key = crypto_util.md5(JSON5.stringify(_options));
+  var key = _options.id ? _options.id : crypto_util.md5(JSON.stringify(_options));
   if (pool_hash[key])
     return pool_hash[key];
   _options['connectionLimit'] = (options.maxConnLimit ? options.maxConnLimit : 20);
@@ -51,7 +51,7 @@ exports.execQuery = function (options) {
       // 查询参数
       var sql = options['sql'];
       var args = options['args'];
-      var handler = options['callback'];
+      var handler = options['_callback'];
 
       // 执行查询
       if (sql) {
