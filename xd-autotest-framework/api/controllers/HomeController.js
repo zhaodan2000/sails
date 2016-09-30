@@ -26,7 +26,7 @@ module.exports = {
   schedule: function(req, res) {
     mongoService.Find("OrderCaseCollection", null, function (records) {
       console.log('records:'+ records);
-      res.view('schedule/index', {data:records});
+      res.view('schedule/index', {data:records, curr_tc_coll:null});
     });
   },
 };

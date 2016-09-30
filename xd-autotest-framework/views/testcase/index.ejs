@@ -14,7 +14,8 @@
         <!--&lt;!&ndash;</form>&ndash;&gt;-->
       <!--</div>-->
     <!--</li>-->
-    <% data.forEach(function(record,index){ %>
+    <%if(data&&data.length>0) {
+    data.forEach(function(record,index){ %>
     <li>
       <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#info' + index%>" style="display:block">
         <i class="fa fa-fw"></i> <%=record.name%><i class="fa fa-fw"></i>
@@ -26,13 +27,13 @@
       </a>
       <ul id="<%='info' + index%>" class="collapse">
         <!--<li>-->
-          <!--<%record.ReqItems.forEach(function (reqItem,i) {%>-->
-            <!--<a href="javascript:void(0)" id="<%=reqItem.name%>" onclick="requestItem(this)"><%=reqItem.name%></a>-->
+          <!--<%record.CaseItems.forEach(function (caseItem,i) {%>-->
+            <!--<a href="javascript:void(0)" id="<%=caseItem.name%>" onclick="requestItem(this)"><%=caseItem.name%></a>-->
           <!--<%})%>-->
         <!--</li>-->
       </ul>
     </li>
-    <%})%>
+    <%})}%>
   </ul>
 
   <div id="page-wrapper-right" aria-hidden="false" class="right-operation">
@@ -41,19 +42,19 @@
     <div class="row">
       <div class="col-lg-12">
         <!-- Page Heading -->
-        <h1 class="page-header" id="tc_coll_name" uniqid="<%=curr_tc_coll.uniqID%>"><%=curr_tc_coll.name%></h1>
+        <h1 class="page-header" id="tc_coll_name" uniqid="<%=curr_tc_coll?curr_tc_coll.uniqID:''%>"><%=curr_tc_coll?curr_tc_coll.name:'默认'%></h1>
         <ol class="breadcrumb">
           <li>
             <i class="fa fa-dashboard"></i>所属文档
-            <input name="tc_coll_doc" value="<%=curr_tc_coll.docName%>" style="width:230px; height:auto;"/>
+            <input name="tc_coll_doc" value="<%=curr_tc_coll?curr_tc_coll.docName:'无'%>" style="width:230px; height:auto;"/>
           </li>
           <li>
             <i class="fa fa-dashboard"></i>服务器
-            <input name="testEnv" value="<%=curr_tc_coll.testEnv%>" style="width:130px; height:auto;" />
+            <input name="testEnv" value="<%=curr_tc_coll?curr_tc_coll.testEnv:'无'%>" style="width:130px; height:auto;" />
           </li>
           <li>
             <i class="fa fa-dashboard"></i>端口号
-            <input name="testEnvPort" value="<%=curr_tc_coll.testEnvPort%>" style="width:50px; height:auto;" />
+            <input name="testEnvPort" value="<%=curr_tc_coll?curr_tc_coll.testEnvPort:'无'%>" style="width:50px; height:auto;" />
           </li>
           <div style="float:right">
             <div class="btn btn-info" id="add_tc_ui" style="width: auto;height: auto">新增用例</div>
@@ -79,20 +80,21 @@
               </tr>
               </thead>
               <tbody>
-              <%for(var i=curr_tc_coll.ReqItems.length-1;i>=0;i--){%>
+              <%if(curr_tc_coll && curr_tc_coll.CaseItems){
+              for(var i=curr_tc_coll.CaseItems.length-1;i>=0;i--){%>
               <tr>
-                <td  style="display:none"><%=curr_tc_coll.ReqItems[i].uniqID%></td>
-                <td><%=curr_tc_coll.ReqItems[i].name%></td>
-                <td><%=curr_tc_coll.ReqItems[i].description%></td>
-                <td><%=curr_tc_coll.ReqItems[i].url%></td>
-                <td><%=curr_tc_coll.ReqItems[i].dev%></td>
-                <td uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">
-                  <a style="cursor: pointer" name="editTC" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">修改</a>
-                  <a style="cursor: pointer" name="removeTC" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">删除</a>
+                <td  style="display:none"><%=curr_tc_coll.CaseItems[i].uniqID%></td>
+                <td><%=curr_tc_coll.CaseItems[i].name%></td>
+                <td><%=curr_tc_coll.CaseItems[i].description%></td>
+                <td><%=curr_tc_coll.CaseItems[i].url%></td>
+                <td><%=curr_tc_coll.CaseItems[i].dev%></td>
+                <td uniqid="<%=curr_tc_coll.CaseItems[i].uniqID%>">
+                  <a style="cursor: pointer" name="editTC" uniqid="<%=curr_tc_coll.CaseItems[i].uniqID%>">修改</a>
+                  <a style="cursor: pointer" name="removeTC" uniqid="<%=curr_tc_coll.CaseItems[i].uniqID%>">删除</a>
                 </td>
                 </td>
               </tr>
-              <%}%>
+              <%}}%>
 
               </tbody>
             </table>
