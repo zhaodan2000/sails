@@ -1,4 +1,4 @@
-var service = require("../api/services/RequestItemServices")
+var service = require("../api/services/CaseServices")
 //service.parseInputPreString("mysql.execQuery({host:'192.168.88.89', port:'3306', user:'xddev', password:'xddev@xiaodou', db:'xd-user', sql: 'select id from xd_user limit 1', callback: function(results){if (results && results.length > 0) {var id = results[0];pre.setGlobalVar('test',id['id']);}}});", function (event) {
 //  console.log(event);
 //});
