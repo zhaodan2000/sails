@@ -326,7 +326,7 @@
      $(this).parent().parent().remove();
 
      $.ajax({
-       url: '/doc/remove',
+       url: '/base/remove',
        method: "post",
        contentType: 'application/x-www-form-urlencoded;charset=utf-8',
        data: {

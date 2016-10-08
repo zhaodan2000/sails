@@ -51,18 +51,19 @@ module.exports.routes = {
   '/schedule': 'Home.schedule',
   // 'post /doc/query_api':'InterfaceDoc.query',
   'post /base/query':'InterfaceDoc.query',
+  'post /base/remove':'InterfaceDoc.remove',
 
   //doc
   'post /doc/save_api':'InterfaceDoc.saveDocItem',
   'post /doc/savedocwithItem':'InterfaceDoc.saveDoc2db',
   'post /doc/showmdfile':'EditDoc.showMdFile',
   'post /doc/query_doc':"EditDoc.queryDoc",
-  'post /doc/remove':"InterfaceDoc.remove",
+  //'post /doc/remove':"InterfaceDoc.remove",
 
   //case
   'post /case/save_tc_collection':'ShowDoc.add_tc_coll_2db',
   'post /case/save_case':'ShowDoc.save_case',
-  
+
   //doc test url
   'get /doc/findRequestItemByName':'DocDemo.findRequestItemByName',
   'post /doc/insertRequestItemService':'DocDemo.insertRequestItemService',

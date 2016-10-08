@@ -102,7 +102,6 @@ module.exports={
   /**
    * 根据入参的name, 来查找mongodb里的符合条件的记录。
    **/
-
   findRequestItemByName:function(req,res) {
 
     console.log("req.param()=" + req.param("requestName"));
@@ -194,5 +193,40 @@ module.exports={
         return res.send(item);
       });
 
-    }
+    },
+
+
+  add_case: function (req, res) {
+    var dic={uniqID: "1475909916895"};
+    mongoService.Find("ReqFolder",dic , function (records) {
+      if(records&&records.length>0){
+        console.log(">0");
+        console.log(records);
+        var caseItem = {
+          uniqID: (new Date().getTime()).toString(),
+          name: '页面+号对应-资源发布接口',
+          description: '暂无接口描述',
+          url: '/asked/post',
+          disabled: 'false',
+          dev: '赵聃周欢',
+          method: 'POST',
+          dataType: 'application/json',
+          header: '{}',
+          queryParams: '{\n  "key": "名称\\t类型\\t是否为空\\t说明\\ntitle\\tString\\t否\\t资源名称\\ncontent\\tString\\t否\\t资源内容\\nvideoUrl\\tString\\t视频的时候不为空\\t视频的候不为空\\t图片，以逗号分隔\\ncategoryId\\tString\\t永远不为空\\t类型为说说传-1，文章和视频传分类ID\\ndigest\\tInteger\\t必须传\\t0说说1文章 2视频\\ncover\\tString\\t视频传\，说说传-1\\n\\n"\n}',
+          response: '{\n  "isError": "是否错误",\n  "errorMessage": "错误消息",\n  "errorCode": "错误代码",\n  "timestamp": "时间戳",\n  "resourcesId": "资源Id"\n}',
+        };
+        caseItem["ReqFolderID"] = records[0].id;
+
+        mongoService.Insert("RequestItem", caseItem, function (inserted) {
+          console.log(inserted);
+
+        });
+      }else{
+        console.log("=0");
+      }
+
+    });
+
+  }
+
 }

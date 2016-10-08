@@ -29,8 +29,7 @@ module.exports={
     apiversion:{
       type:'string',
       unique:false,
-      required:false,
-      defaultsTo:"1.0.0"
+      required:false
     },
     dev:{
       type:'string',
@@ -54,35 +53,19 @@ module.exports={
     },
     dataType:{
       type:'string',
-      required:false,
-      defaultsTo:'application/json'
+      required:false
     },
     header:{
       type:'json',
-      required:false,
-      defaultsTo:{
-        "module":"",
-        "version":"",
-        "clientType":"",
-        "clientIp":"",
-        "deviceId":"",
-        "sessionToken":""
-      }
+      required:false
     },
     queryParams:{
       type:'json',
-      required:false,
-      defaultsTo:{"param1":"value1"}
+      required:false
     },
     response:{
       type:'json',
-      required:false,
-      defaultsTo: {
-        "retcode":"0",
-        "retOk":true,
-        "retdesc":"操作成功",
-        "message":""
-      }
+      required:false
     },
     /**
      * doc与docItem建立关联。
