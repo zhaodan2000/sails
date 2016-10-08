@@ -1,5 +1,5 @@
 #!/bin/bash
-PRO_NAME=xd-autotest-framework
+BASE=`pwd`
 DIR_TMP=.runtime
 PID_FILE=$DIR_TMP/pid.file
 RETVAL=0
@@ -7,8 +7,8 @@ mkdir -p $DIR_TMP
 
 function status
 {
-    PID=`cat $PID_FILE > /dev/null 2>&1`
-    if [ -d /proc/$PID ];then
+    PID=`cat $PID_FILE 2>/dev/null`
+    if [ -f $PID_FILE ] && [ "$PID" != "" ] && [  -d /proc/$PID ];then
         echo "Instance is [RUNNING]."
         RETVAL=0
     else
@@ -64,4 +64,3 @@ case "$1" in
 esac
 
 exit $RETVAL
-
