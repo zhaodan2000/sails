@@ -22,30 +22,131 @@ function createJSONeditor(container_id, json) {
   return editor_temp;
 };
 
+//弹框添加集合UI。
+$('#append_tc_coll_ui').click(function () {
+  $('#myModalForCollect').modal();
+
+  //select 扩充子节点的方式一
+  // var selector='#select_tc_coll_docName';
+  // $(selector).append('<option value="" uniqid="">'+'默认'+'</option>');
+
+  //select 扩充子节点的方式二
+  var selectElement=document.getElementById('select_tc_coll_docName');
+  selectElement.innerHTML='<option value="" uniqid="">'+'默认'+'</option>';
+
+  $.ajax({
+    url:'/base/query',
+    method:"post",
+    data:{
+      modelType:'APIdoc',
+      uniqID:null
+    },
+    success:function (data) {
+      for(var i=0;i<data.length;i++){
+        //data.forEach(function(item,index){
+        var objOption = document.createElement("option");
+        objOption.value= data[i.toString()].uniqID;
+        objOption.text=data[i.toString()].name;
+        selectElement.options.add(objOption);
+      }
+    },
+    error:function (data) {
+
+    }
+  });
+});
+
+//添加用例集合到mongodb中。
+$('#add_tc_coll_2db').click(function () {
+  var selector='#tc_coll_template';
+  var name=$(selector).find("input[name='tc_coll_name']").val();
+  var testEnv=$(selector).find('input[name="tc_coll_testEnv"]').val();
+  var testEnvPort=$(selector).find('input[name="tc_coll_testEnvPort"]').val();
+  var docUniqID=$(selector).find('select[name="tc_docName"] option:selected').val();
+  var docName=$(selector).find('select[name="tc_docName"] option:selected').text();
+
+  var tc_coll={
+    name:name,
+    testEnv:testEnv,
+    testEnvPort:testEnvPort,
+    uniqID:(new Date().getTime()).toString(),
+    docUniqID:docUniqID,
+    docName:docName
+  };
+
+  $.ajax({
+    url:'/case/save_tc_collection',
+    method:'post',
+    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+    data:{
+      reqFolder:tc_coll
+    },
+    success:function(data){
+      alert("保存成功!");
+      //$('#wrapper').html(data);
+      $("#page-wrapper").html(data);
+
+    },
+    error:function (data) {
+      alert("保存失败!"+JSON.stringify(data,null,"\t"));
+    }
+  });
+
+});
+
 /** 弹框添加用例 **/
 $('#add_tc_ui').click(function () {
    $('#myModal').modal();
 
-  if(!global_add_header_jsoneditor){
+  if(!global_case_add_header_jsoneditor){
     //create the json editor: createJSONeditor
     var header_container_id='jsoneditor_header_';
     var header_editor = createJSONeditor(header_container_id, {});
-    global_add_header_jsoneditor=header_editor;
+    global_case_add_header_jsoneditor=header_editor;
   }
 
-  if(!global_add_param_jsoneditor){
+  if(!global_case_add_param_jsoneditor){
     var param_container_id='jsoneditor_queryParams_';
     var param_editor = createJSONeditor(param_container_id, {});
-    global_add_param_jsoneditor=param_editor;
+    global_case_add_param_jsoneditor=param_editor;
   }
 
-  if(!global_add_response_jsoneditor){
+  if(!global_case_add_response_jsoneditor){
     var response_container_id='jsoneditor_response_';
     var response_editor = createJSONeditor(response_container_id, {});
-    global_add_response_jsoneditor=response_editor;
+    global_case_add_response_jsoneditor=response_editor;
   }
-  }
-);
+
+  var docUniqID=$('#tc_coll_doc').attr('uniqid');
+
+  var selectElement=document.getElementById('select_tc_coll_apiName');
+  selectElement.innerHTML='<option value="" uniqid="">'+'默认'+'</option>';
+
+  $.ajax({
+    url:'/base/query',
+    method:"post",
+    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+    data: {
+      modelType:"APIdoc",
+      uniqID:docUniqID
+    },
+    success: function (data) {
+      console.log("弹框添加用例:");
+      console.log(data);
+      global_doc_apis=data.APIdoc_items;
+      for(var i=0;i<data.APIdoc_items.length;i++){
+        var objOption = document.createElement("option");
+        objOption.value= data.APIdoc_items[i.toString()].uniqID;
+        objOption.text=data.APIdoc_items[i.toString()].name;
+        selectElement.options.add(objOption);
+      }
+
+    },
+    error:function(data){
+
+    }
+  });
+});
 
 /** 弹框修改用例 **/
 $('a[name="editTC"]').click(function () {
@@ -53,23 +154,23 @@ $('a[name="editTC"]').click(function () {
   $('#myModal2').modal();
 
   //添加json控件
-  if(!global_update_header_jsoneditor){
+  if(!global_case_update_header_jsoneditor){
     //create the json editor: createJSONeditor
     var header_container_id='update_jsoneditor_header_';
     var header_editor = createJSONeditor(header_container_id, {});
-    global_update_header_jsoneditor=header_editor;
+    global_case_update_header_jsoneditor=header_editor;
   }
 
-  if(!global_update_param_jsoneditor){
+  if(!global_case_update_param_jsoneditor){
     var param_container_id='update_jsoneditor_queryParams_';
     var param_editor = createJSONeditor(param_container_id, {});
-    global_update_param_jsoneditor=param_editor;
+    global_case_update_param_jsoneditor=param_editor;
   }
 
-  if(!global_update_response_jsoneditor){
+  if(!global_case_update_response_jsoneditor){
     var response_container_id='update_jsoneditor_response_';
     var response_editor = createJSONeditor(response_container_id, {});
-    global_update_response_jsoneditor=response_editor;
+    global_case_update_response_jsoneditor=response_editor;
   }
 
   $.ajax({
@@ -83,46 +184,46 @@ $('#btn_add_tc').click(function () {
   var tc_coll_uniqId=$('h1#tc_coll_name').attr("uniqid");
 
   var selector='#tc_template2';
-  var apiItem_name=$(selector).find('input[name="tc_title"]').val();
-  var apiItem_description=$(selector).find('input[name="tc_desc"]').val();
-  var apiItem_url=$(selector).find('input[name="tc_url"]').val();
-  var apiItem_disabled=$(selector).find('select[name="tc_disabled"] option:selected').text();
-  var apiItem_dev=$(selector).find('select[name="tc_dev"] option:selected').text();
-  var apiItem_method=$(selector).find('select[name="tc_method"] option:selected').text();
-  var apiItem_dataType=$(selector).find('select[name="tc_dataType"] option:selected').text();
+  var caseItem_name=$(selector).find('input[name="tc_title"]').val();
+  var caseItem_description=$(selector).find('input[name="tc_desc"]').val();
+  var caseItem_url=$(selector).find('input[name="tc_url"]').val();
+  var caseItem_disabled=$(selector).find('select[name="tc_disabled"] option:selected').text();
+  var caseItem_dev=$(selector).find('select[name="tc_dev"] option:selected').text();
+  var caseItem_method=$(selector).find('select[name="tc_method"] option:selected').text();
+  var caseItem_dataType=$(selector).find('select[name="tc_dataType"] option:selected').text();
 
   if(!$(selector).attr("uniqid")){
     $(selector).attr("uniqid",(new Date().getTime()).toString());
   }
-  var apiItem_uniqId=$(selector).attr("uniqid");
+  var caseItem_uniqId=$(selector).attr("uniqid");
 
-  var apiItem_header=global_update_header_jsoneditor.getText();//global_update_header_jsoneditor 为全局变量。
-  var apiItem_queryParams=global_update_param_jsoneditor.getText(); //global_update_param_jsoneditor 为全局变量。
-  var apiItem_response=global_update_response_jsoneditor.getText(); //global_update_response_jsoneditor 为全局变量。
+  var caseItem_header=global_case_update_header_jsoneditor.getText();//global_case_update_header_jsoneditor 为全局变量。
+  var caseItem_queryParams=global_case_update_param_jsoneditor.getText(); //global_case_update_param_jsoneditor 为全局变量。
+  var caseItem_response=global_case_update_response_jsoneditor.getText(); //global_case_update_response_jsoneditor 为全局变量。
 
-  var apiItem={
-    uniqID:apiItem_uniqId,
-    name:apiItem_name,
-    description:apiItem_description,
-    url:apiItem_url,
-    disabled:apiItem_disabled,
-    dev:apiItem_dev,
-    method:apiItem_method,
-    dataType:apiItem_dataType,
-    header:apiItem_header,
-    queryParams: apiItem_queryParams,
-    response:apiItem_response
+  var caseItem={
+    uniqID:caseItem_uniqId,
+    name:caseItem_name,
+    description:caseItem_description,
+    url:caseItem_url,
+    disabled:caseItem_disabled,
+    dev:caseItem_dev,
+    method:caseItem_method,
+    dataType:caseItem_dataType,
+    header:caseItem_header,
+    queryParams: caseItem_queryParams,
+    response:caseItem_response
   };
 
-  console.log(apiItem);
+  console.log(caseItem);
 
   $.ajax({
-    url:'/doc/save_api',
+    url:'/case/save_case',
     method:"post",
     contentType: 'application/x-www-form-urlencoded;charset=utf-8',
     data: {
-      doc_uniqId:tc_coll_uniqId,
-      apiItem:apiItem
+      tc_coll_uniqId:tc_coll_uniqId,
+      caseItem:caseItem
     },
     success: function (data) {
       alert("保存成功!");
@@ -135,10 +236,43 @@ $('#btn_add_tc').click(function () {
 
 });
 
-/** 添加用例集合 **/
-// $('#append_tc_coll_ui').click(function () {
-//   $('#myModalForCollect').modal();
-// });
+/** 删除用例集合 **/
+$('#del_all_tc_coll').click(function () {
+  $.ajax({
+    url:'/doc/remove',
+    method:'post',
+    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+    data:{
+      modelType:"ReqFolder",
+      uniqID:null
+    },
+    success:function(data){
+      alert("删除成功!");
+    },
+    error:function (data) {
+      alert("删除失败!"+JSON.stringify(data,null,"\t"));
+    }
+
+  })
+});
+
+$('#populate_case').click(function(){
+  var selectIndex=document.getElementById("select_tc_coll_apiName").selectedIndex-1 ;
+  console.log(global_doc_apis[selectIndex.toString()].url);
+  console.log(global_doc_apis[selectIndex.toString()]["url"]);
+  var selector='#tc_template';
+  $(selector).find('input[name="tc_title"]').val(global_doc_apis[selectIndex.toString()].name);
+  $(selector).find('input[name="tc_desc"]').val(global_doc_apis[selectIndex.toString()].description);
+  $(selector).find('input[name="tc_url"]').val(global_doc_apis[selectIndex.toString()].url);
+  $(selector).find('select[name="tc_dataType"]').find("option[value='"+global_doc_apis[selectIndex.toString()].dataType+"']").attr("selected","selected");
+  $(selector).find('select[name="tc_disabled"]').find("option[value='"+global_doc_apis[selectIndex.toString()].disabled+"']").attr("selected","selected");
+  $(selector).find('select[name="tc_dev"]').find("option[value='"+global_doc_apis[selectIndex.toString()].dev+"']").attr("selected","selected");
+
+  global_case_add_header_jsoneditor.set(global_doc_apis[selectIndex.toString()].header);
+  global_case_add_param_jsoneditor.set(global_doc_apis[selectIndex.toString()].queryParams);
+  global_case_add_response_jsoneditor.set(global_doc_apis[selectIndex.toString()].response);
+
+});
 
 //刷新右边页面
 function requestItem(data) {
@@ -222,7 +356,6 @@ function onKeyDown(data) {
 
 //文件的形式导入用例
 function upfile() {
-  console.log("wqwqwqwqwqwqwqw");
   var option = {
     contentType: "text/xml",
     keepAlive:"YES",

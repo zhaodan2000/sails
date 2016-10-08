@@ -38,7 +38,7 @@
    var apiDoc_uniqid=$(this).attr('uniqid');
    console.log(apiDoc_uniqid);
    $.ajax({
-     url:'/doc/editdoc',
+     url:'/doc/query_doc',
      method:"post",
      data:{
        uniqID:apiDoc_uniqid
@@ -202,19 +202,19 @@
 
    if(!global_update_header_jsoneditor){
      //create the json editor: createJSONeditor
-     var header_container_id='jsoneditor_header_';
+     var header_container_id='jsoneditor_header_2';
      var header_editor = createJSONeditor(header_container_id, {});
      global_update_header_jsoneditor=header_editor;
    }
 
    if(!global_update_param_jsoneditor){
-     var param_container_id='jsoneditor_queryParams_';
+     var param_container_id='jsoneditor_queryParams_2';
      var param_editor = createJSONeditor(param_container_id, {});
      global_update_param_jsoneditor=param_editor;
    }
 
    if(!global_update_response_jsoneditor){
-     var response_container_id='jsoneditor_response_';
+     var response_container_id='jsoneditor_response_2';
      var response_editor = createJSONeditor(response_container_id, {});
      global_update_response_jsoneditor=response_editor;
    }
@@ -225,7 +225,7 @@
      alert("uniqid is null??");
    }else{
      $.ajax({
-       url: '/doc/query_api',
+       url: '/base/query',
        method: "post",
        contentType: 'application/x-www-form-urlencoded;charset=utf-8',
        data: {

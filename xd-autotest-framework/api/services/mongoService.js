@@ -2,7 +2,7 @@
  * Created by lyh on 8/4/16.
  * CRUD
  */
-var Math=require('mathjs');
+//var Math=require('mathjs');
 var ObjectId=require('sails-mongo');
 
 module.exports={
@@ -19,7 +19,7 @@ module.exports={
       case "TaskFolder": 
         TaskFolder.create(item).exec(function(err,records){ 
           if (!err) { 
-            console.log("create TaskFolder records success!"); 
+            //console.log("create TaskFolder records success!"); 
             callback(records); 
           }else{ 
             console.log("create TaskFolder records failure!");
@@ -31,7 +31,7 @@ module.exports={
       case "TaskCase":
         TaskCase.create(item).exec(function (err,records) { 
           if (!err) {
-            console.log("create TaskCase records success!");
+            //console.log("create TaskCase records success!");
             callback(records);
           } else { 
             console.log("create TaskCase records failure!");
@@ -43,7 +43,7 @@ module.exports={
       case "RequestItem": 
         RequestItem.create(item).exec(function(err,records){ 
           if (!err) { 
-            console.log("create RequestItem records success!"); 
+            //console.log("create RequestItem records success!"); 
             callback(records); 
           } else { 
             console.log("create RequestItem records failure!");
@@ -67,7 +67,7 @@ module.exports={
       case "APIdoc":
         APIdoc.create(item).exec(function(err,records){
           if (!err) {
-            console.log("create %s records success!", modelType);
+            //console.log("create %s records success!", modelType);
             callback(records);
           } else {
             console.log("create %s records failure!", modelType);
@@ -79,7 +79,7 @@ module.exports={
       case "APIdocitem":
         APIdocitem.create(item).exec(function(err,records){
           if (!err) {
-            console.log("create %s records success!", modelType);
+            //console.log("create %s records success!", modelType);
             callback(records);
           } else {
             console.log("create %s records failure!", modelType);
@@ -91,7 +91,7 @@ module.exports={
       case 'ScheduleStrategy':
         ScheduleStrategy.create(item).exec(function(err,records){
           if (!err) {
-            console.log("create %s records success!", modelType);
+            //console.log("create %s records success!", modelType);
             callback(records);
           } else {
             console.log("create %s records failure!", modelType);
@@ -119,7 +119,7 @@ module.exports={
       case "TaskFolder":
         TaskFolder.update(dic,item).exec(function(err,records){
           if (!err) {
-            console.log("update TaskFolder records success!");
+            //console.log("update TaskFolder records success!");
             callback(records);
           }else{
             console.log("update TaskFolder records failure!");
@@ -131,7 +131,7 @@ module.exports={
       case "TaskCase":
         TaskCase.update(dic,item).exec(function (err,records) {
           if (!err) {
-            console.log("update TaskCase records success!");
+            //console.log("update TaskCase records success!");
             callback(records);
           } else {
             console.log("update TaskCase records failure!");
@@ -143,7 +143,7 @@ module.exports={
       case "RequestItem":
         RequestItem.update(dic,item).exec(function(err,records){
           if (!err) {
-            console.log("update RequestItem records success!");
+            //console.log("update RequestItem records success!");
             callback(records);
           } else {
             console.log("update RequestItem records failure!");
@@ -155,7 +155,7 @@ module.exports={
       case "ReqFolder":
         ReqFolder.update(dic,item).exec(function(err,records){
           if (!err) {
-            console.log("update ReqFolder records success!");
+            //console.log("update ReqFolder records success!");
             callback(records);
           } else {
             console.log("update ReqFolder records failure!");
@@ -179,7 +179,7 @@ module.exports={
       case "APIdocitem":
         APIdocitem.update(dic,item).exec(function(err,records){
           if (!err) {
-            console.log("update %s records success!", modelType);
+            //console.log("update %s records success!", modelType);
             callback(records);
           } else {
             console.log("update %s records failure!", modelType);
@@ -191,7 +191,7 @@ module.exports={
       case "ScheduleStrategy":
         ScheduleStrategy.update(dic,item).exec(function(err,records){
           if (!err) {
-            console.log("update %s records success!", modelType);
+            //console.log("update %s records success!", modelType);
             callback(records);
           } else {
             console.log("update %s records failure!", modelType);
@@ -219,7 +219,7 @@ module.exports={
       case "TaskFolder":
         TaskFolder.find(dic).populate('Cases').exec(function(err,populated){
           if(!err){
-            console.log("populated  %s records:",modelType);
+            //console.log("populated  %s records:",modelType);
             // console.log(populated);
             callback(populated);
           }else{
@@ -232,7 +232,7 @@ module.exports={
       case "TaskCase":
         TaskCase.find(dic).exec(function (err,records) {
           if (!err) {
-            console.log("find %s records success!", modelType);
+            //console.log("find %s records success!", modelType);
             callback(records);
           } else {
             console.log("find %s records failure!", modelType);
@@ -244,7 +244,7 @@ module.exports={
       case "RequestItem":
         RequestItem.find(dic).exec(function(err,records){
           if (!err) {
-            console.log("find %s records success!", modelType);
+            //console.log("find %s records success!", modelType);
             // console.log(records);
             callback(records);
           } else {
@@ -257,7 +257,7 @@ module.exports={
       case "ReqFolder":
         ReqFolder.find(dic).populate('ReqItems').exec(function(err,records){
           if (!err) {
-            console.log("find %s records success!", modelType);
+            //console.log("find %s records success!", modelType);
             callback(records);
           } else {
             console.log("find %s records failure!", modelType);
@@ -269,7 +269,7 @@ module.exports={
       case "APIdocitem":
         APIdocitem.find(dic).exec(function(err,records){
           if (!err) {
-            console.log("find %s records success!", modelType);
+            //console.log("find %s records success!", modelType);
             callback(records);
           } else {
             console.log("find %s records failure!", modelType);
@@ -282,7 +282,7 @@ module.exports={
       case "APIdoc":
         APIdoc.find(dic).populate('APIdoc_items').exec(function(err,records){
           if (!err) {
-            console.log("find %s records success!", modelType);
+            // console.log("find %s records success!", modelType);
             callback(records);
           } else {
             console.log("find %s records failure!", modelType);
@@ -295,7 +295,7 @@ module.exports={
       case "ScheduleStrategy":
         ScheduleStrategy.find(dic).exec(function(err,records){
           if (!err) {
-            console.log("find %s records success!", modelType);
+            // console.log("find %s records success!", modelType);
             callback(records);
           } else {
             console.log("find %s records failure!", modelType);
@@ -333,7 +333,7 @@ module.exports={
       case "TaskFolder":
         TaskFolder.destroy(dic).exec(function(err){
           if (!err) {
-            console.log("destroy %s records success!", modelType);
+            // console.log("destroy %s records success!", modelType);
 
           } else {
             console.log("destroy %s records failure!", modelType);
@@ -344,7 +344,7 @@ module.exports={
       case "TaskCase":
         TaskCase.destroy(dic).exec(function (err) {
           if (!err) {
-            console.log("destroy %s records success!", modelType);
+            // console.log("destroy %s records success!", modelType);
 
           } else {
             console.log("destroy %s records failure!", modelType);
@@ -365,7 +365,7 @@ module.exports={
       case "ReqFolder":
         ReqFolder.destroy(dic).exec(function(err){
           if (!err) {
-            console.log("destroy %s records success!", modelType);
+            // console.log("destroy %s records success!", modelType);
           } else {
             console.log("destroy %s records failure!", modelType);
             console.log(err);
@@ -375,7 +375,7 @@ module.exports={
       case "APIdoc":
         APIdoc.destroy(dic).exec(function(err){
           if (!err) {
-            console.log("destroy %s records success!", modelType);
+            // console.log("destroy %s records success!", modelType);
           } else {
             console.log("destroy %s records failure!", modelType);
             console.log(err);
@@ -385,7 +385,7 @@ module.exports={
       case "APIdocitem":
       APIdocitem.destroy(dic).exec(function(err){
         if (!err) {
-          console.log("destroy %s records success!", modelType);
+          // console.log("destroy %s records success!", modelType);
         } else {
           console.log("destroy %s records failure!", modelType);
           console.log(err);
@@ -395,7 +395,7 @@ module.exports={
       case "ScheduleStrategy":
         ScheduleStrategy.destroy(dic).exec(function(err){
           if (!err) {
-            console.log("destroy %s records success!", modelType);
+            // console.log("destroy %s records success!", modelType);
           } else {
             console.log("destroy %s records failure!", modelType);
             console.log(err);
@@ -416,7 +416,7 @@ module.exports={
     if(requestName) {
       RequestItem.find({name: requestName}).exec(function (err, records) {
         if (!err) {
-          console.log("find records success!");
+          // console.log("find records success!");
           callback(records);
         } else {
           console.log("find records failure!");
@@ -426,7 +426,7 @@ module.exports={
     }else{
       RequestItem.find({}).exec(function (err, records) {
         if (!err) {
-          console.log("find records success!");
+          // console.log("find records success!");
           callback(records);
         } else {
           console.log("find records failure!");

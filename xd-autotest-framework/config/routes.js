@@ -49,16 +49,21 @@ module.exports.routes = {
   '/task': 'Home.task',
   '/case': 'Home.testcase',
   '/schedule': 'Home.schedule',
-  'post /doc/query_api':'InterfaceDoc.query',
+  // 'post /doc/query_api':'InterfaceDoc.query',
+  'post /base/query':'InterfaceDoc.query',
+
+  //doc
   'post /doc/save_api':'InterfaceDoc.saveDocItem',
   'post /doc/savedocwithItem':'InterfaceDoc.saveDoc2db',
   'post /doc/showmdfile':'EditDoc.showMdFile',
-  'post /doc/editdoc':"EditDoc.editDoc",
+  'post /doc/query_doc':"EditDoc.queryDoc",
   'post /doc/remove':"InterfaceDoc.remove",
 
-  /**
-   * doc test url
-   * **/
+  //case
+  'post /case/save_tc_collection':'ShowDoc.add_tc_coll_2db',
+  'post /case/save_case':'ShowDoc.save_case',
+  
+  //doc test url
   'get /doc/findRequestItemByName':'DocDemo.findRequestItemByName',
   'post /doc/insertRequestItemService':'DocDemo.insertRequestItemService',
 

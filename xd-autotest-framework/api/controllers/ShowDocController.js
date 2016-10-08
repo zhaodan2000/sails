@@ -157,12 +157,32 @@ module.exports = {
   },
 
   //增加用例集合
-  addtestcasecollect:function (req,res) {
-    console.log(req.param('name'));
-    mongoService.Insert('ReqFolder',{name:req.param('name')},function (record) {
-      console.log(record);
-      return res.ok();
-    })
+  add_tc_coll_2db:function (req,res) {
+    var reqFolder=req.body["reqFolder"];
+    if(reqFolder){
+      mongoService.Insert('ReqFolder',reqFolder,function (inserted) {
+        if(inserted){
+          mongoService.Find('ReqFolder',{},function (found) {
+            res.view('testcase/index',{data:found, curr_tc_coll:inserted});
+          });
+        }
+        else{
+          mongoService.Find('ReqFolder',{},function (found) {
+            res.view('testcase/index',{data:found, curr_tc_coll:null});
+          });
+        }
+      });
+    }
+   else{
+      res.send({retcode:-1,msg:"入参reqFoder为空"});
+      }
+
+    },
+
+  save_case:function (req,res) {
+    
+
   }
-};
+}
+
 

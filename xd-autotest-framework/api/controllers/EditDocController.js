@@ -11,20 +11,20 @@ var fs=require('fs');
 
 module.exports = {
 
-  editDoc:function (req,res) {
-    var uniqId=req.body['uniqID'];
-    if(uniqId){
-      mongoService.Find('APIdoc',{uniqID:uniqId},function (records) {
-        //res.render('doc/editdoc',{curr_doc:records[0]});
-        mongoService.Find('APIdoc',{},function (docs_records){
+  queryDoc:function (req, res) {
+    var uniqId = req.body['uniqID'];
+    mongoService.Find('APIdoc', {}, function (docs_records) {
+      if (uniqId) {
+        mongoService.Find('APIdoc', {uniqID: uniqId}, function (records) {
+          //res.render('doc/editdoc',{curr_doc:records[0]});
           //res.render('doc/APIdoc',{api_docs:docs_records, curr_doc:records[0]});
-          res.view('doc/APIdoc',{api_docs:docs_records, curr_doc:records[0]});
+          res.view('doc/APIdoc', {api_docs: docs_records, curr_doc: records[0]});
         });
-      });
-    }else{
-      res.send({retcode:-1,message:"前端传入的uniqID为空.",data:null});
-    }
+      } else {
+        res.send({api_docs: docs_records, curr_doc: null});
+      }
 
+    });
   },
 
   showMdFile:function (req,res) {
