@@ -29,6 +29,11 @@ module.exports = {
       unique:false,
       required:false
     },
+    docUniqID:{
+      type:'string',
+      unique:false,
+      required:false
+    },
     docName:{
       type:'string',
       unique:false,
