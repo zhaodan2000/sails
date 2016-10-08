@@ -94,7 +94,7 @@ $('#add_tc_coll_2db').click(function () {
 
 });
 
-/** 弹框添加用例 **/
+/** 弹框添加用例UI **/
 $('#add_tc_ui').click(function () {
    $('#myModal').modal();
 
@@ -131,8 +131,7 @@ $('#add_tc_ui').click(function () {
       uniqID:docUniqID
     },
     success: function (data) {
-      console.log("弹框添加用例:");
-      console.log(data);
+      //给全局变量global_doc_apis赋值,保存文档的所有接口
       global_doc_apis=data.APIdoc_items;
       for(var i=0;i<data.APIdoc_items.length;i++){
         var objOption = document.createElement("option");
@@ -140,7 +139,6 @@ $('#add_tc_ui').click(function () {
         objOption.text=data.APIdoc_items[i.toString()].name;
         selectElement.options.add(objOption);
       }
-
     },
     error:function(data){
 
@@ -150,7 +148,6 @@ $('#add_tc_ui').click(function () {
 
 /** 弹框修改用例 **/
 $('a[name="editTC"]').click(function () {
-  var tc_uniqid=$(this).parent().attr("uniqid");
   $('#myModal2').modal();
 
   //添加json控件
@@ -173,14 +170,133 @@ $('a[name="editTC"]').click(function () {
     global_case_update_response_jsoneditor=response_editor;
   }
 
-  $.ajax({
+  var tc_uniqid=$(this).parent().attr("uniqid");
+  if(!tc_uniqid){
+    alert("uniqid is null??");
+  }else{
+    $.ajax({
+      url: '/base/query',
+      method: "post",
+      contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+      data: {
+        modelType: "RequestItem",
+        uniqID: tc_uniqid
+      },
+      success: function (data) {
+        console.log("succeed!");
+        var selector='#tc_template2';
+        $(selector).find('input[name="tc_title"]').val(data.name);
+        $(selector).find('input[name="tc_desc"]').val(data.description);
+        $(selector).find('input[name="tc_url"]').val(data.url);
+        $(selector).find('select[name="tc_disabled"]').find("option[value='"+data.disabled+"']").attr("selected","selected");
+        $(selector).find('select[name="tc_dev"]').find("option[value='"+data.dev+"']").attr("selected","selected");
+        $(selector).find('select[name="tc_method"]').find("option[value='"+data.method+"']").attr("selected","selected");
+        $(selector).find('select[name="tc_dataType"]').find("option[value='"+data.dataType+"']").attr("selected","selected");
+        $(selector).attr("uniqid", tc_uniqid);
 
-  })
+        global_case_update_header_jsoneditor.set(data.headers);
+        global_case_update_param_jsoneditor.set(data.queryParam);
+        global_case_update_response_jsoneditor.set(data.response);
+
+      },
+      error: function (data) {
+        console.log("fail???");
+        alert("后台查询失败" + JSON.stringify(data));
+      }
+    });
+  }
 
 });
 
-/** 保存用例 **/
+/** 弹框删除用例 **/
+$('a[name="removeTC"]').click(function(){
+  var caseItem_uniqID=$(this).parent().attr("uniqid");
+  if(!caseItem_uniqID){
+    alert("uniqid is null??");
+  }else if(confirm("确定从服务器删除这个case吗?")) {
+    $(this).parent().parent().remove();
+
+    $.ajax({
+      url: '/base/remove',
+      method: "post",
+      contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+      data: {
+        modelType: "RequestItem",
+        uniqID: caseItem_uniqID
+      },
+      success: function (data) {
+        console.log("后台删除成功");
+      },
+      error: function (data) {
+        alert("后台删除失败" + JSON.stringify(data));
+      }
+    });
+  }
+});
+
+/** 新增用例保存至DB **/
 $('#btn_add_tc').click(function () {
+  var tc_coll_uniqId=$('h1#tc_coll_name').attr("uniqid");
+
+  var selector='#tc_template';
+  var caseItem_name=$(selector).find('input[name="tc_title"]').val();
+  var caseItem_description=$(selector).find('input[name="tc_desc"]').val();
+  var caseItem_url=$(selector).find('input[name="tc_url"]').val();
+  // var caseItem_disabled=$(selector).find('select[name="tc_disabled"] option:selected').text();
+  // var caseItem_dev=$(selector).find('select[name="tc_dev"] option:selected').text();
+  // var caseItem_method=$(selector).find('select[name="tc_method"] option:selected').text();
+  // var caseItem_dataType=$(selector).find('select[name="tc_dataType"] option:selected').text();
+  var caseItem_disabled=$(selector).find('input[name="tc_disabled"]').val();
+  var caseItem_dev=$(selector).find('input[name="tc_dev"]').val();
+  var caseItem_method=$(selector).find('input[name="tc_method"]').val();
+  var caseItem_dataType=$(selector).find('input[name="tc_dataType"]').val();
+
+  if(!$(selector).attr("uniqid")){
+    $(selector).attr("uniqid",(new Date().getTime()).toString());
+  }
+  var caseItem_uniqId=$(selector).attr("uniqid");
+
+  var caseItem_header=global_case_add_header_jsoneditor.getText();//global_case_add_header_jsoneditor 为全局变量。
+  var caseItem_queryParams=global_case_add_param_jsoneditor.getText(); //global_case_add_param_jsoneditor 为全局变量。
+  var caseItem_response=global_case_add_response_jsoneditor.getText(); //global_case_add_response_jsoneditor 为全局变量。
+
+  var caseItem={
+    uniqID:caseItem_uniqId,
+    name:caseItem_name,
+    description:caseItem_description,
+    url:caseItem_url,
+    disabled:caseItem_disabled,
+    dev:caseItem_dev,
+    method:caseItem_method,
+    mode:caseItem_dataType,
+    headers:caseItem_header,
+    queryParam: caseItem_queryParams,
+    response:caseItem_response
+  };
+
+  console.log(caseItem);
+
+  $.ajax({
+    url:'/case/save_case',
+    method:"post",
+    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+    data: {
+      tc_coll_uniqId:tc_coll_uniqId,
+      caseItem:caseItem
+    },
+    success: function (data) {
+      alert("保存成功!");
+      $("#page-wrapper").html(data);
+    },
+    error:function(data){
+      alert("保存失败,错误日志:"+JSON.stringify(data,null,"\t"));
+    }
+  });
+
+});
+
+/** 更新用例保存至DB **/
+$('#btn_edit_tc').click(function () {
   var tc_coll_uniqId=$('h1#tc_coll_name').attr("uniqid");
 
   var selector='#tc_template2';
@@ -256,23 +372,44 @@ $('#del_all_tc_coll').click(function () {
   })
 });
 
+//对tc_template进行自动填充.
+//问题: 模态框里的select控件无法进行二次刷新??
 $('#populate_case').click(function(){
   var selectIndex=document.getElementById("select_tc_coll_apiName").selectedIndex-1 ;
-  console.log(global_doc_apis[selectIndex.toString()].url);
-  console.log(global_doc_apis[selectIndex.toString()]["url"]);
+  console.log(global_doc_apis[selectIndex.toString()]);
   var selector='#tc_template';
   $(selector).find('input[name="tc_title"]').val(global_doc_apis[selectIndex.toString()].name);
   $(selector).find('input[name="tc_desc"]').val(global_doc_apis[selectIndex.toString()].description);
   $(selector).find('input[name="tc_url"]').val(global_doc_apis[selectIndex.toString()].url);
-  $(selector).find('select[name="tc_dataType"]').find("option[value='"+global_doc_apis[selectIndex.toString()].dataType+"']").attr("selected","selected");
-  $(selector).find('select[name="tc_disabled"]').find("option[value='"+global_doc_apis[selectIndex.toString()].disabled+"']").attr("selected","selected");
-  $(selector).find('select[name="tc_dev"]').find("option[value='"+global_doc_apis[selectIndex.toString()].dev+"']").attr("selected","selected");
+  $('#tc_template').find('select[name="tc_dataType"]').find("option:selected").attr("selected",false);
+  $('#tc_template').find('select[name="tc_dataType"]').find("option[value='"+global_doc_apis[selectIndex.toString()].dataType+"']").attr("selected","selected");
+  $('#tc_template').find('select[name="tc_disabled"]').find("option:selected").attr("selected",false);
+  $('#tc_template').find('select[name="tc_disabled"]').find("option[value='"+global_doc_apis[selectIndex.toString()].disabled+"']").attr("selected","selected");
+  $('#tc_template').find('select[name="tc_dev"]').find("option:selected").attr("selected",false);
+  $('#tc_template').find('select[name="tc_dev"]').find("option[value='"+global_doc_apis[selectIndex.toString()].dev+"']").attr("selected","selected");
 
   global_case_add_header_jsoneditor.set(global_doc_apis[selectIndex.toString()].header);
   global_case_add_param_jsoneditor.set(global_doc_apis[selectIndex.toString()].queryParams);
   global_case_add_response_jsoneditor.set(global_doc_apis[selectIndex.toString()].response);
-
 });
+
+//新增case UI, 选择接口,则相应地填充字段。
+function changeAPI(){
+  var selector='#tc_template';
+  var selectIndex=document.getElementById("select_tc_coll_apiName").selectedIndex-1 ;
+
+  $(selector).find('input[name="tc_title"]').val(global_doc_apis[selectIndex.toString()].name);
+  $(selector).find('input[name="tc_desc"]').val(global_doc_apis[selectIndex.toString()].description);
+  $(selector).find('input[name="tc_url"]').val(global_doc_apis[selectIndex.toString()].url);
+  $(selector).find('input[name="tc_dataType"]').val(global_doc_apis[selectIndex.toString()].dataType);//find("option[text='"+global_doc_apis[selectIndex.toString()].dataType+"']").attr("selected","selected");
+  $(selector).find('input[name="tc_disabled"]').val(global_doc_apis[selectIndex.toString()].disabled);//find("option[value='"+global_doc_apis[selectIndex.toString()].disabled+"']").attr("selected","selected");
+  $(selector).find('input[name="tc_dev"]').val(global_doc_apis[selectIndex.toString()].dev);//find("option[value='"+global_doc_apis[selectIndex.toString()].dev+"']").attr("selected","selected");
+  $(selector).find('input[name="tc_method"]').val(global_doc_apis[selectIndex.toString()].method);//find("option[value='"+global_doc_apis[selectIndex.toString()].dev+"']").attr("selected","selected");
+
+  global_case_add_header_jsoneditor.set(global_doc_apis[selectIndex.toString()].header);
+  global_case_add_param_jsoneditor.set(global_doc_apis[selectIndex.toString()].queryParams);
+  global_case_add_response_jsoneditor.set(global_doc_apis[selectIndex.toString()].response);
+}
 
 //刷新右边页面
 function requestItem(data) {
@@ -405,3 +542,4 @@ function addFile(serverId) {
     });
 
 }
+
