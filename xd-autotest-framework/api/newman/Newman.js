@@ -8,7 +8,7 @@ var tmpString = {
   clearEnvVar: "postman.clearEnvironmentVariable('{0}');",
   responseBodyHas: "tests['Body matches string'] = responseBody.has('{0}');",
   responseBodyEqualStr: "tests['Body is correct'] = responseBody === '{0}';",
-  checkJsonValue: "if(typeof(jsonData) == 'undefined') {jsonData = JSON.parse(responseBody);}tests['check {0}'] = jsonData.{0} === {1};"
+  checkJsonValue: "if(typeof(jsonData) == 'undefined') {jsonData = JSON.parse(responseBody);}tests['check {0}'] = jsonData.{1} === {2};"
 };
 
 var PreEventProxy = function () {

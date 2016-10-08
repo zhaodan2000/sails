@@ -9,7 +9,7 @@ var service = require("../api/services/CaseServices")
 
 var item = {
   prescript: "mysql.execQuery({id:'1', host:'192.168.88.89', port:'3306', user:'xddev', password:'xddev@xiaodou', db:'xd-user', sql: 'select id from xd_user where id = ?', args:['3'], callback: function(results){if (results && results.length > 0) {var id = results[0];pre.setGlobalVar('test',id['id']);}}});",
-  testscript: "test.setEnvVar('test','hello');test.clearGlobalVar('test');"
+  testscript: "test.setEnvVar('test','hello');test.clearGlobalVar('test');test.checkJsonValue('test', '1234');"
 };
 service.configEvent(item, function (event) {
   console.log(JSON.stringify(event));
