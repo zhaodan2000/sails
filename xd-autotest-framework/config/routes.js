@@ -48,7 +48,7 @@ module.exports.routes = {
   '/doc': 'InterfaceDoc.testService',
   '/task': 'Home.task',
   '/case': 'Home.testcase',
-  '/schedule': 'Home.schedule',
+  '/schedule': 'TaskSchedule.refreshView',
   'post /doc/query_api':'InterfaceDoc.query',
   'post /doc/save_api':'InterfaceDoc.saveDocItem',
   'post /doc/savedocwithItem':'InterfaceDoc.saveDoc2db',
@@ -56,6 +56,9 @@ module.exports.routes = {
   'post /doc/editdoc':"EditDoc.editDoc",
   'post /doc/remove':"InterfaceDoc.remove",
 
+  'post /sc/save':"TaskSchedule.save",
+  'post /sc/remove':"TaskSchedule.remove",
+  'post /sc/edit':"TaskSchedule.edit",
   /**
    * doc test url
    * **/

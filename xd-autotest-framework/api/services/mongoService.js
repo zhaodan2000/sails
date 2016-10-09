@@ -100,7 +100,18 @@ module.exports={
           }
         });
         break;
-
+      case 'ScheduleTask':
+        ScheduleTask.create(item).exec(function(err,records){
+          if (!err) {
+            console.log("create %s records success!", modelType);
+            callback(records);
+          } else {
+            console.log("create %s records failure!", modelType);
+            console.log(err);
+            callback(null);
+          }
+        });
+        break;
       default: 
         break; 
     }
@@ -200,6 +211,20 @@ module.exports={
           }
         });
         break;
+
+      case "ScheduleTask":
+        ScheduleTask.update(dic,item).exec(function(err,records){
+          if (!err) {
+            console.log("update %s records success!", modelType);
+            callback(records);
+          } else {
+            console.log("update %s records failure!", modelType);
+            console.log(err);
+            callback(null);
+          }
+        });
+        break;
+
 
       default:
         break;
@@ -304,6 +329,21 @@ module.exports={
           }
         });
         break;
+
+      case "ScheduleTask":
+        ScheduleTask.find(dic).exec(function(err,records){
+          if (!err) {
+            console.log("find %s records success!", modelType);
+            callback(records);
+          } else {
+            console.log("find %s records failure!", modelType);
+            console.log(err);
+            callback(null);
+          }
+        });
+        break;
+
+
       default:
         break;
     }
@@ -389,7 +429,16 @@ module.exports={
           }
         });
         break;
-
+      case "ScheduleTask":
+        ScheduleTask.destroy(dic).exec(function(err){
+          if (!err) {
+            console.log("destroy %s records success!", modelType);
+          } else {
+            console.log("destroy %s records failure!", modelType);
+            console.log(err);
+          }
+        });
+        break;
       default:
         break;
     }

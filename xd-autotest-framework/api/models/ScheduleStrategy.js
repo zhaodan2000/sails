@@ -21,7 +21,7 @@ module.exports = {
     },
     schedule_time: {
       type: 'string',
-      required: false,
+      required: false
     },
     day_of_week: {
       type: 'array',
