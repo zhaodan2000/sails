@@ -11,108 +11,111 @@ var newManHelper = require('../newman/NewMan')
 
 module.exports = {
 
-
-  /**
-   * 根据一个caseItem对象生成request
-   * @param caseItem
-   * @returns {{id: *, name: *, disabled: *, url: *, method: *, header, body: {mode: *, urlencoded}}}
-   */
-  configCaseItem: function (caseItem) {
-    var headers = caseItem.headers;  //type is json
-    var queryParam = caseItem.queryParam;  //type is json
-
-    var request = {
-      id: caseItem.id,
-      name: caseItem.name,
-      disabled: caseItem.disabled,
-      url: caseItem.url,
-      method: caseItem.method,
-      header: getHeaderWithJson(headers),
-      body: {
-        mode: caseItem.mode,
-        urlencoded: getQueryParamWithJson(queryParam)
-      }
-    }
-    return request;
-  },
-
-  configEvent: function (item, callback) {
-    //配置前置脚本和后置脚本 ----- 根据item是不是输入了文本来判断是否添加脚本
-    // RequestItemServices.
-    var event = [];
-    var ep = eventproxy.create();
-    ep.after(2, function () {
-      callback(event)
+  creatItem: function (obj, callback) {
+    configEvent(obj, function (event) {
+      callback(configItem(configCaseItem(obj), event));
     });
-    this.parseInputPreString(item.prescript, function (preEvent) {
-      event.push(preEvent);
-      ep.emit('1');
+  }
+}
+
+/**
+ * 根据一个caseItem对象生成request
+ * @param caseItem
+ * @returns {{id: *, name: *, disabled: *, url: *, method: *, header, body: {mode: *, urlencoded}}}
+ */
+function configCaseItem(caseItem) {
+  var headers = caseItem.headers;  //type is json
+  var queryParam = caseItem.queryParam;  //type is json
+
+  var request = {
+    id: caseItem.id,
+    name: caseItem.name,
+    disabled: caseItem.disabled,
+    url: caseItem.url,
+    method: caseItem.method,
+    header: getHeaderWithJson(headers),
+    body: {
+      mode: caseItem.mode,
+      urlencoded: getQueryParamWithJson(queryParam)
+    }
+  }
+  return request;
+}
+
+function configEvent(item, callback) {
+  //配置前置脚本和后置脚本 ----- 根据item是不是输入了文本来判断是否添加脚本
+  // RequestItemServices.
+  var event = [];
+  var ep = eventproxy.create();
+  ep.after(2, function () {
+    callback(event)
+  });
+  parseInputPreString(item.prescript, function (preEvent) {
+    event.push(preEvent);
+    ep.emit('1');
+  });
+  parseIntputTestString(item.testscript, function (testEvent) {
+    event.push(testEvent);
+    ep.emit('1');
+  });
+}
+
+/**
+ *
+ * @param request type is obj
+ * @param event  type is array
+ * @returns {{id: *, name: *, disabled: *, request: *, event: *}}
+ */
+function configItem(request, event) {
+  var item = {
+    id: request.id,
+    name: request.name,
+    disabled: request.disabled,
+    request: request,
+    event: event
+  }
+  return item;
+}
+
+
+/**
+ * 将传入的prescript语句转化为event中prescript需要的语法
+ * @param prestring
+ * @param callback
+ * @returns {string}
+ */
+function parseInputPreString(prestring, callback) {
+  var pre = new newManHelper.newPreEventProxy();
+  pre._event = {listen: "prerequest", script: {type: "text/javascript", exec: ""}};
+  var ep = eventproxy.create();
+  var mysql = mysqlhelper.create(ep);
+  eval(prestring);
+  if (ep.getLength() > 0) {
+    ep.after(ep.getLength(), function () {
+      callback(JSON.stringify(pre._event))
     });
-    this.parseIntputTestString(item.testscript, function (testEvent) {
-      event.push(testEvent);
-      ep.emit('1');
+  } else {
+    callback(JSON.stringify(pre._event));
+  }
+}
+
+/**
+ * 将传入的testscript语句转化为event中testscript需要的语法
+ * @param teststring
+ * @returns {string}
+ */
+function parseIntputTestString(teststring, callback) {
+  var test = new newManHelper.newTestEventProxy();
+  test._event = {listen: "test", script: {type: "text/javascript", exec: ""}};
+  var ep = eventproxy.create();
+  var mysql = mysqlhelper.create(ep);
+  eval(teststring);
+  if (ep.getLength() > 0) {
+    ep.after(ep.getLength(), function () {
+      callback(JSON.stringify(test._event))
     });
-  },
-
-  /**
-   *
-   * @param request type is obj
-   * @param event  type is array
-   * @returns {{id: *, name: *, disabled: *, request: *, event: *}}
-   */
-  configItem: function (request, event) {
-    var item = {
-      id: request.id,
-      name: request.name,
-      disabled: request.disabled,
-      request: request,
-      event: event
-    }
-    return item;
-  },
-  creatItem: function (obj) {
-    return this.configItem(this.configCaseItem(obj), this.configEvent(obj));
-  },
-
-  /**
-   * 将传入的prescript语句转化为event中prescript需要的语法
-   * @param prestring
-   * @param callback
-   * @returns {string}
-   */
-  parseInputPreString: function (prestring, callback) {
-    var pre = new newManHelper.newPreEventProxy();
-    pre._event = {listen: "prerequest", script: {type: "text/javascript", exec: ""}};
-    var ep = eventproxy.create();
-    var mysql = mysqlhelper.create(ep);
-    eval(prestring);
-    if (ep.getLength() > 0) {
-      ep.after(ep.getLength(), function () {
-        callback(JSON.stringify(pre._event))
-      });
-    } else {
-      callback(JSON.stringify(pre._event));
-    }
-  },
-
-  /**
-   * 将传入的testscript语句转化为event中testscript需要的语法
-   * @param teststring
-   * @returns {string}
-   */
-  parseIntputTestString: function (teststring, callback) {
-    var test = new newManHelper.newTestEventProxy();
-    test._event = {listen: "test", script: {type: "text/javascript", exec: ""}};
-    var ep = eventproxy.create();
-    var mysql = mysqlhelper.create(ep);
-    eval(teststring);
-    if (ep.getLength() > 0) {
-      ep.after(ep.getLength(), function () {
-        callback(JSON.stringify(test._event))
-      });
-    } else {
-      callback(JSON.stringify(test._event));
-    }
+  } else {
+    callback(JSON.stringify(test._event));
   }
 }
 
