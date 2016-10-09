@@ -139,3 +139,43 @@ function saveButtonClicked() {
   // console.log(JSON.stringify(data, null, 4));
   console.log($("#form").name);
 }
+
+/**
+ * 创建task时解析提交的表单数据
+ * @param body
+ * @returns {*}
+ */
+function parseAddTaskBody(body) {
+  var form = body;
+  form.Schedule_ID = "";
+  console.log(body.schedule_desc);
+  switch(body.schedule_desc){
+    case '不会自动执行任务脚本':
+      form.Schedule_ID = "1";
+      break;
+    case '每天07:30执行任务脚本':
+      form.Schedule_ID = "2";
+      break;
+    case '每周日22：30执行任务':
+      form.Schedule_ID = "3";
+      break;
+    case '每周周一到周五21:00执行任务脚本':
+      form.Schedule_ID = "4";
+      break;
+    default:
+      break;
+  }
+  console.log('form.Schedule_ID' +form.Schedule_ID);
+
+  switch(body.type_desc){
+    case 'group':
+      form.type = '1'
+      break;
+    case 'orderCase':
+      form.type = '2'
+      break;
+    default:
+      break;
+  }
+  return form;
+}

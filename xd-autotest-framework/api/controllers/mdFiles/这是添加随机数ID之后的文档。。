@@ -1,0 +1,30 @@
+# 这是添加随机数ID之后的文档。。
+### 文档描述
+接口文档描述。
+### 测试环境
+192.168.103.101
+### 端口号
+undefined
+### 接口
+1. test
+	* **请求url**
+		* 
+	* **请求方式method**
+		* POST
+	* **接口是否废弃**
+		* false
+	* **开发者**
+		* 赵聃
+	* **请求格式content-type**
+		* application/json
+	* **请求头header**
+		* ""
+		* <pre><code style="width: auto;height: auto">""
+</code></pre>
+	* **请求参数queryParams**
+		* <pre><code style="width: auto;height: auto">""
+</code></pre>
+	* **返回结果response**
+		* ""
+		* <pre><code style="width: auto;height: auto">""
+</code></pre>
