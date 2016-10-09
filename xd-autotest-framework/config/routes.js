@@ -48,7 +48,7 @@ module.exports.routes = {
   '/doc': 'InterfaceDoc.testService',
   '/task': 'Home.task',
   '/case': 'Home.testcase',
-  '/schedule': 'Home.schedule',
+  '/schedule': 'TaskSchedule.refreshView',
   // 'post /doc/query_api':'InterfaceDoc.query',
   'post /base/query':'InterfaceDoc.query',
   'post /base/remove':'InterfaceDoc.remove',
@@ -67,6 +67,12 @@ module.exports.routes = {
   //doc test url
   'get /doc/findRequestItemByName':'DocDemo.findRequestItemByName',
   'post /doc/insertRequestItemService':'DocDemo.insertRequestItemService',
+
+  //sc
+  'post /sc/save':'TaskSchedule.save',
+  'post /sc/remove':'TaskSchedule.remove',
+  'post /sc/edit':'TaskSchedule.edit',
+  //'post /doc/remove':"InterfaceDoc.remove",
 
   '/response': {
     view: 'response'
