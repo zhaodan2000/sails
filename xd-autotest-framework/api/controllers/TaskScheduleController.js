@@ -1,3 +1,5 @@
+var service = require("../services/CaseServices")
+var collectionHelper = require('../newman/NewManModel')
 /**
  * TaskScheduleController
  *
@@ -86,6 +88,25 @@ module.exports = {
 
       }
     });
+  },
+
+  start:function(req,res) {
+    var itemArr = req.body.itemArr;
+/*    for(var i=0;i<itemArr.length;i++) {*/
+      var collection = new collectionHelper.newCollection();
+      collection.setName("测试");
+/*      var reqItem=itemArr[i];*/
+      console.log(itemArr[0]);
+      service.creatItem(itemArr[0], function (item) {
+        collection.pushItem(item);
+        var _collection = collection.getCollection();
+        console.log(JSON.stringify(_collection));
+        service.runCollection(_collection, function (exitCode, results) {
+          console.log(results);
+          return res.send(results);
+        });
+      });
+/*    }*/
   },
 };
 

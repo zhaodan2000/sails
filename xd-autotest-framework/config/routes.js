@@ -72,6 +72,7 @@ module.exports.routes = {
   'post /sc/save':'TaskSchedule.save',
   'post /sc/remove':'TaskSchedule.remove',
   'post /sc/edit':'TaskSchedule.edit',
+  'post /sc/start':'TaskSchedule.start',
   //'post /doc/remove':"InterfaceDoc.remove",
 
   '/response': {

@@ -1,0 +1,61 @@
+{
+    "id": "",
+    "name": "Default",
+    "timestamp": 1476007150336,
+    "folder_id": 0,
+    "target_type": "collection",
+    "count": 1,
+    "collection": {
+        "name": "测试",
+        "order": [
+            "57f8cd790dbdceaf05b83a0c"
+        ],
+        "folders": [],
+        "requests": [
+            {
+                "id": "57f8cd790dbdceaf05b83a0c",
+                "name": "页面+号对应-资源发布接口",
+                "method": "POST",
+                "headers": "hello: world",
+                "data": [],
+                "rawModeData": "",
+                "tests": "",
+                "preRequestScript": "",
+                "url": "/asked/post"
+            }
+        ]
+    },
+    "folder": null,
+    "globals": {
+        "values": []
+    },
+    "results": [
+        {
+            "id": "57f8cd790dbdceaf05b83a0c",
+            "name": "页面+号对应-资源发布接口",
+            "url": "/asked/post",
+            "totalTime": 0,
+            "responseCode": {
+                "code": 0,
+                "name": "",
+                "detail": ""
+            },
+            "tests": {},
+            "totalPassFailCounts": {
+                "pass": 0,
+                "fail": 0
+            },
+            "testPassFailCounts": {},
+            "times": [],
+            "allTests": [
+                {}
+            ],
+            "time": 0,
+            "meanResponseTime": 0
+        }
+    ],
+    "environment": {
+        "values": []
+    },
+    "delay": 0
+}
