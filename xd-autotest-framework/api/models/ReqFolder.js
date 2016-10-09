@@ -1,5 +1,5 @@
 /**
- * TaskFolder.js
+ * ReqFolder.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
@@ -7,7 +7,7 @@
 
 module.exports = {
   connection: 'someMongodbServer',
-  tableName: 'xd_autotest_OrderCaseColletion',
+  tableName: 'xd_autotest_ReqFolder',
   autoPK:true,
   attributes: {
     id:{
@@ -20,36 +20,39 @@ module.exports = {
       required:false,
       unique:true
     },
-    Task_name:{
-      type:'string',
-      required:false
+    name: {
+      type: 'string',
+      required: false,
     },
-    Task_desc:{
+    desc:{
       type:'string',
       unique:false,
-      required:false,
-      defaultsTo:'暂时没有任务描述。'
+      required:false
     },
-    caseType:{
+    docUniqID:{
       type:'string',
-      enum:['1','2'],//1表示原子case, 2表示顺序case.
-      defaultsTo:'1'
+      unique:false,
+      required:false
     },
-    Schedule_ID:{
+    docName:{
       type:'string',
-      required:true,
-      defaultsTo:'1'
+      unique:false,
+      required:false
     },
-    Schedule_desc:{
+    testEnv:{
       type:'string',
-      required:true,
-      defaultsTo:'1'
+      unique:false,
+      required:false
     },
-    Cases:{
-      collection:'OrderCase',
-      via:'OCCollectionID'
+    testEnvPort:{
+      type:'string',
+      unique:false,
+      required:false
+    },
+    ReqItems:{
+      collection:'RequestItem',
+      via:'ReqFolderID'
     }
-
   }
 };
 

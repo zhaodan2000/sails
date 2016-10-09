@@ -24,8 +24,7 @@ module.exports={
     },
     testEnv:{
       type:'string',
-      required:false,
-      defaultsTo:'192.168.103.101'
+      required:false
     },
     testEnvPort:{
       type:'string',
@@ -33,8 +32,7 @@ module.exports={
     },
     docDesc:{
       type:'string',
-      required:false,
-      defaultsTo:'接口文档描述。'
+      required:false
     },
 
     /**

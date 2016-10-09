@@ -48,20 +48,23 @@ module.exports.routes = {
   '/doc': 'InterfaceDoc.testService',
   '/task': 'Home.task',
   '/case': 'Home.testcase',
-  '/schedule': 'TaskSchedule.refreshView',
-  'post /doc/query_api':'InterfaceDoc.query',
+  '/schedule': 'Home.schedule',
+  // 'post /doc/query_api':'InterfaceDoc.query',
+  'post /base/query':'InterfaceDoc.query',
+  'post /base/remove':'InterfaceDoc.remove',
+
+  //doc
   'post /doc/save_api':'InterfaceDoc.saveDocItem',
   'post /doc/savedocwithItem':'InterfaceDoc.saveDoc2db',
   'post /doc/showmdfile':'EditDoc.showMdFile',
-  'post /doc/editdoc':"EditDoc.editDoc",
-  'post /doc/remove':"InterfaceDoc.remove",
+  'post /doc/query_doc':"EditDoc.queryDoc",
+  //'post /doc/remove':"InterfaceDoc.remove",
 
-  'post /sc/save':"TaskSchedule.save",
-  'post /sc/remove':"TaskSchedule.remove",
-  'post /sc/edit':"TaskSchedule.edit",
-  /**
-   * doc test url
-   * **/
+  //case
+  'post /case/save_tc_collection':'ShowDoc.add_tc_coll_2db',
+  'post /case/save_case':'ShowDoc.save_case',
+
+  //doc test url
   'get /doc/findRequestItemByName':'DocDemo.findRequestItemByName',
   'post /doc/insertRequestItemService':'DocDemo.insertRequestItemService',
 

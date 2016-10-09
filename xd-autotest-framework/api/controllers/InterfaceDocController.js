@@ -27,7 +27,7 @@ module.exports = {
   saveDocItem:function (req, res) {
     var APIdoc_uniqid=req.body["doc_uniqId"];
     var API_docitem=req.body["apiItem"];
-    console.log(API_docitem);
+    // console.log(API_docitem);
     mongoService.Find("APIdoc",{uniqID:APIdoc_uniqid},function (records) {
 
       /** 不存在APIdoc对象  */
@@ -43,7 +43,7 @@ module.exports = {
             /** 不存在API_docitem记录,可以插入到db中 **/
             if(!records||records.length==0){
               mongoService.Insert("APIdocitem",API_docitem,function (insertedItem) {
-                console.log("*********************\r\n用户添加了APIdocitem:\r\n"+insertedItem.name);
+                  console.log(" 用户添加了APIdocitem:  "+insertedItem.name);
                 mongoService.Find("APIdoc",{uniqID:APIdoc_uniqid},function (single_doc){
                   mongoService.Find("APIdoc",{},function (docs_records) {
                     res.view('doc/APIdoc', {api_docs:docs_records, curr_doc:single_doc[0]});
@@ -54,7 +54,7 @@ module.exports = {
             /** 存在API_docitem, 则更新apiItem **/
             else{
               mongoService.Update("APIdocitem",API_docitem,{uniqID:API_docitem.uniqID},function (updatedItem) {
-                console.log("*********************\r\n用户更新了APIdocitem:\r\n"+updatedItem.name);
+                console.log(" 用户更新了APIdocitem:  "+updatedItem.name);
                 mongoService.Find("APIdoc",{uniqID:APIdoc_uniqid},function (single_doc){
                   mongoService.Find("APIdoc",{},function (docs_records) {
                     res.view('doc/APIdoc', {api_docs:docs_records, curr_doc:single_doc[0]});
@@ -106,14 +106,14 @@ module.exports = {
                         if (!found || found.length == 0) {
                           tempItem["APIdocID"]=updatedDOC[0].id;
                           mongoService.Insert("APIdocitem", tempItem, function (insertedItem) {
-                            console.log("*********************\r\n用户添加了APIdocitem:\r\n"+tempItem.name);
+                            console.log(" 用户添加了APIdocitem:\r\n"+tempItem.name);
                           });
                         }
 
                         /*** 找到apiItem对象***/
                         else {
                           mongoService.Update("APIdocitem", tempItem, {uniqID: tempItem.uniqID}, function (updatedItem) {
-                            console.log("*********************\r\n用户更新了APIdocitem:\r\n"+tempItem.name);
+                            console.log(" 用户更新了APIdocitem:\r\n"+tempItem.name);
                           });
                         }
                       });
@@ -148,16 +148,19 @@ module.exports = {
   },
 
   /**
-   * 根据用户输入的modelType,以及uniqID来查询指定的model对象。
+   * 根据用户输入的modelType, 以及uniqID来查询指定的model对象。
+   * 如果uniqID为空, 则将model的所有记录返回。
    * */
   query:function (req,res) {
     var modelType=req.body["modelType"];
     var uniqId=req.body["uniqID"];
-    var dic={uniqID:uniqId};
+    var dic=uniqId?{uniqID:uniqId}:{};
 
     mongoService.Find(modelType,dic,function (records) {
-      if(records&&records.length>0){
+      if(records&&records.length>0&&uniqId){
         res.send(records[0]);
+      }else if(!uniqId){
+        res.send(records);
       }else{
         console.log("查询失败。。。");
         res.send({retcode:-1, msg:"查询失败。"});
@@ -171,13 +174,19 @@ module.exports = {
   remove:function(req,res){
     var modelType=req.body["modelType"];
     var uniqId=req.body["uniqID"];
-    var dic={uniqID:uniqId};
-    mongoService.Find(modelType,dic,function (records) {
-      if(records&&records.length>0){
-        mongoService.Delete(modelType,dic);
-      }
+    if(uniqId){
+      var dic={uniqID:uniqId};
+      mongoService.Find(modelType,dic,function (records) {
+        if(records&&records.length>0){
+          mongoService.Delete(modelType,dic);
+          res.ok();
+        }
+      });
+    }else{
+      mongoService.Delete(modelType,{});
       res.ok();
-    });
+    }
+
   },
 
 };

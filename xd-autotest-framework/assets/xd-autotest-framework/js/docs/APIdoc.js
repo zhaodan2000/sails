@@ -2,7 +2,12 @@
    * Created by lyh on 8/8/16.
    */
 
+
  // $(document).ready(function() {
+ //   console.log(++counter);
+ //   global_header_jsoneditor=null;
+ //   global_param_jsoneditor=null;
+ //   global_response_jsoneditor=null;
  // });
 
  /** 在UI上添加 jsoneditor 控件 **/
@@ -33,13 +38,16 @@
    var apiDoc_uniqid=$(this).attr('uniqid');
    console.log(apiDoc_uniqid);
    $.ajax({
-     url:'/doc/editdoc',
+     url:'/doc/query_doc',
      method:"post",
      data:{
        uniqID:apiDoc_uniqid
      },
      success:function(data){
        $("#page-wrapper").html(data);
+       // global_header_jsoneditor=null;
+       // global_param_jsoneditor=null;
+       // global_response_jsoneditor=null;
        console.log("获取指定文件的所有接口成功!");
      }
    });
@@ -194,19 +202,19 @@
 
    if(!global_update_header_jsoneditor){
      //create the json editor: createJSONeditor
-     var header_container_id='update_jsoneditor_header_';
+     var header_container_id='jsoneditor_header_2';
      var header_editor = createJSONeditor(header_container_id, {});
      global_update_header_jsoneditor=header_editor;
    }
 
    if(!global_update_param_jsoneditor){
-     var param_container_id='update_jsoneditor_queryParams_';
+     var param_container_id='jsoneditor_queryParams_2';
      var param_editor = createJSONeditor(param_container_id, {});
      global_update_param_jsoneditor=param_editor;
    }
 
    if(!global_update_response_jsoneditor){
-     var response_container_id='update_jsoneditor_response_';
+     var response_container_id='jsoneditor_response_2';
      var response_editor = createJSONeditor(response_container_id, {});
      global_update_response_jsoneditor=response_editor;
    }
@@ -217,7 +225,7 @@
      alert("uniqid is null??");
    }else{
      $.ajax({
-       url: '/doc/query_api',
+       url: '/base/query',
        method: "post",
        contentType: 'application/x-www-form-urlencoded;charset=utf-8',
        data: {
@@ -269,9 +277,9 @@
    }
    var apiItem_uniqId=$(selector).attr("uniqid");
 
-   var apiItem_header=global_update_header_jsoneditor.getText();//global_update_header_jsoneditor 为全局变量。
-   var apiItem_queryParams=global_update_param_jsoneditor.getText(); //global_update_param_jsoneditor 为全局变量。
-   var apiItem_response=global_update_response_jsoneditor.getText(); //global_update_response_jsoneditor 为全局变量。
+   var apiItem_header=global_update_header_jsoneditor.getText();//global_header_jsoneditor 为全局变量。
+   var apiItem_queryParams=global_update_param_jsoneditor.getText(); //global_param_jsoneditor 为全局变量。
+   var apiItem_response=global_update_response_jsoneditor.getText(); //global_response_jsoneditor 为全局变量。
 
    var apiItem={
      uniqID:apiItem_uniqId,
@@ -318,7 +326,7 @@
      $(this).parent().parent().remove();
 
      $.ajax({
-       url: '/doc/remove',
+       url: '/base/remove',
        method: "post",
        contentType: 'application/x-www-form-urlencoded;charset=utf-8',
        data: {

@@ -7,7 +7,7 @@
 
 module.exports = {
   connection: 'someMongodbServer',
-  tableName: 'xd_autotest_OrderCase',
+  tableName: 'xd_autotest_TaskCase',
   autoPK:true,
   attributes: {
     id:{
@@ -107,8 +107,8 @@ module.exports = {
        type:'string',
        required:false
     },
-    OCCollectionID:{
-      model:'OrderCaseCollection'
+    TaskID:{
+      model:'TaskFolder'
     }
   }
 };

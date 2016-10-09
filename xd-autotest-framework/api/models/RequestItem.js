@@ -12,7 +12,7 @@ var uuid = require('node-uuid');
 
 module.exports = {
   connection: 'someMongodbServer',
-  tableName: 'xd_autotest_Case',
+  tableName: 'xd_autotest_request',
   autoPK:true,
   attributes: {
     id: {
@@ -27,72 +27,55 @@ module.exports = {
     },
     name: {
       type: 'string',
-      required: false,
-      minLength: 1,
-      maxLength: 60
+      required: false
     },
     //auth 开发人员
     dev:{
       type:'string',
       required: false
     },
-
     //可用状态
     disabled:{
       type:'boolean',
       required: false
     },
-
     version: {
       type: 'string',
-      required: false,
-      minLength: 1,
-      maxLength: 20
+      required: false
     },
     description: {
       type: 'string',
-      required: false,
-      minLength: 1,
-      maxLength: 300
+      required: false
     },
     //url
     url: {
       type: 'string',
-      required: false,
-      minLength: 1,
-      maxLength: 300
+      required: false
+    },
+    //content-type
+    mode: {
+      type: 'string',
+      required: false
+    },
+    method: {
+      type: 'string',
+      //enum: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COPY', 'HEAD', 'OPTIONS', 'LINK', 'UNLINK', 'PURGE', 'LOCK', 'UNLOCK', 'PROPFIND', 'VIEW'],
+      required: false
+    },
+    //header Json
+    headers: {
+      type: 'json',
+      required: false
     },
     //param json
     queryParam:{
       type:'json',
       required: false
     },
-
-    method: {
-      type: 'string',
-      enum: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COPY', 'HEAD', 'OPTIONS', 'LINK', 'UNLINK', 'PURGE', 'LOCK', 'UNLOCK', 'PROPFIND', 'VIEW'],
-      defaultsTo: 'POST',
-      required: false
-    },
-
-    //header Json
-    headers: {
+    //response
+    response: {
       type: 'json',
-      required: false,
-      defaultsTo:{
-        "module":"",
-        "version":"",
-        "clientType":"",
-        "clientIp":"",
-        "deviceId":"",
-        "sessionToken":""
-      }
-    },
-    //body
-    mode: {
-      type: 'string',
-      required: false,
-      defaultsTo:"application/json"
+      required: false
     },
     testscript:{
       type:'string',
@@ -102,19 +85,8 @@ module.exports = {
       type:'string',
       required: false
     },
-    //response
-    response: {
-      type: 'json',
-      required: false,
-      defaultsTo: {
-        "retcode":"0",
-        "retOk":true,
-        "retdesc":"操作成功",
-        "message":""
-      }
-    },
-    CaseCollectionID:{
-      model:'CaseCollection'
+    ReqFolderID:{
+      model:'ReqFolder'
     }
 
 

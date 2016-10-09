@@ -29,7 +29,7 @@ $("button[name='getCurDoc']").click(function(){
   var apiDoc_uniqid=$(this).attr('uniqid');
   console.log(apiDoc_uniqid);
   $.ajax({
-    url:'/doc/editdoc',
+    url:'/doc/query_doc',
     method:"post",
     data:{
       uniqID:apiDoc_uniqid
