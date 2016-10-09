@@ -55,7 +55,6 @@ $('#saveBtn').click(function(){
     },
     success: function (data) {
       alert("保存成功!");
-      location.reload();
     },
     error:function(data){
       alert("保存失败,错误日志:"+JSON.stringify(data,null,"\t"));
@@ -106,7 +105,7 @@ function saveEdit(){
   var sc_desc=$("#sc_desc_e").val();
   var sc_type=$("#sc_type_e").val();
   var sc_task_id=$("#sc_task_id_e").val();
-  var sc_task_name=$("#sc_task_name_e").text();
+  var sc_task_name=$("#sc_task_name_e").val();
   var sc_host=$("#sc_host_e").val();
   var sc_time=$("#sc_time_e").val();
   var sc_state=$("#sc_state_e").val();
@@ -127,7 +126,6 @@ function saveEdit(){
     },
     success: function (data) {
       alert("修改成功!");
-      $.main.refreshMain("/schedule");
     },
     error:function(data){
       alert("修改失败,错误日志:"+JSON.stringify(data,null,"\t"));
