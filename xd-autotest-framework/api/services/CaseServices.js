@@ -8,12 +8,30 @@ var fs = require('fs');
 var mysqlhelper = require('../utils/mysqlhelper')
 var eventproxy = require('../utils/eventproxyhelper')
 var newManHelper = require('../newman/NewMan')
+var executor = require('newman');
 
 module.exports = {
-
+  /**
+   * 根据requestItem生成collectionItem
+   * */
   creatItem: function (obj, callback) {
     configEvent(obj, function (event) {
       callback(configItem(configCaseItem(obj), event));
+    });
+  },
+  /**
+   * 执行Item
+   * */
+  runItem: function (item, callback) {
+    var _option = {
+      iterationCount: 1,                    // define the number of times the runner should run
+      outputFile: "outfile.json",            // the file to export to
+      responseHandler: "TestResponseHandler", // the response handler to use
+      asLibrary: true,         				// this makes sure the exit code is returned as an argument to the callback function
+      stopOnError: true
+    };
+    executor.execute(collectionJson, _option, function (exitCode) {
+      callback(exitCode);
     });
   }
 }
