@@ -1,37 +1,37 @@
 {
-	"id": "70dfb6bc-0bd5-85cc-48e9-2eed0be5c74f",
-	"name": "testcoll",
-	"requests": [
-		{
-			"id": "41374677-e313-d78c-24a0-b80dada90740",
-			"headers": "module: 2\nclientType: android\nversion: 1.0\nclientIp: 192.168.31.23\ndeviceId: MyTestDeviceID123\n",
-			"url": "http://192.168.103.101:8002/user/newLogin",
-			"pathVariables": {},
-			"preRequestScript": "",
-			"method": "POST",
-			"collectionId": "70dfb6bc-0bd5-85cc-48e9-2eed0be5c74f",
-			"data": [
-				{
-					"key": "req",
-					"value": "{\"platform\":\"local\",\"phoneNum\":\"17701257566\",\"pwd\":\"123456\"}",
-					"type": "text",
-					"enabled": true
-				}
-			],
-			"dataMode": "urlencoded",
-			"name": "第三方登录接口 -本地账号",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1470034592944,
-			"version": 2,
-			"responses": [],
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {}
-		}
-	],
-	"order": [
-		"41374677-e313-d78c-24a0-b80dada90740"
-	],
-	"timestamp": 1470034592944
+    "variables": [],
+    "info": {
+        "name": "测试",
+        "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+    },
+    "item": [
+        {
+            "id": "1475925706968",
+            "name": "删除自己发布的资源",
+            "disabled": false,
+            "request": {
+                "id": "1475925706968",
+                "name": "删除自己发布的资源",
+                "disabled": false,
+                "url": "/asked/deleteById",
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "application/json",
+                    "urlencoded": [
+                        {
+                            "key": "resourcesId",
+                            "value": "String\"\n",
+                            "type": "text",
+                            "enabled": true
+                        }
+                    ]
+                }
+            },
+            "event": [
+                "{\"listen\":\"prerequest\",\"script\":{\"type\":\"text/javascript\",\"exec\":\"\"}}",
+                "{\"listen\":\"test\",\"script\":{\"type\":\"text/javascript\",\"exec\":\"\"}}"
+            ]
+        }
+    ]
 }
