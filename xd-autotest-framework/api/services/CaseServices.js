@@ -8,7 +8,7 @@ var fs = require('fs');
 var mysqlhelper = require('../utils/mysqlhelper')
 var eventproxy = require('../utils/eventproxyhelper')
 var newManHelper = require('../newman/NewMan')
-var executor = require('newman');
+var Newman = require('xdnewman');
 
 module.exports = {
   /**
@@ -20,9 +20,9 @@ module.exports = {
     });
   },
   /**
-   * 执行Item
+   * 执行Collection
    * */
-  runItem: function (item, callback) {
+  runCollection: function (collection, callback) {
     var _option = {
       iterationCount: 1,                    // define the number of times the runner should run
       outputFile: "outfile.json",            // the file to export to
@@ -30,8 +30,8 @@ module.exports = {
       asLibrary: true,         				// this makes sure the exit code is returned as an argument to the callback function
       stopOnError: true
     };
-    executor.execute(collectionJson, _option, function (exitCode) {
-      callback(exitCode);
+    Newman.execute(collection, _option, function (exitCode, results) {
+      callback(exitCode, results);
     });
   }
 }

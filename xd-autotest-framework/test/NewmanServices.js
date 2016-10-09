@@ -1,4 +1,4 @@
-var Newman = require('newman');
+var Newman = require('xdnewman');
 var JSON5 = require('json5');
 var fs = require('fs');
 
@@ -7,7 +7,7 @@ var collectionJson = JSON5.parse(fs.readFileSync("test.postman_collection", 'utf
 var data = 'data.csv';
 
 console.log(collectionJson);
-console.log(envjson);
+// console.log(envjson);
 console.log(data);
 
 // define Newman options
@@ -22,7 +22,7 @@ var newmanOptions = {
 }
 
 // Optional Callback function which will be executed once Newman is done executing all its tasks.
-Newman.execute(collectionJson, newmanOptions, function(exitCode){
+Newman.execute(collectionJson, newmanOptions, function(exitCode, results){
     console.log("exitCode is " + exitCode);
-    console.log('callback');
+    console.log(results);
 });
