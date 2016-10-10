@@ -1,111 +1,3 @@
-<!--<div class="container-fluid">-->
-
-  <!-- 左侧栏: 用例集合列表。 -->
-  <ul class="nav navbar-nav side-nav">
-    <li style="height: 49px">
-      <button type="button" class="btn btn-info" data-toggle="modal" data-target="" id="append_tc_coll_ui" style="width: auto;height: auto">添加用例集合</button>
-      <button type="button" class="btn btn-info" data-toggle="modal" id="del_all_tc_coll" style="width: auto;height: auto;display: none">删除所有用例集合</button>
-    </li>
-
-    <!--<li>-->
-      <!--<div class="modal-body">-->
-        <!--&lt;!&ndash;<form action='/ShowDoc/operatfile' method="post" id="fileForm" enctype="multipart/form-data">&ndash;&gt;-->
-          <!--&lt;!&ndash;<label class="control-label" for="inputSuccess"><font color="#FFFFFF" size="4">导入用例</font></label>&ndash;&gt;-->
-          <!--&lt;!&ndash;<input type="file" id="uploadfile" name="submit" accept=".postman_collection" onchange="upfile()">&ndash;&gt;-->
-        <!--&lt;!&ndash;</form>&ndash;&gt;-->
-      <!--</div>-->
-    <!--</li>-->
-    <%if(data&&data.length>0) {
-    data.forEach(function(record,index){ %>
-    <li>
-      <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#info' + index%>" style="display:block">
-        <i class="fa fa-fw"></i> <%=record.name%><i class="fa fa-fw"></i>
-        <!--<i class="fa fa-fw fa-caret-up"></i>-->
-        <div>
-          <button id="<%='edit_tc_coll_'+index%>" name="query_tc_coll" uniqid="<%=record.uniqID%>" class="fa fa-edit" style="width: auto;height: auto">查看</button>
-          <button id="<%='export_tc_coll_'+index%>" name="export" uniqid="<%=record.uniqID%>" class="fa fa-dashboard" style="width: auto;height: auto">导出</button>
-        </div>
-      </a>
-      <ul id="<%='info' + index%>" class="collapse">
-        <!--<li>-->
-          <!--<%record.ReqItems.forEach(function (caseItem,i) {%>-->
-            <!--<a href="javascript:void(0)" id="<%=caseItem.name%>" onclick="requestItem(this)"><%=caseItem.name%></a>-->
-          <!--<%})%>-->
-        <!--</li>-->
-      </ul>
-    </li>
-    <%})}%>
-  </ul>
-
-  <div id="page-wrapper-right" aria-hidden="false" class="right-operation">
-
-
-    <div class="row">
-      <div class="col-lg-12">
-        <!-- Page Heading -->
-        <h1 class="page-header" id="tc_coll_name" uniqid="<%=curr_tc_coll?curr_tc_coll.uniqID:''%>"><%=curr_tc_coll?curr_tc_coll.name:'默认'%></h1>
-        <ol class="breadcrumb">
-          <li>
-            <i class="fa fa-dashboard"></i>所属文档
-            <input id="tc_coll_doc" name="tc_coll_doc" value="<%=curr_tc_coll?curr_tc_coll.docName:'无'%>" uniqid="<%=curr_tc_coll?curr_tc_coll.docUniqID:''%>" style="width:230px; height:auto;"/>
-          </li>
-          <li>
-            <i class="fa fa-dashboard"></i>服务器
-            <input id="testEnv" name="testEnv" value="<%=curr_tc_coll?curr_tc_coll.testEnv:'无'%>" style="width:130px; height:auto;" />
-          </li>
-          <li>
-            <i class="fa fa-dashboard"></i>端口号
-            <input id="testEnvPort" name="testEnvPort" value="<%=curr_tc_coll?curr_tc_coll.testEnvPort:'无'%>" style="width:50px; height:auto;" />
-          </li>
-          <div style="float:right">
-            <div class="btn btn-info" id="add_tc_ui" style="width: auto;height: auto">新增用例</div>
-            <div class="btn btn-info" id="save_tc_coll" style="width: auto;height: auto">保存文档</div>
-          </div>
-        </ol>
-      </div>
-      <!-- /.row -->
-
-      <!-- 接口表格 -->
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <thead>
-              <tr>
-                <th style="display:none">uniqid</th>
-                <th>用例名</th>
-                <th>用例描述</th>
-                <th>请求URL</th>
-                <th style="width:8%">开发者</th>
-                <th style="width:10%">操作</th>
-              </tr>
-              </thead>
-              <tbody>
-              <%if(curr_tc_coll && curr_tc_coll.ReqItems){
-              for(var i=curr_tc_coll.ReqItems.length-1;i>=0;i--){%>
-              <tr>
-                <td  style="display:none"><%=curr_tc_coll.ReqItems[i].uniqID%></td>
-                <td><%=curr_tc_coll.ReqItems[i].name%></td>
-                <td><%=curr_tc_coll.ReqItems[i].description%></td>
-                <td><%=curr_tc_coll.ReqItems[i].url%></td>
-                <td><%=curr_tc_coll.ReqItems[i].dev%></td>
-                <td uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">
-                  <a style="cursor: pointer" name="editTC" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">修改</a>
-                  <a style="cursor: pointer" name="removeTC" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">删除</a>
-                </td>
-                </td>
-              </tr>
-              <%}}%>
-
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
 <!-- 弹modal框, 新增用例 -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -316,6 +208,113 @@
 </div>
 
 
+<!-- 左侧栏: 用例集合列表。 -->
+  <ul class="nav navbar-nav side-nav">
+    <li style="height: 49px">
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="" id="append_tc_coll_ui" style="width: auto;height: auto">添加用例集合</button>
+      <button type="button" class="btn btn-info" data-toggle="modal" id="del_all_tc_coll" style="width: auto;height: auto;display: none">删除所有用例集合</button>
+    </li>
+
+    <!--<li>-->
+      <!--<div class="modal-body">-->
+        <!--&lt;!&ndash;<form action='/ShowDoc/operatfile' method="post" id="fileForm" enctype="multipart/form-data">&ndash;&gt;-->
+          <!--&lt;!&ndash;<label class="control-label" for="inputSuccess"><font color="#FFFFFF" size="4">导入用例</font></label>&ndash;&gt;-->
+          <!--&lt;!&ndash;<input type="file" id="uploadfile" name="submit" accept=".postman_collection" onchange="upfile()">&ndash;&gt;-->
+        <!--&lt;!&ndash;</form>&ndash;&gt;-->
+      <!--</div>-->
+    <!--</li>-->
+    <%if(data&&data.length>0) {
+    data.forEach(function(record,index){ %>
+    <li>
+      <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#info' + index%>" style="display:block">
+        <i class="fa fa-fw"></i> <%=record.name%><i class="fa fa-fw"></i>
+        <!--<i class="fa fa-fw fa-caret-up"></i>-->
+        <div>
+          <button id="<%='edit_tc_coll_'+index%>" name="query_tc_coll" uniqid="<%=record.uniqID%>" class="fa fa-edit" style="width: auto;height: auto">查看</button>
+          <button id="<%='export_tc_coll_'+index%>" name="export" uniqid="<%=record.uniqID%>" class="fa fa-dashboard" style="width: auto;height: auto">导出</button>
+        </div>
+      </a>
+      <ul id="<%='info' + index%>" class="collapse">
+        <!--<li>-->
+          <!--<%record.ReqItems.forEach(function (caseItem,i) {%>-->
+            <!--<a href="javascript:void(0)" id="<%=caseItem.name%>" onclick="requestItem(this)"><%=caseItem.name%></a>-->
+          <!--<%})%>-->
+        <!--</li>-->
+      </ul>
+    </li>
+    <%})}%>
+  </ul>
+
+  <div id="page-wrapper-right" aria-hidden="false" class="right-operation">
+
+
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Page Heading -->
+        <h1 class="page-header" id="tc_coll_name" uniqid="<%=curr_tc_coll?curr_tc_coll.uniqID:''%>"><%=curr_tc_coll?curr_tc_coll.name:'默认'%></h1>
+        <ol class="breadcrumb">
+          <li>
+            <i class="fa fa-dashboard"></i>所属文档
+            <input id="tc_coll_doc" name="tc_coll_doc" value="<%=curr_tc_coll?curr_tc_coll.docName:'无'%>" uniqid="<%=curr_tc_coll?curr_tc_coll.docUniqID:''%>" style="width:230px; height:auto;"/>
+          </li>
+          <li>
+            <i class="fa fa-dashboard"></i>服务器
+            <input id="testEnv" name="testEnv" value="<%=curr_tc_coll?curr_tc_coll.testEnv:'无'%>" style="width:130px; height:auto;" />
+          </li>
+          <li>
+            <i class="fa fa-dashboard"></i>端口号
+            <input id="testEnvPort" name="testEnvPort" value="<%=curr_tc_coll?curr_tc_coll.testEnvPort:'无'%>" style="width:50px; height:auto;" />
+          </li>
+          <div style="float:right">
+            <div class="btn btn-info" id="add_tc_ui" style="width: auto;height: auto">新增用例</div>
+            <div class="btn btn-info" id="save_tc_coll" style="width: auto;height: auto">保存文档</div>
+          </div>
+        </ol>
+      </div>
+      <!-- /.row -->
+
+      <!-- 接口表格 -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th style="display:none">uniqid</th>
+                <th>用例名</th>
+                <th>用例描述</th>
+                <th>请求URL</th>
+                <th style="width:8%">开发者</th>
+                <th style="width:10%">操作</th>
+              </tr>
+              </thead>
+              <tbody>
+              <%if(curr_tc_coll && curr_tc_coll.ReqItems){
+              for(var i=curr_tc_coll.ReqItems.length-1;i>=0;i--){%>
+              <tr>
+                <td  style="display:none"><%=curr_tc_coll.ReqItems[i].uniqID%></td>
+                <td><%=curr_tc_coll.ReqItems[i].name%></td>
+                <td><%=curr_tc_coll.ReqItems[i].description%></td>
+                <td><%=curr_tc_coll.ReqItems[i].url%></td>
+                <td><%=curr_tc_coll.ReqItems[i].dev%></td>
+                <td uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">
+                  <a style="cursor: pointer" name="editTC" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">修改</a>
+                  <a style="cursor: pointer" name="removeTC" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">删除</a>
+                </td>
+                </td>
+              </tr>
+              <%}}%>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
   <link href="/xd-autotest-framework/css/jsoneditor.css" rel="stylesheet" type="text/css">
   <script src="/xd-autotest-framework/js/jsoneditor.js"></script>
   <script src="/xd-autotest-framework/js/testcase/testcase.js"></script>
@@ -326,4 +325,4 @@
       global_case_update_header_jsoneditor=null,global_case_update_param_jsoneditor=null,global_case_update_response_jsoneditor=null;
     var global_doc_apis=null;
   </script>
- <!--</div>-->
+

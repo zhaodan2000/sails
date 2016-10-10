@@ -2,14 +2,6 @@
    * Created by lyh on 8/8/16.
    */
 
-
- // $(document).ready(function() {
- //   console.log(++counter);
- //   global_header_jsoneditor=null;
- //   global_param_jsoneditor=null;
- //   global_response_jsoneditor=null;
- // });
-
  /** 在UI上添加 jsoneditor 控件 **/
  function createJSONeditor(container_id, json) {
    //var container = document.getElementById('jsoneditor_queryParams_'+(i+1));

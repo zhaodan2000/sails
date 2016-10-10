@@ -192,8 +192,9 @@ module.exports = {
         mongoService.Find("RequestItem", {uniqID: caseItem.uniqID}, function (case_found) { 
         /** 存在RequestItem记录,可以更新到db中 **/ 
         if (case_found && case_found.length > 0) { 
+          console.log(caseItem);
           mongoService.Update("RequestItem", caseItem, {uniqID: caseItem.uniqID}, function (case_updated) { 
-            console.log(" 用户更新了RequestItem:  " + case_updated.name); 
+            console.log(" 用户更新了RequestItem:  "+case_updated[0].name)
             mongoService.Find("ReqFolder", {}, function (found) { 
               mongoService.Find("ReqFolder", {uniqID: reqFolder_uniqid}, function (coll_found) { 
                 res.view('testcase/index', {data: found, curr_tc_coll: coll_found[0]}); 
@@ -202,7 +203,7 @@ module.exports = {
           }); 
         } else { 
           caseItem["ReqFolderID"] = records[0].id; 
-          console.log(caseItem); 
+          // console.log(caseItem); 
           mongoService.Insert("RequestItem", caseItem, function (case_inserted) { 
             console.log(" 用户添加了RequestItem:  " + case_inserted.name); 
             mongoService.Find("ReqFolder", {}, function (found) { 
