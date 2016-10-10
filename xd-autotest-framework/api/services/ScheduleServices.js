@@ -106,7 +106,7 @@ module.exports = {
       });
     });
     for (var i = 0; i < itemArr.length; i++) {
-      itemArr[i].url=sc_host+itemArr[i].url;
+      itemArr[i].url="http://"+sc_host+itemArr[i].url;
       console.log(itemArr[i]);
       service.creatItem(itemArr[i], function (item) {
         collection.pushItem(item);
