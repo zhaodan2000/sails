@@ -1,0 +1,104 @@
+<!-- Modal -->
+<div id="addScModal" class="modal fade in" tabindex="-1" aria-labelledby="myModalLabel1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="form"  method="POST">
+        <div class="modal-header"><button class="close" type="button" data-dismiss="modal">&times;</button>
+          <h4 id="myModalLabel1" class="modal-title">添加执行策略</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label style="font-size: 18px">策略名</label>
+            <input id="sc_name" type="text" class="form-control" placeholder="策略名">
+          </div>
+          <div class="form-group">
+            <label style="font-size: 18px">策略描述</label>
+            <input id="sc_desc" type="text" class="form-control" placeholder="策略名">
+          </div>
+          <div class="form-group">
+            <label style="font-size: 18px"> 类型:</label>
+            <select id="sc_type" class="form-control" onchange="getTask()">
+              <option value="1">用例</option>
+              <option value="2">任务</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label style="font-size: 18px">选择要执行的用例或任务</label>
+            <select id="sc_task" class="form-control">
+            </select>
+          </div>
+          <div class="form-group">
+            <label style="font-size: 18px">服务器地址</label>
+            <input id="sc_host" type="text" class="form-control" placeholder="服务器地址">
+          </div>
+          <div class="form-group">
+            <label style="font-size: 18px"> 定时策略:</label>
+            <input id="sc_time" type="text" class="form-control" placeholder="请输入定时策略">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
+          <!--<button onclick="demoClicked()" class="btn btn-primary" type="button" data-dismiss="modal">添加</button>-->
+          <button class="btn btn-primary" type="button" id="saveBtn">添加</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<div id="myModal2" class="modal fade in" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="form"  method="POST">
+        <div class="modal-header"><button class="close" type="button" data-dismiss="modal">&times;</button>
+          <h4 id="myModalLabel" class="modal-title">修改执行策略</h4>
+        </div>
+        <input type="hidden" class="form-control"  id="sc_id_e">
+        <div class="modal-body">
+          <div class="form-group">
+            <label style="font-size: 18px">策略名</label>
+            <input id="sc_name_e" type="text" class="form-control" placeholder="策略名">
+          </div>
+          <div class="form-group">
+            <label style="font-size: 18px">策略描述</label>
+            <input id="sc_desc_e" type="text" class="form-control" placeholder="策略名">
+          </div>
+          <div class="form-group">
+            <label style="font-size: 18px"> 类型:</label>
+            <select id="sc_type_e" class="form-control" onchange="getTask()" disabled ="true">
+              <option value="1">用例</option>
+              <option value="2">任务</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label style="font-size: 18px">选择要执行的用例或任务</label>
+            <input id="sc_task_name_e" type="text" class="form-control" disabled ="true">
+            <input type="hidden" id="sc_task_id_e" type="text" class="form-control" disabled ="true">
+          </div>
+          <div class="form-group">
+            <label style="font-size: 18px">服务器地址</label>
+            <input id="sc_host_e" type="text" class="form-control" placeholder="服务器地址">
+          </div>
+          <div class="form-group">
+            <label style="font-size: 18px"> 定时策略:</label>
+            <input id="sc_time_e" type="text" class="form-control" placeholder="请输入定时策略">
+          </div>
+          <div style="display:none" class="form-group">
+            <label style="font-size: 18px">策略状态:</label>
+            <select id="sc_state_e" class="form-control">
+              <option value="1">开启</option>
+              <option value="2">关闭</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
+          <!--<button onclick="demoClicked()" class="btn btn-primary" type="button" data-dismiss="modal">添加</button>-->
+          <button class="btn btn-primary" type="button" onclick="saveEdit()">添加</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

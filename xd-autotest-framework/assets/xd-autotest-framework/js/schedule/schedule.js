@@ -52,7 +52,8 @@ $('#saveBtn').click(function(){
       sc_state:sc_state
     },
     success: function (data) {
-      alert("保存成功!");
+      alert(data);
+      $.main.refreshMain("schedule");
     },
     error:function(data){
       alert("保存失败,错误日志:"+JSON.stringify(data,null,"\t"));
