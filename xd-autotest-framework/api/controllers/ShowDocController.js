@@ -179,39 +179,6 @@ module.exports = {
 
   },
 
-  // save_case: function (req, res) {
-  //   var reqFolder_uniqid = req.body["tc_coll_uniqId"];
-  //   var caseItem = req.body["caseItem"];
-  //
-  //   mongoService.Find("ReqFolder", {uniqID: reqFolder_uniqid}, function (coll_found) {
-  //     if (coll_found && coll_found.length > 0) {
-  //       caseItem["ReqFolderID"] = coll_found[0].id;
-  //       mongoService.Find("RequestItem", {uniqID: caseItem.uniqID}, function (case_found) {
-  //         if (case_found && case_found.length > 0) {
-  //           console.log(caseItem);
-  //           mongoService.Update("RequestItem", caseItem, {uniqID: caseItem.uniqID}, function (case_updated) {
-  //             console.log(" 用户更新了RequestItem:  " + case_updated.name);
-  //             mongoService.Find("ReqFolder", {}, function (records) {
-  //               res.view('testcase/index', {data: records, curr_tc_coll: coll_found[0]});
-  //             })
-  //           });
-  //         } else {
-  //           mongoService.Insert("RequestItem", caseItem, function (case_inserted) {
-  //             console.log(" 用户添加了RequestItem:  " + case_inserted.name);
-  //             mongoService.Find("ReqFolder", {}, function (records) {
-  //               res.view('testcase/index', {data: records, curr_tc_coll: coll_found[0]});
-  //             })
-  //           })
-  //         }
-  //       });
-  //
-  //     } else {
-  //       res.send({retcode: -1, msg: "不存在data所指对象", data: "ReqFolder的uniqID=" + reqFolder_uniqid});
-  //     }
-  //   });
-  //
-  // },
-
   save_case: function (req, res) { 
     var reqFolder_uniqid = req.body["tc_coll_uniqId"]; 
     var caseItem = req.body["caseItem"];
@@ -248,7 +215,21 @@ module.exports = {
         }); 
       } 
     }); 
-  }, 
+  },
+
+  query_tc_coll: function(req,res){ 
+    var uniqId = req.body['uniqID']; 
+    mongoService.Find('ReqFolder', {}, function (docs_records) { 
+      if (uniqId) { 
+        mongoService.Find('ReqFolder', {uniqID: uniqId}, function (records) { 
+          //res.render('doc/APIdoc',{api_docs:docs_records, curr_doc:records[0]}); 
+          res.view('testcase/index', {data: docs_records, curr_tc_coll: records[0]}); 
+        }); 
+      } else { 
+        res.view('testcase/index', {data: docs_records, curr_tc_coll: null}); 
+      }  
+    }); 
+  }
 }
 
 

@@ -63,6 +63,7 @@ module.exports.routes = {
   //case
   'post /case/save_tc_collection':'ShowDoc.add_tc_coll_2db',
   'post /case/save_case':'ShowDoc.save_case',
+  'post /case/query_tc_collection':'ShowDoc.query_tc_coll',
 
   //doc test url
   'get /doc/findRequestItemByName':'DocDemo.findRequestItemByName',

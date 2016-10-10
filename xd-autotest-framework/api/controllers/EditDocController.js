@@ -8,6 +8,7 @@ var markdown = require('markdown-js');
 //var markdown= require("markdown").main(system);
 //var markdown=require('markdown-to-html');
 var fs=require('fs');
+var path = require('path');
 
 module.exports = {
 
@@ -16,7 +17,6 @@ module.exports = {
     mongoService.Find('APIdoc', {}, function (docs_records) {
       if (uniqId) {
         mongoService.Find('APIdoc', {uniqID: uniqId}, function (records) {
-          //res.render('doc/editdoc',{curr_doc:records[0]});
           //res.render('doc/APIdoc',{api_docs:docs_records, curr_doc:records[0]});
           res.view('doc/APIdoc', {api_docs: docs_records, curr_doc: records[0]});
         });
@@ -33,7 +33,6 @@ module.exports = {
       console.log("req.body.uniqid=" + uid);
       mongoService.Find('APIdoc', {uniqID:uid}, function (found) {
         if (found && found.length != 0) {
-          var filename = __dirname + '/mdFiles/' + found[0].name;
           var data = '# ' + found[0].name;
           data += '\r\n### 文档描述\r\n';
           data += (found[0].docDesc?found[0].docDesc:"暂无文档描述。");
@@ -69,6 +68,12 @@ module.exports = {
             data +='\r\n</code></pre>';
           }
 
+          var html = markdown.makeHtml(data) ;
+          res.send(html);
+
+          /**
+          //写入文件中。
+          var filename = __dirname + '/mdFiles/' + found[0].name;
           fs.writeFile(filename, data, function () {
             console.log('内容写入文件完成');
             // 读入 Markdown 源文件
@@ -77,6 +82,7 @@ module.exports = {
 
             res.send(html);
           });
+           **/
         }
         else {
           res.send({retcode: -1, message: '没有找到APIdoc........',data:null});
@@ -116,9 +122,6 @@ module.exports = {
       "desc": "暂时没有任务描述。"
     };
 
-
-
-    var filename=__dirname+'/mdFiles/'+testItem.name;
     var data='# '+testItem.name;
     data+='\r\n### '+testItem.desc;
     data+='\r\n### 接口';
@@ -131,13 +134,21 @@ module.exports = {
       data+='\r\n\t\t* '+reqItem.method;
     }
 
-    fs.writeFile(filename,data,function () {
+    var html = markdown.makeHtml(data) ;
+    res.send(html,200);
+
+
+    /**
+     //写入文件中。
+     var filename=__dirname+'/mdFiles/'+testItem.name;
+     fs.writeFile(filename,data,function () {
       console.log('内容写入文件完成');
       // 读入 Markdown 源文件
       var fileContent = fs.readFileSync(filename, 'utf8');
       var html = markdown.makeHtml(fileContent) ;
       res.send(html,200);
     });
+     **/
 
   },
 
