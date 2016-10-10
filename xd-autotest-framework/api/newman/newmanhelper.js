@@ -40,5 +40,9 @@ var TestEventProxy = function () {
   };
 };
 
-exports.newPreEventProxy = PreEventProxy;
-exports.newTestEventProxy = TestEventProxy;
+exports.newPreEventProxy = function () {
+  return new PreEventProxy();
+};
+exports.newTestEventProxy = function () {
+  return new TestEventProxy();
+};

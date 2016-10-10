@@ -45,9 +45,6 @@
      },
      success:function(data){
        $("#page-wrapper").html(data);
-       // global_header_jsoneditor=null;
-       // global_param_jsoneditor=null;
-       // global_response_jsoneditor=null;
        console.log("获取指定文件的所有接口成功!");
      }
    });

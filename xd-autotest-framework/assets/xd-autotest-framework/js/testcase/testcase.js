@@ -84,6 +84,7 @@ $('#add_tc_coll_2db').click(function () {
     success:function(data){
       alert("保存成功!");
       //$('#wrapper').html(data);
+      
       $("#page-wrapper").html(data);
 
     },
@@ -410,6 +411,28 @@ function changeAPI(){
   global_case_add_param_jsoneditor.set(global_doc_apis[selectIndex.toString()].queryParams);
   global_case_add_response_jsoneditor.set(global_doc_apis[selectIndex.toString()].response);
 }
+
+/**
+ * 点击左侧文档名,
+ * 查看该文档的所有接口列表。
+ **/
+$("button[name='query_tc_coll']").click(function(){
+  var tcColl_uniqid=$(this).attr('uniqid');
+  console.log(tcColl_uniqid);
+  $.ajax({
+    url:'/case/query_tc_collection',
+    method:"post",
+    data:{
+      uniqID:tcColl_uniqid
+    },
+    success:function(data){
+      $("#page-wrapper").html(data);
+      console.log("获取指定文件的所有接口成功!");
+    }
+  });
+
+
+});
 
 //刷新右边页面
 function requestItem(data) {

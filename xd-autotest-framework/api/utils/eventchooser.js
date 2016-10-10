@@ -6,7 +6,7 @@ function eventchooser(info){
     this.choose = function(info){
         if(info["event"] && typeof(info["event"]) != "undefined"){
             if(info["event"] == this.event){
-                callback(info["result"]);
+                this.callback(info["result"]);
             } else {
                 info["passfunc"](info["result"]);
             }
