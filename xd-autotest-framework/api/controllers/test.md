@@ -1,5 +1,0 @@
-这是一段通过fs.writeFile函数写入的内容；
-使用fs.appendFile追加文件内容
-使用fs.appendFile追加文件内容
-使用fs.appendFile追加文件内容
-使用fs.appendFile追加文件内容使用fs.appendFile追加文件内容
