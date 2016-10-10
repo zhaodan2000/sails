@@ -1,6 +1,7 @@
 /**
  * Created by zhouhuanon 16/10/9.
  */
+var map = require("../utils/maps").newHashMap();
 module.exports = {
     /**
      * 根据任务的调度策略类型Schedule_ID进行调度
@@ -13,6 +14,7 @@ module.exports = {
     for (var i=0;i<scArr.length;i++){
        var sc=scArr[i];
       var j = schedule.scheduleJob(sc.sc_time, function () {
+        map.put(j.getId(),j);
         console.log("执行任务");
       });
     }
