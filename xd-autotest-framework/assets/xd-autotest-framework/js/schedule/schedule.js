@@ -168,7 +168,7 @@ function start(sc_host,sc_type,sc_task_id){
     modelType="TaskFolder";
   }
   $.ajax({
-    url: '/base/query',
+    url: '/sc/start',
     method: "post",
     contentType: 'application/x-www-form-urlencoded;charset=utf-8',
     data: {
@@ -176,21 +176,7 @@ function start(sc_host,sc_type,sc_task_id){
       uniqID: sc_task_id
     },
     success: function (data) {
-      var itemArr=data.ReqItems;
-        $.ajax({
-          url:'/sc/start',
-          method:"post",
-          contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-          data: {
-            itemArr: itemArr
-          },
-          success: function (data) {
-            alert(data);
-          },
-          error:function(data){
-            alert("执行失败,错误日志:"+JSON.stringify(data,null,"\t"));
-          }
-        });
+      alert(data);
       console.log(data);
     },
     error:function(data){

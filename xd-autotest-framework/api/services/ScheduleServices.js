@@ -7,10 +7,8 @@ module.exports = {
      * 根据任务的调度策略类型Schedule_ID进行调度
      * @param scheduleID
      */
-    execTaskWithScheduleID: function(sc_id)
+    execTaskWithScheduleID: function()
   {
-
-    console.log(sc_id + '-------------');
     var schedule = require("node-schedule");
     var scArr = getSc();
     for (var i=0;i<scArr.length;i++){
@@ -33,6 +31,4 @@ module.exports = {
       return records;
     });
   },
-
-
 }
