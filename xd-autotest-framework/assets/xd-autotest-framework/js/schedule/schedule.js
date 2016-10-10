@@ -10,7 +10,6 @@ $(document).ready(function() {
       uniqID: null
     },
     success: function (data) {
-      console.log(data);
       var sc_task = $("#sc_task");
       sc_task.empty();
       for(var i=0;i<data.length;i++) {
@@ -28,7 +27,6 @@ $(document).ready(function() {
  * 保存新增的接口到DB。
  * ***/
 $('#saveBtn').click(function(){
-  console.log("12312");
   var sc_id=(new Date().getTime()).toString();
   var sc_name=$("#sc_name").val();
   var sc_desc=$("#sc_desc").val();
@@ -37,7 +35,7 @@ $('#saveBtn').click(function(){
   var sc_task_name=$("#sc_task option:selected").text();
   var sc_host=$("#sc_host").val();
   var sc_time=$("#sc_time").val();
-  var sc_state=$("#sc_state").val();
+  var sc_state="2";
   $.ajax({
     url:'/sc/save',
     method:"post",
@@ -99,7 +97,6 @@ function edit(sc_id,sc_name,sc_desc,sc_type,sc_task_id,sc_task_name,sc_host,sc_t
   $('#myModal2').modal();
 }
 function saveEdit(){
-  console.log("12312");
   var sc_id=$("#sc_id_e").val();
   var sc_name=$("#sc_name_e").val();
   var sc_desc=$("#sc_desc_e").val();
@@ -148,7 +145,6 @@ function getTask(){
       uniqID: null
     },
     success: function (data) {
-      console.log(data);
       var sc_task = $("#sc_task");
       sc_task.empty();
       for(var i=0;i<data.length;i++) {
@@ -176,12 +172,33 @@ function start(sc_host,sc_type,sc_task_id){
       uniqID: sc_task_id
     },
     success: function (data) {
-      alert(data);
       console.log(data);
+      alert(data);
     },
     error:function(data){
-      alert("查询错误:"+JSON.stringify(data,null,"\t"));
+      alert("执行错误:"+JSON.stringify(data,null,"\t"));
     }
   })
-}
 
+}
+function editState(sc_id,state){
+  var sc_id=sc_id;
+  var sc_state=state;
+  console.log(sc_id);
+  console.log(state);
+  $.ajax({
+    url:'/sc/editState',
+    method:"post",
+    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+    data: {
+      sc_id: sc_id,
+      sc_state:sc_state
+    },
+    success: function (data) {
+      alert("操作成功!");
+    },
+    error:function(data){
+      alert("操作失败,错误日志:"+JSON.stringify(data,null,"\t"));
+    }
+  });
+}

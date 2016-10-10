@@ -1,6 +1,8 @@
 var service = require("../services/CaseServices")
 var collectionHelper = require('../newman/NewManModel')
 var eventproxy = require('../utils/eventproxyhelper')
+var scheduleServices=require("../services/ScheduleServices")
+
 /**
  * TaskScheduleController
  *
@@ -14,7 +16,7 @@ var path=require('path');
 module.exports = {
   refreshView: function (req, res) {
     mongoService.Find('ScheduleTask', null, function (records) {
-      console.log(records);
+/*      console.log(records);*/
       res.view('schedule/index', {data: records});
     });
   },
@@ -25,7 +27,6 @@ module.exports = {
    * @param res
    */
   save: function (req, res) {
-    console.log("123");
     var form = req.body;
     console.log(form);
     var sc = {
@@ -59,7 +60,7 @@ module.exports = {
    * @param res
    */
   remove: function (req, res) {
-    console.log(req);
+/*    console.log(req);*/
     mongoService.Delete('ScheduleTask', {sc_id: req.body.sc_id});
     mongoService.Find("ScheduleTask", null, function (records) {
       if (records) {
@@ -91,14 +92,31 @@ module.exports = {
     });
   },
 
+  editState: function (req, res) {
+    var form = req.body;
+    var sc = {
+      sc_state: form.sc_state
+    };
+    mongoService.Update("ScheduleTask", sc, {sc_id: form.sc_id}, function (records) {
+      if (records) {
+        if(sc_state==1){
+          scheduleServices.start(form.sc_id)
+        }else{
+          scheduleServices.stop(form.sc_id)
+        }
+        res.send(records);
+      } else {
+        res.send({errMsg: "更新失败"});
+      }
+    });
+  },
+
   start: function (req, res) {
     var modelType = req.body.modelType;
-    var uniqId=req.body.uniqId;
-    console.log(req);
-    mongoService.Find("ReqFolder",null, function (records) {
+      mongoService.Find(modelType,{uniqID:req.body.uniqID}, function (records) {
       if (records) {
         //console.log(records);
-        var itemArr = records.ReqItems;
+        var itemArr = records[0].ReqItems;
         var ep = eventproxy.create();
         var collection = new collectionHelper.newCollection();
         collection.setName("测试");
