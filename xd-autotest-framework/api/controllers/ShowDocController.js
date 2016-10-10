@@ -179,39 +179,76 @@ module.exports = {
 
   },
 
-  save_case: function (req, res) {
-    var reqFolder_uniqid = req.body["tc_coll_uniqId"];
+  // save_case: function (req, res) {
+  //   var reqFolder_uniqid = req.body["tc_coll_uniqId"];
+  //   var caseItem = req.body["caseItem"];
+  //
+  //   mongoService.Find("ReqFolder", {uniqID: reqFolder_uniqid}, function (coll_found) {
+  //     if (coll_found && coll_found.length > 0) {
+  //       caseItem["ReqFolderID"] = coll_found[0].id;
+  //       mongoService.Find("RequestItem", {uniqID: caseItem.uniqID}, function (case_found) {
+  //         if (case_found && case_found.length > 0) {
+  //           console.log(caseItem);
+  //           mongoService.Update("RequestItem", caseItem, {uniqID: caseItem.uniqID}, function (case_updated) {
+  //             console.log(" 用户更新了RequestItem:  " + case_updated.name);
+  //             mongoService.Find("ReqFolder", {}, function (records) {
+  //               res.view('testcase/index', {data: records, curr_tc_coll: coll_found[0]});
+  //             })
+  //           });
+  //         } else {
+  //           mongoService.Insert("RequestItem", caseItem, function (case_inserted) {
+  //             console.log(" 用户添加了RequestItem:  " + case_inserted.name);
+  //             mongoService.Find("ReqFolder", {}, function (records) {
+  //               res.view('testcase/index', {data: records, curr_tc_coll: coll_found[0]});
+  //             })
+  //           })
+  //         }
+  //       });
+  //
+  //     } else {
+  //       res.send({retcode: -1, msg: "不存在data所指对象", data: "ReqFolder的uniqID=" + reqFolder_uniqid});
+  //     }
+  //   });
+  //
+  // },
+
+  save_case: function (req, res) { 
+    var reqFolder_uniqid = req.body["tc_coll_uniqId"]; 
     var caseItem = req.body["caseItem"];
-
-    mongoService.Find("ReqFolder", {uniqID: reqFolder_uniqid}, function (coll_found) {
-      if (coll_found && coll_found.length > 0) {
-        caseItem["ReqFolderID"] = coll_found[0].id;
-        mongoService.Find("RequestItem", {uniqID: caseItem.uniqID}, function (case_found) {
-          if (case_found && case_found.length > 0) {
-            console.log(caseItem);
-            mongoService.Update("RequestItem", caseItem, {uniqID: caseItem.uniqID}, function (case_updated) {
-              console.log(" 用户更新了RequestItem:  " + case_updated.name);
-              mongoService.Find("ReqFolder", {}, function (records) {
-                res.view('testcase/index', {data: records, curr_tc_coll: coll_found[0]});
-              })
-            });
-          } else {
-            mongoService.Insert("RequestItem", caseItem, function (case_inserted) {
-              console.log(" 用户添加了RequestItem:  " + case_inserted.name);
-              mongoService.Find("ReqFolder", {}, function (records) {
-                res.view('testcase/index', {data: records, curr_tc_coll: coll_found[0]});
-              })
-            })
-          }
-        });
-
-      } else {
-        res.send({retcode: -1, msg: "不存在data所指对象", data: "ReqFolder的uniqID=" + reqFolder_uniqid});
-      }
-    });
-
-  },
-
+    mongoService.Find("ReqFolder",{uniqID:reqFolder_uniqid},function (records) {  
+      /** 不存在ReqFolder对象  */ 
+      if (!records || records.length == 0) { 
+        res.send({retcode: -1, message: "不存在data对象", data: "reqFolder_uniqid=" + reqFolder_uniqid}); 
+      } 
+      /** 存在ReqFolder对象**/ 
+      else {//存在 ReqFolder 
+        mongoService.Find("RequestItem", {uniqID: caseItem.uniqID}, function (case_found) { 
+        /** 存在RequestItem记录,可以更新到db中 **/ 
+        if (case_found && case_found.length > 0) { 
+          mongoService.Update("RequestItem", caseItem, {uniqID: caseItem.uniqID}, function (case_updated) { 
+            console.log(" 用户更新了RequestItem:  " + case_updated.name); 
+            mongoService.Find("ReqFolder", {}, function (found) { 
+              mongoService.Find("ReqFolder", {uniqID: reqFolder_uniqid}, function (coll_found) { 
+                res.view('testcase/index', {data: found, curr_tc_coll: coll_found[0]}); 
+              }); 
+            }); 
+          }); 
+        } else { 
+          caseItem["ReqFolderID"] = records[0].id; 
+          console.log(caseItem); 
+          mongoService.Insert("RequestItem", caseItem, function (case_inserted) { 
+            console.log(" 用户添加了RequestItem:  " + case_inserted.name); 
+            mongoService.Find("ReqFolder", {}, function (found) { 
+              mongoService.Find("ReqFolder", {uniqID: reqFolder_uniqid}, function (coll_found) { 
+                res.view('testcase/index', {data: found, curr_tc_coll: coll_found[0]}); 
+              }); 
+            }); 
+          }); 
+        } 
+        }); 
+      } 
+    }); 
+  }, 
 }
 
 
