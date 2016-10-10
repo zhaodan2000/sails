@@ -123,6 +123,22 @@
      global_add_response_jsoneditor=response_editor;
    }
 
+   var header_value={
+     "clientType": "android",
+     "version": "1.0.0",
+     "module": "3",
+     "deviceId": "999",
+     "clientIp": "192.168.0.1",
+     "sessionToken": "bb93c10b-7fea-4384-bbeb-8d63e8533b54"
+   };
+
+   var response_value={
+     "retcode": "0"
+   };
+
+   global_add_header_jsoneditor.set(header_value);
+   global_add_response_jsoneditor.set(response_value);
+
  });
 
  /**
