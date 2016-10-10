@@ -21,4 +21,6 @@ var _Collection = function () {
   }
 };
 
-exports.newCollection = _Collection;
+exports.newCollection = function (){
+  return new _Collection();
+};

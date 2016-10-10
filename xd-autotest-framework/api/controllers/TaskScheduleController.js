@@ -118,7 +118,7 @@ module.exports = {
         //console.log(records);
         var itemArr = records[0].ReqItems;
         var ep = eventproxy.create();
-        var collection = new collectionHelper.newCollection();
+        var collection = collectionHelper.newCollection();
         collection.setName("测试");
         ep.after(itemArr.length, function () {
           var _collection = collection.getCollection();
