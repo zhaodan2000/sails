@@ -227,6 +227,16 @@ module.exports={
 
     });
 
+  },
+
+  testAAA:function(req,res) {
+    // var modelType = req.body.modelType;
+    // var uniqId=req.body.uniqId;
+    // console.log(req);
+    mongoService.Find("ReqFolder", {uniqID: '1475909916895'}, function (records) {
+      console.log(records);
+      res.send(records);
+    });
   }
 
 }
