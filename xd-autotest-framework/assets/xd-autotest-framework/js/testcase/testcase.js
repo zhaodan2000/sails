@@ -84,6 +84,7 @@ $('#add_tc_coll_2db').click(function () {
     success:function(data){
       alert("保存成功!");
       //$('#wrapper').html(data);
+      
       $("#page-wrapper").html(data);
 
     },
