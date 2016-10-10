@@ -52,7 +52,7 @@ $('#saveBtn').click(function(){
       sc_state:sc_state
     },
     success: function (data) {
-      alert(data);
+      alert("保存成功");
       $.main.refreshMain("schedule");
     },
     error:function(data){
@@ -81,7 +81,7 @@ function remove(sc_id){
   }else if(confirm("确定删除吗?")){
     $(this).parent().parent().remove();
     $.post("/sc/remove", {sc_id:sc_id}, function (result) {
-      alert("删除成功")
+      $.main.refreshMain("schedule");
     }, "json");
   }
 }
@@ -124,6 +124,7 @@ function saveEdit(){
     },
     success: function (data) {
       alert("修改成功!");
+      $.main.refreshMain("schedule");
     },
     error:function(data){
       alert("修改失败,错误日志:"+JSON.stringify(data,null,"\t"));
@@ -198,7 +199,7 @@ function editState(sc_id,state){
       sc_state:sc_state
     },
     success: function (data) {
-      alert("操作成功!");
+      $.main.refreshMain("schedule");
     },
     error:function(data){
       alert("操作失败,错误日志:"+JSON.stringify(data,null,"\t"));

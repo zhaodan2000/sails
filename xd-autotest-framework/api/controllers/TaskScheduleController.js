@@ -99,11 +99,11 @@ module.exports = {
     };
     mongoService.Update("ScheduleTask", sc, {sc_id: form.sc_id}, function (records) {
       if (records) {
-        if(sc_state==1){
+/*        if(form.sc_state==1){
           scheduleServices.start(form.sc_id)
         }else{
           scheduleServices.stop(form.sc_id)
-        }
+        }*/
         res.send(records);
       } else {
         res.send({errMsg: "更新失败"});

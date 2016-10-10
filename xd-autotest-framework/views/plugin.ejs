@@ -1,6 +1,6 @@
 <!-- Modal -->
-<div id="addScModal" class="modal fade in" tabindex="-1" aria-labelledby="myModalLabel1" aria-hidden="true">
-  <div class="modal-dialog">
+  <div id="addScModal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
     <div class="modal-content">
       <form id="form"  method="POST">
         <div class="modal-header"><button class="close" type="button" data-dismiss="modal">&times;</button>
@@ -39,16 +39,16 @@
         <div class="modal-footer">
           <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
           <!--<button onclick="demoClicked()" class="btn btn-primary" type="button" data-dismiss="modal">添加</button>-->
-          <button class="btn btn-primary" type="button" id="saveBtn">添加</button>
+          <button class="btn btn-primary" type="button" id="saveBtn" data-dismiss="modal">添加</button>
         </div>
       </form>
-
     </div>
   </div>
 </div>
 
-<div id="myModal2" class="modal fade in" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+
+<div id="myModal2" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <form id="form"  method="POST">
         <div class="modal-header"><button class="close" type="button" data-dismiss="modal">&times;</button>
@@ -95,7 +95,7 @@
         <div class="modal-footer">
           <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
           <!--<button onclick="demoClicked()" class="btn btn-primary" type="button" data-dismiss="modal">添加</button>-->
-          <button class="btn btn-primary" type="button" onclick="saveEdit()">添加</button>
+          <button class="btn btn-primary" type="button" onclick="saveEdit()" data-dismiss="modal">添加</button>
         </div>
       </form>
 
