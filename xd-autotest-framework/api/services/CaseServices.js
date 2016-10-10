@@ -7,7 +7,7 @@ require('../utils/string');
 var fs = require('fs');
 var mysqlhelper = require('../utils/mysqlhelper')
 var eventproxy = require('../utils/eventproxyhelper')
-var newManHelper = require('../newman/NewMan')
+var newManHelper = require('../newman/newmanhelper')
 var Newman = require('xdnewman');
 
 module.exports = {

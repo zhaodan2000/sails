@@ -1,5 +1,5 @@
 var service = require("../services/CaseServices")
-var collectionHelper = require('../newman/NewManModel')
+var collectionHelper = require('../newman/newmanmodel')
 var eventproxy = require('../utils/eventproxyhelper')
 var scheduleServices=require("../services/ScheduleServices")
 
