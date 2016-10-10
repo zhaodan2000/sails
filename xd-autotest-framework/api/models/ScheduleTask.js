@@ -54,7 +54,7 @@ module.exports = {
       type:'string',
       required:false,
       enum:['1','2'],//1表示开启, 2表示关闭.
-      defaultsTo:'1'
+      defaultsTo:'2'
     }
   }
 };

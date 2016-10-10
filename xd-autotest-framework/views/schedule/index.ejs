@@ -26,11 +26,11 @@
             <table id="taskTable" class="table table-bordered table-hover table-striped">
               <thead>
               <tr>
-                <th class="col-lg-2">策略名称</th>
-                <th class="col-lg-3">服务器</th>
-                <th class="col-lg-2">策略描述</th>
-                <th class="col-lg-1">状态</th>
-                <th class="col-lg-3">操作</th>
+                <th class="col-lg-2">名称</th>
+                <th class="col-lg-2">服务器</th>
+                <th class="col-lg-2">描述</th>
+                <th class="col-lg-2">状态</th>
+                <th class="col-lg-4">操作</th>
               </tr>
               </thead>
               <tbody>
@@ -40,7 +40,7 @@
                 <td ><%-record.sc_name%></td>
                 <td><%-record.sc_host%></td>
                 <td><%-record.sc_desc%></td>
-                <td><%-record.sc_state%></td>
+                <td><% if(record.sc_state==1){%><a style="cursor: pointer" onclick="editState('<%=record.sc_id%>','2')">关闭</a> <%}else{%> <a style="cursor: pointer" onclick="editState('<%=record.sc_id%>','1')">开启</a> <%}%></td>
                 <td uniqid="<%=record.sc_id%>">
                   <a style="cursor: pointer" onclick="edit('<%=record.sc_id%>','<%=record.sc_name%>','<%=record.sc_desc%>','<%=record.sc_type%>','<%=record.sc_task_id%>','<%=record.sc_task_name%>','<%=record.sc_host%>','<%=record.sc_time%>','<%=record.sc_state%>')" uniqid="<%=record.sc_id%>">修改</a>
                   <a style="cursor: pointer" onclick="remove(<%=record.sc_id%>)">删除</a>
@@ -65,11 +65,11 @@
             <table id="taskTable" class="table table-bordered table-hover table-striped">
               <thead>
               <tr>
-                <th class="col-lg-2">策略名称</th>
-                <th class="col-lg-3">服务器</th>
-                <th class="col-lg-2">策略描述</th>
-                <th class="col-lg-1">状态</th>
-                <th class="col-lg-3">操作</th>
+                <th class="col-lg-2">名称</th>
+                <th class="col-lg-2">服务器</th>
+                <th class="col-lg-2">描述</th>
+                <th class="col-lg-2">状态</th>
+                <th class="col-lg-4">操作</th>
               </tr>
               </thead>
               <tbody>
@@ -79,11 +79,11 @@
                 <td ><%-record.sc_name%></td>
                 <td><%-record.sc_host%></td>
                 <td><%-record.sc_desc%></td>
-                <td><%-record.sc_state%></td>
-                <td>
+                <td><% if(record.sc_state==1){%><a style="cursor: pointer" onclick="editState('<%=record.sc_id%>','2')">关闭</a> <%}else{%> <a style="cursor: pointer" onclick="editState('<%=record.sc_id%>','1')">开启</a> <%}%></td>
+                <td uniqid="<%=record.sc_id%>">
                   <a style="cursor: pointer" onclick="edit('<%=record.sc_id%>','<%=record.sc_name%>','<%=record.sc_desc%>','<%=record.sc_type%>','<%=record.sc_task_id%>','<%=record.sc_task_name%>','<%=record.sc_host%>','<%=record.sc_time%>','<%=record.sc_state%>')" uniqid="<%=record.sc_id%>">修改</a>
                   <a style="cursor: pointer" onclick="remove(<%=record.sc_id%>)">删除</a>
-                  <a style="cursor: pointer">执行</a>
+                  <a style="cursor: pointer" onclick="start('<%=record.sc_host%>','<%=record.sc_type%>','<%=record.sc_task_id%>')">执行</a>
                   <a style="cursor: pointer">日志</a>
                 </td>
               </tr>
@@ -135,13 +135,6 @@
               <label style="font-size: 18px"> 定时策略:</label>
               <input id="sc_time" type="text" class="form-control" placeholder="请输入定时策略">
             </div>
-            <div class="form-group">
-              <label style="font-size: 18px">策略状态:</label>
-              <select id="sc_state" class="form-control">
-                <option value="1">开启</option>
-                <option value="2">关闭</option>
-              </select>
-            </div>
           </div>
           <div class="modal-footer">
             <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
@@ -191,7 +184,7 @@
               <label style="font-size: 18px"> 定时策略:</label>
               <input id="sc_time_e" type="text" class="form-control" placeholder="请输入定时策略">
             </div>
-            <div class="form-group">
+            <div style="display:none" class="form-group">
               <label style="font-size: 18px">策略状态:</label>
               <select id="sc_state_e" class="form-control">
                 <option value="1">开启</option>
