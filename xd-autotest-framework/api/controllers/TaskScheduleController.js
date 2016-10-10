@@ -1,5 +1,5 @@
 var service = require("../services/CaseServices")
-var collectionHelper = require('../newman/newmanmodel')
+var collectionHelper = require('../newman/NewManModel')
 var eventproxy = require('../utils/eventproxyhelper')
 var scheduleServices=require("../services/ScheduleServices")
 
@@ -113,27 +113,13 @@ module.exports = {
 
   start: function (req, res) {
     var modelType = req.body.modelType;
+    var sc_id=req.body.sc_id;
+    var sc_host=req.body.sc_host;
       mongoService.Find(modelType,{uniqID:req.body.uniqID}, function (records) {
       if (records) {
-        //console.log(records);
-        var itemArr = records[0].ReqItems;
-        var ep = eventproxy.create();
-        var collection = collectionHelper.newCollection();
-        collection.setName("测试");
-        ep.after(itemArr.length, function () {
-          var _collection = collection.getCollection();
-          //console.log(JSON.stringify(_collection));
-          service.runCollection(_collection, function (exitCode, results) {
-           // console.log(results);
-            return res.send(results);
-          });
-        });
-        for (var i = 0; i < itemArr.length; i++) {
-          service.creatItem(itemArr[i], function (item) {
-            collection.pushItem(item);
-            ep.emit(1);
-          });
-        }
+        console.log(records[0]);
+        scheduleServices.execute(records[0],sc_id,sc_host);
+        return res.send();
       }
     })
   },

@@ -112,6 +112,20 @@ module.exports={
           }
         });
         break;
+
+      case 'ScheduleLog':
+        ScheduleLog.create(item).exec(function(err,records){
+          if (!err) {
+            console.log("create %s records success!", modelType);
+            callback(records);
+          } else {
+            console.log("create %s records failure!", modelType);
+            console.log(err);
+            callback(null);
+          }
+        });
+        break;
+
       default: 
         break; 
     }
@@ -343,6 +357,18 @@ module.exports={
         });
         break;
 
+      case "ScheduleLog":
+        ScheduleLog.find(dic).exec(function(err,records){
+          if (!err) {
+            console.log("find %s records success!", modelType);
+            callback(records);
+          } else {
+            console.log("find %s records failure!", modelType);
+            console.log(err);
+            callback(null);
+          }
+        });
+        break;
 
       default:
         break;

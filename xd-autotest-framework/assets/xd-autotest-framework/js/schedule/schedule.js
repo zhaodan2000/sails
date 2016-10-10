@@ -157,7 +157,7 @@ function getTask(){
     }
   })
 }
-function start(sc_host,sc_type,sc_task_id){
+function start(sc_id,sc_host,sc_type,sc_task_id){
   var modelType="ReqFolder";
   if(sc_type==1){
   }else{
@@ -169,11 +169,13 @@ function start(sc_host,sc_type,sc_task_id){
     contentType: 'application/x-www-form-urlencoded;charset=utf-8',
     data: {
       modelType: modelType,
-      uniqID: sc_task_id
+      uniqID: sc_task_id,
+      sc_id:sc_id,
+      sc_host:sc_host
     },
     success: function (data) {
       console.log(data);
-      alert(data);
+      alert("执行中，请稍候查看日志");
     },
     error:function(data){
       alert("执行错误:"+JSON.stringify(data,null,"\t"));
@@ -196,6 +198,23 @@ function editState(sc_id,state){
     },
     success: function (data) {
       alert("操作成功!");
+    },
+    error:function(data){
+      alert("操作失败,错误日志:"+JSON.stringify(data,null,"\t"));
+    }
+  });
+}
+
+function getLog(sc_id){
+  $.ajax({
+    url:'/log/all',
+    method:"post",
+    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+    data: {
+      sc_id: sc_id
+    },
+    success: function (data) {
+      $("#page-wrapper").html(data);
     },
     error:function(data){
       alert("操作失败,错误日志:"+JSON.stringify(data,null,"\t"));

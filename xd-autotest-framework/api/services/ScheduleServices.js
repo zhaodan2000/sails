@@ -2,6 +2,9 @@
  * Created by zhouhuanon 16/10/9.
  */
 var map = require("../utils/maps").newHashMap();
+var service = require("../services/CaseServices")
+var collectionHelper = require('../newman/NewManModel')
+var eventproxy = require('../utils/eventproxyhelper')
 module.exports = {
     /**
      * 根据任务的调度策略类型Schedule_ID进行调度
@@ -28,10 +31,20 @@ module.exports = {
     var schedule = require("node-schedule");
     var scArr = getSc(sc_id);
     var sc=scArr[0];
-    var j = schedule.scheduleJob(sc.sc_time, function () {
-        map.put(sc.sc_id,j);
-        console.log("执行任务");
-      });
+    var modelType="ReqFolder";
+    if(sc.sc_type==1){
+    }else{
+      modelType="TaskFolder";
+    }
+    mongoService.Find(modelType,{uniqID:sc.sc_task_id}, function (records) {
+      if (records) {
+        var j = schedule.scheduleJob(sc.sc_time, function () {
+          map.put(sc.sc_id,j);
+          console.log("执行任务");
+          execute(records[0],sc.sc_id);
+        });
+      }
+    })
   },
 
   /**
@@ -58,6 +71,70 @@ module.exports = {
    * @param scheduleID
    */
   start: function(sc_id) {
-    startById(sc_id);
+    this.startById(sc_id);
   },
+
+  /**
+   * 启动定时任务
+   * @param scheduleID
+   */
+  execute: function(task,sc_id,sc_host) {
+    console.log(task);
+    var itemArr = task.ReqItems;
+    var ep = eventproxy.create();
+    var collection = new collectionHelper.newCollection();
+    collection.setName("测试");
+    ep.after(itemArr.length, function () {
+      var _collection = collection.getCollection();
+      //console.log(JSON.stringify(_collection));
+      service.runCollection(_collection, function (exitCode, results) {
+        var log_id=(new Date().getTime()).toString();
+        var log = {
+          log_id:log_id,
+          sc_id: sc_id,
+          log_desc:JSON.stringify(results)
+        };
+        mongoService.Insert("ScheduleLog", log, function (records) {
+          if (records) {
+            console.log('insert sucess');
+            return records;
+          } else {
+            //fail
+            console.log('insert fail');
+          }
+        });
+      });
+    });
+    for (var i = 0; i < itemArr.length; i++) {
+      itemArr[i].url=sc_host+itemArr[i].url;
+      console.log(itemArr[i]);
+      service.creatItem(itemArr[i], function (item) {
+        collection.pushItem(item);
+        ep.emit(1);
+      });
+    }
+  },
+
+  /**
+   * 启动定时任务
+   * @param scheduleID
+   */
+  insertLog: function(log) {
+    mongoService.Insert("ScheduleLog", log, function (records) {
+      if (records) {
+        //sucess
+        console.log('insert sucess');
+        //创建任务成功之后需要设置任务的调度策略
+        //在这里查找调度策略
+        return records;
+      } else {
+        //fail
+        console.log('insert fail');
+      }
+    });
+  },
+
 }
+
+
+

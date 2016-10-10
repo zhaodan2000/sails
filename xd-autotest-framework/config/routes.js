@@ -76,6 +76,9 @@ module.exports.routes = {
   'post /sc/editState':'TaskSchedule.editState',
   'post /sc/start':'TaskSchedule.start',
 
+  //sc
+  'post /log/all':'LogSchedule.all',
+
   //'post /doc/remove':"InterfaceDoc.remove",
 
   '/response': {
