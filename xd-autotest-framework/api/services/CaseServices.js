@@ -103,7 +103,7 @@ function configItem(request, event) {
  * @returns {string}
  */
 function parseInputPreString(prestring, callback) {
-  var pre = new newManHelper.newPreEventProxy();
+  var pre = newManHelper.newPreEventProxy();
   pre._event = {listen: "prerequest", script: {type: "text/javascript", exec: ""}};
   var ep = eventproxy.create();
   var mysql = mysqlhelper.create(ep);
@@ -123,7 +123,7 @@ function parseInputPreString(prestring, callback) {
  * @returns {string}
  */
 function parseIntputTestString(teststring, callback) {
-  var test = new newManHelper.newTestEventProxy();
+  var test = newManHelper.newTestEventProxy();
   test._event = {listen: "test", script: {type: "text/javascript", exec: ""}};
   var ep = eventproxy.create();
   var mysql = mysqlhelper.create(ep);

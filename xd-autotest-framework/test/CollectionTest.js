@@ -1,12 +1,12 @@
 var service = require("../api/services/CaseServices")
 var collectionHelper = require('../api/newman/NewManModel')
-//service.parseInputPreString("mysql.execQuery({host:'192.168.88.89', port:'3306', user:'xddev', password:'xddev@xiaodou', db:'xd-user', sql: 'select id from xd_user limit 1', callback: function(results){if (results && results.length > 0) {var id = results[0];pre.setGlobalVar('test',id['id']);}}});", function (event) {
+// service.parseInputPreString("mysql.execQuery({host:'192.168.88.89', port:'3306', user:'xddev', password:'xddev@xiaodou', db:'xd-user', sql: 'select id from xd_user limit 1', callback: function(results){if (results && results.length > 0) {var id = results[0];pre.setGlobalVar('test',id['id']);}}});", function (event) {
 //  console.log(event);
-//});
+// });
 //
-//service.parseIntputTestString("test.setEnvVar('test','hello');test.clearGlobalVar('test');", function (event) {
+// service.parseIntputTestString("test.setEnvVar('test','hello');test.clearGlobalVar('test');", function (event) {
 //  console.log(event);
-//});
+// });
 
 // var item = {
 //   prescript: "mysql.execQuery({id:'1', host:'192.168.88.89', port:'3306', user:'xddev', password:'xddev@xiaodou', db:'xd-user', sql: 'select id from xd_user where id = ?', args:['3'], callback: function(results){if (results && results.length > 0) {var id = results[0];pre.setGlobalVar('test',id['id']);}}});",
@@ -29,6 +29,8 @@ var reqItem = {
   "queryParam" : {
     "resourcesId" : "String\"\n"
   },
+  "prescript":"mysql.execQuery({id:'1', host:'192.168.88.89', port:'3306', user:'xddev', password:'xddev@xiaodou', db:'xd-user', sql: 'select id from xd_user where id = ?', args:['3'], callback: function(results){if (results && results.length > 0) {var id = results[0];pre.setGlobalVar('test',id['id']);}}});",
+  "testscript":"test.setEnvVar('test','hello');test.clearGlobalVar('test');test.checkJsonValue('test', '1234');",
   "response" : {
     "errorCode" : 0,
     "errorMessage" : "成功",
