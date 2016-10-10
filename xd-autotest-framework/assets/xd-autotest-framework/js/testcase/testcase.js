@@ -24,7 +24,7 @@ function createJSONeditor(container_id, json) {
 
 //弹框添加集合UI。
 $('#append_tc_coll_ui').click(function () {
-  $('#myModalForCollect').modal();
+  $('#addTCCollectModal').modal();
 
   //select 扩充子节点的方式一
   // var selector='#select_tc_coll_docName';
@@ -82,9 +82,11 @@ $('#add_tc_coll_2db').click(function () {
       reqFolder:tc_coll
     },
     success:function(data){
+      // $('#your-modal-id').modal('hide');
+      $('body').removeClass('modal-open');
+      $('.modal-backdrop').remove();
       alert("保存成功!");
       //$('#wrapper').html(data);
-      
       $("#page-wrapper").html(data);
 
     },
@@ -97,7 +99,7 @@ $('#add_tc_coll_2db').click(function () {
 
 /** 弹框添加用例UI **/
 $('#add_tc_ui').click(function () {
-   $('#myModal').modal();
+   $('#addTCModal').modal();
 
   if(!global_case_add_header_jsoneditor){
     //create the json editor: createJSONeditor
@@ -149,7 +151,7 @@ $('#add_tc_ui').click(function () {
 
 /** 弹框修改用例 **/
 $('a[name="editTC"]').click(function () {
-  $('#myModal2').modal();
+  $('#editTCModal').modal();
 
   //添加json控件
   if(!global_case_update_header_jsoneditor){
@@ -286,6 +288,9 @@ $('#btn_add_tc').click(function () {
       caseItem:caseItem
     },
     success: function (data) {
+      // $('#your-modal-id').modal('hide');
+      $('body').removeClass('modal-open');
+      $('.modal-backdrop').remove();
       alert("保存成功!");
       $("#page-wrapper").html(data);
     },
@@ -327,8 +332,8 @@ $('#btn_edit_tc').click(function () {
     dev:caseItem_dev,
     method:caseItem_method,
     dataType:caseItem_dataType,
-    header:caseItem_header,
-    queryParams: caseItem_queryParams,
+    headers:caseItem_header,
+    queryParam: caseItem_queryParams,
     response:caseItem_response
   };
 
@@ -343,6 +348,9 @@ $('#btn_edit_tc').click(function () {
       caseItem:caseItem
     },
     success: function (data) {
+      // $('#your-modal-id').modal('hide');
+      $('body').removeClass('modal-open');
+      $('.modal-backdrop').remove();
       alert("保存成功!");
       $("#page-wrapper").html(data);
     },
@@ -483,14 +491,14 @@ $(document).ready(function () {
 
   //提交增加的用例
   $("#submitBtn").click(function () {
-    $('#myModal').modal('hide');
+    $('#addTCModal').modal('hide');
     $(".modal-backdrop").hide();
     $("#formModel").ajaxSubmit(option_submit);
   });
 
   //增加用例集合
   $("#submitcollect").click(function () {
-    $('#myModal').modal('hide');
+    $('#addTCModal').modal('hide');
     $(".modal-backdrop").hide();
     $("#formModelForCollect").ajaxSubmit(option_submitForCollect);
   });

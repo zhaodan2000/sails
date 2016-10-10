@@ -102,7 +102,7 @@
   * 通过弹出模态框, 来提供添加新接口的UI
   * */
  $("#addAPI_ui").click(function () {
-   $('#myModal').modal();
+   $('#addAPIModal').modal();
 
    if(!global_add_header_jsoneditor){
      //create the json editor: createJSONeditor
@@ -187,7 +187,7 @@
   * 修改指定的接口。
   * */
  $('a[name="editAPI"]').click(function(){
-   $('#myModal2').modal();
+   $('#saveAPIModal').modal();
 
    if(!global_update_header_jsoneditor){
      //create the json editor: createJSONeditor
