@@ -54,7 +54,7 @@ module.exports = {
             /** 存在API_docitem, 则更新apiItem **/
             else{
               mongoService.Update("APIdocitem",API_docitem,{uniqID:API_docitem.uniqID},function (updatedItem) {
-                console.log(" 用户更新了APIdocitem:  "+updatedItem.name);
+                console.log(" 用户更新了APIdocitem:  "+updatedItem[0].name);
                 mongoService.Find("APIdoc",{uniqID:APIdoc_uniqid},function (single_doc){
                   mongoService.Find("APIdoc",{},function (docs_records) {
                     res.view('doc/APIdoc', {api_docs:docs_records, curr_doc:single_doc[0]});
@@ -68,6 +68,28 @@ module.exports = {
       }
     });
 
+  },
+
+  /**
+   * 将doc与docItem存入db中,其中doc:docItem=1:N
+   * 入参:
+   * data: {
+      apiDoc: APIdoc
+    }
+   * */
+  saveDoc:function(req,res){
+    //构造APIdoc对象
+    var API_doc=req.body["apiDoc"];
+
+    /** 前端传入的API_doc.uniqID不为空*/
+    if(API_doc.uniqID){
+      mongoService.Update("APIdoc", API_doc, {uniqID: API_doc.uniqID}, function (updatedDOC) {
+        /** 更新APIdoc成功 */
+        res.ok();
+      });
+    }else{
+      res.send({retcode:-1,message:"uniqId为空",data:"APIdoc"});
+    }
   },
 
   /**
