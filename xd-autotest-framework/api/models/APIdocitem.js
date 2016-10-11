@@ -22,6 +22,20 @@ module.exports={
       type: 'string',
       required: false
     },
+    description:{
+      type:'string',
+      required:false
+    },
+    //前置脚本
+    prescript:{
+      type:'string',
+      required: false
+    },
+    //后置脚本
+    testscript:{
+      type:'string',
+      required: false
+    },
     url:{
       type:'string',
       required:false
@@ -40,10 +54,6 @@ module.exports={
       type:'boolean',
       required:false,
       defaultsTo:false
-    },
-    description:{
-      type:'string',
-      required:false
     },
     method:{
       type:'string',
