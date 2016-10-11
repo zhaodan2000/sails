@@ -82,91 +82,18 @@ module.exports = {
     var API_doc=req.body["apiDoc"];
 
     /** 前端传入的API_doc.uniqID不为空*/
-    if(API_doc.uniqID){
-      mongoService.Update("APIdoc", API_doc, {uniqID: API_doc.uniqID}, function (updatedDOC) {
+    if(API_doc&&API_doc.uniqID){
+      mongoService.Insert("APIdoc", API_doc, function (insertedDOC) {
         /** 更新APIdoc成功 */
-        res.ok();
+        mongoService.Find("APIdoc",{},function(found){
+          res.view('doc/APIdoc', {api_docs:found, curr_doc:insertedDOC});
+        });
       });
     }else{
-      res.send({retcode:-1,message:"uniqId为空",data:"APIdoc"});
-    }
-  },
-
-  /**
-   * 将doc与docItem存入db中,其中doc:docItem=1:N
-   * 入参:
-   * data: {
-      apiDoc: APIdoc,
-      apiItems:apiItemsArray
-    }
-   * */
-  saveDoc2db: function(req,res){
-    //构造APIdoc对象
-    var API_doc=req.body["apiDoc"];
-
-    //构造APIdocitem对象
-    var apisItemArray=req.body["apiItems"];
-
-    /** 前端传入的API_doc.uniqID不为空*/
-    if(API_doc.uniqID){
-      mongoService.Find("APIdoc",{uniqID:API_doc.uniqID},function (records) {
-
-        /** 不存在APIdoc对象  */
-        if(!records||records.length==0){
-          res.send({retcode:-1,message:"不存在data对象",data:API_doc});
-        }
-        /** 存在APIdoc对象**/
-        else {//存在APIdoc
-          mongoService.Update("APIdoc", API_doc, {uniqID: API_doc.uniqID}, function (updatedDOC) {
-            /** 更新APIdoc成功 */
-            if(updatedDOC && updatedDOC.length>0){
-
-              apisItemArray.forEach(function(tempItem,index,array){
-                if(tempItem.uniqID){
-                      mongoService.Find("APIdocitem", {uniqID: tempItem.uniqID}, function (found) {
-                        /** 没有找到apiItem对象 **/
-                        if (!found || found.length == 0) {
-                          tempItem["APIdocID"]=updatedDOC[0].id;
-                          mongoService.Insert("APIdocitem", tempItem, function (insertedItem) {
-                            console.log(" 用户添加了APIdocitem:\r\n"+tempItem.name);
-                          });
-                        }
-
-                        /*** 找到apiItem对象***/
-                        else {
-                          mongoService.Update("APIdocitem", tempItem, {uniqID: tempItem.uniqID}, function (updatedItem) {
-                            console.log(" 用户更新了APIdocitem:\r\n"+tempItem.name);
-                          });
-                        }
-                      });
-
-                    }
-
-                    /** APIdocitem的uniqID为空**/
-                    else{
-                      res.send({retcode:-1,message:"前端传入apidocitem的uniqID为空,若不刷新前端,会重复添加apidocitem"});
-                    }
-
-              });
-              res.send({retcode:0,msg:"更新APIdoc成功,且更新APIdocitem成功。"});
-            }
-
-            /** 更新APIdoc失败**/
-            else{
-              res.send({retcode:-1,errMsg:"更新APIdoc失败,API_doc.uniqID="+API_doc.uniqID});
-            }
-
-          });
-        }
-
+      mongoService.Find("APIdoc",{},function(found){
+        res.view('doc/APIdoc', {api_docs:found, curr_doc:null});
       });
     }
-
-    /** 前端传入的API_doc.uniqID为空 */
-    else{
-      res.send({retcode:-1,errMsg:"前端传入的API_doc.uniqID为空"});
-    }
-
   },
 
   /**

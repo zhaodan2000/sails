@@ -1,36 +1,38 @@
 <!-- 弹modal框, 新增接口 -->
-<div class="modal fade" id="addAPIModal" tabindex="-1" role="dialog" aria-labelledby="addAPIModalLabel" aria-hidden="true">
+<div class="modal fade" id="addAPIModal" tabindex="-1" role="dialog" aria-labelledby="addAPIModalLabel"
+     aria-hidden="true" style="height:100%;overflow-y: scroll;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+        </button>
         <h4 class="modal-title" id="addAPIModalLabel">新增接口</h4>
       </div>
       <div class="modal-body">
-        <div id="api_template" uniqid="" class="form-group" >
+        <div id="api_template" uniqid="" class="form-group">
           <div class="form-group">
             <label class="control-label" style="text-align:right">接口名</label>
-            <input name="api_title" class="form-control" required="required" />
+            <input name="api_title" class="form-control" required="required"/>
           </div>
           <div class="form-group">
             <label class="control-label" style="text-align:right">接口描述</label>
-            <input name="api_desc" class="form-control" required="required" />
+            <input name="api_desc" class="form-control" required="required"/>
           </div>
           <div class="form-group">
             <label class="control-label" style="text-align:right">前置脚本</label>
-            <textarea name="api_prescript" class="form-control" rows="5" required="required" />
+            <textarea name="api_prescript" class="form-control" rows="5" required="required"/>
           </div>
           <div class="form-group">
             <label class="control-label" style="text-align:right">后置脚本</label>
-            <textarea name="api_testscript" class="form-control" rows="5" required="required" />
+            <textarea name="api_testscript" class="form-control" rows="5" required="required"/>
           </div>
           <div class="form-group">
             <label class="control-label">请求URL</label>
-            <input name="api_url" class="form-control" required="required" />
+            <input name="api_url" class="form-control" required="required"/>
           </div>
           <div class="form-group">
             <label class="control-label">请求content-type</label>
-            <select class="form-control" name="api_dataType" >
+            <select class="form-control" name="api_dataType">
               <option value="application/json" style=" ">application/json</option>
               <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
               <option value="application/application/octet-stream">application/application/octet-stream</option>
@@ -56,7 +58,7 @@
               <option value="true">true</option>
             </select>
             <label class="control-label">开发者</label>
-            <select class="col-3 form-control" name="api_dev" >
+            <select class="col-3 form-control" name="api_dev">
               <option value="赵聃">赵聃</option>
               <option value="李德洪">李德洪</option>
               <option value="周欢">周欢</option>
@@ -81,45 +83,49 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" data-backdrop="false" id="btn_add_api" ></span>保存</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" data-backdrop="false"
+                id="btn_add_api"></span>保存
+        </button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- 弹modal框, 保存接口 -->
-<div class="modal fade" id="saveAPIModal" tabindex="-1" role="dialog" aria-labelledby="saveAPIModalLabel" aria-hidden="true">
+<div class="modal fade" id="saveAPIModal" tabindex="-1" role="dialog" aria-labelledby="saveAPIModalLabel"
+     aria-hidden="true" style="height:100%;overflow-y: scroll;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+        </button>
         <h4 class="modal-title" id="saveAPIModalLabel">修改接口</h4>
       </div>
       <div class="modal-body">
-        <div id="api_template2" uniqid="" class="form-group" >
+        <div id="api_template2" uniqid="" class="form-group">
           <div class="form-group">
             <label class="control-label" style="text-align:right">接口名</label>
-            <input name="api_title" class="form-control" required="required" />
+            <input name="api_title" class="form-control" required="required"/>
           </div>
           <div class="form-group">
             <label class="control-label" style="text-align:right">接口描述</label>
-            <input name="api_desc" class="form-control" required="required" />
+            <input name="api_desc" class="form-control" required="required"/>
           </div>
           <div class="form-group">
             <label class="control-label" style="text-align:right">前置脚本</label>
-            <textarea name="api_prescript" class="form-control" rows="5" required="required" />
+            <textarea name="api_prescript" class="form-control" rows="5" required="required"/>
           </div>
           <div class="form-group">
             <label class="control-label" style="text-align:right">后置脚本</label>
-            <textarea name="api_testscript" class="form-control" rows="5" required="required" />
+            <textarea name="api_testscript" class="form-control" rows="5" required="required"/>
           </div>
           <div class="form-group">
             <label class="control-label">请求URL</label>
-            <input name="api_url" class="form-control" required="required" />
+            <input name="api_url" class="form-control" required="required"/>
           </div>
           <div class="form-group">
             <label class="control-label">请求content-type</label>
-            <select class="form-control" name="api_dataType" >
+            <select class="form-control" name="api_dataType">
               <option value="application/json" style=" ">application/json</option>
               <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
               <option value="application/application/octet-stream">application/application/octet-stream</option>
@@ -145,7 +151,7 @@
               <option value="true">true</option>
             </select>
             <label class="control-label">开发者</label>
-            <select class="col-3 form-control" name="api_dev" >
+            <select class="col-3 form-control" name="api_dev">
               <option value="赵聃">赵聃</option>
               <option value="李德洪">李德洪</option>
               <option value="周欢">周欢</option>
@@ -170,41 +176,50 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" data-backdrop="false" id="btn_update_api" ></span>保存</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" data-backdrop="false"
+                id="btn_update_api"></span>保存
+        </button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- 添加文档（弹Modal框） -->
-<div class="modal fade" id="addDocModal" tabindex="-1" role="dialog" aria-labelledby="addDocModalLabel" aria-hidden="true">
+<div class="modal fade" id="addDocModal" tabindex="-1" role="dialog" aria-labelledby="addDocModalLabel"
+     aria-hidden="true" style="height:100%;overflow-y: scroll;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+        </button>
         <h4 class="modal-title" id="addDocModalLabel">添加文档</h4>
       </div>
       <!--<form id="formModelForCollect" class="form-inline" action="/ShowDoc/addtestcasecollect" method="POST">-->
       <!--</form>-->
       <div class="modal-body">
-        <div id="tc_coll_template" uniqid="" class="form-group">
+        <div id="doc_template" uniqid="" class="form-group">
           <div>
             <label class="control-label" style="text-align:right">文档名</label>
-            <input name="tc_coll_name" class="form-control" required="required" />
+            <input name="doc_name" class="form-control" required="required"/>
+          </div>
+          <div>
+            <label class="control-label" style="text-align:right">文档描述</label>
+            <input name="doc_description" class="form-control" required="required"/>
           </div>
           <div>
             <label class="control-label" style="text-align:right">服务器</label>
-            <input name="tc_coll_testEnv" class="form-control" required="required" />
+            <input name="doc_testEnv" class="form-control" required="required"/>
           </div>
           <div style="display: none">
             <label class="control-label" style="text-align:right">端口号</label>
-            <input name="tc_coll_testEnvPort" class="form-control" />
+            <input name="doc_testEnvPort" class="form-control"/>
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" data-backdrop="false" id="add_doc_2db">提交</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" data-backdrop="false" id="add_doc_2db">提交
+        </button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal -->
@@ -213,24 +228,25 @@
 
 <div id="page-wrapper-right" aria-hidden="false" class="right-operation">
   <!-- 文档基本信息 -->
-  <div class="row" >
+  <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header" id="api_doc_name" uniqid="<%=curr_doc?curr_doc.uniqID:'无'%>"><%=curr_doc?curr_doc.name:'无'%></h1>
+      <h1 class="page-header" id="api_doc_name"
+          uniqid="<%= curr_doc?curr_doc.uniqID:'无' %>"><%= curr_doc?curr_doc.name:'无' %></h1>
       <ol class="breadcrumb">
         <li>
           <i class="fa fa-dashboard"></i>文档描述
-          <input name="docdesc" value="<%=curr_doc?curr_doc.docDesc:'无'%>" style="width:230px; height:auto;"/>
+          <input name="docdesc" value="<%= curr_doc?curr_doc.docDesc:'无' %>" style="width:230px; height:auto;"/>
         </li>
         <li>
           <i class="fa fa-dashboard"></i>测试环境
-          <input name="testEnv" value="<%=curr_doc?curr_doc.testEnv:'无'%>" style="width:180px; height:auto;" />
+          <input name="testEnv" value="<%= curr_doc?curr_doc.testEnv:'无' %>" style="width:180px; height:auto;"/>
         </li>
         <li style="display: none">
           <i class="fa fa-dashboard"></i>端口号
-          <input name="testEnvPort" value="<%=curr_doc?curr_doc.testEnvPort:'无'%>" style="width:50px; height:auto;" />
+          <input name="testEnvPort" value="<%= curr_doc?curr_doc.testEnvPort:'无' %>" style="width:50px; height:auto;"/>
         </li>
         <div style="float:right">
-          <div class="btn btn-info" id="addAPI_ui" >新增后台接口</div>
+          <div class="btn btn-info" id="addAPI_ui">新增后台接口</div>
         </div>
       </ol>
     </div>
@@ -252,21 +268,21 @@
           </tr>
           </thead>
           <tbody>
-          <%if(curr_doc && curr_doc.APIdoc_items && curr_doc.APIdoc_items.length>0){
-          for(var i=curr_doc.APIdoc_items.length-1;i>=0;i--){%>
+          <% if(curr_doc && curr_doc.APIdoc_items && curr_doc.APIdoc_items.length > 0){
+          for(var i = curr_doc.APIdoc_items.length - 1;i >= 0;i--){ %>
           <tr>
-            <td  style="display:none"><%=curr_doc.APIdoc_items[i].uniqID%></td>
-            <td><%=curr_doc.APIdoc_items[i].name%></td>
-            <td><%=curr_doc.APIdoc_items[i].description%></td>
-            <td><%=curr_doc.APIdoc_items[i].url%></td>
-            <td><%=curr_doc.APIdoc_items[i].dev%></td>
-            <td uniqid="<%=curr_doc.APIdoc_items[i].uniqID%>">
-              <a style="cursor: pointer" name="editAPI" uniqid="<%=curr_doc.APIdoc_items[i].uniqID%>">修改</a>
-              <a style="cursor: pointer" name="removeAPI" uniqid="<%=curr_doc.APIdoc_items[i].uniqID%>">删除</a>
+            <td style="display:none"><%= curr_doc.APIdoc_items[i].uniqID %></td>
+            <td><%= curr_doc.APIdoc_items[i].name %></td>
+            <td><%= curr_doc.APIdoc_items[i].description %></td>
+            <td><%= curr_doc.APIdoc_items[i].url %></td>
+            <td><%= curr_doc.APIdoc_items[i].dev %></td>
+            <td uniqid="<%= curr_doc.APIdoc_items[i].uniqID %>">
+              <a style="cursor: pointer" name="editAPI" uniqid="<%= curr_doc.APIdoc_items[i].uniqID %>">修改</a>
+              <a style="cursor: pointer" name="removeAPI" uniqid="<%= curr_doc.APIdoc_items[i].uniqID %>">删除</a>
             </td>
             </td>
           </tr>
-          <%}}%>
+          <% }} %>
 
           </tbody>
         </table>
@@ -279,30 +295,36 @@
 
 <!--左边目录 --->
 <ul class="nav navbar-nav side-nav">
-  <li >
-    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#docModal" id="add_apidoc"  style="width: auto;height: auto">添加文档</button>
+  <li>
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#docModal" id="add_apidoc"
+            style="width: auto;height: auto">添加文档
+    </button>
   </li>
 
-  <%if(api_docs&&api_docs.length>0){
-  for(var i=api_docs.length-1; i>=0;i--){%>
-  <li >
-    <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#doc_' + (i+1) %>" style="display:block">
-      <i class="fa fa-fw"></i><%=api_docs[i].name%>
+  <% if(api_docs && api_docs.length > 0){
+  for(var i = api_docs.length - 1; i >= 0;i--){ %>
+  <li>
+    <a href="javascript:void(0)" data-toggle="collapse" data-target="<%= '#doc_' + (i + 1) %>" style="display:block">
+      <i class="fa fa-fw"></i><%= api_docs[i].name %>
       <div>
-        <button id="<%='edit_api_doc_'+i%>" name="getCurDoc" uniqid="<%=api_docs[i].uniqID%>" class="fa fa-edit" style="width: auto;height: auto">编辑</button>
-        <button id="<%='view_api_doc_'+i%>" name="viewMDfile" uniqid="<%=api_docs[i].uniqID%>" class="fa fa-dashboard" style="width: auto;height: auto">查看全部</button>
-        <!--<button id="<%='delete_api_doc_'+i%>" name="deleteMDfile" uniqid="<%=api_docs[i].uniqID%>" disabled="true" class="fa fa-trash" style="width: auto;height:auto">删除</button>-->
+        <button id="<%= 'edit_api_doc_'+i %>" name="getCurDoc" uniqid="<%= api_docs[i].uniqID %>" class="fa fa-edit"
+                style="width: auto;height: auto">编辑
+        </button>
+        <button id="<%= 'view_api_doc_'+i %>" name="viewMDfile" uniqid="<%= api_docs[i].uniqID %>"
+                class="fa fa-dashboard" style="width: auto;height: auto">查看全部
+        </button>
+        <!--<button id="<%= 'delete_api_doc_'+i %>" name="deleteMDfile" uniqid="<%= api_docs[i].uniqID %>" disabled="true" class="fa fa-trash" style="width: auto;height:auto">删除</button>-->
       </div>
     </a>
   </li>
-  <%} }%>
+  <% } } %>
 </ul>
 
 
 <script>
   //定义全局变量, 来保存请求头、请求参数、请求response的jsoneditors.
-  var global_add_header_jsoneditor=null, global_add_param_jsoneditor=null,global_add_response_jsoneditor=null,
-    global_update_header_jsoneditor=null,global_update_param_jsoneditor=null,global_update_response_jsoneditor=null;
+  var global_add_header_jsoneditor = null, global_add_param_jsoneditor = null, global_add_response_jsoneditor = null,
+    global_update_header_jsoneditor = null, global_update_param_jsoneditor = null, global_update_response_jsoneditor = null;
 </script>
 
 <link href="/xd-autotest-framework/css/jsoneditor.css" rel="stylesheet" type="text/css">

@@ -97,6 +97,30 @@ $('#add_tc_coll_2db').click(function () {
 
 });
 
+$('#update_tc_coll').click(function(){
+  var testEnv= $('#testEnv').val();
+  var uniqid=$('#tc_coll_name').attr("uniqid");
+
+  var tc_coll={testEnv:testEnv,uniqID:uniqid};
+
+  $.ajax({
+    url:'/case/update_tc_collection',
+    method:'post',
+    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+    data:{
+      reqFolder:tc_coll
+    },
+    success:function(data){
+      alert("保存成功!");
+    },
+    error:function (data) {
+      alert("保存失败!"+JSON.stringify(data,null,"\t"));
+    }
+  });
+
+});
+
+
 /** 弹框添加用例UI **/
 $('#add_tc_ui').click(function () {
    $('#addTCModal').modal();

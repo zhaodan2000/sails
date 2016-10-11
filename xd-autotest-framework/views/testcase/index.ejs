@@ -1,5 +1,6 @@
+
 <!-- 弹modal框, 新增用例 -->
-<div class="modal fade" id="addTCModal" tabindex="-1" role="dialog" aria-labelledby="addTCModalLabel" aria-hidden="true">
+<div class="modal fade" id="addTCModal" tabindex="-1" role="dialog" aria-labelledby="addTCModalLabel" aria-hidden="true" style="height:100%;overflow-y: scroll;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,71 +9,63 @@
       </div>
       <div class="modal-body">
         <div id="tc_template" uniqid="" class="form-group" >
-          <div class="form-group">
-            <label class="control-label" style="text-align:right">选择接口</label>
-            <select id="select_tc_coll_apiName" name="tc_apiName" class="form-control" onchange="changeAPI()"/>
-            <!--<option value="">text</option>-->
-            </select>
-            <button id="populate_case" type="button" class="btn btn-info" style="display: none">确定</button>
-          </div>
-          <div class="form-group">
-            <label class="control-label" style="text-align:right">用例名</label>
-            <input name="tc_title" class="form-control" required="required" />
-          </div>
-          <div class="form-group">
-            <label class="control-label" style="text-align:right">用例描述</label>
-            <input name="tc_desc" class="form-control" required="required" />
-          </div>
-          <div class="form-group">
-            <label class="control-label" style="text-align:right">前置脚本</label>
-            <textarea name="tc_prescript" class="form-control" rows="5" required="required" />
-          </div>
-          <div class="form-group">
-            <label class="control-label" style="text-align:right">后置脚本</label>
-            <textarea name="tc_testscript" class="form-control" rows="5" required="required" />
-          </div>
-          <div class="form-group">
-            <label class="control-label">请求URL</label>
-            <input name="tc_url" class="form-control" required="required" />
-          </div>
-          <div class="form-group">
-            <label class="control-label">请求content-type</label>
-            <input name="tc_dataType" class="form-control" required="required" />
-            <select class="form-control" name="tc_dataType" style="display: none">
-              <option value="application/json">application/json</option>
-              <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
-              <option value="application/application/octet-stream">application/application/octet-stream</option>
-              <option value="text/html">text/html</option>
-              <option value="text/plain">text/plain</option>
-              <option value="text/xml">text/xml</option>
-              <option value="image/gif">image/gif</option>
-              <option value="image/jpeg">image/jpeg</option>
-              <option value="image/png">image/png</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="control-label">请求method</label>
-            <input name="tc_method" class="form-control" required="required" />
-            <select class="form-control" name="tc_method" style="display:none">
-              <option value="POST" selected="selected">POST</option>
-              <option value="GET">GET</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="control-label">是否废弃</label>
-            <input name="tc_disabled" class="form-control" required="required" />
-            <select class="col-3 form-control" name="tc_disabled" style="display:none">
-              <option value="false">false</option>
-              <option value="true">true</option>
-            </select>
-            <label class="control-label">开发者</label>
-            <input name="tc_dev" class="form-control" required="required" />
-            <select class="col-3 form-control" name="tc_dev" style="display: none" >
-              <option value="赵聃">赵聃</option>
-              <option value="李德洪">李德洪</option>
-              <option value="周欢">周欢</option>
-            </select>
-          </div>
+            <div class="form-group">
+              <label class="control-label" style="text-align:right">选择接口</label>
+              <select id="select_tc_coll_apiName" name="tc_apiName" class="form-control" onchange="changeAPI()"/>
+              <!--<option value="">text</option>-->
+              </select>
+              <button id="populate_case" type="button" class="btn btn-info" style="display: none">确定</button>
+            </div>
+            <div class="form-group">
+              <label class="control-label" style="text-align:right">用例名</label>
+              <input name="tc_title" class="form-control" required="required" />
+            </div>
+            <div class="form-group">
+              <label class="control-label" style="text-align:right">用例描述</label>
+              <input name="tc_desc" class="form-control" required="required" />
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求URL</label>
+              <input name="tc_url" class="form-control" required="required" />
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求content-type</label>
+              <input name="tc_dataType" class="form-control" required="required" />
+              <select class="form-control" name="tc_dataType" style="display: none">
+                <option value="application/json">application/json</option>
+                <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
+                <option value="application/application/octet-stream">application/application/octet-stream</option>
+                <option value="text/html">text/html</option>
+                <option value="text/plain">text/plain</option>
+                <option value="text/xml">text/xml</option>
+                <option value="image/gif">image/gif</option>
+                <option value="image/jpeg">image/jpeg</option>
+                <option value="image/png">image/png</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求method</label>
+              <input name="tc_method" class="form-control" required="required" />
+              <select class="form-control" name="tc_method" style="display:none">
+                <option value="POST" selected="selected">POST</option>
+                <option value="GET">GET</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label">是否废弃</label>
+              <input name="tc_disabled" class="form-control" required="required" />
+              <select class="col-3 form-control" name="tc_disabled" style="display:none">
+                <option value="false">false</option>
+                <option value="true">true</option>
+              </select>
+              <label class="control-label">开发者</label>
+              <input name="tc_dev" class="form-control" required="required" />
+              <select class="col-3 form-control" name="tc_dev" style="display: none" >
+                <option value="赵聃">赵聃</option>
+                <option value="李德洪">李德洪</option>
+                <option value="周欢">周欢</option>
+              </select>
+            </div>
           <div class="form-group">
             <label class="control-label">请求头header</label>
             <div id="jsoneditor_header_" style="width: auto; height: auto;"></div>
@@ -97,7 +90,7 @@
 </div>
 
 <!-- 弹modal框, 修改用例 -->
-<div class="modal fade" id="editTCModal" tabindex="-1" role="dialog" aria-labelledby="editTCModalLabel" aria-hidden="true">
+<div class="modal fade" id="editTCModal" tabindex="-1" role="dialog" aria-labelledby="editTCModalLabel" aria-hidden="true" style="height:100%;overflow-y: scroll;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -113,14 +106,6 @@
           <div class="form-group">
             <label class="control-label" style="text-align:right">用例描述</label>
             <input name="tc_desc" class="form-control" required="required" />
-          </div>
-          <div class="form-group">
-            <label class="control-label" style="text-align:right">前置脚本</label>
-            <textarea name="tc_prescript" class="form-control" rows="5" required="required" />
-          </div>
-          <div class="form-group">
-            <label class="control-label" style="text-align:right">后置脚本</label>
-            <textarea name="tc_testscript" class="form-control" rows="5" required="required" />
           </div>
           <div class="form-group">
             <label class="control-label">请求URL</label>
@@ -184,7 +169,7 @@
 </div>
 
 <!-- 添加用例集合（弹Modal框） -->
-<div class="modal fade" id="addTCCollectModal" tabindex="-1" role="dialog" aria-labelledby="addTCCollectModalLabel" aria-hidden="true">
+<div class="modal fade" id="addTCCollectModal" tabindex="-1" role="dialog" aria-labelledby="addTCCollectModalLabel" aria-hidden="true" style="height:100%;overflow-y: scroll;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -205,7 +190,7 @@
           </div>
           <div style="display: none">
             <label class="control-label" style="text-align:right">端口号</label>
-            <input name="tc_coll_testEnvPort" class="form-control" />
+            <input name="tc_coll_testEnvPort" class="form-control" required="required" />
           </div>
           <div>
             <label class="control-label" style="text-align:right">选择文档</label>
@@ -223,79 +208,8 @@
   </div><!-- /.modal -->
 </div>
 
-<!-- -->
-<div id="page-wrapper-right" aria-hidden="false" class="right-operation">
-
-
-  <div class="row">
-    <div class="col-lg-12">
-      <!-- Page Heading -->
-      <h1 class="page-header" id="tc_coll_name" uniqid="<%=curr_tc_coll?curr_tc_coll.uniqID:''%>"><%=curr_tc_coll?curr_tc_coll.name:'默认'%></h1>
-      <ol class="breadcrumb">
-        <li>
-          <i class="fa fa-dashboard"></i>所属文档
-          <input id="tc_coll_doc" name="tc_coll_doc" value="<%=curr_tc_coll?curr_tc_coll.docName:'无'%>" uniqid="<%=curr_tc_coll?curr_tc_coll.docUniqID:''%>" style="width:230px; height:auto;"/>
-        </li>
-        <li>
-          <i class="fa fa-dashboard"></i>服务器
-          <input id="testEnv" name="testEnv" value="<%=curr_tc_coll?curr_tc_coll.testEnv:'无'%>" style="width:180px; height:auto;" />
-        </li>
-        <li style="display: none">
-          <i class="fa fa-dashboard"></i>端口号
-          <input id="testEnvPort" name="testEnvPort" value="<%=curr_tc_coll?curr_tc_coll.testEnvPort:'无'%>" style="width:50px; height:auto;" />
-        </li>
-        <div style="float:right">
-          <div class="btn btn-info" id="add_tc_ui" style="width: auto;height: auto">新增用例</div>
-          <div class="btn btn-info" id="save_tc_coll" style="width: auto;height: auto">保存文档</div>
-        </div>
-      </ol>
-    </div>
-    <!-- /.row -->
-
-    <!-- 接口表格 -->
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="table-responsive">
-          <table class="table table-hover">
-            <thead>
-            <tr>
-              <th style="display:none">uniqid</th>
-              <th>用例名</th>
-              <th>用例描述</th>
-              <th>请求URL</th>
-              <th style="width:8%">开发者</th>
-              <th style="width:10%">操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <%if(curr_tc_coll && curr_tc_coll.ReqItems){
-            for(var i=curr_tc_coll.ReqItems.length-1;i>=0;i--){%>
-            <tr>
-              <td  style="display:none"><%=curr_tc_coll.ReqItems[i].uniqID%></td>
-              <td><%=curr_tc_coll.ReqItems[i].name%></td>
-              <td><%=curr_tc_coll.ReqItems[i].description%></td>
-              <td><%=curr_tc_coll.ReqItems[i].url%></td>
-              <td><%=curr_tc_coll.ReqItems[i].dev%></td>
-              <td uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">
-                <a style="cursor: pointer" name="editTC" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">修改</a>
-                <a style="cursor: pointer" name="removeTC" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">删除</a>
-              </td>
-              </td>
-            </tr>
-            <%}}%>
-
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
 <!-- 左侧栏: 用例集合列表。 -->
-<ul class="nav navbar-nav side-nav">
+  <ul class="nav navbar-nav side-nav">
     <li style="height: 49px">
       <button type="button" class="btn btn-info" data-toggle="modal" data-target="" id="append_tc_coll_ui" style="width: auto;height: auto">添加用例集合</button>
       <button type="button" class="btn btn-info" data-toggle="modal" id="del_all_tc_coll" style="width: auto;height: auto;display: none">删除所有用例集合</button>
@@ -331,6 +245,73 @@
     <%})}%>
   </ul>
 
+  <div id="page-wrapper-right" aria-hidden="false" class="right-operation">
+
+
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Page Heading -->
+        <h1 class="page-header" id="tc_coll_name" uniqid="<%=curr_tc_coll?curr_tc_coll.uniqID:''%>"><%=curr_tc_coll?curr_tc_coll.name:'默认'%></h1>
+        <ol class="breadcrumb">
+          <li>
+            <i class="fa fa-dashboard"></i>所属文档
+            <input id="tc_coll_doc" name="tc_coll_doc" value="<%=curr_tc_coll?curr_tc_coll.docName:'无'%>" uniqid="<%=curr_tc_coll?curr_tc_coll.docUniqID:''%>" style="width:230px; height:auto;"/>
+          </li>
+          <li>
+            <i class="fa fa-dashboard"></i>服务器
+            <input id="testEnv" name="testEnv" value="<%=curr_tc_coll?curr_tc_coll.testEnv:'无'%>" style="width:180px; height:auto;" />
+          </li>
+          <li style="display: none">
+            <i class="fa fa-dashboard"></i>端口号
+            <input id="testEnvPort" name="testEnvPort" value="<%=curr_tc_coll?curr_tc_coll.testEnvPort:'无'%>" style="width:50px; height:auto;" />
+          </li>
+          <div style="float:right">
+            <div class="btn btn-info" id="add_tc_ui" style="width: auto;height: auto">新增用例</div>
+            <div class="btn btn-info" id="update_tc_coll" style="width: auto;height: auto">更新集合</div>
+          </div>
+        </ol>
+      </div>
+    </div>
+      <!-- /.row -->
+
+      <!-- 接口表格 -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th style="display:none">uniqid</th>
+                <th>用例名</th>
+                <th>用例描述</th>
+                <th>请求URL</th>
+                <th style="width:8%">开发者</th>
+                <th style="width:10%">操作</th>
+              </tr>
+              </thead>
+              <tbody>
+              <%if(curr_tc_coll && curr_tc_coll.ReqItems){
+              for(var i=curr_tc_coll.ReqItems.length-1;i>=0;i--){%>
+              <tr>
+                <td  style="display:none"><%=curr_tc_coll.ReqItems[i].uniqID%></td>
+                <td><%=curr_tc_coll.ReqItems[i].name%></td>
+                <td><%=curr_tc_coll.ReqItems[i].description%></td>
+                <td><%=curr_tc_coll.ReqItems[i].url%></td>
+                <td><%=curr_tc_coll.ReqItems[i].dev%></td>
+                <td uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">
+                  <a style="cursor: pointer" name="editTC" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">修改</a>
+                  <a style="cursor: pointer" name="removeTC" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">删除</a>
+                </td>
+                </td>
+              </tr>
+              <%}}%>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
 
   <link href="/xd-autotest-framework/css/jsoneditor.css" rel="stylesheet" type="text/css">
   <script src="/xd-autotest-framework/js/jsoneditor.js"></script>
