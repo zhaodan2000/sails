@@ -44,32 +44,28 @@ module.exports.routes = {
    *                                                                          *
    ***************************************************************************/
 
+  //home
   '/overview': 'Home.overview',
   '/doc': 'InterfaceDoc.testService',
   '/task': 'Home.task',
   '/case': 'Home.testcase',
   '/schedule': 'TaskSchedule.refreshView',
-  // 'post /doc/query_api':'InterfaceDoc.query',
+
+  //base
   'post /base/query': 'InterfaceDoc.query',
   'post /base/remove': 'InterfaceDoc.remove',
 
   //doc
   'post /doc/save_doc': 'InterfaceDoc.saveDoc',
   'post /doc/save_api': 'InterfaceDoc.saveDocItem',
-  'post /doc/savedocwithItem': 'InterfaceDoc.saveDoc2db',
   'post /doc/showmdfile': 'EditDoc.showMdFile',
   'post /doc/query_doc': "EditDoc.queryDoc",
-  //'post /doc/remove':"InterfaceDoc.remove",
 
   //case
   'post /case/save_tc_collection': 'ShowDoc.add_tc_coll_2db',
   'post /case/update_tc_collection':'ShowDoc.save_tc_coll',
   'post /case/save_case': 'ShowDoc.save_case',
   'post /case/query_tc_collection': 'ShowDoc.query_tc_coll',
-
-  //doc test url
-  'get /doc/findRequestItemByName': 'DocDemo.findRequestItemByName',
-  'post /doc/insertRequestItemService': 'DocDemo.insertRequestItemService',
 
   //sc
   'post /sc/save': 'TaskSchedule.save',
@@ -80,8 +76,6 @@ module.exports.routes = {
 
   //sc
   'post /log/all': 'LogSchedule.all',
-
-  //'post /doc/remove':"InterfaceDoc.remove",
 
   '/response': {
     view: 'response'
