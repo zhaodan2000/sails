@@ -2,14 +2,6 @@
    * Created by lyh on 8/8/16.
    */
 
-
- // $(document).ready(function() {
- //   console.log(++counter);
- //   global_header_jsoneditor=null;
- //   global_param_jsoneditor=null;
- //   global_response_jsoneditor=null;
- // });
-
  /** 在UI上添加 jsoneditor 控件 **/
  function createJSONeditor(container_id, json) {
    //var container = document.getElementById('jsoneditor_queryParams_'+(i+1));
@@ -110,7 +102,7 @@
   * 通过弹出模态框, 来提供添加新接口的UI
   * */
  $("#addAPI_ui").click(function () {
-   $('#myModal').modal();
+   $('#addAPIModal').modal();
 
    if(!global_add_header_jsoneditor){
      //create the json editor: createJSONeditor
@@ -130,6 +122,22 @@
      var response_editor = createJSONeditor(response_container_id, {});
      global_add_response_jsoneditor=response_editor;
    }
+
+   var header_value={
+     "clientType": "android",
+     "version": "1.0.0",
+     "module": "3",
+     "deviceId": "999",
+     "clientIp": "192.168.0.1",
+     "sessionToken": "bb93c10b-7fea-4384-bbeb-8d63e8533b54"
+   };
+
+   var response_value={
+     "retcode": "0"
+   };
+
+   global_add_header_jsoneditor.set(header_value);
+   global_add_response_jsoneditor.set(response_value);
 
  });
 
@@ -195,7 +203,7 @@
   * 修改指定的接口。
   * */
  $('a[name="editAPI"]').click(function(){
-   $('#myModal2').modal();
+   $('#saveAPIModal').modal();
 
    if(!global_update_header_jsoneditor){
      //create the json editor: createJSONeditor

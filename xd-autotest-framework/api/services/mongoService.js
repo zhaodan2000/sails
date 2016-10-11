@@ -374,20 +374,7 @@ module.exports={
         break;
     }
   },
-
-  FindByObjId:function(modelType,dic,callback){
-    var _id="57bd5fcaf3146ed921e27613";
-    ScheduleStrategy.findById(_id,function(err,records) {
-      if (!err) {
-        callback(records);
-        return records;
-      } else {
-        callback(null);
-        return err;
-      }
-    });
-  },
-
+  
   /**
    * 根据传入的model类型,以及查找的条件,
    * 将对应的model记录删除掉。
