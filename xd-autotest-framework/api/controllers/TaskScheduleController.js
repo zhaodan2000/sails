@@ -118,7 +118,6 @@ module.exports = {
     var sc_task_id=req.body.sc_task_id;
       mongoService.Find(modelType,{uniqID:req.body.uniqID}, function (records) {
       if (records) {
-        console.log(records[0]);
         scheduleServices.execute(records[0],sc_id,sc_host,sc_task_id);
         return res.send();
       }

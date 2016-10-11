@@ -82,7 +82,6 @@ module.exports = {
       var _collection = collection.getCollection();
       //console.log(JSON.stringify(_collection));
       service.runCollection(_collection, function (exitCode, results) {
-        console.log(results);
         var log_id=(new Date().getTime()).toString();
         var log = {
           log_id:log_id,
