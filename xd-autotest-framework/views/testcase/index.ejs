@@ -187,7 +187,7 @@
             <label class="control-label" style="text-align:right">服务器</label>
             <input name="tc_coll_testEnv" class="form-control" required="required" />
           </div>
-          <div>
+          <div style="display: none">
             <label class="control-label" style="text-align:right">端口号</label>
             <input name="tc_coll_testEnvPort" class="form-control" required="required" />
           </div>
@@ -258,18 +258,19 @@
           </li>
           <li>
             <i class="fa fa-dashboard"></i>服务器
-            <input id="testEnv" name="testEnv" value="<%=curr_tc_coll?curr_tc_coll.testEnv:'无'%>" style="width:130px; height:auto;" />
+            <input id="testEnv" name="testEnv" value="<%=curr_tc_coll?curr_tc_coll.testEnv:'无'%>" style="width:180px; height:auto;" />
           </li>
-          <li>
+          <li style="display: none">
             <i class="fa fa-dashboard"></i>端口号
             <input id="testEnvPort" name="testEnvPort" value="<%=curr_tc_coll?curr_tc_coll.testEnvPort:'无'%>" style="width:50px; height:auto;" />
           </li>
           <div style="float:right">
             <div class="btn btn-info" id="add_tc_ui" style="width: auto;height: auto">新增用例</div>
-            <div class="btn btn-info" id="save_tc_coll" style="width: auto;height: auto">保存文档</div>
+            <div class="btn btn-info" id="update_tc_coll" style="width: auto;height: auto">更新集合</div>
           </div>
         </ol>
       </div>
+    </div>
       <!-- /.row -->
 
       <!-- 接口表格 -->
@@ -310,9 +311,6 @@
         </div>
       </div>
     </div>
-
-  </div>
-
 
   <link href="/xd-autotest-framework/css/jsoneditor.css" rel="stylesheet" type="text/css">
   <script src="/xd-autotest-framework/js/jsoneditor.js"></script>

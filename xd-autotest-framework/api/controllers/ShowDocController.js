@@ -230,6 +230,21 @@ module.exports = {
         res.view('testcase/index', {data: docs_records, curr_tc_coll: null}); 
       }  
     }); 
+  },
+
+  save_tc_coll:function(req,res){
+    var tc_coll = req.body['reqFolder'];
+    if(tc_coll&&tc_coll.uniqID){
+      mongoService.Update("ReqFolder",tc_coll,{uniqID:tc_coll.uniqID},function(updated){
+        if(updated&&updated.length>0){
+          res.ok();
+        }else{
+          res.fail("更新失败");
+        }
+      });
+    }else{
+        res.fail("不存在该对象的uniqID");
+    }
   }
 }
 
