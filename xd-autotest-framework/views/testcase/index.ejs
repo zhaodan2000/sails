@@ -9,7 +9,6 @@
       </div>
       <div class="modal-body">
         <div id="tc_template" uniqid="" class="form-group" >
-          <div style="display: none">
             <div class="form-group">
               <label class="control-label" style="text-align:right">选择接口</label>
               <select id="select_tc_coll_apiName" name="tc_apiName" class="form-control" onchange="changeAPI()"/>
@@ -28,8 +27,6 @@
             <div class="form-group">
               <label class="control-label">请求URL</label>
               <input name="tc_url" class="form-control" required="required" />
-            </div>
-
             </div>
             <div class="form-group">
               <label class="control-label">请求content-type</label>
@@ -69,9 +66,6 @@
                 <option value="周欢">周欢</option>
               </select>
             </div>
-
-
-
           <div class="form-group">
             <label class="control-label">请求头header</label>
             <div id="jsoneditor_header_" style="width: auto; height: auto;"></div>
@@ -96,7 +90,7 @@
 </div>
 
 <!-- 弹modal框, 修改用例 -->
-<div class="modal fade" id="editTCModal" tabindex="-1" role="dialog" aria-labelledby="editTCModalLabel" aria-hidden="true">
+<div class="modal fade" id="editTCModal" tabindex="-1" role="dialog" aria-labelledby="editTCModalLabel" aria-hidden="true" style="height:100%;overflow-y: scroll;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -105,7 +99,6 @@
       </div>
       <div class="modal-body">
         <div id="tc_template2" uniqid="" class="form-group" >
-
           <div class="form-group">
             <label class="control-label" style="text-align:right">用例名</label>
             <input name="tc_title" class="form-control" required="required" />
@@ -176,7 +169,7 @@
 </div>
 
 <!-- 添加用例集合（弹Modal框） -->
-<div class="modal fade" id="addTCCollectModal" tabindex="-1" role="dialog" aria-labelledby="addTCCollectModalLabel" aria-hidden="true">
+<div class="modal fade" id="addTCCollectModal" tabindex="-1" role="dialog" aria-labelledby="addTCCollectModalLabel" aria-hidden="true" style="height:100%;overflow-y: scroll;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
