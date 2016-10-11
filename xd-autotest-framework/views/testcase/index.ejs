@@ -24,6 +24,14 @@
             <input name="tc_desc" class="form-control" required="required" />
           </div>
           <div class="form-group">
+            <label class="control-label" style="text-align:right">前置脚本</label>
+            <textarea name="tc_prescript" class="form-control" rows="5" required="required" />
+          </div>
+          <div class="form-group">
+            <label class="control-label" style="text-align:right">前置脚本</label>
+            <textarea name="tc_testscript" class="form-control" rows="5" required="required" />
+          </div>
+          <div class="form-group">
             <label class="control-label">请求URL</label>
             <input name="tc_url" class="form-control" required="required" />
           </div>
@@ -105,6 +113,14 @@
           <div class="form-group">
             <label class="control-label" style="text-align:right">用例描述</label>
             <input name="tc_desc" class="form-control" required="required" />
+          </div>
+          <div class="form-group">
+            <label class="control-label" style="text-align:right">前置脚本</label>
+            <textarea name="tc_prescript" class="form-control" rows="5" required="required" />
+          </div>
+          <div class="form-group">
+            <label class="control-label" style="text-align:right">前置脚本</label>
+            <textarea name="tc_testscript" class="form-control" rows="5" required="required" />
           </div>
           <div class="form-group">
             <label class="control-label">请求URL</label>
@@ -207,8 +223,79 @@
   </div><!-- /.modal -->
 </div>
 
+<!-- -->
+<div id="page-wrapper-right" aria-hidden="false" class="right-operation">
+
+
+  <div class="row">
+    <div class="col-lg-12">
+      <!-- Page Heading -->
+      <h1 class="page-header" id="tc_coll_name" uniqid="<%=curr_tc_coll?curr_tc_coll.uniqID:''%>"><%=curr_tc_coll?curr_tc_coll.name:'默认'%></h1>
+      <ol class="breadcrumb">
+        <li>
+          <i class="fa fa-dashboard"></i>所属文档
+          <input id="tc_coll_doc" name="tc_coll_doc" value="<%=curr_tc_coll?curr_tc_coll.docName:'无'%>" uniqid="<%=curr_tc_coll?curr_tc_coll.docUniqID:''%>" style="width:230px; height:auto;"/>
+        </li>
+        <li>
+          <i class="fa fa-dashboard"></i>服务器
+          <input id="testEnv" name="testEnv" value="<%=curr_tc_coll?curr_tc_coll.testEnv:'无'%>" style="width:130px; height:auto;" />
+        </li>
+        <li>
+          <i class="fa fa-dashboard"></i>端口号
+          <input id="testEnvPort" name="testEnvPort" value="<%=curr_tc_coll?curr_tc_coll.testEnvPort:'无'%>" style="width:50px; height:auto;" />
+        </li>
+        <div style="float:right">
+          <div class="btn btn-info" id="add_tc_ui" style="width: auto;height: auto">新增用例</div>
+          <div class="btn btn-info" id="save_tc_coll" style="width: auto;height: auto">保存文档</div>
+        </div>
+      </ol>
+    </div>
+    <!-- /.row -->
+
+    <!-- 接口表格 -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th style="display:none">uniqid</th>
+              <th>用例名</th>
+              <th>用例描述</th>
+              <th>请求URL</th>
+              <th style="width:8%">开发者</th>
+              <th style="width:10%">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%if(curr_tc_coll && curr_tc_coll.ReqItems){
+            for(var i=curr_tc_coll.ReqItems.length-1;i>=0;i--){%>
+            <tr>
+              <td  style="display:none"><%=curr_tc_coll.ReqItems[i].uniqID%></td>
+              <td><%=curr_tc_coll.ReqItems[i].name%></td>
+              <td><%=curr_tc_coll.ReqItems[i].description%></td>
+              <td><%=curr_tc_coll.ReqItems[i].url%></td>
+              <td><%=curr_tc_coll.ReqItems[i].dev%></td>
+              <td uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">
+                <a style="cursor: pointer" name="editTC" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">修改</a>
+                <a style="cursor: pointer" name="removeTC" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">删除</a>
+              </td>
+              </td>
+            </tr>
+            <%}}%>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
 <!-- 左侧栏: 用例集合列表。 -->
-  <ul class="nav navbar-nav side-nav">
+<ul class="nav navbar-nav side-nav">
     <li style="height: 49px">
       <button type="button" class="btn btn-info" data-toggle="modal" data-target="" id="append_tc_coll_ui" style="width: auto;height: auto">添加用例集合</button>
       <button type="button" class="btn btn-info" data-toggle="modal" id="del_all_tc_coll" style="width: auto;height: auto;display: none">删除所有用例集合</button>
@@ -243,75 +330,6 @@
     </li>
     <%})}%>
   </ul>
-
-  <div id="page-wrapper-right" aria-hidden="false" class="right-operation">
-
-
-    <div class="row">
-      <div class="col-lg-12">
-        <!-- Page Heading -->
-        <h1 class="page-header" id="tc_coll_name" uniqid="<%=curr_tc_coll?curr_tc_coll.uniqID:''%>"><%=curr_tc_coll?curr_tc_coll.name:'默认'%></h1>
-        <ol class="breadcrumb">
-          <li>
-            <i class="fa fa-dashboard"></i>所属文档
-            <input id="tc_coll_doc" name="tc_coll_doc" value="<%=curr_tc_coll?curr_tc_coll.docName:'无'%>" uniqid="<%=curr_tc_coll?curr_tc_coll.docUniqID:''%>" style="width:230px; height:auto;"/>
-          </li>
-          <li>
-            <i class="fa fa-dashboard"></i>服务器
-            <input id="testEnv" name="testEnv" value="<%=curr_tc_coll?curr_tc_coll.testEnv:'无'%>" style="width:130px; height:auto;" />
-          </li>
-          <li>
-            <i class="fa fa-dashboard"></i>端口号
-            <input id="testEnvPort" name="testEnvPort" value="<%=curr_tc_coll?curr_tc_coll.testEnvPort:'无'%>" style="width:50px; height:auto;" />
-          </li>
-          <div style="float:right">
-            <div class="btn btn-info" id="add_tc_ui" style="width: auto;height: auto">新增用例</div>
-            <div class="btn btn-info" id="save_tc_coll" style="width: auto;height: auto">保存文档</div>
-          </div>
-        </ol>
-      </div>
-      <!-- /.row -->
-
-      <!-- 接口表格 -->
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <thead>
-              <tr>
-                <th style="display:none">uniqid</th>
-                <th>用例名</th>
-                <th>用例描述</th>
-                <th>请求URL</th>
-                <th style="width:8%">开发者</th>
-                <th style="width:10%">操作</th>
-              </tr>
-              </thead>
-              <tbody>
-              <%if(curr_tc_coll && curr_tc_coll.ReqItems){
-              for(var i=curr_tc_coll.ReqItems.length-1;i>=0;i--){%>
-              <tr>
-                <td  style="display:none"><%=curr_tc_coll.ReqItems[i].uniqID%></td>
-                <td><%=curr_tc_coll.ReqItems[i].name%></td>
-                <td><%=curr_tc_coll.ReqItems[i].description%></td>
-                <td><%=curr_tc_coll.ReqItems[i].url%></td>
-                <td><%=curr_tc_coll.ReqItems[i].dev%></td>
-                <td uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">
-                  <a style="cursor: pointer" name="editTC" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">修改</a>
-                  <a style="cursor: pointer" name="removeTC" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">删除</a>
-                </td>
-                </td>
-              </tr>
-              <%}}%>
-
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
 
 
   <link href="/xd-autotest-framework/css/jsoneditor.css" rel="stylesheet" type="text/css">
