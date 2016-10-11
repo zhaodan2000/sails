@@ -374,7 +374,7 @@ module.exports={
         break;
     }
   },
-  
+
   /**
    * 根据传入的model类型,以及查找的条件,
    * 将对应的model记录删除掉。
@@ -469,6 +469,138 @@ module.exports={
         break;
     }
   },
+
+  /**
+   * 根据传入的model类型,以及查找的条件,
+   * 将对应的model记录查找返回。
+   * @param modelType 为model类型,字符串。
+   * @param dic 为查找的条件,字典。
+   * @param sortCond 为排序条件。
+   * @param callback 将查找的结果以回调函数传回。
+   * */
+  FindAndSort:function(modelType, dic, callback){
+    switch(modelType){
+      case "TaskFolder":
+        TaskFolder.find({where:dic, sort:{name:1}}).populate('Cases').exec(function(err,populated){
+          if(!err){
+            //console.log("populated  %s records:",modelType);
+            // console.log(populated);
+            callback(populated);
+          }else{
+            console.log("populated %s failure...",modelType);
+            console.log(err);
+            callback(null);
+          }
+        });
+        break;
+      case "TaskCase":
+        TaskCase.find({where:dic, sort:{name:0}}).exec(function (err,records) {
+          if (!err) {
+            //console.log("find %s records success!", modelType);
+            callback(records);
+          } else {
+            console.log("find %s records failure!", modelType);
+            console.log(err);
+            callback(null);
+          }
+        });
+        break;
+      case "RequestItem":
+        RequestItem.find(dic).exec(function(err,records){
+          if (!err) {
+            //console.log("find %s records success!", modelType);
+            // console.log(records);
+            callback(records);
+          } else {
+            console.log("find %s records failure!", modelType);
+            console.log(err);
+            callback(null);
+          }
+        });
+        break;
+      case "ReqFolder":
+        ReqFolder.find({where:dic, sort:{name:0}}).populate('ReqItems').exec(function(err,records){
+          if (!err) {
+            //console.log("find %s records success!", modelType);
+            callback(records);
+          } else {
+            console.log("find %s records failure!", modelType);
+            console.log(err);
+            callback(null);
+          }
+        });
+        break;
+      case "APIdocitem":
+        APIdocitem.find(dic).exec(function(err,records){
+          if (!err) {
+            //console.log("find %s records success!", modelType);
+            callback(records);
+          } else {
+            console.log("find %s records failure!", modelType);
+            console.log(err);
+            callback(null);
+          }
+        });
+        break;
+
+      case "APIdoc":
+        APIdoc.find(dic).populate('APIdoc_items').exec(function(err,records){
+          if (!err) {
+            // console.log("find %s records success!", modelType);
+            callback(records);
+          } else {
+            console.log("find %s records failure!", modelType);
+            console.log(err);
+            callback(null);
+          }
+        });
+        break;
+
+      case "ScheduleStrategy":
+        ScheduleStrategy.find(dic).exec(function(err,records){
+          if (!err) {
+            // console.log("find %s records success!", modelType);
+            callback(records);
+          } else {
+            console.log("find %s records failure!", modelType);
+            console.log(err);
+            callback(null);
+          }
+        });
+        break;
+
+      case "ScheduleTask":
+        ScheduleTask.find(dic).exec(function(err,records){
+          if (!err) {
+            console.log("find %s records success!", modelType);
+            callback(records);
+          } else {
+            console.log("find %s records failure!", modelType);
+            console.log(err);
+            callback(null);
+          }
+        });
+        break;
+
+      case "ScheduleLog":
+        ScheduleLog.find(dic).exec(function(err,records){
+          if (!err) {
+            console.log("find %s records success!", modelType);
+            callback(records);
+          } else {
+            console.log("find %s records failure!", modelType);
+            console.log(err);
+            callback(null);
+          }
+        });
+        break;
+
+      default:
+        break;
+    }
+  },
+
+
 
   /**
    * 根据入参的name, 来查找mongodb里的符合条件的记录。
