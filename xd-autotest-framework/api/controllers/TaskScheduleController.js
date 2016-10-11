@@ -99,11 +99,11 @@ module.exports = {
     };
     mongoService.Update("ScheduleTask", sc, {sc_id: form.sc_id}, function (records) {
       if (records) {
-/*        if(form.sc_state==1){
-          scheduleServices.start(form.sc_id)
+        if(form.sc_state==1){
+          scheduleServices.start(form.sc_id,form.sc_type);
         }else{
-          scheduleServices.stop(form.sc_id)
-        }*/
+          scheduleServices.stop(form.sc_id);
+        }
         res.send(records);
       } else {
         res.send({errMsg: "更新失败"});
@@ -115,10 +115,11 @@ module.exports = {
     var modelType = req.body.modelType;
     var sc_id=req.body.sc_id;
     var sc_host=req.body.sc_host;
+    var sc_task_id=req.body.sc_task_id;
       mongoService.Find(modelType,{uniqID:req.body.uniqID}, function (records) {
       if (records) {
         console.log(records[0]);
-        scheduleServices.execute(records[0],sc_id,sc_host);
+        scheduleServices.execute(records[0],sc_id,sc_host,sc_task_id);
         return res.send();
       }
     })

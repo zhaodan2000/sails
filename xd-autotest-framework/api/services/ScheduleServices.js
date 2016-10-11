@@ -5,6 +5,7 @@ var map = require("../utils/maps").newHashMap();
 var service = require("../services/CaseServices")
 var collectionHelper = require('../newman/NewManModel')
 var eventproxy = require('../utils/eventproxyhelper')
+var mongoService = require("../services/mongoService")
 module.exports = {
     /**
      * 根据任务的调度策略类型Schedule_ID进行调度
@@ -26,22 +27,20 @@ module.exports = {
    * 根据任务的调度策略类型Schedule_ID进行调度
    * @param scheduleID
    */
-  startById: function(sc_id)
+  start: function(sc_id,sc_type,sc_task_id,sc_time)
   {
     var schedule = require("node-schedule");
-    var scArr = getSc(sc_id);
-    var sc=scArr[0];
     var modelType="ReqFolder";
-    if(sc.sc_type==1){
+    if(sc_type==1){
     }else{
       modelType="TaskFolder";
     }
-    mongoService.Find(modelType,{uniqID:sc.sc_task_id}, function (records) {
+    mongoService.Find(modelType,{uniqID:sc_task_id}, function (records) {
       if (records) {
-        var j = schedule.scheduleJob(sc.sc_time, function () {
+        var j = schedule.scheduleJob(sc_time, function () {
           map.put(sc.sc_id,j);
           console.log("执行任务");
-          execute(records[0],sc.sc_id);
+          execute(records[0],sc_id);
         });
       }
     })
@@ -52,10 +51,12 @@ module.exports = {
    * @param scheduleID
    */
   getSc: function(sc_id) {
-    mongoService.Find('ScheduleTask',{sc_id:sc_id},function (records) {
-      console.log(records);
-      return records;
-    });
+    console.log(sc_id);
+    mongoService.Find("ScheduleTask", {sc_id:sc_id}, function (records) {
+      if (records) {
+        console.log(records);
+      }
+    })
   },
 
   /**
@@ -66,13 +67,7 @@ module.exports = {
     var job= map.get(sc_id);
     job.cancel();
   },
-  /**
-   * 启动定时任务
-   * @param scheduleID
-   */
-  start: function(sc_id) {
-    this.startById(sc_id);
-  },
+
 
   /**
    * 启动定时任务
@@ -82,7 +77,7 @@ module.exports = {
     console.log(task);
     var itemArr = task.ReqItems;
     var ep = eventproxy.create();
-    var collection = new collectionHelper.newCollection();
+    var collection = collectionHelper.newCollection();
     collection.setName("测试");
     ep.after(itemArr.length, function () {
       var _collection = collection.getCollection();
