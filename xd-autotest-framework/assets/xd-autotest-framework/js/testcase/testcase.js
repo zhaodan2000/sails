@@ -101,6 +101,7 @@ $('#add_tc_coll_2db').click(function () {
 $('#add_tc_ui').click(function () {
    $('#addTCModal').modal();
 
+
   if(!global_case_add_header_jsoneditor){
     //create the json editor: createJSONeditor
     var header_container_id='jsoneditor_header_';
@@ -120,6 +121,9 @@ $('#add_tc_ui').click(function () {
     global_case_add_response_jsoneditor=response_editor;
   }
 
+  $('#tc_template').find('textarea').focus();
+
+  //设置header和response默认值。
   var header_value={
     "clientType": "android",
     "version": "1.0.0",
@@ -128,11 +132,9 @@ $('#add_tc_ui').click(function () {
     "clientIp": "192.168.0.1",
     "sessionToken": "bb93c10b-7fea-4384-bbeb-8d63e8533b54"
   };
-
   var response_value={
     "retcode": "0"
   };
-
   global_case_add_header_jsoneditor.set(header_value);
   global_case_add_response_jsoneditor.set(response_value);
 
@@ -159,6 +161,7 @@ $('#add_tc_ui').click(function () {
         objOption.text=data.APIdoc_items[i.toString()].name;
         selectElement.options.add(objOption);
       }
+
     },
     error:function(data){
 
@@ -212,6 +215,8 @@ $('a[name="editTC"]').click(function () {
         $(selector).find('select[name="tc_dev"]').find("option[value='"+data.dev+"']").attr("selected","selected");
         $(selector).find('select[name="tc_method"]').find("option[value='"+data.method+"']").attr("selected","selected");
         $(selector).find('select[name="tc_dataType"]').find("option[value='"+data.dataType+"']").attr("selected","selected");
+        $(selector).find('textarea[name="tc_prescript"]').val(data.prescript);
+        $(selector).find('textarea[name="tc_testscript"]').val(data.testscript);
         $(selector).attr("uniqid", tc_uniqid);
 
         global_case_update_header_jsoneditor.set(data.headers);
@@ -270,6 +275,8 @@ $('#btn_add_tc').click(function () {
   var caseItem_dev=$(selector).find('input[name="tc_dev"]').val();
   var caseItem_method=$(selector).find('input[name="tc_method"]').val();
   var caseItem_dataType=$(selector).find('input[name="tc_dataType"]').val();
+  var caseItem_preScript=$(selector).find('textarea[name="tc_prescript"]').val();
+  var caseItem_testScript=$(selector).find('textarea[name="tc_testscript"]').val();
 
   if(!$(selector).attr("uniqid")){
     $(selector).attr("uniqid",(new Date().getTime()).toString());
@@ -284,6 +291,8 @@ $('#btn_add_tc').click(function () {
     uniqID:caseItem_uniqId,
     name:caseItem_name,
     description:caseItem_description,
+    prescript:caseItem_preScript,
+    testscript:caseItem_testScript,
     url:caseItem_url,
     disabled:caseItem_disabled,
     dev:caseItem_dev,
@@ -330,6 +339,8 @@ $('#btn_edit_tc').click(function () {
   var caseItem_dev=$(selector).find('select[name="tc_dev"] option:selected').text();
   var caseItem_method=$(selector).find('select[name="tc_method"] option:selected').text();
   var caseItem_dataType=$(selector).find('select[name="tc_dataType"] option:selected').text();
+  var caseItem_preScript=$(selector).find('textarea[name="tc_prescript"]').val();
+  var caseItem_testScript=$(selector).find('textarea[name="tc_testscript"]').val();
 
   if(!$(selector).attr("uniqid")){
     $(selector).attr("uniqid",(new Date().getTime()).toString());
@@ -344,6 +355,8 @@ $('#btn_edit_tc').click(function () {
     uniqID:caseItem_uniqId,
     name:caseItem_name,
     description:caseItem_description,
+    prescript:caseItem_preScript,
+    testscript:caseItem_testScript,
     url:caseItem_url,
     disabled:caseItem_disabled,
     dev:caseItem_dev,
@@ -431,6 +444,8 @@ function changeAPI(){
   $(selector).find('input[name="tc_disabled"]').val(global_doc_apis[selectIndex.toString()].disabled);//find("option[value='"+global_doc_apis[selectIndex.toString()].disabled+"']").attr("selected","selected");
   $(selector).find('input[name="tc_dev"]').val(global_doc_apis[selectIndex.toString()].dev);//find("option[value='"+global_doc_apis[selectIndex.toString()].dev+"']").attr("selected","selected");
   $(selector).find('input[name="tc_method"]').val(global_doc_apis[selectIndex.toString()].method);//find("option[value='"+global_doc_apis[selectIndex.toString()].dev+"']").attr("selected","selected");
+  $(selector).find('textarea[name="tc_prescript"]').val(global_doc_apis[selectIndex.toString()].prescript);
+  $(selector).find('textarea[name="tc_testscript"]').val(global_doc_apis[selectIndex.toString()].testscript);
 
   global_case_add_header_jsoneditor.set(global_doc_apis[selectIndex.toString()].header);
   global_case_add_param_jsoneditor.set(global_doc_apis[selectIndex.toString()].queryParams);

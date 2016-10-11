@@ -74,7 +74,6 @@ module.exports = {
    * @param scheduleID
    */
   execute: function(task,sc_id,sc_host) {
-    console.log(task);
     var itemArr = task.ReqItems;
     var ep = eventproxy.create();
     var collection = collectionHelper.newCollection();
@@ -91,7 +90,6 @@ module.exports = {
         };
         mongoService.Insert("ScheduleLog", log, function (records) {
           if (records) {
-            console.log('insert success');
             return records;
           } else {
             //fail
@@ -102,7 +100,6 @@ module.exports = {
     });
     for (var i = 0; i < itemArr.length; i++) {
       itemArr[i].url="http://"+sc_host+itemArr[i].url;
-      console.log(itemArr[i]);
       service.creatItem(itemArr[i], function (item) {
         collection.pushItem(item);
         ep.emit(1);

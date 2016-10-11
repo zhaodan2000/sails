@@ -237,6 +237,14 @@ module.exports={
       console.log(records);
       res.send(records);
     });
+  },
+
+  testFindAndSort:function(req,res){
+    var modelType=req.param();
+    mongoService.FindAndSort(modelType,{},function(records){
+      console.log("hallo");
+      res.send(records,200);
+    });
   }
 
 }
