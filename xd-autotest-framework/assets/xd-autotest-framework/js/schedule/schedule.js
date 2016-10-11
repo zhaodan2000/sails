@@ -185,7 +185,7 @@ function start(sc_id,sc_host,sc_type,sc_task_id){
   })
 
 }
-function editState(sc_id,state){
+function editState(sc_id,state,sc_type,sc_task_id,sc_time){
   var sc_id=sc_id;
   var sc_state=state;
   console.log(sc_id);
@@ -196,7 +196,10 @@ function editState(sc_id,state){
     contentType: 'application/x-www-form-urlencoded;charset=utf-8',
     data: {
       sc_id: sc_id,
-      sc_state:sc_state
+      sc_state:sc_state,
+      sc_type:sc_type,
+      sc_task_id:sc_task_id,
+      sc_time:sc_time
     },
     success: function (data) {
       $.main.refreshMain("schedule");
