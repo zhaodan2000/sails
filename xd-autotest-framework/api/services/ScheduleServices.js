@@ -91,7 +91,7 @@ module.exports = {
         };
         mongoService.Insert("ScheduleLog", log, function (records) {
           if (records) {
-            console.log('insert sucess');
+            console.log('insert success');
             return records;
           } else {
             //fail
