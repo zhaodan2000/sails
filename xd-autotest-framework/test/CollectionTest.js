@@ -17,26 +17,38 @@ var collectionHelper = require('../api/newman/NewManModel')
 // });
 
 var reqItem = {
-  "id" : "1475925706968",
-  "name" : "删除自己发布的资源",
-  "description" : "暂无接口描述",
-  "url" : "/asked/deleteById",
-  "disabled" : false,
-  "dev" : "周欢",
-  "method" : "POST",
-  "mode" : "application/json",
-  "headers" : {},
-  "queryParam" : {
-    "resourcesId" : "String\"\n"
+  "uniqID": "1476158446588",
+  "name": "登录接口1",
+  "description": "登录接口1",
+  "url": "http://192.168.103.101:8201/user/login",
+  "disabled": false,
+  "dev": "赵聃",
+  "method": "POST",
+  "mode": "a/json",
+  "headers": {
+    "Content-Type": "application/json;charset=utf-8",
+    "clientType": "android",
+    "version": "1.0.0",
+    "module": "3",
+    "deviceId": "999",
+    "clientIp": "192.168.0.1",
+    "sessionToken": "bb93c10b-7fea-4384-bbeb-8d63e8533b54"
   },
-  "prescript":"mysql.execQuery({id:'1', host:'192.168.88.89', port:'3306', user:'xddev', password:'xddev@xiaodou', db:'xd-user', sql: 'select id from xd_user where id = ?', args:['3'], callback: function(results){if (results && results.length > 0) {var id = results[0];pre.setGlobalVar('test',id['id']);}}});",
-  "testscript":"test.setEnvVar('test','hello');test.clearGlobalVar('test');test.checkJsonValue('test', '1234');",
-  "response" : {
-    "errorCode" : 0,
-    "errorMessage" : "成功",
-    "isError" : "false",
-    "timestamp" : 1428326863138
-  }
+  "queryParam": {
+    "phoneNum": "13718037894",
+    "pwd": "123456",
+    "platform": "local"
+  },
+  "response": {
+    "retcode": "0"
+  },
+  "ReqFolderID": "57fb647206e1b1270e013de6",
+  "createdAt": "2016-10-11T04:00:46.629Z",
+  "updatedAt": "2016-10-11T06:11:01.009Z",
+  "dataType": "application/json",
+  "prescript": "pre.setGlobalVar('test','3');",
+  "testscript": "test.checkJsonValue('retcode',0);",
+  "id": "57fc63eeeccbc220913ce86a"
 };
 var collection = new collectionHelper.newCollection();
 collection.setName("测试");

@@ -86,7 +86,7 @@ module.exports = {
         var log = {
           log_id:log_id,
           sc_id: sc_id,
-          log_desc:JSON.stringify(results)
+          log_desc:exitCode == 0?JSON.stringify(results):"Error"
         };
         mongoService.Insert("ScheduleLog", log, function (records) {
           if (records) {
@@ -100,6 +100,7 @@ module.exports = {
     });
     for (var i = 0; i < itemArr.length; i++) {
       itemArr[i].url="http://"+sc_host+itemArr[i].url;
+      console.log(JSON.stringify(itemArr[i]));
       service.creatItem(itemArr[i], function (item) {
         collection.pushItem(item);
         ep.emit(1);

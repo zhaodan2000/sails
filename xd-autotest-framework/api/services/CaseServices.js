@@ -8,7 +8,8 @@ var fs = require('fs');
 var mysqlhelper = require('../utils/mysqlhelper')
 var eventproxy = require('../utils/eventproxyhelper')
 var newManHelper = require('../newman/newmanhelper')
-var Newman = require('xdnewman');
+var Newman = require('autotest-engine');
+var uuid = require('node-uuid')
 
 module.exports = {
   /**
@@ -25,12 +26,13 @@ module.exports = {
   runCollection: function (collection, callback) {
     var _option = {
       iterationCount: 1,                    // define the number of times the runner should run
-      outputFile: null,            // the file to export to
+      outputFile: "output.json",            // the file to export to
       responseHandler: "TestResponseHandler", // the response handler to use
+      html:"result.html",
       asLibrary: true,         				// this makes sure the exit code is returned as an argument to the callback function
-      stopOnError: true
+      stopOnError: false
     };
-    Newman.execute(collection, _option, function (exitCode, results) {
+    new Newman().execute(collection, _option, function (exitCode, results) {
       callback(exitCode, results);
     });
   }
@@ -86,7 +88,7 @@ function configEvent(item, callback) {
  */
 function configItem(request, event) {
   var item = {
-    id: request.id,
+    id: uuid.v4(),
     name: request.name,
     disabled: request.disabled,
     request: request,
@@ -110,10 +112,10 @@ function parseInputPreString(prestring, callback) {
   eval(prestring);
   if (ep.getLength() > 0) {
     ep.after(ep.getLength(), function () {
-      callback(JSON.stringify(pre._event))
+      callback(pre._event);
     });
   } else {
-    callback(JSON.stringify(pre._event));
+    callback(pre._event);
   }
 }
 
@@ -130,10 +132,10 @@ function parseIntputTestString(teststring, callback) {
   eval(teststring);
   if (ep.getLength() > 0) {
     ep.after(ep.getLength(), function () {
-      callback(JSON.stringify(test._event))
+      callback(test._event);
     });
   } else {
-    callback(JSON.stringify(test._event));
+    callback(test._event);
   }
 }
 
