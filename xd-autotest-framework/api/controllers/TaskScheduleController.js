@@ -69,7 +69,11 @@ module.exports = {
     })
   },
 
-
+  /**
+   * 修改
+   * @param req
+   * @param res
+   */
   edit: function (req, res) {
     var form = req.body;
     var sc = {
@@ -92,17 +96,23 @@ module.exports = {
     });
   },
 
+  /**
+   * 改变状态启动关闭定时任务
+   * @param req
+   * @param res
+   */
   editState: function (req, res) {
     var form = req.body;
+    console.log(form);
     var sc = {
       sc_state: form.sc_state
     };
     mongoService.Update("ScheduleTask", sc, {sc_id: form.sc_id}, function (records) {
       if (records) {
         if(form.sc_state==1){
-          scheduleServices.start(form.sc_id,form.sc_type);
+          scheduleServices.start(form.sc_id,form.sc_type,form.sc_task_id,form.sc_time,form.sc_host);
         }else{
-          scheduleServices.stop(form.sc_id);
+/*          scheduleServices.stop(form.sc_id);*/
         }
         res.send(records);
       } else {
@@ -110,7 +120,11 @@ module.exports = {
       }
     });
   },
-
+  /**
+   * 启动定时任务
+   * @param req
+   * @param res
+   */
   start: function (req, res) {
     var modelType = req.body.modelType;
     var sc_id=req.body.sc_id;
@@ -118,11 +132,44 @@ module.exports = {
     var sc_task_id=req.body.sc_task_id;
       mongoService.Find(modelType,{uniqID:req.body.uniqID}, function (records) {
       if (records) {
-        scheduleServices.execute(records[0],sc_id,sc_host,sc_task_id);
+        var itemArr = records[0].ReqItems;
+        for (var i = 0; i < itemArr.length; i++) {
+          itemArr[i].url="http://"+sc_host+itemArr[i].url;
+        }
+          scheduleServices.execute(itemArr,sc_id);
         return res.send();
       }
     })
   },
+
+  /**
+   * 系统启动时加载，扫描启动定时任务
+   * @param req
+   * @param res
+   */
+getAll: function (req, res) {
+  mongoService.Find('ScheduleTask', null, function (records) {
+    /*      console.log(records);*/
+    if (records) {
+      var items= records[0];
+      for (var i = 0; i < items.length; i++) {
+         if(items[i].sc_state==1){
+           var modelType="ReqFolder";
+           if(items[i].sc_type==1){
+           }else{
+             modelType="TaskFolder";
+           }
+           mongoService.Find(modelType,{uniqID:items[i].sc_task_id}, function (records) {
+             if (records) {
+               scheduleServices.execute(records[0],items[i].sc_id,items[i].sc_host,items[i].sc_task_id);
+               return res.send();
+             }
+           })
+         }
+      }
+   }
+  });
+},
 }
 
 
