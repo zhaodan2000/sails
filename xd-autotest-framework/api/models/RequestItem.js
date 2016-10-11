@@ -75,11 +75,13 @@ module.exports = {
       type: 'json',
       required: false
     },
-    testscript:{
+    //前置脚本
+    prescript:{
       type:'string',
       required: false
     },
-    prescript:{
+    //后置脚本
+    testscript:{
       type:'string',
       required: false
     },
