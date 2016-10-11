@@ -82,13 +82,17 @@ module.exports = {
     var API_doc=req.body["apiDoc"];
 
     /** 前端传入的API_doc.uniqID不为空*/
-    if(API_doc.uniqID){
-      mongoService.Update("APIdoc", API_doc, {uniqID: API_doc.uniqID}, function (updatedDOC) {
+    if(API_doc&&API_doc.uniqID){
+      mongoService.Insert("APIdoc", API_doc, function (insertedDOC) {
         /** 更新APIdoc成功 */
-        res.ok();
+        mongoService.Find("APIdoc",{},function(found){
+          res.view('doc/APIdoc', {api_docs:found, curr_doc:insertedDOC});
+        });
       });
     }else{
-      res.send({retcode:-1,message:"uniqId为空",data:"APIdoc"});
+      mongoService.Find("APIdoc",{},function(found){
+        res.view('doc/APIdoc', {api_docs:found, curr_doc:null});
+      });
     }
   },
 

@@ -414,19 +414,30 @@ $('#add_apidoc').click(function(){
 
  // 保存文档到db.
  $('#add_doc_2db').click(function(){
+   var selector='#doc_template';
+   var doc_name=$(selector).find('input[name="doc_name"]').val();
+   var doc_description=$(selector).find('input[name="doc_description"]').val();
+   var doc_testEnv=$(selector).find('input[name="doc_testEnv"]').val();
 
-   var _apiDoc={};
+   var apiDOC={name:doc_name, docDesc:doc_description, testEnv:doc_testEnv,uniqID:(new Date().getTime()).toString()};
+
+   console.log(apiDOC);
+
    $.ajax({
-     url:'/doc/save_doc',
-     method:'post',
-     contentType: "application/json;charset=utf-8",
-     data: {apiDoc:_apiDoc},
+     url:"/doc/save_doc",
+     method:"post",
+     contentType: "application/x-www-form-urlencoded;charset=utf-8",
+     data: {
+       apiDoc:apiDOC
+     },
      success: function (data) {
-       
+       $('body').removeClass('modal-open');
+       $('.modal-backdrop').remove();
        alert("保存成功!");
+       $("#page-wrapper").html(data);
      },
      error: function (data) {
-       alert(JSON.stringify(err, null, "\t"));
+       alert(JSON.stringify(data, null, "\t"));
      }
    });
  });
