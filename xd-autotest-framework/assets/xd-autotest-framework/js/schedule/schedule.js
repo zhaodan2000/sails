@@ -185,7 +185,7 @@ function start(sc_id,sc_host,sc_type,sc_task_id){
   })
 
 }
-function editState(sc_id,state,sc_type,sc_task_id,sc_time){
+function editState(sc_id,state,sc_type,sc_task_id,sc_time,sc_host){
   var sc_id=sc_id;
   var sc_state=state;
   console.log(sc_id);
@@ -199,7 +199,8 @@ function editState(sc_id,state,sc_type,sc_task_id,sc_time){
       sc_state:sc_state,
       sc_type:sc_type,
       sc_task_id:sc_task_id,
-      sc_time:sc_time
+      sc_time:sc_time,
+      sc_host:sc_host
     },
     success: function (data) {
       $.main.refreshMain("schedule");
