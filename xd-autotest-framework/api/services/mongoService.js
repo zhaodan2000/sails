@@ -358,7 +358,7 @@ module.exports={
         break;
 
       case "ScheduleLog":
-        ScheduleLog.find(dic).exec(function(err,records){
+        ScheduleLog.find(dic).sort({createdAt:-1}).exec(function(err,records){
           if (!err) {
             console.log("find %s records success!", modelType);
             callback(records);
@@ -374,7 +374,7 @@ module.exports={
         break;
     }
   },
-  
+
   /**
    * 根据传入的model类型,以及查找的条件,
    * 将对应的model记录删除掉。
