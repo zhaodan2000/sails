@@ -2,13 +2,25 @@
   <!--leftTable-->
   <ul class="nav navbar-nav side-nav">
     <li>
-      <a data-toggle="collapse" onclick="showManagerTask()"> 任务管理 </a>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addTaskModal"
+              style="width: auto;height: auto">添加任务</button>
+      <a id="deleteAll" role="button" class="btn btn-danger" data-toggle="modal" onclick="deleteAllTasks()"
+              style="display: none">删除全部任务</a>
+    </li>
+    <li>
+      <a data-toggle="collapse" onclick="showManagerTask()" style="display: none"> 任务管理 </a>
       <% if (data) { %>
       <% data.forEach(function(record,index){ %>
     <li>
-      <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#info' + index%>"><i class="fa fa-fw fa-arrows-v"></i> <%=record.Task_name%> <i
-          class="fa fa-fw fa-caret-up"></i></a>
-      <ul id="<%='info' + index%>" class="collapse">
+      <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#info' + index%>">
+        <i class="fa fa-fw"></i> <%=record.Task_name%>
+        <i class="fa fa-fw fa-caret-up" style="display: none"></i>
+        <div>
+          <button id="<%= 'edit_task_'+index %>" name="getCurTask" uniqid="<%= record.uniqID %>" class="fa fa-edit"
+                  style="width: auto;height: auto">编辑</button>
+        </div>
+      </a>
+      <ul id="<%='info' + index%>" class="collapse" style="display: none">
         <% var cases = record.Cases; cases.forEach(function(caseItem,recordIndex){ %>
         <li>
           <a id="<%=caseItem.name%>" name="<%=caseItem.name%>" onclick="requestItem(this)"><%=caseItem.name%></a>
@@ -26,58 +38,12 @@
   <!-- Page Heading -->
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header" style="position: static">
-        任务
-        <small>任务列表</small>
-        <!-- Button to trigger modal -->
-        <a href="#addTaskModal" role="button" class="btn btn-primary" data-toggle="modal">添加任务</a>
-        <a id="deleteAll" role="button" class="btn btn-danger" data-toggle="modal" onclick="deleteAllTasks()">删除全部任务</a>
-        <!-- Modal -->
-        <div id="addTaskModal" class="modal fade in" tabindex="-1">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <form id="form"  method="POST">
-                <div class="modal-header"><button class="close" type="button" data-dismiss="modal">&times;</button>
-                  <h4 id="myModalLabel" class="modal-title">添加任务</h4>
-                </div>
-
-                <div class="modal-body">
-                  <div class="form-group">
-                    <label style="font-size: 18px">任务名</label>
-                    <input name="task_name" type="text" class="form-control" placeholder="任务名">
-                  </div>
-                  <div class="form-group">
-                    <label style="font-size: 18px"> 类型:</label>
-                    <select name="type_desc" class="form-control">
-                      <option>group</option>
-                      <option>orderCase</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label style="font-size: 18px">调度策略:</label>
-                    <select name="schedule_desc" class="form-control">
-                      <option>不会自动执行任务脚本</option>
-                      <option>每天07:30执行任务脚本</option>
-                      <option>每周日22：30执行任务</option>
-                      <option>每周周一到周五21:00执行任务脚本</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
-                  <!--<button onclick="demoClicked()" class="btn btn-primary" type="button" data-dismiss="modal">添加</button>-->
-                  <button class="btn btn-primary" type="button" id="saveBtn">添加</button>
-                </div>
-              </form>
-
-            </div>
-          </div>
-        </div>
-
+      <h1 class="page-header" style="position: static">顺序用例
+        <small>顺序用例列表</small>
       </h1>
       <ol class="breadcrumb">
         <li class="active">
-          <i class="fa fa-tasks"></i> 任务
+          <i class="fa fa-tasks"></i> 顺序用例
         </li>
       </ol>
     </div>
@@ -89,13 +55,12 @@
         <div class="panel-body">
           <div class="table-responsive">
             <table id="taskTable" class="table table-bordered table-hover table-striped">
-
               <thead>
-              <tr>
-                <th>任务</th>
-                <th>creatTime</th>
-                <th>调度策略描述</th>
-                <th>调度策略类型</th>
+                <tr>
+                <th>顺序用例名</th>
+                <th>描述</th>
+                <th>用例数量</th>
+                <th>操作</th>
               </tr>
               </thead>
 
@@ -106,8 +71,10 @@
                 <td ><%-record.Task_name%></td>
                 <td><%-record.createdAt%></td>
                 <td><%-record.Schedule_desc%></td>
-                <td><%-record.Schedule_ID%>
-                  <div style="float: right">
+                <td>
+                  <a style="cursor: pointer" name="editAPI" uniqid="<%= record.uniqID %>">修改</a>
+                  <a style="cursor: pointer" name="removeAPI" uniqid="<%= record.uniqID %>">删除</a>
+                  <div style="display: none; float: right">
                     <button name="<%-record.uniqID%>" class="btn btn-xs btn-primary" onclick="runSelectedTask(this.name)">运行</button>
                     <button name="<%-record.uniqID%>" class="btn btn-xs btn-info" onclick="showTaskDetailView(this.name)" >编辑</button>
                     <button name="<%-record.uniqID%>" class="btn btn-xs btn-danger" onclick="deleteSelectedTask(this.name)">删除</button>
@@ -129,6 +96,49 @@
   <!-- /.row -->
 </div>
 <!-- /.container-fluid -->
+
+<!--弹模态框, 添加任务(addTaskModal) -->
+<div id="addTaskModal" class="modal fade in" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="form"  method="POST">
+        <div class="modal-header"><button class="close" type="button" data-dismiss="modal">&times;</button>
+          <h4 id="myModalLabel" class="modal-title">添加任务</h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group">
+            <label style="font-size: 18px">任务名</label>
+            <input name="task_name" type="text" class="form-control" placeholder="任务名">
+          </div>
+          <div class="form-group">
+            <label style="font-size: 18px"> 类型:</label>
+            <select name="type_desc" class="form-control">
+              <option>group</option>
+              <option>orderCase</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label style="font-size: 18px">调度策略:</label>
+            <select name="schedule_desc" class="form-control">
+              <option>不会自动执行任务脚本</option>
+              <option>每天07:30执行任务脚本</option>
+              <option>每周日22：30执行任务</option>
+              <option>每周周一到周五21:00执行任务脚本</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
+          <!--<button onclick="demoClicked()" class="btn btn-primary" type="button" data-dismiss="modal">添加</button>-->
+          <button class="btn btn-primary" type="button" id="saveBtn">添加</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
 
 <script src="/xd-autotest-framework/js/index/frame-right.js"></script>
 <script src="/xd-autotest-framework/js/task/task.js"></script>

@@ -12,22 +12,18 @@ module.exports = {
   all: function (req, res) {
     var sc_id=req.body.sc_id;
     mongoService.Find('ScheduleLog', {sc_id:sc_id}, function (records) {
-     console.log(records);
       res.view('schedule/log', {data: records});
     });
   },
   getLogById: function (req, res) {
     var log_id=req.body.log_id;
     mongoService.Find('ScheduleLog', {log_id:log_id}, function (records) {
-      console.log(records);
       res.view('schedule/logDesc', {data: records});
     });
   },
   log: function (req, res) {
     var log_id=req.param("log_id");
-    console.log(log_id);
     mongoService.Find('ScheduleLog', {log_id:log_id}, function (records) {
-      console.log(records);
       res.view('schedule/logShow', {data: records});
     });
   },
