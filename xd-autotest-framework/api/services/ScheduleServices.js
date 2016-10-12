@@ -8,6 +8,7 @@ var eventproxy = require('../utils/eventproxyhelper');
 var mongoService = require("../services/mongoService");
 var nodemailer = require("nodemailer");
 var smtpTransport = require('nodemailer-smtp-transport');
+var request = require('request');
 module.exports = {
 /*    /!**
      * 根据任务的调度策略类型Schedule_ID进行调度
@@ -85,15 +86,11 @@ module.exports = {
    */
   execute: function(itemArr,sc_id) {
     var mailEp = eventproxy.create();
-    mailEp.after(1, function(){
-      _sendMail();
-    });
     var ep = eventproxy.create();
     var collection = collectionHelper.newCollection();
     collection.setName("测试");
     ep.after(itemArr.length, function () {
       var _collection = collection.getCollection();
-
      service.runCollection(_collection, function (exitCode, results) {
         var log_id=(new Date().getTime()).toString();
         var log = {
@@ -104,8 +101,8 @@ module.exports = {
         };
         mongoService.Insert("ScheduleLog", log, function (records) {
           if (records) {
-            mailEp.emit(1);
-            return records;
+            request.post('http://localhost:1337/log/sendMail').form({"log_id":log_id})
+            return log_id;
           } else {
             //fail
             console.log('insert fail');
@@ -140,10 +137,13 @@ module.exports = {
     });
   },
 
+  sendMail:function() {
+    _sendMail();
+  },
 }
 
 exports.execute = _execute;
-exports.execute = _sendMail;
+exports.execute=_sendMail;
 function _execute(itemArr,sc_id) {
   var ep = eventproxy.create();
   var collection = collectionHelper.newCollection();
@@ -161,7 +161,7 @@ function _execute(itemArr,sc_id) {
       };
       mongoService.Insert("ScheduleLog", log, function (records) {
         if (records) {
-          _sendMail();
+          request.post('/log/sendMail', {form:{'log_id':'123'}})
           return records;
         } else {
           //fail
@@ -177,6 +177,7 @@ function _execute(itemArr,sc_id) {
     });
   }
 }
+
 
 function _sendMail(){
   // 开启一个 SMTP 连接池
@@ -208,4 +209,3 @@ function _sendMail(){
     transport.close(); // 如果没用，关闭连接池
   });
 }
-

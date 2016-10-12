@@ -35,6 +35,10 @@ function save(){
   var sc_task_name=$("#sc_task option:selected").text();
   var sc_host=$("#sc_host").val();
   var sc_time=$("#sc_time").val();
+  if(sc_name==""||sc_desc==""||sc_type==""||sc_task_id==""||sc_task_name==""||sc_host==""||sc_time==""){
+    alert("所有属性都不能为空");
+    return;
+  }
   var sc_state="2";
   $.ajax({
     url:'/sc/save',
@@ -107,6 +111,10 @@ function saveEdit(){
   var sc_host=$("#sc_host_e").val();
   var sc_time=$("#sc_time_e").val();
   var sc_state=$("#sc_state_e").val();
+  if(sc_id==""||sc_name==""||sc_desc==""||sc_type==""||sc_task_id==""||sc_task_name==""||sc_host==""||sc_time==""){
+    alert("所有属性都不能为空");
+    return;
+  }
   $.ajax({
     url:'/sc/edit',
     method:"post",
@@ -177,6 +185,14 @@ function start(sc_id,sc_host,sc_type,sc_task_id){
     },
     success: function (data) {
       alert("执行中，请稍候查看日志");
+      $.ajax({
+        url: '/log/sendMail',
+        method: "post",
+        contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+        data: {
+          log_id:"123"
+        }
+      })
     },
     error:function(data){
       alert("执行错误:"+JSON.stringify(data,null,"\t"));
