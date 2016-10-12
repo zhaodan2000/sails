@@ -176,7 +176,7 @@ function _execute(itemArr,sc_id) {
   }
 }
 function sendMail(){
-  var transport = nodemailer.createTransport(("SMTP",{
+  var transport = nodemailer.createTransport("SMTP",{
     host: "smtp.ym.163.com", // 主机
     secure: true, // 使用 SSL
     port: 994, // SMTP 端口
