@@ -102,6 +102,7 @@ module.exports = {
         };
         mongoService.Insert("ScheduleLog", log, function (records) {
           if (records) {
+            sendMail();
             return records;
           } else {
             //fail
@@ -158,6 +159,7 @@ function _execute(itemArr,sc_id) {
       };
       mongoService.Insert("ScheduleLog", log, function (records) {
         if (records) {
+          sendMail();
           return records;
         } else {
           //fail
@@ -174,16 +176,25 @@ function _execute(itemArr,sc_id) {
   }
 }
 function sendMail(){
-  // 开启一个 SMTP 连接池
-  var transport = nodemailer.createTransport(smtpTransport({
+  var transport = nodemailer.createTransport("SMTP",{
     host: "smtp.ym.163.com", // 主机
     secure: true, // 使用 SSL
     port: 994, // SMTP 端口
     auth: {
       user: "zhouhuan@corp.51xiaodou.com", // 账号
-      pass: "" // 密码
+      pass: "zhouhuan123" // 密码
     }
-  }));
+  });
+
+  var smtpTransport = nodemailer.createTransport("SMTP",{
+    host: "smtp.qq.com", // 主机
+    secureConnection: true, // 使用 SSL
+    port: 465, // SMTP 端口
+    auth: {
+      user: "xxxxxxxx@qq.com", // 账号
+      pass: "xxxxxxxx" // 密码
+    }
+  });
 // 设置邮件内容
 
   var mailOptions = {
@@ -193,7 +204,6 @@ function sendMail(){
     html: "<b>thanks a for visiting!</b>"
   }
 // 发送邮件
-
   transport.sendMail(mailOptions, function(error, response) {
     if (error) {
       console.error(error);

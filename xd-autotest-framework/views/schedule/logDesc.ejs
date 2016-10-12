@@ -16,11 +16,13 @@
   <!-- /.row -->
 
   <div class="row">
+    <div class="col-lg-12">
               <% if (data) { %>
               <% data.forEach(function(record,index){ %>
               <%-record.log_html%>
               <% }) %>
               <% } %>
+      </div>
   </div>
   <!-- /.row -->
 </div>

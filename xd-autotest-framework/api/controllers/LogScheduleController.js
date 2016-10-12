@@ -23,6 +23,14 @@ module.exports = {
       res.view('schedule/logDesc', {data: records});
     });
   },
+  log: function (req, res) {
+    var log_id=req.param("log_id");
+    console.log(log_id);
+    mongoService.Find('ScheduleLog', {log_id:log_id}, function (records) {
+      console.log(records);
+      res.view('schedule/logShow', {data: records});
+    });
+  },
 }
 
 
