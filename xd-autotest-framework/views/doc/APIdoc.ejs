@@ -18,11 +18,11 @@
             <label class="control-label" style="text-align:right">接口描述</label>
             <input name="api_desc" class="form-control" required="required"/>
           </div>
-          <div class="form-group">
+          <div class="form-group" style="display: none">
             <label class="control-label" style="text-align:right">前置脚本</label>
             <textarea name="api_prescript" class="form-control" rows="5" required="required"/>
           </div>
-          <div class="form-group">
+          <div class="form-group" style="display: none">
             <label class="control-label" style="text-align:right">后置脚本</label>
             <textarea name="api_testscript" class="form-control" rows="5" required="required"/>
           </div>
@@ -111,11 +111,11 @@
             <label class="control-label" style="text-align:right">接口描述</label>
             <input name="api_desc" class="form-control" required="required"/>
           </div>
-          <div class="form-group">
+          <div class="form-group" style="display: none">
             <label class="control-label" style="text-align:right">前置脚本</label>
             <textarea name="api_prescript" class="form-control" rows="5" required="required"/>
           </div>
-          <div class="form-group">
+          <div class="form-group" style="display: none">
             <label class="control-label" style="text-align:right">后置脚本</label>
             <textarea name="api_testscript" class="form-control" rows="5" required="required"/>
           </div>
@@ -235,15 +235,15 @@
       <ol class="breadcrumb">
         <li>
           <i class="fa fa-dashboard"></i>文档描述
-          <input name="docdesc" value="<%= curr_doc?curr_doc.docDesc:'无' %>" style="width:230px; height:auto;"/>
+          <input name="docdesc" value="<%= curr_doc?curr_doc.docDesc:'无' %>" disabled="true" style="width:230px; height:auto;"/>
         </li>
         <li>
           <i class="fa fa-dashboard"></i>测试环境
-          <input name="testEnv" value="<%= curr_doc?curr_doc.testEnv:'无' %>" style="width:180px; height:auto;"/>
+          <input name="testEnv" value="<%= curr_doc?curr_doc.testEnv:'无' %>" disabled="true" style="width:180px; height:auto;"/>
         </li>
         <li style="display: none">
           <i class="fa fa-dashboard"></i>端口号
-          <input name="testEnvPort" value="<%= curr_doc?curr_doc.testEnvPort:'无' %>" style="width:50px; height:auto;"/>
+          <input name="testEnvPort" value="<%= curr_doc?curr_doc.testEnvPort:'无' %>" disabled="true" style="width:50px; height:auto;"/>
         </li>
         <div style="float:right">
           <div class="btn btn-info" id="addAPI_ui">新增后台接口</div>

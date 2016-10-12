@@ -155,8 +155,8 @@
    var apiItem_dev=$(selector).find('select[name="api_dev"] option:selected').text();
    var apiItem_method=$(selector).find('select[name="api_method"] option:selected').text();
    var apiItem_dataType=$(selector).find('select[name="api_dataType"] option:selected').text();
-   var apiItem_preScript=$(selector).find('textarea[name="api_prescript"]').val();
-   var apiItem_testScript=$(selector).find('select[name="api_testscript"]').val();
+   // var apiItem_preScript=$(selector).find('textarea[name="api_prescript"]').val();
+   // var apiItem_testScript=$(selector).find('select[name="api_testscript"]').val();
 
    if(!$(selector).attr("uniqid")){
      $(selector).attr("uniqid",(new Date().getTime()).toString());
@@ -171,8 +171,8 @@
      uniqID:apiItem_uniqId,
      name:apiItem_name,
      description:apiItem_description,
-     prescript:apiItem_preScript,
-     testscript:apiItem_testScript,
+     // prescript:apiItem_preScript,
+     // testscript:apiItem_testScript,
      url:apiItem_url,
      disabled:apiItem_disabled,
      dev:apiItem_dev,
@@ -253,8 +253,8 @@
          $(selector).find('select[name="api_dev"]').find("option[value='"+data.dev+"']").attr("selected","selected");
          $(selector).find('select[name="api_method"]').find("option[value='"+data.method+"']").attr("selected","selected");
          $(selector).find('select[name="api_dataType"]').find("option[value='"+data.dataType+"']").attr("selected","selected");
-         $(selector).find('textarea[name="api_prescript"]').val(data.prescript);
-         $(selector).find('textarea[name="api_testscript"]').val(data.testscript);
+         // $(selector).find('textarea[name="api_prescript"]').val(data.prescript);
+         // $(selector).find('textarea[name="api_testscript"]').val(data.testscript);
          $(selector).attr("uniqid", apiItem_uniqID);
 
          global_update_header_jsoneditor.set(data.header);
@@ -284,8 +284,8 @@
    var apiItem_dev=$(selector).find('select[name="api_dev"] option:selected').text();
    var apiItem_method=$(selector).find('select[name="api_method"] option:selected').text();
    var apiItem_dataType=$(selector).find('select[name="api_dataType"] option:selected').text();
-   var apiItem_preScript=$(selector).find('textarea[name="api_prescript"]').val();
-   var apiItem_testScript=$(selector).find('textarea[name="api_testscript"]').val();
+   // var apiItem_preScript=$(selector).find('textarea[name="api_prescript"]').val();
+   // var apiItem_testScript=$(selector).find('textarea[name="api_testscript"]').val();
 
    if(!$(selector).attr("uniqid")){
      $(selector).attr("uniqid",(new Date().getTime()).toString());
@@ -300,8 +300,8 @@
      uniqID:apiItem_uniqId,
      name:apiItem_name,
      description:apiItem_description,
-     prescript:apiItem_preScript,
-     testscript:apiItem_testScript,
+     // prescript:apiItem_preScript,
+     // testscript:apiItem_testScript,
      url:apiItem_url,
      disabled:apiItem_disabled,
      dev:apiItem_dev,

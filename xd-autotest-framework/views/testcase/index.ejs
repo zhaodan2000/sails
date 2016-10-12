@@ -24,6 +24,14 @@
               <label class="control-label" style="text-align:right">用例描述</label>
               <input name="tc_desc" class="form-control" required="required" />
             </div>
+          <div class="form-group" >
+            <label class="control-label" style="text-align:right">前置脚本</label>
+            <textarea name="tc_prescript" class="form-control" rows="5" required="required"/>
+          </div>
+          <div class="form-group" >
+            <label class="control-label" style="text-align:right">后置脚本</label>
+            <textarea name="tc_testscript" class="form-control" rows="5" required="required"/>
+          </div>
             <div class="form-group">
               <label class="control-label">请求URL</label>
               <input name="tc_url" class="form-control" required="required" />
@@ -106,6 +114,14 @@
           <div class="form-group">
             <label class="control-label" style="text-align:right">用例描述</label>
             <input name="tc_desc" class="form-control" required="required" />
+          </div>
+          <div class="form-group" >
+            <label class="control-label" style="text-align:right">前置脚本</label>
+            <textarea name="tc_prescript" class="form-control" rows="5" required="required"/>
+          </div>
+          <div class="form-group" >
+            <label class="control-label" style="text-align:right">后置脚本</label>
+            <textarea name="tc_testscript" class="form-control" rows="5" required="required"/>
           </div>
           <div class="form-group">
             <label class="control-label">请求URL</label>
@@ -255,7 +271,8 @@
         <ol class="breadcrumb">
           <li>
             <i class="fa fa-dashboard"></i>所属文档
-            <input id="tc_coll_doc" name="tc_coll_doc" value="<%=curr_tc_coll?curr_tc_coll.docName:'无'%>" uniqid="<%=curr_tc_coll?curr_tc_coll.docUniqID:''%>" style="width:230px; height:auto;"/>
+            <input id="tc_coll_doc" name="tc_coll_doc" value="<%=curr_tc_coll?curr_tc_coll.docName:'无'%>"
+                   uniqid="<%=curr_tc_coll?curr_tc_coll.docUniqID:''%>" disabled="true" style="width:230px; height:auto;"/>
           </li>
           <li>
             <i class="fa fa-dashboard"></i>服务器
