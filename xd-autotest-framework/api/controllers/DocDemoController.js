@@ -103,8 +103,7 @@ module.exports={
    * 根据入参的name, 来查找mongodb里的符合条件的记录。
    **/
   findRequestItemByName:function(req,res) {
-
-    console.log("req.param()=" + req.param("requestName"));
+    console.log("req.param()=" + req.param("requestName")); //Get请求获取参数的方法。与req.params["requestName"]不等价。。
     console.log("req.url=" + req.url);
     console.log("req.method=" + req.method);
     console.log("req.host=" + req.host);

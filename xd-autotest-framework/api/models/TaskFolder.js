@@ -27,23 +27,19 @@ module.exports = {
     Task_desc:{
       type:'string',
       unique:false,
-      required:false,
-      defaultsTo:'暂时没有任务描述。'
+      required:false
     },
     caseType:{
       type:'string',
-      enum:['1','2'],//1表示原子case, 2表示顺序case.
-      defaultsTo:'1'
+      enum:['1','2']//1表示原子case, 2表示顺序case.
     },
     Schedule_ID:{
       type:'string',
-      required:true,
-      defaultsTo:'1'
+      required:true
     },
     Schedule_desc:{
       type:'string',
       required:true,
-      defaultsTo:'1'
     },
     Cases:{
       collection:'TaskCase',
