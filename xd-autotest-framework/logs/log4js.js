@@ -11,7 +11,7 @@ log4js.configure({
     }, //控制台输出
     {
       type: "file",
-      filename: 'logs/info.log',
+      filename: 'info.log',
       pattern: "_yyyy-MM-dd",
       maxLogSize: 20480,
       backups: 3,

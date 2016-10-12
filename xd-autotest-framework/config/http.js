@@ -8,7 +8,7 @@
  * For more information on configuration, check out:
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.http.html
  */
-var logger = require("../log4js").logger("outIn")
+var logger = require("../logs/log4js").logger("outIn")
 module.exports.http = {
 
   /****************************************************************************
@@ -47,6 +47,7 @@ module.exports.http = {
       '404',
       '500'
     ],
+
 
   /****************************************************************************
   *                                                                           *
