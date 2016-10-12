@@ -76,6 +76,7 @@ module.exports.routes = {
 
   //sc
   'post /log/all': 'LogSchedule.all',
+  'post /log/getLogById': 'LogSchedule.getLogById',
 
   '/response': {
     view: 'response'

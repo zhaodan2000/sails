@@ -16,6 +16,13 @@ module.exports = {
       res.view('schedule/log', {data: records});
     });
   },
+  getLogById: function (req, res) {
+    var log_id=req.body.log_id;
+    mongoService.Find('ScheduleLog', {log_id:log_id}, function (records) {
+      console.log(records);
+      res.view('schedule/logDesc', {data: records});
+    });
+  },
 }
 
 

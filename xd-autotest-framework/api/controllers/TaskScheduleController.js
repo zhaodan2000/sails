@@ -103,7 +103,6 @@ module.exports = {
    */
   editState: function (req, res) {
     var form = req.body;
-    console.log(form);
     var sc = {
       sc_state: form.sc_state
     };
@@ -112,7 +111,7 @@ module.exports = {
         if(form.sc_state==1){
           scheduleServices.start(form.sc_id,form.sc_type,form.sc_task_id,form.sc_time,form.sc_host);
         }else{
-/*          scheduleServices.stop(form.sc_id);*/
+          scheduleServices.stop(form.sc_id);
         }
         res.send(records);
       } else {

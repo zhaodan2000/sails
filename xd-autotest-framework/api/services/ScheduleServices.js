@@ -73,7 +73,9 @@ module.exports = {
    */
   stop: function(sc_id) {
     var job= map.get(sc_id);
-    job.cancel();
+    if(job!=null) {
+      job.cancel();
+    }
   },
 
 
@@ -93,7 +95,8 @@ module.exports = {
         var log = {
           log_id:log_id,
           sc_id: sc_id,
-          log_desc:exitCode == 0?JSON.stringify(results):"Error"
+          log_desc:exitCode == 0?JSON.stringify(results):"Error",
+          log_html:exitCode == 0?JSON.stringify(results.html):"Error"
         };
         mongoService.Insert("ScheduleLog", log, function (records) {
           if (records) {
