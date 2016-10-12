@@ -22,9 +22,7 @@ module.exports = {
     },
     name: {
       type: 'string',
-      required: false,
-      minLength: 1,
-      maxLength: 60
+      required: false
     },
     //auth 开发人员
     dev:{
@@ -40,24 +38,17 @@ module.exports = {
 
     version: {
       type: 'string',
-      required: false,
-      minLength: 1,
-      maxLength: 20
+      required: false
     },
 
     description: {
       type: 'string',
-      required: false,
-      minLength: 1,
-      maxLength: 300
+      required: false
     },
-
     //url
     url: {
       type: 'string',
-      required: true,
-      minLength: 1,
-      maxLength: 300
+      required: true
     },
 
     //param json
@@ -69,21 +60,19 @@ module.exports = {
     method: {
       type: 'string',
       enum: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COPY', 'HEAD', 'OPTIONS', 'LINK', 'UNLINK', 'PURGE', 'LOCK', 'UNLOCK', 'PROPFIND', 'VIEW'],
-      defaultsTo: 'POST',
       required: false
     },
 
-    //header Json
+    //header (Json format)
     headers: {
       type: 'json',
       required: false
     },
 
-    //body
+    //content-type
     mode: {
       type: 'string',
-      required: false,
-      defaultsTo:"application/json"
+      required: false
     },
 
     //response
@@ -91,11 +80,15 @@ module.exports = {
       type: 'json',
       required: false
     },
-
+    // 二级目录(暂未用上)
     dirpath:{
       type:'string',
-      required:false,
-      defaultsTo:'/默认'
+      required:false
+    },
+    //顺序
+    sequence:{
+      type:'integer',
+      required:false
     },
     //preScript 前置脚本
     prescript:{

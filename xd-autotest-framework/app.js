@@ -55,7 +55,11 @@ process.chdir(__dirname);
 
 
   // Start server
-  sails.lift(rc('sails'));
+  try{
+    sails.lift(rc('sails'));
+  }catch (e){
+    console.error(e);
+  }
 })();
 
 
