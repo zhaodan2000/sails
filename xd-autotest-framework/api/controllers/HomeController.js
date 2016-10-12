@@ -14,7 +14,6 @@ module.exports = {
   },
   task: function(req, res) {
     mongoService.Find("TaskFolder", null, function (records) {
-      console.log('records:'+ records);
       res.view('task/index', {data:records});
     });
   },
@@ -25,7 +24,6 @@ module.exports = {
   },
   schedule: function(req, res) {
     mongoService.Find("TaskFolder", null, function (records) {
-      console.log('records:'+ records);
       res.view('schedule/index', {data:records});
     });
   },

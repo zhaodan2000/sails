@@ -48,6 +48,7 @@ module.exports.http = {
       '500'
     ],
 
+    
   /****************************************************************************
   *                                                                           *
   * Example custom middleware; logs each request to the console.              *
