@@ -84,15 +84,17 @@ module.exports = {
    * @param scheduleID
    */
   execute: function(itemArr,sc_id) {
-    console.log(itemArr);
-    console.log(sc_id);
+    var mailEp = eventproxy.create();
+    mailEp.after(1, function(){
+      _sendMail();
+    });
     var ep = eventproxy.create();
     var collection = collectionHelper.newCollection();
     collection.setName("测试");
     ep.after(itemArr.length, function () {
       var _collection = collection.getCollection();
-      //console.log(JSON.stringify(_collection));
-      service.runCollection(_collection, function (exitCode, results) {
+
+     service.runCollection(_collection, function (exitCode, results) {
         var log_id=(new Date().getTime()).toString();
         var log = {
           log_id:log_id,
@@ -102,7 +104,7 @@ module.exports = {
         };
         mongoService.Insert("ScheduleLog", log, function (records) {
           if (records) {
-            _sendMail();
+            mailEp.emit(1);
             return records;
           } else {
             //fail
@@ -191,7 +193,7 @@ function _sendMail(){
 
   var mailOptions = {
     from: "zhouhuan@corp.51xiaodou.com", // 发件地址
-    to: "zhaodan@corp.51xiaodou.com", // 收件列表
+    to: "liyuehua@corp.51xiaodou.com", // 收件列表
     subject: "周欢测试", // 标题
     html: "<b>thanks a for visiting!</b>"
   }
