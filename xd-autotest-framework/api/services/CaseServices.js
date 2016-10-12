@@ -107,7 +107,11 @@ function parseInputPreString(prestring, callback) {
   pre._event = {listen: "prerequest", script: {type: "text/javascript", exec: ""}};
   var ep = eventproxy.create();
   var mysql = mysqlhelper.create(ep);
-  eval(prestring);
+  try{
+    eval(prestring);
+  }catch (e){
+    console.error(e);
+  }
   if (ep.getLength() > 0) {
     ep.after(ep.getLength(), function () {
       callback(pre._event);
@@ -127,7 +131,11 @@ function parseIntputTestString(teststring, callback) {
   test._event = {listen: "test", script: {type: "text/javascript", exec: ""}};
   var ep = eventproxy.create();
   var mysql = mysqlhelper.create(ep);
-  eval(teststring);
+  try{
+    eval(teststring);
+  }catch (e){
+    console.error(e);
+  }
   if (ep.getLength() > 0) {
     ep.after(ep.getLength(), function () {
       callback(test._event);
