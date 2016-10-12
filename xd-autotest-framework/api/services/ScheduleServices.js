@@ -84,15 +84,17 @@ module.exports = {
    * @param scheduleID
    */
   execute: function(itemArr,sc_id) {
-    console.log(itemArr);
-    console.log(sc_id);
+    var mailEp = eventproxy.create();
+    mailEp.after(1, function(){
+      _sendMail();
+    });
     var ep = eventproxy.create();
     var collection = collectionHelper.newCollection();
     collection.setName("测试");
     ep.after(itemArr.length, function () {
       var _collection = collection.getCollection();
-      //console.log(JSON.stringify(_collection));
-      service.runCollection(_collection, function (exitCode, results) {
+
+     service.runCollection(_collection, function (exitCode, results) {
         var log_id=(new Date().getTime()).toString();
         var log = {
           log_id:log_id,
@@ -102,6 +104,7 @@ module.exports = {
         };
         mongoService.Insert("ScheduleLog", log, function (records) {
           if (records) {
+            mailEp.emit(1);
             return records;
           } else {
             //fail
@@ -140,7 +143,7 @@ module.exports = {
 }
 
 exports.execute = _execute;
-exports.execute = sendMail;
+exports.execute = _sendMail;
 function _execute(itemArr,sc_id) {
   var ep = eventproxy.create();
   var collection = collectionHelper.newCollection();
@@ -158,6 +161,7 @@ function _execute(itemArr,sc_id) {
       };
       mongoService.Insert("ScheduleLog", log, function (records) {
         if (records) {
+          _sendMail();
           return records;
         } else {
           //fail
@@ -173,7 +177,8 @@ function _execute(itemArr,sc_id) {
     });
   }
 }
-function sendMail(){
+
+function _sendMail(){
   // 开启一个 SMTP 连接池
   var transport = nodemailer.createTransport(smtpTransport({
     host: "smtp.ym.163.com", // 主机
@@ -181,14 +186,14 @@ function sendMail(){
     port: 994, // SMTP 端口
     auth: {
       user: "zhouhuan@corp.51xiaodou.com", // 账号
-      pass: "" // 密码
+      pass: "zhouhuan123" // 密码
     }
   }));
 // 设置邮件内容
 
   var mailOptions = {
     from: "zhouhuan@corp.51xiaodou.com", // 发件地址
-    to: "zhaodan@corp.51xiaodou.com", // 收件列表
+    to: "liyuehua@corp.51xiaodou.com", // 收件列表
     subject: "周欢测试", // 标题
     html: "<b>thanks a for visiting!</b>"
   }
@@ -203,3 +208,4 @@ function sendMail(){
     transport.close(); // 如果没用，关闭连接池
   });
 }
+
