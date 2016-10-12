@@ -84,6 +84,8 @@ module.exports = {
    * @param scheduleID
    */
   execute: function(itemArr,sc_id) {
+    console.log(itemArr);
+    console.log(sc_id);
     var ep = eventproxy.create();
     var collection = collectionHelper.newCollection();
     collection.setName("测试");
@@ -151,7 +153,8 @@ function _execute(itemArr,sc_id) {
       var log = {
         log_id:log_id,
         sc_id: sc_id,
-        log_desc:JSON.stringify(results)
+        log_desc:exitCode == 0?JSON.stringify(results):"Error",
+        log_html:exitCode == 0?JSON.stringify(results.html):"Error"
       };
       mongoService.Insert("ScheduleLog", log, function (records) {
         if (records) {

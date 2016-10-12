@@ -176,7 +176,6 @@ function start(sc_id,sc_host,sc_type,sc_task_id){
       sc_host:sc_host
     },
     success: function (data) {
-      console.log(data);
       alert("执行中，请稍候查看日志");
     },
     error:function(data){
