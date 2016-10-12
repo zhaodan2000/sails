@@ -28,5 +28,9 @@ module.exports = {
       type:'string',
       required:false,
     },
+    log_html:{
+      type:'string',
+      required:false,
+    },
   }
 };
