@@ -6,8 +6,10 @@ var service = require("../services/CaseServices");
 var collectionHelper = require('../newman/NewManModel');
 var eventproxy = require('../utils/eventproxyhelper');
 var mongoService = require("../services/mongoService");
+var mailService = require("../services/MailService");
 var nodemailer = require("nodemailer");
 var smtpTransport = require('nodemailer-smtp-transport');
+var request = require('request');
 module.exports = {
 /*    /!**
      * 根据任务的调度策略类型Schedule_ID进行调度
@@ -85,15 +87,11 @@ module.exports = {
    */
   execute: function(itemArr,sc_id) {
     var mailEp = eventproxy.create();
-    mailEp.after(1, function(){
-      _sendMail();
-    });
     var ep = eventproxy.create();
     var collection = collectionHelper.newCollection();
     collection.setName("测试");
     ep.after(itemArr.length, function () {
       var _collection = collection.getCollection();
-
      service.runCollection(_collection, function (exitCode, results) {
         var log_id=(new Date().getTime()).toString();
         var log = {
@@ -104,8 +102,9 @@ module.exports = {
         };
         mongoService.Insert("ScheduleLog", log, function (records) {
           if (records) {
-            mailEp.emit(1);
-            return records;
+           /* request.post('http://localhost:1337/log/sendMail').form({"log_id":log_id})*/
+            mailService.sendMail();
+            return log_id;
           } else {
             //fail
             console.log('insert fail');
@@ -139,11 +138,9 @@ module.exports = {
       }
     });
   },
-
 }
 
 exports.execute = _execute;
-exports.execute = _sendMail;
 function _execute(itemArr,sc_id) {
   var ep = eventproxy.create();
   var collection = collectionHelper.newCollection();
@@ -161,7 +158,7 @@ function _execute(itemArr,sc_id) {
       };
       mongoService.Insert("ScheduleLog", log, function (records) {
         if (records) {
-          _sendMail();
+          request.post('/log/sendMail', {form:{'log_id':'123'}})
           return records;
         } else {
           //fail
@@ -177,35 +174,3 @@ function _execute(itemArr,sc_id) {
     });
   }
 }
-
-function _sendMail(){
-  // 开启一个 SMTP 连接池
-  var transport = nodemailer.createTransport(smtpTransport({
-    host: "smtp.ym.163.com", // 主机
-    secure: true, // 使用 SSL
-    port: 994, // SMTP 端口
-    auth: {
-      user: "zhouhuan@corp.51xiaodou.com", // 账号
-      pass: "zhouhuan123" // 密码
-    }
-  }));
-// 设置邮件内容
-
-  var mailOptions = {
-    from: "zhouhuan@corp.51xiaodou.com", // 发件地址
-    to: "liyuehua@corp.51xiaodou.com", // 收件列表
-    subject: "周欢测试", // 标题
-    html: "<b>thanks a for visiting!</b>"
-  }
-// 发送邮件
-
-  transport.sendMail(mailOptions, function(error, response) {
-    if (error) {
-      console.error(error);
-    } else {
-      console.log(response);
-    }
-    transport.close(); // 如果没用，关闭连接池
-  });
-}
-

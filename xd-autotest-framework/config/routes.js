@@ -74,9 +74,11 @@ module.exports.routes = {
   'post /sc/editState': 'TaskSchedule.editState',
   'post /sc/start': 'TaskSchedule.start',
 
+
   //sc
   'post /log/all': 'LogSchedule.all',
   'post /log/getLogById': 'LogSchedule.getLogById',
+  'post /log/sendMail': 'TaskSchedule.sendMail',
 
   '/response': {
     view: 'response'

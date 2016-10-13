@@ -2,7 +2,7 @@ var service = require("../services/CaseServices")
 var collectionHelper = require('../newman/NewManModel')
 var eventproxy = require('../utils/eventproxyhelper')
 var scheduleServices=require("../services/ScheduleServices")
-
+var mailService = require("../services/MailService");
 /**
  * TaskScheduleController
  *
@@ -124,7 +124,7 @@ module.exports = {
    * @param req
    * @param res
    */
-  start: function (req, res) {
+  start: function (req, res,callback) {
     var modelType = req.body.modelType;
     var sc_id=req.body.sc_id;
     var sc_host=req.body.sc_host;
@@ -135,8 +135,9 @@ module.exports = {
         for (var i = 0; i < itemArr.length; i++) {
           itemArr[i].url="http://"+sc_host+itemArr[i].url;
         }
-          scheduleServices.execute(itemArr,sc_id);
-        return res.send();
+         var log_id= scheduleServices.execute(itemArr,sc_id);
+         console.log(log_id);
+          return res.send();
       }
     })
   },
@@ -169,6 +170,16 @@ getAll: function (req, res) {
    }
   });
 },
+  /**
+   * 启动定时任务
+   * @param req
+   * @param res
+   */
+  sendMail: function (req, res,callback) {
+    var log_id = req.body.log_id;
+    console.log(log_id);
+    mailService.sendMail();
+  },
 }
 
 
