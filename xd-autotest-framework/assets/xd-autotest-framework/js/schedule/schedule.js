@@ -167,7 +167,7 @@ function getTask(){
     }
   })
 }
-function start(sc_id,sc_host,sc_type,sc_task_id){
+function start(sc_id,sc_host,sc_type,sc_task_id,sc_name){
   var modelType="ReqFolder";
   if(sc_type==1){
   }else{
@@ -181,18 +181,11 @@ function start(sc_id,sc_host,sc_type,sc_task_id){
       modelType: modelType,
       uniqID: sc_task_id,
       sc_id:sc_id,
-      sc_host:sc_host
+      sc_host:sc_host,
+      sc_name:sc_name
     },
     success: function (data) {
       alert("执行中，请稍候查看日志");
-      $.ajax({
-        url: '/log/sendMail',
-        method: "post",
-        contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-        data: {
-          log_id:"123"
-        }
-      })
     },
     error:function(data){
       alert("执行错误:"+JSON.stringify(data,null,"\t"));
@@ -200,7 +193,7 @@ function start(sc_id,sc_host,sc_type,sc_task_id){
   })
 
 }
-function editState(sc_id,state,sc_type,sc_task_id,sc_time,sc_host){
+function editState(sc_id,state,sc_type,sc_task_id,sc_time,sc_host,sc_name){
   var sc_id=sc_id;
   var sc_state=state;
   console.log(sc_id);
@@ -215,7 +208,8 @@ function editState(sc_id,state,sc_type,sc_task_id,sc_time,sc_host){
       sc_type:sc_type,
       sc_task_id:sc_task_id,
       sc_time:sc_time,
-      sc_host:sc_host
+      sc_host:sc_host,
+      sc_name:sc_name
     },
     success: function (data) {
       $.main.refreshMain("schedule");

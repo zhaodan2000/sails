@@ -18,7 +18,7 @@ module.exports = {
   getLogById: function (req, res) {
     var log_id=req.body.log_id;
     mongoService.Find('ScheduleLog', {log_id:log_id}, function (records) {
-      res.view('schedule/logDesc', {data: records});
+      res.view('schedule/logShow', {data: records});
     });
   },
   log: function (req, res) {

@@ -1,11 +1,11 @@
 <h2 style="text-align: center">策略报告</h2>
  <div class="row">
     <div class="col-lg-12">
-              <% if (data) { %>
-              <% data.forEach(function(record,index){ %>
-              <%-record.log_html%>
-              <% }) %>
-              <% } %>
+      <% if (data) {
+        data.forEach(function(record,index){%>
+      <%-record.log_html.slice(1).substring(0,record.log_html.length-2)%>
+      <% })
+      } %>
       </div>
   </div>
 </div>

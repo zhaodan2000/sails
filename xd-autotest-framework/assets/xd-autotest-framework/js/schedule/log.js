@@ -1,16 +1,4 @@
 function report(log_id){
-  $.ajax({
-    url:'/log/getLogById',
-    method:"post",
-    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-    data: {
-      log_id: log_id
-    },
-    success: function (data) {
-      $("#page-wrapper").html(data);
-    },
-    error:function(data){
-      alert("操作失败,错误日志:"+JSON.stringify(data,null,"\t"));
-    }
-  });
+  var url="/LogSchedule/log?log_id="+log_id;
+  window.open(url,'_blank','height=800,width=800,top=100,left=200,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
 }

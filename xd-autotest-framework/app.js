@@ -52,11 +52,17 @@ process.chdir(__dirname);
       rc = function () { return {}; };
     }
   }
-
-
   // Start server
   try{
-    sails.lift(rc('sails'));
+    sails.lift(rc('sails'),function(){
+      var request = require('request');
+      /*    request.get('http://localhost:1337/TaskSchedule/getAll');*/
+      request('http://localhost:1337/TaskSchedule/getAll', function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+          sails.log.debug(body) // 打印google首页
+        }
+      })
+    });
   }catch (e){
     console.error(e);
   }

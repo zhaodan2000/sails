@@ -7,8 +7,6 @@ var collectionHelper = require('../newman/NewManModel');
 var eventproxy = require('../utils/eventproxyhelper');
 var mongoService = require("../services/mongoService");
 var mailService = require("../services/MailService");
-var nodemailer = require("nodemailer");
-var smtpTransport = require('nodemailer-smtp-transport');
 var request = require('request');
 module.exports = {
 /*    /!**
@@ -31,7 +29,7 @@ module.exports = {
    * 根据任务的调度策略类型Schedule_ID进行调度
    * @param scheduleID
    */
-  start: function(sc_id,sc_type,sc_task_id,sc_time,sc_host)
+  start: function(sc_id,sc_type,sc_task_id,sc_time,sc_host,sc_name)
   {
     var schedule = require("node-schedule");
     var modelType="ReqFolder";
@@ -50,7 +48,7 @@ module.exports = {
         var j = schedule.scheduleJob(sc_time, function () {
           map.put(sc_id,j);
           console.log("执行任务");
-          _execute(itemArr,sc_id);
+          _execute(itemArr,sc_id,sc_name);
         });
       }
     })
@@ -77,6 +75,7 @@ module.exports = {
     var job= map.get(sc_id);
     if(job!=null) {
       job.cancel();
+      console.log()
     }
   },
 
@@ -85,25 +84,25 @@ module.exports = {
    * 启动定时任务
    * @param scheduleID
    */
-  execute: function(itemArr,sc_id) {
+  execute: function(itemArr,sc_id,sc_name) {
     var mailEp = eventproxy.create();
     var ep = eventproxy.create();
     var collection = collectionHelper.newCollection();
-    collection.setName("测试");
+    collection.setName(sc_name);
     ep.after(itemArr.length, function () {
       var _collection = collection.getCollection();
-     service.runCollection(_collection, function (exitCode, results) {
-        var log_id=(new Date().getTime()).toString();
+      service.runCollection(_collection, function (exitCode, results) {
+        var log_id = (new Date().getTime()).toString();
+        var log_html= JSON.stringify(results.html);
         var log = {
-          log_id:log_id,
+          log_id: log_id,
           sc_id: sc_id,
-          log_desc:exitCode == 0?JSON.stringify(results):"Error",
-          log_html:exitCode == 0?JSON.stringify(results.html):"Error"
+          log_desc: exitCode == 0 ? JSON.stringify(results) : "Error",
+          log_html: exitCode == log_html
         };
         mongoService.Insert("ScheduleLog", log, function (records) {
           if (records) {
-           /* request.post('http://localhost:1337/log/sendMail').form({"log_id":log_id})*/
-            mailService.sendMail();
+            mailService.sendMail(log_id, sc_name,log_html);
             return log_id;
           } else {
             //fail
@@ -141,25 +140,26 @@ module.exports = {
 }
 
 exports.execute = _execute;
-function _execute(itemArr,sc_id) {
+function _execute(itemArr,sc_id,sc_name) {
+  var mailEp = eventproxy.create();
   var ep = eventproxy.create();
   var collection = collectionHelper.newCollection();
-  collection.setName("测试");
+  collection.setName(sc_name);
   ep.after(itemArr.length, function () {
     var _collection = collection.getCollection();
-    //console.log(JSON.stringify(_collection));
     service.runCollection(_collection, function (exitCode, results) {
       var log_id=(new Date().getTime()).toString();
+      var log_html= JSON.stringify(results.html);
       var log = {
         log_id:log_id,
         sc_id: sc_id,
         log_desc:exitCode == 0?JSON.stringify(results):"Error",
-        log_html:exitCode == 0?JSON.stringify(results.html):"Error"
+        log_html:exitCode == log_html
       };
       mongoService.Insert("ScheduleLog", log, function (records) {
         if (records) {
-          request.post('/log/sendMail', {form:{'log_id':'123'}})
-          return records;
+          mailService.sendMail(log_id,sc_name,log_html);
+          return log_id;
         } else {
           //fail
           console.log('insert fail');
