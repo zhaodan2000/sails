@@ -72,6 +72,7 @@
                 <td><%-record.createdAt%></td>
                 <td><%-record.Schedule_desc%></td>
                 <td>
+                  <a style="cursor: pointer" name="querySequence" uniqid="<%= record.uniqID %>">查看</a>
                   <a style="cursor: pointer" name="editAPI" uniqid="<%= record.uniqID %>">修改</a>
                   <a style="cursor: pointer" name="removeAPI" uniqid="<%= record.uniqID %>">删除</a>
                   <div style="display: none; float: right">
@@ -80,6 +81,12 @@
                     <button name="<%-record.uniqID%>" class="btn btn-xs btn-danger" onclick="deleteSelectedTask(this.name)">删除</button>
                   </div>
                 </td>
+              </tr>
+              <tr id="test_hidden_row" style="display: none">
+                <td >hello,world!</td>
+                <td >hello,world!</td>
+                <td >hello,world!</td>
+                <td >hello,world!</td>
               </tr>
               <% }) %>
               <% } %>

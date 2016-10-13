@@ -9,6 +9,10 @@ function showManagerTask(){
   $.main.refreshMain("/TaskManager/showTaskMangerView");
 }
 
+$('a[name="querySequence"]').click(function(){
+  $('#test_hidden_row').attr("style","display: ");
+});
+
 /**
  * 添加一个task
  */

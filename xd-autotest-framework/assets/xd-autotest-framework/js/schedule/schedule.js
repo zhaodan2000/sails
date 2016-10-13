@@ -242,3 +242,13 @@ function getLog(sc_id){
     }
   });
 }
+function sendMail(){
+  $.ajax({
+    url: '/log/sendMail',
+    method: "post",
+    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+    data: {
+      log_id:"123"
+    }
+  })
+}
