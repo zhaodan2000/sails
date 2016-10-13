@@ -98,7 +98,7 @@ module.exports = {
           log_id: log_id,
           sc_id: sc_id,
           log_desc: exitCode == 0 ? JSON.stringify(results) : "Error",
-          log_html: exitCode == log_html
+          log_html : log_html
         };
         mongoService.Insert("ScheduleLog", log, function (records) {
           if (records) {
@@ -154,7 +154,7 @@ function _execute(itemArr,sc_id,sc_name) {
         log_id:log_id,
         sc_id: sc_id,
         log_desc:exitCode == 0?JSON.stringify(results):"Error",
-        log_html:exitCode == log_html
+        log_html : log_html
       };
       mongoService.Insert("ScheduleLog", log, function (records) {
         if (records) {

@@ -19,13 +19,13 @@ module.exports = {
         secure: true, // 使用 SSL
         port: 994, // SMTP 端口
         auth: {
-          user: "zhouhuan@corp.51xiaodou.com", // 账号
-          pass: "zhouhuan123" // 密码
+          user: "autotest@corp.51xiaodou.com", // 账号
+          pass: "pgP4dkuC6G" // 密码
         }
       }));
       // 设置邮件内容
       var mailOptions = {
-        from: "zhouhuan@corp.51xiaodou.com", // 发件地址
+        from: "autotest@corp.51xiaodou.com", // 发件地址
         to: jsonObj.mail, // 收件列表
         subject: sc_name+"测试报告", // 标题
         html: html
