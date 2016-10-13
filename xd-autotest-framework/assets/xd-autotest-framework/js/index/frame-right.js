@@ -6,9 +6,11 @@
   $.main.refreshRight = function (url, option) {
     if ($("#page-wrapper-right")) {
       var _option = {};
+      _option.method = option&&option.data? 'POST':'GET';
       _option.data = option&&option.data? option.data:{};
       $.ajax({
         url: url,
+        method: _option.method,
         data : _option.data,
         success: function (data) {
           $("#page-wrapper-right").html(data);
