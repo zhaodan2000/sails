@@ -9,22 +9,6 @@ var mongoService = require("../services/mongoService");
 var mailService = require("../services/MailService");
 var request = require('request');
 module.exports = {
-/*    /!**
-     * 根据任务的调度策略类型Schedule_ID进行调度
-     * @param scheduleID
-     *!/
-    startAll: function()
-  {
-    var schedule = require("node-schedule");
-    var scArr = getSc();
-    for (var i=0;i<scArr.length;i++){
-       var sc=scArr[i];
-      var j = schedule.scheduleJob(sc.sc_time, function () {
-        map.put(sc.sc_id,j);
-        console.log("执行任务");
-      });
-    }
-  },*/
   /**
    * 根据任务的调度策略类型Schedule_ID进行调度
    * @param scheduleID
@@ -54,18 +38,6 @@ module.exports = {
     })
   },
 
-/*  /!**
-   * 查找schedule
-   * @param scheduleID
-   *!/
-  getSc: function(sc_id) {
-    console.log(sc_id);
-    mongoService.Find("ScheduleTask", {sc_id:sc_id}, function (records) {
-      if (records) {
-        console.log(records);
-      }
-    })
-  },*/
 
   /**
    * 停止定时任务
