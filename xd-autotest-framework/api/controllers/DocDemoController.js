@@ -5,6 +5,22 @@ var fs=require('fs');
 
 module.exports={
 
+
+  testArray:function(req,res){
+    var  _rnds = new Array(16);
+
+      for (var i = 0, r; i < 16; i++) {
+        if ((i & 0x03) === 0) {
+          r = Math.random() * 0x100000000;
+        }
+
+        _rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
+      }
+
+      return _rnds;
+
+  },
+
   testService:function (req,res) {
     res.view('doc/postmanUI');
   },
