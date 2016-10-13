@@ -6,7 +6,7 @@
   $.main.refreshMain = function (url, option) {
     if ($("#page-wrapper")) {
       var _option = {};
-      _option.method = option&&option.data? 'POST':'GET';
+      _option.method = option && option.method? option.method:'GET';
       _option.data = option && option.data? option.data:{};
       $.ajax({
         url: url,
