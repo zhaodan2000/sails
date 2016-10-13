@@ -2,7 +2,7 @@ var service = require("../services/CaseServices")
 var collectionHelper = require('../newman/NewManModel')
 var eventproxy = require('../utils/eventproxyhelper')
 var scheduleServices=require("../services/ScheduleServices")
-
+var mailService = require("../services/MailService");
 /**
  * TaskScheduleController
  *
@@ -178,7 +178,7 @@ getAll: function (req, res) {
   sendMail: function (req, res,callback) {
     var log_id = req.body.log_id;
     console.log(log_id);
-    scheduleServices.sendMail();
+    mailService.sendMail();
   },
 }
 
