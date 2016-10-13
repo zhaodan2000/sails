@@ -3,6 +3,7 @@ var collectionHelper = require('../newman/NewManModel')
 var eventproxy = require('../utils/eventproxyhelper')
 var scheduleServices=require("../services/ScheduleServices")
 var mailService = require("../services/MailService");
+var map = require("../utils/maps").newHashMap();
 /**
  * TaskScheduleController
  *
@@ -109,7 +110,7 @@ module.exports = {
     mongoService.Update("ScheduleTask", sc, {sc_id: form.sc_id}, function (records) {
       if (records) {
         if(form.sc_state==1){
-          scheduleServices.start(form.sc_id,form.sc_type,form.sc_task_id,form.sc_time,form.sc_host);
+          scheduleServices.start(form.sc_id,form.sc_type,form.sc_task_id,form.sc_time,form.sc_host,form.sc_name);
         }else{
           scheduleServices.stop(form.sc_id);
         }
@@ -129,13 +130,14 @@ module.exports = {
     var sc_id=req.body.sc_id;
     var sc_host=req.body.sc_host;
     var sc_task_id=req.body.sc_task_id;
+    var sc_name=req.body.sc_name;
       mongoService.Find(modelType,{uniqID:req.body.uniqID}, function (records) {
       if (records) {
         var itemArr = records[0].ReqItems;
         for (var i = 0; i < itemArr.length; i++) {
           itemArr[i].url="http://"+sc_host+itemArr[i].url;
         }
-         var log_id= scheduleServices.execute(itemArr,sc_id);
+         var log_id= scheduleServices.execute(itemArr,sc_id,sc_name);
          console.log(log_id);
           return res.send();
       }
@@ -148,10 +150,7 @@ module.exports = {
    * @param res
    */
 getAll: function (req, res) {
-  mongoService.Find('ScheduleTask', null, function (records) {
-    /*      console.log(records);*/
-    if (records) {
-      var items= records[0];
+  mongoService.Find('ScheduleTask', null, function (items) {
       for (var i = 0; i < items.length; i++) {
          if(items[i].sc_state==1){
            var modelType="ReqFolder";
@@ -159,15 +158,10 @@ getAll: function (req, res) {
            }else{
              modelType="TaskFolder";
            }
-           mongoService.Find(modelType,{uniqID:items[i].sc_task_id}, function (records) {
-             if (records) {
-               scheduleServices.execute(records[0],items[i].sc_id,items[i].sc_host,items[i].sc_task_id);
-               return res.send();
-             }
-           })
+           scheduleServices.start(items[i].sc_id,items[i].sc_type,items[i].sc_task_id,items[i].sc_time,items[i].sc_host,items[i].sc_name);
+           return res.send("success");
          }
       }
-   }
   });
 },
   /**
