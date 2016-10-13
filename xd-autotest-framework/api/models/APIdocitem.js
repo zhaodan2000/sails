@@ -4,7 +4,7 @@
 
 module.exports={
   connection: 'someMongodbServer',
-  tableName: 'xd_autotest_apidocitem',
+  tableName: 'xd_autotest_docAPI',
   autoPK:true,//PrimaryKey ID自动增加
   attributes: {
     id:{
