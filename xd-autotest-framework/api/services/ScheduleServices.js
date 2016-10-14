@@ -29,8 +29,8 @@ module.exports = {
           itemArr[i].url="http://"+sc_host+itemArr[i].url;
           console.log(itemArr[i].url);
         }
+        map.put(sc_id,j);
         var j = schedule.scheduleJob(sc_time, function () {
-          map.put(sc_id,j);
           console.log("执行任务");
           _execute(itemArr,sc_id,sc_name);
         });
@@ -47,7 +47,7 @@ module.exports = {
     var job= map.get(sc_id);
     if(job!=null) {
       job.cancel();
-      console.log()
+      sails.log.debug("关闭定时任务"+sc_id);
     }
   },
 
