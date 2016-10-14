@@ -127,17 +127,18 @@ function _execute(itemArr,sc_id,sc_name) {
   ep.after(itemArr.length, function () {
     var _collection = collection.getCollection();
     service.runCollection(_collection, function (exitCode, results) {
-      var log_id=(new Date().getTime()).toString();
+      var log_id = (new Date().getTime()).toString();
       var log_html= JSON.stringify(results.html);
+      sails.log.debug(log_html);
       var log = {
-        log_id:log_id,
+        log_id: log_id,
         sc_id: sc_id,
-        log_desc:exitCode == 0?JSON.stringify(results):"Error",
+        log_desc: exitCode == 0 ? JSON.stringify(results) : "Error",
         log_html : log_html
       };
       mongoService.Insert("ScheduleLog", log, function (records) {
         if (records) {
-          mailService.sendMail(log_id,sc_name,log_html);
+          mailService.sendMail(log_id, sc_name,log_html);
           return log_id;
         } else {
           //fail
