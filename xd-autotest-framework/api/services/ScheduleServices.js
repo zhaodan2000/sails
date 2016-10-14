@@ -102,6 +102,29 @@ module.exports = {
    * 启动定时任务
    * @param scheduleID
    */
+  executeOne: function(itemArr,callback) {
+    var mailEp = eventproxy.create();
+    var ep = eventproxy.create();
+    var collection = collectionHelper.newCollection();
+    collection.setName("");
+    ep.after(itemArr.length, function () {
+      var _collection = collection.getCollection();
+      service.runCollection(_collection, function (exitCode, results) {
+          callback(results);
+      });
+    });
+    for (var i = 0; i < itemArr.length; i++) {
+      service.creatItem(itemArr[i], function (item) {
+        collection.pushItem(item);
+        ep.emit(1);
+      });
+    }
+  },
+
+  /**
+   * 启动定时任务
+   * @param scheduleID
+   */
   insertLog: function(log) {
     mongoService.Insert("ScheduleLog", log, function (records) {
       if (records) {
