@@ -8,7 +8,7 @@
 var formidable = require('formidable');
 var http = require('http');
 var util = require('util');
-// var request = require('request');
+var ScheduleService=require("../services/ScheduleServices");
 
 module.exports = {
   findRequestItemByID: function (req, res) {
@@ -179,6 +179,7 @@ module.exports = {
 
   },
 
+  //保存用例: 如果用例不存在,则添加;若存在,则更新。
   save_case: function (req, res) { 
     var reqFolder_uniqid = req.body["tc_coll_uniqId"]; 
     var caseItem = req.body["caseItem"];
@@ -218,6 +219,22 @@ module.exports = {
     }); 
   },
 
+  //运行case.
+  executeCase:function(req,res){
+    var uniqID=req.body["uniqid"];
+    if(uniqID){
+      mongoService.Find("RequestItem",{uniqID:uniqID},function (found) {
+        ScheduleService.executeOne(found,function(results){
+          console.log(results.results);
+          res.send(results.results,200);
+        });
+
+      });
+    }
+  },
+
+
+  //查询指定用例集合。
   query_tc_coll: function(req,res){ 
     var uniqId = req.body['uniqID']; 
     mongoService.Find('ReqFolder', {}, function (docs_records) { 

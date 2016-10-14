@@ -20,22 +20,20 @@ module.exports = {
      */
   addTask: function (req, res) {
     // console.log('req.body:'+JSON.stringify(req.body, null, 4));
-    var form = parseAddTaskBody(req.body);
-    var taskForm = {Task_name:form.task_name, type:form.type, Schedule_ID:form.Schedule_ID, Schedule_desc:form.schedule_desc,uniqID:(new Date().getTime()).toString()};
+    var form =req.body;
+    var taskForm = {Task_name:form.sequenceCase_name, Task_desc:form.sequenceCase_desc,uniqID:(new Date().getTime()).toString()};
     mongoService.Insert("TaskFolder", taskForm, function (records) {
       if (records){
-        //sucess
-        console.log('insert sucess');
-        //创建任务成功之后需要设置任务的调度策略
-        //在这里查找调度策略
-
         return res.send(records);
       }else {
         //fail
-        console.log('insert fail');
+        console.log('insert failed;');
       }
     });
   },
+
+
+
 
   /**
    * 查找一个task任务
@@ -150,7 +148,7 @@ module.exports = {
    * 通过name显示用例详情
    * @param req
    * @param res
-     */
+   */
   findRequestItemByID:function (req,res) {
     var dic = {name:req.param("name")};
     console.log(dic);
@@ -188,8 +186,6 @@ module.exports = {
         });
       }
     })
-
-
   },
 
   /**
@@ -252,46 +248,6 @@ module.exports = {
   }
 
 };
-
-/**
- * 创建task时解析提交的表单数据
- * @param body
- * @returns {*}
- */
-function parseAddTaskBody(body) {
-  var form = body;
-  form.Schedule_ID = "";
-  console.log(body.schedule_desc);
-  switch(body.schedule_desc){
-    case '不会自动执行任务脚本':
-      form.Schedule_ID = "1";
-      break;
-    case '每天07:30执行任务脚本':
-      form.Schedule_ID = "2";
-      break;
-    case '每周日22：30执行任务':
-      form.Schedule_ID = "3";
-      break;
-    case '每周周一到周五21:00执行任务脚本':
-      form.Schedule_ID = "4";
-      break;
-    default:
-      break;
-  }
-  console.log('form.Schedule_ID' +form.Schedule_ID);
-
-  switch(body.type_desc){
-    case 'group':
-      form.type = '1'
-      break;
-    case 'orderCase':
-      form.type = '2'
-      break;
-    default:
-      break;
-  }
-  return form;
-}
 
 /**
  * 刷新task页面

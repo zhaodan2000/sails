@@ -27,9 +27,9 @@
               <thead>
               <tr>
                 <th class="col-lg-2">名称</th>
-                <th class="col-lg-2">服务器</th>
-                <th class="col-lg-2">描述</th>
-                <th class="col-lg-2">状态</th>
+                <th class="col-lg-3">服务器</th>
+                <th class="col-lg-2">定时策略</th>
+                <th class="col-lg-1">状态</th>
                 <th class="col-lg-4">操作</th>
               </tr>
               </thead>
@@ -39,7 +39,7 @@
               <tr>
                 <td ><%-record.sc_name%></td>
                 <td><%-record.sc_host%></td>
-                <td><%-record.sc_desc%></td>
+                <td><%-record.sc_time%></td>
                 <td><% if(record.sc_state==1){%><a style="cursor: pointer" onclick="editState('<%=record.sc_id%>','2','<%=record.sc_type%>','<%=record.sc_task_id%>','<%=record.sc_time%>','<%=record.sc_host%>','<%=record.sc_name%>')">关闭</a> <%}else{%> <a style="cursor: pointer" onclick="editState('<%=record.sc_id%>','1','<%=record.sc_type%>','<%=record.sc_task_id%>','<%=record.sc_time%>','<%=record.sc_host%>','<%=record.sc_name%>')">开启</a> <%}%></td>
                 <td uniqid="<%=record.sc_id%>">
                   <a style="cursor: pointer" onclick="edit('<%=record.sc_id%>','<%=record.sc_name%>','<%=record.sc_desc%>','<%=record.sc_type%>','<%=record.sc_task_id%>','<%=record.sc_task_name%>','<%=record.sc_host%>','<%=record.sc_time%>','<%=record.sc_state%>')" uniqid="<%=record.sc_id%>">修改</a>
@@ -66,9 +66,9 @@
               <thead>
               <tr>
                 <th class="col-lg-2">名称</th>
-                <th class="col-lg-2">服务器</th>
-                <th class="col-lg-2">描述</th>
-                <th class="col-lg-2">状态</th>
+                <th class="col-lg-3">服务器</th>
+                <th class="col-lg-2">定时策略</th>
+                <th class="col-lg-1">状态</th>
                 <th class="col-lg-4">操作</th>
               </tr>
               </thead>
@@ -78,7 +78,7 @@
               <tr>
                 <td ><%-record.sc_name%></td>
                 <td><%-record.sc_host%></td>
-                <td><%-record.sc_desc%></td>
+                <td><%-record.sc_time%></td>
                 <td><% if(record.sc_state==1){%><a style="cursor: pointer" onclick="editState('<%=record.sc_id%>','2','<%=record.sc_type%>','<%=record.sc_task_id%>','<%=record.sc_time%>','<%=record.sc_host%>','<%=record.sc_name%>')">关闭</a> <%}else{%> <a style="cursor: pointer" onclick="editState('<%=record.sc_id%>','1','<%=record.sc_type%>','<%=record.sc_task_id%>','<%=record.sc_time%>','<%=record.sc_host%>','<%=record.sc_name%>')">开启</a> <%}%></td>
                 <td uniqid="<%=record.sc_id%>">
                   <a style="cursor: pointer" onclick="edit('<%=record.sc_id%>','<%=record.sc_name%>','<%=record.sc_desc%>','<%=record.sc_type%>','<%=record.sc_task_id%>','<%=record.sc_task_name%>','<%=record.sc_host%>','<%=record.sc_time%>','<%=record.sc_state%>')" uniqid="<%=record.sc_id%>">修改</a>

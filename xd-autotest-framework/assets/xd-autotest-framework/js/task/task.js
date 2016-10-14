@@ -20,10 +20,8 @@ $(document).ready(function () {
   var option_save = {
     url:"/TaskManager/addTask",
     success: function(data) {
-      // console.log('+++++++++++++++'+data);
-      //刷新页面之后后出现遮罩
       $.main.refreshMain("/TaskManager/showTaskMangerView");
-      }
+    }
   };
 
   //ajaxSubmit 

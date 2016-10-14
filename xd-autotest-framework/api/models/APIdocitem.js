@@ -84,7 +84,5 @@ module.exports={
     APIdocID: {
       model:'APIdoc'
     }
-
-
   }
 }

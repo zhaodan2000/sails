@@ -54,6 +54,8 @@ module.exports = {
             /** 存在API_docitem, 则更新apiItem **/
             else{
               mongoService.Update("APIdocitem",API_docitem,{uniqID:API_docitem.uniqID},function (updatedItem) {
+                mongoService.Update("RequestItem",{url:API_docitem.url},
+                  {apiUniqId:API_docitem.uniqID},function(updatedRequest){});
                 console.log(" 用户更新了APIdocitem:  "+updatedItem[0].name);
                 mongoService.Find("APIdoc",{uniqID:APIdoc_uniqid},function (single_doc){
                   mongoService.Find("APIdoc",{},function (docs_records) {

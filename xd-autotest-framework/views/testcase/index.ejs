@@ -8,7 +8,7 @@
         <h4 class="modal-title" id="addTCModalLabel">新增用例</h4>
       </div>
       <div class="modal-body">
-        <div id="tc_template" uniqid="" class="form-group" >
+        <div id="tc_template" uniqid="" api_uniqid="" class="form-group" >
             <div class="form-group">
               <label class="control-label" style="text-align:right">选择接口</label>
               <select id="select_tc_coll_apiName" name="tc_apiName" class="form-control" onchange="changeAPI()"/>
@@ -316,6 +316,7 @@
                 <td><%=curr_tc_coll.ReqItems[i].url%></td>
                 <td><%=curr_tc_coll.ReqItems[i].dev%></td>
                 <td uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">
+                  <a style="cursor: pointer" name="execTC" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">运行</a>
                   <a style="cursor: pointer" name="editTC" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">修改</a>
                   <a style="cursor: pointer" name="removeTC" uniqid="<%=curr_tc_coll.ReqItems[i].uniqID%>">删除</a>
                 </td>

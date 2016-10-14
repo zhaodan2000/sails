@@ -31,8 +31,15 @@ module.exports = {
         }
         map.put(sc_id,j);
         var j = schedule.scheduleJob(sc_time, function () {
-          console.log("执行任务");
-          _execute(itemArr,sc_id,sc_name);
+          mongoService.Find('ScheduleTask', {sc_id:sc_id}, function (records) {
+              if(records) {
+                sails.log.debug(records[0].sc_state);
+                if (records[0].sc_state == 1) {
+                    sails.log.debug("执行任务");
+                  _execute(itemArr, sc_id, sc_name);
+               }
+              }
+          });
         });
       }
     })
@@ -95,6 +102,29 @@ module.exports = {
    * 启动定时任务
    * @param scheduleID
    */
+  executeOne: function(itemArr,callback) {
+    var mailEp = eventproxy.create();
+    var ep = eventproxy.create();
+    var collection = collectionHelper.newCollection();
+    collection.setName("");
+    ep.after(itemArr.length, function () {
+      var _collection = collection.getCollection();
+      service.runCollection(_collection, function (exitCode, results) {
+          callback(results);
+      });
+    });
+    for (var i = 0; i < itemArr.length; i++) {
+      service.creatItem(itemArr[i], function (item) {
+        collection.pushItem(item);
+        ep.emit(1);
+      });
+    }
+  },
+
+  /**
+   * 启动定时任务
+   * @param scheduleID
+   */
   insertLog: function(log) {
     mongoService.Insert("ScheduleLog", log, function (records) {
       if (records) {
@@ -120,17 +150,18 @@ function _execute(itemArr,sc_id,sc_name) {
   ep.after(itemArr.length, function () {
     var _collection = collection.getCollection();
     service.runCollection(_collection, function (exitCode, results) {
-      var log_id=(new Date().getTime()).toString();
+      var log_id = (new Date().getTime()).toString();
       var log_html= JSON.stringify(results.html);
+      sails.log.debug(log_html);
       var log = {
-        log_id:log_id,
+        log_id: log_id,
         sc_id: sc_id,
-        log_desc:exitCode == 0?JSON.stringify(results):"Error",
+        log_desc: exitCode == 0 ? JSON.stringify(results) : "Error",
         log_html : log_html
       };
       mongoService.Insert("ScheduleLog", log, function (records) {
         if (records) {
-          mailService.sendMail(log_id,sc_name,log_html);
+          mailService.sendMail(log_id, sc_name,log_html);
           return log_id;
         } else {
           //fail

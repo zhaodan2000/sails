@@ -59,7 +59,7 @@ process.chdir(__dirname);
       /*    request.get('http://localhost:1337/TaskSchedule/getAll');*/
       request('http://localhost:1337/TaskSchedule/getAll', function (error, response, body) {
         if (!error && response.statusCode == 200) {
-          sails.log.debug(body) // 打印google首页
+          sails.log.debug(body) //
         }
       })
     });

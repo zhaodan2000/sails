@@ -87,6 +87,11 @@ module.exports = {
     },
     ReqFolderID:{
       model:'ReqFolder'
+    },
+
+    apiUniqId:{
+      type:'string',
+      required: false
     }
 
 
