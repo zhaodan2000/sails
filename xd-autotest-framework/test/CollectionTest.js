@@ -47,7 +47,7 @@ function sendMail(){
     transport.close(); // 如果没用，关闭连接池
   });
 }
-sendMail();
+// sendMail();
 var reqItem = {
   "uniqID": "1476158446588",
   "name": "登录接口1",
@@ -78,8 +78,8 @@ var reqItem = {
   "createdAt": "2016-10-11T04:00:46.629Z",
   "updatedAt": "2016-10-11T06:11:01.009Z",
   "dataType": "application/json",
-  "prescript": "pre.setGlobalVar('test','3');",
-  "testscript": "test.checkJsonValue('retcode',0);",
+  // "prescript": "mysql.execQuery({id:'1', host:'192.168.88.242', port:'3306', user:'xddev', password:'xddev@xiaodou', db:'2business', sql: 'select id from xd_user where id = ?', args:['3'], callback: function(results){if (results && results.length > 0) {var id = results[0];async('retcode', id['id']);}}});",
+  // "testscript": "mysql.execQuery({id:'1', host:'192.168.88.242', port:'3306', user:'xddev', password:'xddev@xiaodou', db:'2business', sql: 'select id from xd_user where id = ?', args:['3'], callback: function(results){if (results && results.length > 0) {var id = results[0];async('retcode', id['id']);}}});",
   "id": "57fc63eeeccbc220913ce86a"
 };
 var collection = new collectionHelper.newCollection();
@@ -89,7 +89,7 @@ service.creatItem(reqItem, function (item) {
   collection.pushItem(item);
   var _collection = collection.getCollection();
   service.runCollection(_collection, function(exitCode, results){
-    console.log(results);
+    console.log(JSON.stringify(results));
     try{
       // sendMail();
     }catch (e){

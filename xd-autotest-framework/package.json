@@ -5,8 +5,8 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
-    "async": "^2.0.0",
-    "autotest-engine": "^1.2.3",
+    "async": "^2.1.1",
+    "autotest-engine": "^1.2.5",
     "crypto": "0.0.3",
     "ejs": "2.3.4",
     "eventproxy": "^0.3.5",
@@ -35,6 +35,7 @@
     "mathjs": "^3.3.0",
     "mongodb": "^2.2.5",
     "mysql": "^2.11.1",
+    "node-ini": "1.0.0",
     "node-schedule": "^1.1.1 ",
     "node-uuid": "^1.4.7",
     "nodemailer": "2.6.4",
@@ -44,8 +45,7 @@
     "sails": "~0.12.3",
     "sails-disk": "~0.10.9",
     "sails-mongo": "^0.12.0",
-    "xdmailer-smtp-transport": "^1.0.0",
-    "node-ini":"1.0.0"
+    "xdmailer-smtp-transport": "^1.0.0"
   },
   "scripts": {
     "debug": "node debug app.js",
