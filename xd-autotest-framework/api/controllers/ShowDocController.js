@@ -8,7 +8,7 @@
 var formidable = require('formidable');
 var http = require('http');
 var util = require('util');
-// var request = require('request');
+var ScheduleService=require("../services/ScheduleServices");
 
 module.exports = {
   findRequestItemByID: function (req, res) {
@@ -223,9 +223,12 @@ module.exports = {
   executeCase:function(req,res){
     var uniqID=req.body["uniqid"];
     if(uniqID){
-      mongoService.Find("RequestItem",{uniqID:123},function () {
-        ScheduleService.execute(["requestItem"],"","");
-        res.ok();
+      mongoService.Find("RequestItem",{uniqID:uniqID},function (found) {
+        ScheduleService.executeOne(found,function(results){
+          console.log(results.results);
+          res.send(results.results,200);
+        });
+
       });
     }
   },

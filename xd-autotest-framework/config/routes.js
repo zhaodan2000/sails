@@ -66,6 +66,7 @@ module.exports.routes = {
   'post /case/update_tc_collection':'ShowDoc.save_tc_coll',
   'post /case/save_case': 'ShowDoc.save_case',
   'post /case/query_tc_collection': 'ShowDoc.query_tc_coll',
+  'post /case/executeCase':'ShowDoc.executeCase',
 
   //sc
   'post /sc/save': 'TaskSchedule.save',

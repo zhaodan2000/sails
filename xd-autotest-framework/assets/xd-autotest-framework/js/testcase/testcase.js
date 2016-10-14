@@ -282,7 +282,16 @@ $('a[name="removeTC"]').click(function(){
 });
 
 $('a[name="execTC"]').click(function(){
-  
+  $.ajax({
+    url:'/case/executeCase',
+    method:'post',
+    data:{
+      uniqid:$(this).attr('uniqid')
+    },
+    success:function (data) {
+        alert(JSON.stringify(data));
+    }
+  });
 });
 
 /** 新增用例保存至DB **/
