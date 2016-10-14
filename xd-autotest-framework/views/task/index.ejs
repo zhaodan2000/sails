@@ -57,32 +57,32 @@
             <table id="taskTable" class="table table-bordered table-hover table-striped">
               <thead>
                 <tr>
-                <th>顺序用例名</th>
-                <th>描述</th>
-                <th>用例数量</th>
-                <th>操作</th>
-              </tr>
+                  <th>顺序用例名</th>
+                  <th>描述</th>
+                  <th>用例数量</th>
+                  <th>操作</th>
+                </tr>
               </thead>
 
               <tbody>
               <% if (data) { %>
               <% data.forEach(function(record,index){ %>
-              <tr>
-                <td ><%-record.Task_name%></td>
-                <td><%-record.createdAt%></td>
-                <td><%-record.Schedule_desc%></td>
-                <td>
-                  <a style="cursor: pointer" name="querySequence" uniqid="<%= record.uniqID %>">查看</a>
-                  <a style="cursor: pointer" name="editAPI" uniqid="<%= record.uniqID %>">修改</a>
-                  <a style="cursor: pointer" name="removeAPI" uniqid="<%= record.uniqID %>">删除</a>
-                  <div style="display: none; float: right">
-                    <button name="<%-record.uniqID%>" class="btn btn-xs btn-primary" onclick="runSelectedTask(this.name)">运行</button>
-                    <button name="<%-record.uniqID%>" class="btn btn-xs btn-info" onclick="showTaskDetailView(this.name)" >编辑</button>
-                    <button name="<%-record.uniqID%>" class="btn btn-xs btn-danger" onclick="deleteSelectedTask(this.name)">删除</button>
-                  </div>
-                </td>
-              </tr>
-              <tr id="test_hidden_row" style="display: none">
+                <tr>
+                  <td ><%-record.Task_name%></td>
+                  <td><%-record.Task_desc%></td>
+                  <td><%-record.Cases?record.Cases.length:0 %></td>
+                  <td>
+                    <a style="cursor: pointer" name="querySequence" uniqid="<%= record.uniqID %>">查看</a>
+                    <a style="cursor: pointer" name="editAPI" uniqid="<%= record.uniqID %>">修改</a>
+                    <a style="cursor: pointer" name="removeAPI" uniqid="<%= record.uniqID %>">删除</a>
+                    <div style="display: none; float: right">
+                      <button name="<%-record.uniqID%>" class="btn btn-xs btn-primary" onclick="runSelectedTask(this.name)">运行</button>
+                      <button name="<%-record.uniqID%>" class="btn btn-xs btn-info" onclick="showTaskDetailView(this.name)" >编辑</button>
+                      <button name="<%-record.uniqID%>" class="btn btn-xs btn-danger" onclick="deleteSelectedTask(this.name)">删除</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr id="test_hidden_row" style="display: none">
                 <td >hello,world!</td>
                 <td >hello,world!</td>
                 <td >hello,world!</td>
@@ -120,7 +120,7 @@
           </div>
           <div class="form-group">
             <label style="font-size: 18px">描述</label>
-            <input name="sequenceCase_name" type="text" class="form-control" placeholder="">
+            <input name="sequenceCase_desc" type="text" class="form-control" placeholder="">
           </div>
         </div>
         <div class="modal-footer">

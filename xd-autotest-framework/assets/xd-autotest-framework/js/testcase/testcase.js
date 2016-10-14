@@ -281,6 +281,10 @@ $('a[name="removeTC"]').click(function(){
   }
 });
 
+$('a[name="execTC"]').click(function(){
+  
+});
+
 /** 新增用例保存至DB **/
 $('#btn_add_tc').click(function () {
   var tc_coll_uniqId=$('h1#tc_coll_name').attr("uniqid");
