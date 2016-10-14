@@ -31,8 +31,15 @@ module.exports = {
         }
         map.put(sc_id,j);
         var j = schedule.scheduleJob(sc_time, function () {
-          console.log("执行任务");
-          _execute(itemArr,sc_id,sc_name);
+          mongoService.Find('ScheduleTask', {sc_id:sc_id}, function (records) {
+              if(records) {
+                sails.log.debug(records[0].sc_state);
+                if (records[0].sc_state == 1) {
+                    sails.log.debug("执行任务");
+                  _execute(itemArr, sc_id, sc_name);
+               }
+              }
+          });
         });
       }
     })
