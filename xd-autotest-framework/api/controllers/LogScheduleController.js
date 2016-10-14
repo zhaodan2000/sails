@@ -16,7 +16,6 @@ module.exports = {
   all: function (req, res) {
     var sc_id=req.body.sc_id;
     mongoService.Find('ScheduleLogSome', {sc_id:sc_id}, function (records) {
-      sails.log.debug(records);
       res.view('schedule/log', {data: records});
     });
   },

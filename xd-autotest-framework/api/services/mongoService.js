@@ -358,7 +358,7 @@ module.exports={
         break;
 
       case "ScheduleLog":
-        ScheduleLog.find(dic).sort({createdAt:-1}).exec(function(err,records){
+        ScheduleLog.find(dic).exec(function(err,records){
           if (!err) {
             console.log("find %s records success!", modelType);
             callback(records);
@@ -371,7 +371,7 @@ module.exports={
         break;
 
       case "ScheduleLogSome":
-        ScheduleLog.find({where:dic, select: ['log_id','sc_id','createdAt']}).sort({createdAt:-1}).exec(function(err,records){
+        ScheduleLog.find({where:dic, select: ['log_id','sc_id','createdAt'], sort: { 'createdAt': -1 }}).exec(function(err,records){
           if (!err) {
             console.log("find %s records success!", modelType);
             callback(records);
