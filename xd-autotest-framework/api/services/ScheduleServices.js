@@ -9,22 +9,6 @@ var mongoService = require("../services/mongoService");
 var mailService = require("../services/MailService");
 var request = require('request');
 module.exports = {
-/*    /!**
-     * 根据任务的调度策略类型Schedule_ID进行调度
-     * @param scheduleID
-     *!/
-    startAll: function()
-  {
-    var schedule = require("node-schedule");
-    var scArr = getSc();
-    for (var i=0;i<scArr.length;i++){
-       var sc=scArr[i];
-      var j = schedule.scheduleJob(sc.sc_time, function () {
-        map.put(sc.sc_id,j);
-        console.log("执行任务");
-      });
-    }
-  },*/
   /**
    * 根据任务的调度策略类型Schedule_ID进行调度
    * @param scheduleID
@@ -45,27 +29,22 @@ module.exports = {
           itemArr[i].url="http://"+sc_host+itemArr[i].url;
           console.log(itemArr[i].url);
         }
+        map.put(sc_id,j);
         var j = schedule.scheduleJob(sc_time, function () {
-          map.put(sc_id,j);
-          console.log("执行任务");
-          _execute(itemArr,sc_id,sc_name);
+          mongoService.Find('ScheduleTask', {sc_id:sc_id}, function (records) {
+              if(records) {
+                sails.log.debug(records[0].sc_state);
+                if (records[0].sc_state == 1) {
+                    sails.log.debug("执行任务");
+                  _execute(itemArr, sc_id, sc_name);
+               }
+              }
+          });
         });
       }
     })
   },
 
-/*  /!**
-   * 查找schedule
-   * @param scheduleID
-   *!/
-  getSc: function(sc_id) {
-    console.log(sc_id);
-    mongoService.Find("ScheduleTask", {sc_id:sc_id}, function (records) {
-      if (records) {
-        console.log(records);
-      }
-    })
-  },*/
 
   /**
    * 停止定时任务
@@ -75,7 +54,7 @@ module.exports = {
     var job= map.get(sc_id);
     if(job!=null) {
       job.cancel();
-      console.log()
+      sails.log.debug("关闭定时任务"+sc_id);
     }
   },
 
@@ -98,7 +77,7 @@ module.exports = {
           log_id: log_id,
           sc_id: sc_id,
           log_desc: exitCode == 0 ? JSON.stringify(results) : "Error",
-          log_html: exitCode == log_html
+          log_html : log_html
         };
         mongoService.Insert("ScheduleLog", log, function (records) {
           if (records) {
@@ -148,17 +127,18 @@ function _execute(itemArr,sc_id,sc_name) {
   ep.after(itemArr.length, function () {
     var _collection = collection.getCollection();
     service.runCollection(_collection, function (exitCode, results) {
-      var log_id=(new Date().getTime()).toString();
+      var log_id = (new Date().getTime()).toString();
       var log_html= JSON.stringify(results.html);
+      sails.log.debug(log_html);
       var log = {
-        log_id:log_id,
+        log_id: log_id,
         sc_id: sc_id,
-        log_desc:exitCode == 0?JSON.stringify(results):"Error",
-        log_html:exitCode == log_html
+        log_desc: exitCode == 0 ? JSON.stringify(results) : "Error",
+        log_html : log_html
       };
       mongoService.Insert("ScheduleLog", log, function (records) {
         if (records) {
-          mailService.sendMail(log_id,sc_name,log_html);
+          mailService.sendMail(log_id, sc_name,log_html);
           return log_id;
         } else {
           //fail

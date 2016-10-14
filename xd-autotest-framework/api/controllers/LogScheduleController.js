@@ -1,4 +1,8 @@
 /**
+ * Created by zhouhuan on 16/10/10
+ */
+
+/**
  * LogScheduleController
  *
  * @description :: Server-side logic for managing Taskschedules
@@ -11,7 +15,7 @@ var path=require('path');
 module.exports = {
   all: function (req, res) {
     var sc_id=req.body.sc_id;
-    mongoService.Find('ScheduleLog', {sc_id:sc_id}, function (records) {
+    mongoService.Find('ScheduleLogSome', {sc_id:sc_id}, function (records) {
       res.view('schedule/log', {data: records});
     });
   },
