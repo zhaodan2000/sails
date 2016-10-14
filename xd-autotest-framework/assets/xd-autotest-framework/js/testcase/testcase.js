@@ -97,6 +97,7 @@ $('#add_tc_coll_2db').click(function () {
 
 });
 
+//更新用例集合到db.
 $('#update_tc_coll').click(function(){
   var testEnv= $('#testEnv').val();
   var uniqid=$('#tc_coll_name').attr("uniqid");
@@ -119,7 +120,6 @@ $('#update_tc_coll').click(function(){
   });
 
 });
-
 
 /** 弹框添加用例UI **/
 $('#add_tc_ui').click(function () {
@@ -144,8 +144,6 @@ $('#add_tc_ui').click(function () {
     var response_editor = createJSONeditor(response_container_id, {});
     global_case_add_response_jsoneditor=response_editor;
   }
-
-  $('#tc_template').find('textarea').focus();
 
   //设置header和response默认值。
   var header_value={
@@ -306,6 +304,7 @@ $('#btn_add_tc').click(function () {
     $(selector).attr("uniqid",(new Date().getTime()).toString());
   }
   var caseItem_uniqId=$(selector).attr("uniqid");
+  var caseItem_api_uniqid=$(selector).attr("api_uniqid");
 
   var caseItem_header=global_case_add_header_jsoneditor.getText();//global_case_add_header_jsoneditor 为全局变量。
   var caseItem_queryParams=global_case_add_param_jsoneditor.getText(); //global_case_add_param_jsoneditor 为全局变量。
@@ -324,7 +323,8 @@ $('#btn_add_tc').click(function () {
     mode:caseItem_dataType,
     headers:caseItem_header,
     queryParam: caseItem_queryParams,
-    response:caseItem_response
+    response:caseItem_response,
+    apiUniqId:caseItem_api_uniqid
   };
 
   console.log(caseItem);
@@ -460,6 +460,7 @@ $('#populate_case').click(function(){
 function changeAPI(){
   var selector='#tc_template';
   var selectIndex=document.getElementById("select_tc_coll_apiName").selectedIndex-1 ;
+  if(selectIndex<0) return ;
 
   $(selector).find('input[name="tc_title"]').val(global_doc_apis[selectIndex.toString()].name);
   $(selector).find('input[name="tc_desc"]').val(global_doc_apis[selectIndex.toString()].description);
@@ -470,6 +471,7 @@ function changeAPI(){
   $(selector).find('input[name="tc_method"]').val(global_doc_apis[selectIndex.toString()].method);//find("option[value='"+global_doc_apis[selectIndex.toString()].dev+"']").attr("selected","selected");
   $(selector).find('textarea[name="tc_prescript"]').val(global_doc_apis[selectIndex.toString()].prescript);
   $(selector).find('textarea[name="tc_testscript"]').val(global_doc_apis[selectIndex.toString()].testscript);
+  $(selector).attr('api_uniqid',global_doc_apis[selectIndex.toString()].uniqID);
 
   global_case_add_header_jsoneditor.set(global_doc_apis[selectIndex.toString()].header);
   global_case_add_param_jsoneditor.set(global_doc_apis[selectIndex.toString()].queryParams);

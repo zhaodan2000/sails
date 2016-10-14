@@ -144,67 +144,10 @@
  /**
   * 保存新增的接口到DB。
   * ***/
- $('#btn_add_api').click(function(){
-   var doc_uniqId=$('h1#api_doc_name').attr("uniqid");
-
-   var selector='#api_template';
-   var apiItem_name=$(selector).find('input[name="api_title"]').val();
-   var apiItem_description=$(selector).find('input[name="api_desc"]').val();
-   var apiItem_url=$(selector).find('input[name="api_url"]').val();
-   var apiItem_disabled=$(selector).find('select[name="api_disabled"] option:selected').text();
-   var apiItem_dev=$(selector).find('select[name="api_dev"] option:selected').text();
-   var apiItem_method=$(selector).find('select[name="api_method"] option:selected').text();
-   var apiItem_dataType=$(selector).find('select[name="api_dataType"] option:selected').text();
-   // var apiItem_preScript=$(selector).find('textarea[name="api_prescript"]').val();
-   // var apiItem_testScript=$(selector).find('select[name="api_testscript"]').val();
-
-   if(!$(selector).attr("uniqid")){
-     $(selector).attr("uniqid",(new Date().getTime()).toString());
-   }
-   var apiItem_uniqId=$(selector).attr("uniqid");
-
-   var apiItem_header=global_add_header_jsoneditor.getText();//global_header_jsoneditor 为全局变量。
-   var apiItem_queryParams=global_add_param_jsoneditor.getText(); //global_param_jsoneditor 为全局变量。
-   var apiItem_response=global_add_response_jsoneditor.getText(); //global_response_jsoneditor 为全局变量。
-
-   var apiItem={
-     uniqID:apiItem_uniqId,
-     name:apiItem_name,
-     description:apiItem_description,
-     // prescript:apiItem_preScript,
-     // testscript:apiItem_testScript,
-     url:apiItem_url,
-     disabled:apiItem_disabled,
-     dev:apiItem_dev,
-     method:apiItem_method,
-     dataType:apiItem_dataType,
-     header:apiItem_header,
-     queryParams: apiItem_queryParams,
-     response:apiItem_response
-   };
-
-   console.log(apiItem);
-
-   $.ajax({
-     url:'/doc/save_api',
-     method:"post",
-     contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-     data: {
-       doc_uniqId:doc_uniqId,
-       apiItem:apiItem
-     },
-     success: function (data) {
-       $('body').removeClass('modal-open');
-       $('.modal-backdrop').remove();
-       alert("保存成功!");
-       $("#page-wrapper").html(data);
-     },
-     error:function(data){
-       alert("保存失败,错误日志:"+JSON.stringify(data,null,"\t"));
-     }
-   });
+ $('#btn_add_api').click(function () {
+   saveAPI('#api_template', global_add_header_jsoneditor,global_add_param_jsoneditor,global_add_response_jsoneditor);
  });
-
+ 
  /**
   * 修改指定的接口。
   * */
@@ -274,9 +217,15 @@
   * 更新接口到DB。
   * ***/
  $('#btn_update_api').click(function(){
+   saveAPI('#api_template2', global_update_header_jsoneditor,global_update_param_jsoneditor,global_update_response_jsoneditor);
+ });
+
+ function saveAPI(template_id, header_jsoneditor,param_jsoneditor, response_jsoneditor){
+
    var doc_uniqId=$('h1#api_doc_name').attr("uniqid");
 
-   var selector='#api_template2';
+   //var selector='#api_template2';
+   var selector=template_id;
    var apiItem_name=$(selector).find('input[name="api_title"]').val();
    var apiItem_description=$(selector).find('input[name="api_desc"]').val();
    var apiItem_url=$(selector).find('input[name="api_url"]').val();
@@ -292,9 +241,9 @@
    }
    var apiItem_uniqId=$(selector).attr("uniqid");
 
-   var apiItem_header=global_update_header_jsoneditor.getText();//global_header_jsoneditor 为全局变量。
-   var apiItem_queryParams=global_update_param_jsoneditor.getText(); //global_param_jsoneditor 为全局变量。
-   var apiItem_response=global_update_response_jsoneditor.getText(); //global_response_jsoneditor 为全局变量。
+   var apiItem_header=header_jsoneditor.getText();//global_header_jsoneditor 为全局变量。
+   var apiItem_queryParams=param_jsoneditor.getText(); //global_param_jsoneditor 为全局变量。
+   var apiItem_response=response_jsoneditor.getText(); //global_response_jsoneditor 为全局变量。
 
    var apiItem={
      uniqID:apiItem_uniqId,
@@ -332,7 +281,7 @@
        alert("保存失败,错误日志:"+JSON.stringify(data,null,"\t"));
      }
    });
- });
+ };
 
  /**
   * 删除指定的接口,前端以及后台都删除。

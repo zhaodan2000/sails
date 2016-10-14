@@ -29,18 +29,6 @@ module.exports = {
       unique:false,
       required:false
     },
-    caseType:{
-      type:'string',
-      enum:['1','2']//1表示原子case, 2表示顺序case.
-    },
-    Schedule_ID:{
-      type:'string',
-      required:true
-    },
-    Schedule_desc:{
-      type:'string',
-      required:true,
-    },
     Cases:{
       collection:'TaskCase',
       via:'TaskID'
