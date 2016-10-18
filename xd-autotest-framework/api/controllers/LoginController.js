@@ -11,7 +11,7 @@ module.exports = {
     res.view('login');
   },
   doLogin : function(req, res) {
-    var username=req.body.username;
+    var username=req.body.userName;
     var password=req.body.password;
     var user={
       user_name:username
