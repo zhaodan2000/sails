@@ -125,7 +125,8 @@ $('#update_tc_coll').click(function(){
 $('#add_tc_ui').click(function () {
    $('#addTCModal').modal();
 
-
+  console.log("test");
+  
   if(!global_case_add_header_jsoneditor){
     //create the json editor: createJSONeditor
     var header_container_id='jsoneditor_header_';
