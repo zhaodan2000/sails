@@ -16,7 +16,7 @@
         <i class="fa fa-fw"></i> <%=record.Task_name%>
         <i class="fa fa-fw fa-caret-up" style="display: none"></i>
         <div>
-          <button id="<%= 'edit_task_'+index %>" name="getCurTask" uniqid="<%= record.uniqID %>" class="fa fa-edit"
+          <button id="<%='edit_task_'+index %>" name="getCurTask" uniqid="<%= record.uniqID %>" class="fa fa-edit"
                   style="width: auto;height: auto">编辑</button>
         </div>
       </a>
@@ -38,12 +38,12 @@
   <!-- Page Heading -->
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header" style="position: static">顺序用例
-        <small>顺序用例列表</small>
+      <h1 class="page-header" style="position: static"><%data&&data.length>0?data[0].Task_name:'无'%>
+        <!--<small>顺序用例表</small>-->
       </h1>
       <ol class="breadcrumb">
         <li class="active">
-          <i class="fa fa-tasks"></i> 顺序用例
+          <i class="fa fa-tasks"></i>顺序用例
         </li>
       </ol>
     </div>
@@ -77,7 +77,6 @@
                     <a style="cursor: pointer" name="removeAPI" uniqid="<%= record.uniqID %>">删除</a>
                     <div style="display: none; float: right">
                       <button name="<%-record.uniqID%>" class="btn btn-xs btn-primary" onclick="runSelectedTask(this.name)">运行</button>
-                      <button name="<%-record.uniqID%>" class="btn btn-xs btn-info" onclick="showTaskDetailView(this.name)" >编辑</button>
                       <button name="<%-record.uniqID%>" class="btn btn-xs btn-danger" onclick="deleteSelectedTask(this.name)">删除</button>
                     </div>
                   </td>
