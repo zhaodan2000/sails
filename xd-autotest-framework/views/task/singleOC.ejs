@@ -1,0 +1,257 @@
+
+  <!-- Page Heading -->
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header" uniqid="<%=(data&&data.length>0)?data[0].uniqID:''%>" style="position: static"><%=(data&&data.length>0)?data[0].Task_name:'无'%></h1>
+      <ol class="breadcrumb">
+        <li class="active">
+          <i class="fa fa-tasks"></i> 顺序用例
+        </li>
+        <div class="btn btn-info" id="add_OC_ui" style="float:right">新增用例</div>
+      </ol>
+    </div>
+  </div>
+  <!-- /.row -->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table id="taskTable" class="table table-bordered table-hover table-striped">
+              <thead>
+              <tr>
+                <th>顺序</th>
+                <th>用例名</th>
+                <th>描述</th>
+                <th>操作</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <% if (data&&data.Cases) { %>
+              <% data.Cases.forEach(function(record,index){ %>
+              <tr>
+                <td><%-record.sequence%></td>
+                <td><%-record.name%></td>
+                <td><%-record.description%></td>
+                <td style="width: 16%">
+                  <a style="cursor: pointer" name="moveUp" uniqid="<%= record.uniqID %>">上移</a>
+                  <a style="cursor: pointer" name="moveDown" uniqid="<%= record.uniqID %>">下移</a>
+                  <a style="cursor: pointer" name="querySequence" uniqid="<%= record.uniqID %>">查看</a>
+                  <a style="cursor: pointer" name="editAPI" uniqid="<%= record.uniqID %>">编辑</a>
+                  <a style="cursor: pointer" name="removeAPI" uniqid="<%= record.uniqID %>">删除</a>
+                  <div style="display: none; float: right">
+                    <button name="<%-record.uniqID%>" class="btn btn-xs btn-primary" onclick="runSelectedTask(this.name)">运行</button>
+                    <button name="<%-record.uniqID%>" class="btn btn-xs btn-info" onclick="showTaskDetailView(this.name)" >编辑</button>
+                    <button name="<%-record.uniqID%>" class="btn btn-xs btn-danger" onclick="deleteSelectedTask(this.name)">删除</button>
+                  </div>
+                </td>
+              </tr>
+              <tr id="test_hidden_row" style="display: none">
+                <td >hello,world!</td>
+                <td >hello,world!</td>
+                <td >hello,world!</td>
+                <td >hello,world!</td>
+              </tr>
+              <% }) %>
+              <% } %>
+              </tbody>
+            </table>
+          </div>
+          <div class="text-right">
+            <a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.row -->
+  <!--<div id="page-wrapper-right" aria-hidden="false" class="right-operation" >-->
+  <!--</div>-->
+
+  <!-- 弹modal框, 新增用例 -->
+  <div class="modal fade" id="addOrderTCModal" tabindex="-1" role="dialog" aria-labelledby="addOrderTCModalLabel" aria-hidden="true" style="height:100%;overflow-y: scroll;">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <h4 class="modal-title" id="addOrderTCModalLabel">新增用例</h4>
+        </div>
+        <div class="modal-body">
+          <div id="oc_template" uniqid="" class="form-group" >
+            <div class="form-group">
+              <label class="control-label" style="text-align:right">选择接口</label>
+              <select id="select_tc_coll_apiName" name="tc_apiName" class="form-control" onchange="changeAPI()"/>
+              <!--<option value="">text</option>-->
+              </select>
+              <button id="populate_case" type="button" class="btn btn-info" style="display: none">确定</button>
+            </div>
+            <div class="form-group">
+              <label class="control-label" style="text-align:right">用例名</label>
+              <input name="tc_title" class="form-control" required="required" />
+            </div>
+            <div class="form-group">
+              <label class="control-label" style="text-align:right">用例描述</label>
+              <input name="tc_desc" class="form-control" required="required" />
+            </div>
+            <div class="form-group" >
+              <label class="control-label" style="text-align:right">前置脚本</label>
+              <textarea name="tc_prescript" class="form-control" rows="5" required="required"/>
+            </div>
+            <div class="form-group" >
+              <label class="control-label" style="text-align:right">后置脚本</label>
+              <textarea name="tc_testscript" class="form-control" rows="5" required="required"/>
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求URL</label>
+              <input name="tc_url" class="form-control" required="required" />
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求content-type</label>
+              <input name="tc_dataType" class="form-control" required="required" />
+              <select class="form-control" name="tc_dataType" style="display: none">
+                <option value="application/json">application/json</option>
+                <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
+                <option value="application/application/octet-stream">application/application/octet-stream</option>
+                <option value="text/html">text/html</option>
+                <option value="text/plain">text/plain</option>
+                <option value="text/xml">text/xml</option>
+                <option value="image/gif">image/gif</option>
+                <option value="image/jpeg">image/jpeg</option>
+                <option value="image/png">image/png</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求method</label>
+              <input name="tc_method" class="form-control" required="required" />
+              <select class="form-control" name="tc_method" style="display:none">
+                <option value="POST" selected="selected">POST</option>
+                <option value="GET">GET</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label">是否废弃</label>
+              <input name="tc_disabled" class="form-control" required="required" />
+              <select class="col-3 form-control" name="tc_disabled" style="display:none">
+                <option value="false">false</option>
+                <option value="true">true</option>
+              </select>
+              <label class="control-label">开发者</label>
+              <input name="tc_dev" class="form-control" required="required" />
+              <select class="col-3 form-control" name="tc_dev" style="display: none" >
+                <option value="赵聃">赵聃</option>
+                <option value="李德洪">李德洪</option>
+                <option value="周欢">周欢</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求头header</label>
+              <div id="jsoneditor_header_" style="width: auto; height: auto;"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求参数</label>
+              <div id="jsoneditor_queryParams_" style="width: auto; height: auto;"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">返回结果Response</label>
+              <div id="jsoneditor_response_" style="width: auto; height: auto;"></div>
+            </div>
+            <!--</li>-->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" data-backdrop="false" id="btn_add_OC" ></span>保存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 弹modal框, 编辑用例 -->
+  <div class="modal fade" id="editOrderTCModal" tabindex="-1" role="dialog" aria-labelledby="editOrderTCModalLabel" aria-hidden="true" style="height:100%;overflow-y: scroll;">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <h4 class="modal-title" id="editOrderTCModalLabel">修改用例</h4>
+        </div>
+        <div class="modal-body">
+          <div id="oc_template2" class="form-group" >
+            <div class="form-group">
+              <label class="control-label" style="text-align:right">用例名</label>
+              <input name="tc_title" class="form-control" required="required" />
+            </div>
+            <div class="form-group">
+              <label class="control-label" style="text-align:right">用例描述</label>
+              <input name="tc_desc" class="form-control" required="required" />
+            </div>
+            <div class="form-group" >
+              <label class="control-label" style="text-align:right">前置脚本</label>
+              <textarea name="tc_prescript" class="form-control" rows="5" required="required"/>
+            </div>
+            <div class="form-group" >
+              <label class="control-label" style="text-align:right">后置脚本</label>
+              <textarea name="tc_testscript" class="form-control" rows="5" required="required"/>
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求URL</label>
+              <input name="tc_url" class="form-control" required="required" />
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求content-type</label>
+              <select class="form-control" name="tc_dataType" >
+                <option value="application/json" style=" ">application/json</option>
+                <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
+                <option value="application/application/octet-stream">application/application/octet-stream</option>
+                <option value="text/html">text/html</option>
+                <option value="text/plain">text/plain</option>
+                <option value="text/xml">text/xml</option>
+                <option value="image/gif">image/gif</option>
+                <option value="image/jpeg">image/jpeg</option>
+                <option value="image/png">image/png</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求method</label>
+              <select class="form-control" name="tc_method">
+                <option value="POST" selected="selected">POST</option>
+                <option value="GET">GET</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label">是否废弃</label>
+              <select class="col-3 form-control" name="tc_disabled">
+                <option value="false">false</option>
+                <option value="true">true</option>
+              </select>
+              <label class="control-label">开发者</label>
+              <select class="col-3 form-control" name="tc_dev" >
+                <option value="赵聃">赵聃</option>
+                <option value="李德洪">李德洪</option>
+                <option value="周欢">周欢</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求头header</label>
+              <div id="update_jsoneditor_header_" style="width: auto; height: auto;"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">请求参数</label>
+              <div id="update_jsoneditor_queryParams_" style="width: auto; height: auto;"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">返回结果Response</label>
+              <div id="update_jsoneditor_response_" style="width: auto; height: auto;"></div>
+            </div>
+            <!--</li>-->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" data-backdrop="false" id="btn_edit_OC" ></span>保存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/xd-autotest-framework/js/testcase/singleOC.js"></script>

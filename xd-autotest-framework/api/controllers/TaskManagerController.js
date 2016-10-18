@@ -32,16 +32,22 @@ module.exports = {
     });
   },
 
-
-
-
   /**
    * 查找一个task任务
    * @param req
    * @param res
      */
   selectTask: function (req, res) {
-
+    var uniqID=req.body["uniqID"];
+    console.log(uniqID);
+    //根据uniqId搜索task
+    mongoService.Find('TaskFolder',{uniqID:uniqID}, function (found_task) {
+      if (found_task&&found_task.length>0) {
+        res.view('task/singleOC',{data:found_task});
+      }else{
+        res.view('task/singleOC',{data:null});
+      }
+    });
   },
 
   /**
@@ -163,31 +169,66 @@ module.exports = {
    * @param req
    * @param res
      */
-  addCaseToTask: function (req, res) {
-    // var ObjectId = require('mongodb').ObjectID;
-    var item = req.param("item");
-    // console.log(JSON.stringify(item, null, 4));
-    mongoService.Find("RequestItem", { name:item.itemName}, function (requestItems) {
-      if(requestItems){
-        var requestItem = requestItems[0];
-        requestItem.TaskID = item.taskId;
-        delete requestItem["id"];
-        // console.log("requestItem:"+JSON.stringify(requestItem, null, 4));
-        mongoService.Insert("TaskCase", requestItem, function (records) {
-          if (records){
-            //sucess
-            console.log(JSON.stringify(records, null, 4));
-            console.log('insert sucess');
-            return res.send(records);
-          }else {
-            //fail
-            console.log('insert fail');
-          }
-        });
-      }
-    })
+  addOrderCase: function (req, res) {
+    console.log("enter addOrderCase");
+    console.log(req.body);
+    var item=req.body["orderCase"];
+    var taskFolder_uniqid=req.body["taskFolder_uniqid"];
+    if(item&&item.uniqID){
+      mongoService.Find('TaskFolder',{uniqID:taskFolder_uniqid},function(found_folder){
+        if(found_folder&&found_folder.length>0){
+          item["TaskID"]=found_folder.id;
+          mongoService.Insert("TaskCase", item, function (records) {
+            if (records){
+              //success.
+              mongoService.Find('TaskFolder',{uniqID:taskFolder_uniqid},function(found){
+                res.view('task/singleOC',{data:found});
+              });
+            }else {
+              //fail
+              res.view('task/singleOC',{data:null});
+            }
+            });
+        }else{
+          res.view('task/singleOC',{data:null});
+        }
+      });
+    }else{
+      res.view('task/singleOC',{data:null});
+    }
   },
 
+  /**
+   * 更新task中Cases数组中case顺序
+   * @param req
+   * @param res
+   */
+  updateOrderCase: function (req, res) {
+    var item=req.body["orderCase"];
+    var taskFolder_uniqid=req.body["taskFolder_uniqid"];
+    if(item&&item.uniqID){
+      mongoService.Find('TaskFolder',{uniqID:taskFolder_uniqid},function(found_folder){
+        if(found_folder&&found_folder.length>0){
+          item["TaskID"]=found_folder.id;
+          mongoService.Update("TaskCase", item, {uniqID:item.uniqID}, function (records) {
+            if (records){
+              //success.
+              mongoService.Find('TaskFolder',{uniqID:taskFolder_uniqid},function(found){
+                res.view('task/singleOC',{data:found});
+              });
+            }else {
+              //fail
+              res.view('task/singleOC',{data:null});
+            }
+          });
+        }else{
+          res.view('task/singleOC',{data:null});
+        }
+      });
+    }else{
+      res.view('task/singleOC',{data:null});
+    }
+  },
   /**
    * 更新task, 删除task的Cases数组中所有case
    * @param req
@@ -218,14 +259,6 @@ module.exports = {
     //   console.log(record);
     // });
     return res.send("receive");
-  },
-  /**
-   * 更新task中Cases数组中case顺序
-   * @param req
-   * @param res
-     */
-  updateCasesOrder: function (req, res) {
-
   },
 
   /**
