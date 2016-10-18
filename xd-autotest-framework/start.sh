@@ -21,7 +21,7 @@ function start
 {
     status > /dev/null 2>&1
     if [ $RETVAL -ne 0 ];then
-        sails lift 1>logs/info_$PRO_NAME.log 2>logs/error_$PRO_NAME.log &
+        node app.js 1>logs/info_$PRO_NAME.log 2>logs/error_$PRO_NAME.log &
         echo $! > $PID_FILE
         echo "Instance is [STARTED]."
         RETVAL=$?
