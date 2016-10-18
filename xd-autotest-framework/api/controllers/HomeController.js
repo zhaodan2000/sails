@@ -1,12 +1,12 @@
+var mysqlService=require("../services/mysqlService");
 /**
  * HomeController
  *
  * @description :: Server-side logic for managing Homes
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-
 module.exports = {
-	index : function(req, res) {
+  index: function(req, res) {
     res.view('index');
   },
   overview: function(req, res) {

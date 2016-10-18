@@ -104,21 +104,22 @@ function configItem(request, event) {
  */
 function parseInputPreString(prestring, callback) {
   var pre = newManHelper.newPreEventProxy();
-  pre._event = {listen: "prerequest", script: {type: "text/javascript", exec: ""}};
-  var ep = eventproxy.create();
-  var mysql = mysqlhelper.create(ep);
-  try{
-    eval(prestring);
-  }catch (e){
-    console.error(e);
-  }
-  if (ep.getLength() > 0) {
-    ep.after(ep.getLength(), function () {
-      callback(pre._event);
-    });
-  } else {
-    callback(pre._event);
-  }
+  pre._event = {listen: "prerequest", script: {type: "text/javascript", exec: prestring}};
+  // var ep = eventproxy.create();
+  // var mysql = mysqlhelper.create(ep);
+  // try{
+  //   eval(prestring);
+  // }catch (e){
+  //   console.error(e);
+  // }
+  callback(pre._event);
+  // if (ep.getLength() > 0) {
+  //   ep.after(ep.getLength(), function () {
+  //     callback(pre._event);
+  //   });
+  // } else {
+  //   callback(pre._event);
+  // }
 }
 
 /**
@@ -128,21 +129,21 @@ function parseInputPreString(prestring, callback) {
  */
 function parseIntputTestString(teststring, callback) {
   var test = newManHelper.newTestEventProxy();
-  test._event = {listen: "test", script: {type: "text/javascript", exec: ""}};
-  var ep = eventproxy.create();
-  var mysql = mysqlhelper.create(ep);
-  try{
-    eval(teststring);
-  }catch (e){
-    console.error(e);
-  }
-  if (ep.getLength() > 0) {
-    ep.after(ep.getLength(), function () {
-      callback(test._event);
-    });
-  } else {
+  test._event = {listen: "test", script: {type: "text/javascript", exec: teststring}};
+  // var ep = eventproxy.create();
+  // var mysql = mysqlhelper.create(ep);
+  // try{
+  //   eval(teststring);
+  // }catch (e){
+  //   console.error(e);
+  // }
+  // if (ep.getLength() > 0) {
+  //   ep.after(ep.getLength(), function () {
+  //     callback(test._event);
+  //   });
+  // } else {
     callback(test._event);
-  }
+  // }
 }
 
 /**

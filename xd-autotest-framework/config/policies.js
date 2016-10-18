@@ -15,12 +15,12 @@
  * For more information on configuring policies, check out:
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.policies.html
  */
-var auth = require('http-auth')
+/*var auth = require('http-auth')
 var basic = auth.basic({
   realm: "Simon Area"
 }, function (username, password, callback) {
   callback(username === "Tina" && password === "Bullock");
-})
+})*/
 
 module.exports.policies = {
 
@@ -31,7 +31,11 @@ module.exports.policies = {
    *                                                                          *
    ***************************************************************************/
 
-  '*': true,
+  '*': 'sessionAuth',//all controller action
+  LoginController:{
+    '*':true//不走全局*过滤器
+  }
+
 
   /***************************************************************************
    *                                                                          *
@@ -53,8 +57,8 @@ module.exports.policies = {
   // before letting any users feed our rabbits
   // feed : ['isNiceToAnimals', 'hasRabbitFood']
   // }
-  InterfaceController: {
+/*  InterfaceController: {
     '*': auth.connect(basic),
     show: true
-  }
+  }*/
 };
