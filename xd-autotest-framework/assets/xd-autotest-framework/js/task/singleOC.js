@@ -60,6 +60,9 @@ function move(t,oper){
       alert("已经是最顶部了!");
       return;
     }else{
+      console.log($(data_tr).attr("uniqid"));
+      console.log($(data_tr).prev().attr("uniqid"));
+      exchangeOrder($(data_tr).attr("uniqid"),$(data_tr).prev().attr("uniqid"));
       $(data_tr).insertBefore($(data_tr).prev()); //将本身插入到目标tr的前面
     }
   }else{
@@ -67,14 +70,18 @@ function move(t,oper){
       alert("已经是最底部了!");
       return;
     }else{
+      console.log($(data_tr).attr("uniqid"));
+      console.log($(data_tr).next().attr("uniqid"));
+      exchangeOrder($(data_tr).attr("uniqid"),$(data_tr).next().attr("uniqid"));
       $(data_tr).insertAfter($(data_tr).next()); //将本身插入到目标tr的后面
+
     }
   }
 };
 
 function exchangeOrder(uniqid_1, uniqid_2){
   $.ajax({
-    url:'',
+    url:'/oc/exchangeOrder',
     method:'POST',
     data:{
       uniqid_1:uniqid_1,

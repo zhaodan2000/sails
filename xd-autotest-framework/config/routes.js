@@ -77,6 +77,8 @@ module.exports.routes = {
   'post /sc/editState': 'TaskSchedule.editState',
   'post /sc/start': 'TaskSchedule.start',
 
+  //orderCase
+  'post /oc/exchangeOrder':'TaskManager.exchangeOrder',
 
   //sc
   'post /log/all': 'LogSchedule.all',

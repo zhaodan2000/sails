@@ -30,7 +30,7 @@
               <tbody>
               <% if (data&&data.length>0) {
                 data[0].Cases.forEach(function(record,index){ %>
-              <tr uniqid="<%record.uniqID%>">
+              <tr uniqid="<%-record.uniqID%>">
                 <td ><%-record.sequence%></td>
                 <td><%-record.name%></td>
                 <td><%-record.description%></td>

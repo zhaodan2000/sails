@@ -226,7 +226,18 @@ module.exports = {
     var uniqid_1=req.body["uniqid_1"];
     var uniqid_2=req.body["uniqid_2"];
 
-    mongoService.Find()
+    mongoService.Find("TaskCase",{uniqID:[uniqid_1,uniqid_2]},function(found){
+      if(found&& (found.length==2)){
+        var order_1=found[0].sequence;
+        var order_2=found[1].sequence;
+        found[0]["sequence"]=order_2;
+        found[1]["sequence"]=order_1;
+
+        found.forEach(function(record,index){
+          mongoService.Update("TaskCase",record, {uniqID:record.uniqID},function(records){})
+        });
+      }
+    })
   },
 
   /**
