@@ -48,7 +48,7 @@ module.exports = {
     //url
     url: {
       type: 'string',
-      required: true
+      required: false
     },
 
     //param json

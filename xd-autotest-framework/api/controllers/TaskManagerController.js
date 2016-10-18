@@ -170,18 +170,18 @@ module.exports = {
    * @param res
      */
   addOrderCase: function (req, res) {
-    console.log("enter addOrderCase");
     console.log(req.body);
     var item=req.body["orderCase"];
     var taskFolder_uniqid=req.body["taskFolder_uniqid"];
     if(item&&item.uniqID){
       mongoService.Find('TaskFolder',{uniqID:taskFolder_uniqid},function(found_folder){
         if(found_folder&&found_folder.length>0){
-          item["TaskID"]=found_folder.id;
+          item["TaskID"]=found_folder[0].id;
           mongoService.Insert("TaskCase", item, function (records) {
             if (records){
               //success.
               mongoService.Find('TaskFolder',{uniqID:taskFolder_uniqid},function(found){
+                console.log(found);
                 res.view('task/singleOC',{data:found});
               });
             }else {
