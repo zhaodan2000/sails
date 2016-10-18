@@ -18,11 +18,9 @@ module.exports = {
       user_name:username
     }
     mysqlService.Find("User",user,function(records){
-      sails.log.debug(records);
       if(!lodash.isEmpty(records)) {
         if (records[0] == null) {
           req.session.authenticated = false;
-          req.session.user = user;
           return res.redirect("/login");
         } else {
           password = password + '{' + records[0].salt + '}';
@@ -33,13 +31,11 @@ module.exports = {
             return res.redirect('/');
           } else {
             req.session.authenticated = false;
-            req.session.user = user;
             return res.redirect("/login");
           }
         }
       }else{
         req.session.authenticated = false;
-        req.session.user = user;
         return res.redirect("/login");
       }
     })
