@@ -30,13 +30,13 @@
               <tbody>
               <% if (data&&data.length>0) {
                 data[0].Cases.forEach(function(record,index){ %>
-              <tr>
-                <td><%-record.sequence%></td>
+              <tr uniqid="<%record.uniqID%>">
+                <td ><%-record.sequence%></td>
                 <td><%-record.name%></td>
                 <td><%-record.description%></td>
                 <td style="width: 18%">
-                  <a style="cursor: pointer" name="moveUp" uniqid="<%= record.uniqID %>">上移</a>
-                  <a style="cursor: pointer" name="moveDown" uniqid="<%= record.uniqID %>">下移</a>
+                  <a style="cursor: pointer" name="moveUp" uniqid="<%= record.uniqID %>" onclick="move(this,'moveUp')">上移</a>
+                  <a style="cursor: pointer" name="moveDown" uniqid="<%= record.uniqID %>" onclick="move(this,'moveDown')">下移</a>
                   <a style="cursor: pointer" name="querySequence" uniqid="<%= record.uniqID %>">查看</a>
                   <a style="cursor: pointer" name="editAPI" uniqid="<%= record.uniqID %>">编辑</a>
                   <a style="cursor: pointer" name="removeAPI" uniqid="<%= record.uniqID %>">删除</a>
@@ -46,12 +46,6 @@
                     <button name="<%-record.uniqID%>" class="btn btn-xs btn-danger" onclick="deleteSelectedTask(this.name)">删除</button>
                   </div>
                 </td>
-              </tr>
-              <tr id="test_hidden_row" style="display: none">
-                <td >hello,world!</td>
-                <td >hello,world!</td>
-                <td >hello,world!</td>
-                <td >hello,world!</td>
               </tr>
               <% }) %>
               <% } %>
@@ -146,15 +140,15 @@
             </div>
             <div class="form-group">
               <label class="control-label">请求头header</label>
-              <div id="jsoneditor_header_" style="width: auto; height: auto;"></div>
+              <div id="jsoneditor_header_oc_1" style="width: auto; height: auto;"></div>
             </div>
             <div class="form-group">
               <label class="control-label">请求参数</label>
-              <div id="jsoneditor_queryParams_" style="width: auto; height: auto;"></div>
+              <div id="jsoneditor_queryParams_oc_1" style="width: auto; height: auto;"></div>
             </div>
             <div class="form-group">
               <label class="control-label">返回结果Response</label>
-              <div id="jsoneditor_response_" style="width: auto; height: auto;"></div>
+              <div id="jsoneditor_response_oc_1" style="width: auto; height: auto;"></div>
             </div>
             <!--</li>-->
           </div>
@@ -233,15 +227,15 @@
             </div>
             <div class="form-group">
               <label class="control-label">请求头header</label>
-              <div id="update_jsoneditor_header_" style="width: auto; height: auto;"></div>
+              <div id="update_jsoneditor_header_oc_2" style="width: auto; height: auto;"></div>
             </div>
             <div class="form-group">
               <label class="control-label">请求参数</label>
-              <div id="update_jsoneditor_queryParams_" style="width: auto; height: auto;"></div>
+              <div id="update_jsoneditor_queryParams_oc_2" style="width: auto; height: auto;"></div>
             </div>
             <div class="form-group">
               <label class="control-label">返回结果Response</label>
-              <div id="update_jsoneditor_response_" style="width: auto; height: auto;"></div>
+              <div id="update_jsoneditor_response_oc_2" style="width: auto; height: auto;"></div>
             </div>
             <!--</li>-->
           </div>
@@ -254,4 +248,4 @@
     </div>
   </div>
 
-  <script src="/xd-autotest-framework/js/testcase/singleOC.js"></script>
+  <script src="/xd-autotest-framework/js/task/singleOC.js"></script>

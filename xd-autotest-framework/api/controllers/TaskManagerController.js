@@ -181,7 +181,6 @@ module.exports = {
             if (records){
               //success.
               mongoService.Find('TaskFolder',{uniqID:taskFolder_uniqid},function(found){
-                console.log(found);
                 res.view('task/singleOC',{data:found});
               });
             }else {
@@ -199,29 +198,21 @@ module.exports = {
   },
 
   /**
-   * 更新task中Cases数组中case顺序
+   * 更新顺序用例的内容
    * @param req
    * @param res
    */
   updateOrderCase: function (req, res) {
     var item=req.body["orderCase"];
-    var taskFolder_uniqid=req.body["taskFolder_uniqid"];
     if(item&&item.uniqID){
-      mongoService.Find('TaskFolder',{uniqID:taskFolder_uniqid},function(found_folder){
-        if(found_folder&&found_folder.length>0){
-          item["TaskID"]=found_folder.id;
-          mongoService.Update("TaskCase", item, {uniqID:item.uniqID}, function (records) {
-            if (records){
-              //success.
-              mongoService.Find('TaskFolder',{uniqID:taskFolder_uniqid},function(found){
-                res.view('task/singleOC',{data:found});
-              });
-            }else {
-              //fail
-              res.view('task/singleOC',{data:null});
-            }
+      mongoService.Update("TaskCase", item, {uniqID:item.uniqID}, function (records) {
+        if (records){
+          //success.
+          mongoService.Find('TaskFolder',{uniqID:taskFolder_uniqid},function(found){
+            res.view('task/singleOC',{data:found});
           });
-        }else{
+        }else {
+          //fail
           res.view('task/singleOC',{data:null});
         }
       });
@@ -229,6 +220,15 @@ module.exports = {
       res.view('task/singleOC',{data:null});
     }
   },
+
+  // 交换顺序
+  exchangeOrder:function(req,res){
+    var uniqid_1=req.body["uniqid_1"];
+    var uniqid_2=req.body["uniqid_2"];
+
+    mongoService.Find()
+  },
+
   /**
    * 更新task, 删除task的Cases数组中所有case
    * @param req
