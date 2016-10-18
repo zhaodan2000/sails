@@ -34,6 +34,9 @@ module.exports.policies = {
   '*': 'sessionAuth',//all controller action
   LoginController:{
     '*':true//不走全局*过滤器
+  },
+  TimingScheduleController:{
+    '*':true//不走全局*过滤器
   }
 
 

@@ -57,7 +57,7 @@ process.chdir(__dirname);
     sails.lift(rc('sails'),function(){
       var request = require('request');
       /*    request.get('http://localhost:1337/TaskSchedule/getAll');*/
-      request('http://localhost:1337/TaskSchedule/getAll', function (error, response, body) {
+      request('http://localhost:1337/TimingSchedule/getAll', function (error, response, body) {
         if (!error && response.statusCode == 200) {
           sails.log.debug(body) //
         }
