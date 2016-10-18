@@ -37,6 +37,10 @@ module.exports = {
             return res.redirect("/login");
           }
         }
+      }else{
+        req.session.authenticated = false;
+        req.session.user = user;
+        return res.redirect("/login");
       }
     })
   },
