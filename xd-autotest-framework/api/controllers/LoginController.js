@@ -1,5 +1,6 @@
 var mysqlService=require("../services/mysqlService");
 var crypto = require("crypto");
+var lodash=require("lodash");
 /**
  * HomeController
  *
@@ -11,29 +12,32 @@ module.exports = {
     res.view('login');
   },
   doLogin : function(req, res) {
-    var username=req.body.userName;
+    var username=req.body.username;
     var password=req.body.password;
     var user={
       user_name:username
     }
     mysqlService.Find("User",user,function(records){
       sails.log.debug(records);
-      if(records[0]==null) {
-        req.session.authenticated=false;
-        req.session.user = user;
-        return res.redirect("/login");
+      if(!lodash.isEmpty(records)) {
+        if (records[0] == null) {
+          req.session.authenticated = false;
+          req.session.user = user;
+          return res.redirect("/login");
         } else {
-            password=password+'{'+records[0].salt+'}';
-            password=crypto.createHash("md5").update(password).digest("hex");
-            if(password==records[0].password) {
-              req.session.authenticated = true;
-              req.session.user = user;
-              return res.redirect('/');
-            }else{
-              req.session.authenticated=false;
-              req.session.user = user;
-            }
+          password = password + '{' + records[0].salt + '}';
+          password = crypto.createHash("md5").update(password).digest("hex");
+          if (password == records[0].password) {
+            req.session.authenticated = true;
+            req.session.user = user;
+            return res.redirect('/');
+          } else {
+            req.session.authenticated = false;
+            req.session.user = user;
+            return res.redirect("/login");
+          }
         }
+      }
     })
   },
   loginOut: function(req, res) {
