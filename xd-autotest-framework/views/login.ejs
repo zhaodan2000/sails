@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>自动测试框架</title>
+
+  <% include common/framework-css.ejs %>
+  <link href="/xd-autotest-framework/css/login.css" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+  <div class="login-box">
+    <div class="login-title text-center">
+      <h1><small>登录</small></h1>
+    </div>
+    <div class="login-content ">
+      <div class="form">
+        <form action="/doLogin" method="post">
+          <div class="form-group">
+            <div class="col-xs-12  ">
+              <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input type="text" id="userName" name="userName" class="form-control" placeholder="用户名">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-xs-12  ">
+              <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input type="password" id="password" name="password" class="form-control" placeholder="密码">
+              </div>
+            </div>
+          </div>
+          <div class="form-group form-actions">
+            <div class="col-xs-4 col-xs-offset-4 ">
+              <button type="submit"  class="btn btn-sm btn-info"></span> 登录</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

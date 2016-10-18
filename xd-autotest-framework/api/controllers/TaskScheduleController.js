@@ -21,7 +21,6 @@ var path=require('path');
 module.exports = {
   refreshView: function (req, res) {
     mongoService.Find('ScheduleTask', null, function (records) {
-/*      console.log(records);*/
       res.view('schedule/index', {data: records});
     });
   },
