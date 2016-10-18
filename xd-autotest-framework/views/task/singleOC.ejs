@@ -28,13 +28,13 @@
               </thead>
 
               <tbody>
-              <% if (data&&data.Cases) { %>
-              <% data.Cases.forEach(function(record,index){ %>
+              <% if (data&&data.length>0) {
+                data[0].Cases.forEach(function(record,index){ %>
               <tr>
                 <td><%-record.sequence%></td>
                 <td><%-record.name%></td>
                 <td><%-record.description%></td>
-                <td style="width: 16%">
+                <td style="width: 18%">
                   <a style="cursor: pointer" name="moveUp" uniqid="<%= record.uniqID %>">上移</a>
                   <a style="cursor: pointer" name="moveDown" uniqid="<%= record.uniqID %>">下移</a>
                   <a style="cursor: pointer" name="querySequence" uniqid="<%= record.uniqID %>">查看</a>
