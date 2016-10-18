@@ -3,7 +3,7 @@
  */
 var map = require("../utils/maps").newHashMap();
 var service = require("../services/CaseServices");
-var collectionHelper = require('../newman/NewManModel');
+var collectionHelper = require('../newman/newmanmodel');
 var eventproxy = require('../utils/eventproxyhelper');
 var mongoService = require("../services/mongoService");
 var mailService = require("../services/MailService");
