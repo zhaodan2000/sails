@@ -11,6 +11,7 @@ function init_env
 function deploy
 {
 	cd $basedir/$baseop
+	rm -rf $baseop
 	tar zxvf $basedir/$baseop/*.tar.gz
   cd $baseop
   npm install
