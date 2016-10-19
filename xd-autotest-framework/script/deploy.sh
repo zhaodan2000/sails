@@ -11,7 +11,7 @@ function init_env
 function deploy
 {
 	cd $basedir/$baseop
-	tar zxvf $basedir/$baseop/*.tar
+	tar zxvf $basedir/$baseop/*.tar.gz
   #cp -rf $basedir/$baseop/conf/* /home/work/xiaodou/$baseop/WEB-INF/classes/conf/custom/env
 	#rm -rf /home/work/xiaodou/$baseop/*.war
 #	sh /home/work/xiaodou/$tomcat/bin/stop_tomcat.sh
