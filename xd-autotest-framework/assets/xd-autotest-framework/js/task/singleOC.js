@@ -95,4 +95,23 @@ function exchangeOrder(uniqid_1, uniqid_2){
     }
   });
 
-}
+};
+
+$('a[name="removeOC"]').click(function(){
+  var uniqid=$(this).attr('uniqid');
+  if(!uniqid){
+    alert("uniqid is null??");
+  }else if(confirm("确定从服务器删除这个case吗?")) {
+    $.ajax({
+      url: '/oc/deleteOrderCase',
+      method: 'POST',
+      data: {uniqID: uniqid},
+      success: function (data) {
+        alert("删除成功");
+      },
+      error: function (data) {
+        alert("删除失败:" + JSON.stringify(data));
+      }
+    });
+  }
+});

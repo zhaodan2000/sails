@@ -70,15 +70,16 @@ module.exports.routes = {
   'post /case/query_tc_collection': 'ShowDoc.query_tc_coll',
   'post /case/executeCase':'ShowDoc.executeCase',
 
+  //orderCase
+  'post /oc/exchangeOrder':'TaskManager.exchangeOrder',
+  'post /oc/deleteOrderCase':'TaskManager.deleteCase',
+
   //sc
   'post /sc/save': 'TaskSchedule.save',
   'post /sc/remove': 'TaskSchedule.remove',
   'post /sc/edit': 'TaskSchedule.edit',
   'post /sc/editState': 'TaskSchedule.editState',
   'post /sc/start': 'TaskSchedule.start',
-
-  //orderCase
-  'post /oc/exchangeOrder':'TaskManager.exchangeOrder',
 
   //sc
   'post /log/all': 'LogSchedule.all',

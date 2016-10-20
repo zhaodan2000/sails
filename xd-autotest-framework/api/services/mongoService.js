@@ -2,8 +2,16 @@
  * Created by lyh on 8/4/16.
  * CRUD
  */
-//var Math=require('mathjs');
-var ObjectId=require('sails-mongo');
+// var TaskFolder=require('../models/TaskFolder');
+// var TaskCase=require('../models/TaskCase');
+// var ReqFolder=require('../models/ReqFolder');
+// var RequestItem=require('../models/RequestItem');
+// var APIdoc=require('../models/APIdoc');
+// var APIdocitem=require('../models/APIdocitem');
+// var ScheduleResult=require('../models/ScheduleResult');
+// var ScheduleLog=require('../models/ScheduleLog');
+// var ScheduleStrategy=require('../models/ScheduleStrategy');
+// var ScheduleTask=require('../models/ScheduleTask');
 
 module.exports={
 
@@ -256,7 +264,7 @@ module.exports={
   Find:function(modelType, dic, callback){
     switch(modelType){
       case "TaskFolder":
-        TaskFolder.find(dic).populate('Cases').exec(function(err,populated){
+        TaskFolder.find(dic).populate('Cases',{sort:'sequence ASC'}).exec(function(err,populated){
           if(!err){
             //console.log("populated  %s records:",modelType);
             // console.log(populated);
@@ -493,10 +501,10 @@ module.exports={
    * @param sortCond 为排序条件。
    * @param callback 将查找的结果以回调函数传回。
    * */
-  FindAndSort:function(modelType, dic, callback){
+  FindAndSort:function(modelType, dic, sortCond, callback){
     switch(modelType){
       case "TaskFolder":
-        TaskFolder.find({where:dic, sort:{name:1}}).populate('Cases').exec(function(err,populated){
+        TaskFolder.find(dic).sort(sortCond).populate('Cases').exec(function(err,populated){
           if(!err){
             //console.log("populated  %s records:",modelType);
             // console.log(populated);
@@ -509,7 +517,7 @@ module.exports={
         });
         break;
       case "TaskCase":
-        TaskCase.find({where:dic, sort:{name:0}}).exec(function (err,records) {
+        TaskCase.find(dic).sort(sortCond).exec(function (err,records) {
           if (!err) {
             //console.log("find %s records success!", modelType);
             callback(records);
@@ -521,7 +529,7 @@ module.exports={
         });
         break;
       case "RequestItem":
-        RequestItem.find(dic).exec(function(err,records){
+        RequestItem.find(dic).sort(sortCond).exec(function(err,records){
           if (!err) {
             //console.log("find %s records success!", modelType);
             // console.log(records);
@@ -534,7 +542,7 @@ module.exports={
         });
         break;
       case "ReqFolder":
-        ReqFolder.find({where:dic, sort:{name:0}}).populate('ReqItems').exec(function(err,records){
+        ReqFolder.find(dic).sort(sortCond).populate('ReqItems').exec(function(err,records){
           if (!err) {
             //console.log("find %s records success!", modelType);
             callback(records);
@@ -546,7 +554,7 @@ module.exports={
         });
         break;
       case "APIdocitem":
-        APIdocitem.find(dic).exec(function(err,records){
+        APIdocitem.find(dic).sort(sortCond).exec(function(err,records){
           if (!err) {
             //console.log("find %s records success!", modelType);
             callback(records);
@@ -559,7 +567,7 @@ module.exports={
         break;
 
       case "APIdoc":
-        APIdoc.find(dic).populate('APIdoc_items').exec(function(err,records){
+        APIdoc.find(dic).sort(sortCond).populate('APIdoc_items').exec(function(err,records){
           if (!err) {
             // console.log("find %s records success!", modelType);
             callback(records);
@@ -572,7 +580,7 @@ module.exports={
         break;
 
       case "ScheduleStrategy":
-        ScheduleStrategy.find(dic).exec(function(err,records){
+        ScheduleStrategy.find(dic).sort(sortCond).exec(function(err,records){
           if (!err) {
             // console.log("find %s records success!", modelType);
             callback(records);
@@ -585,7 +593,7 @@ module.exports={
         break;
 
       case "ScheduleTask":
-        ScheduleTask.find(dic).exec(function(err,records){
+        ScheduleTask.find(dic).sort(sortCond).exec(function(err,records){
           if (!err) {
             console.log("find %s records success!", modelType);
             callback(records);
@@ -615,7 +623,26 @@ module.exports={
     }
   },
 
-
+  //删除某个orderCase, 并调整sequence顺序。
+  DeleteAndReSortTaskCase:function(dic,callback){
+    TaskCase.find(dic).exec(function(err, records){
+      console.log(records);
+      if(records&&records.length>0){
+        TaskCase.find({sequence:{'>':records[0].sequence}}).exec(function(err, gt_records){
+          if(gt_records){
+            console.log("gt_records");
+            console.log(gt_records);
+            gt_records.forEach(function(record,index){
+              TaskCase.update({uniqID:record.uniqID},{sequence:(--record["sequence"])});
+            });
+          }
+        });
+        TaskCase.destroy(dic).exec(function(err){
+          callback(err);
+        });
+      }
+    });
+  },
 
   /**
    * 根据入参的name, 来查找mongodb里的符合条件的记录。

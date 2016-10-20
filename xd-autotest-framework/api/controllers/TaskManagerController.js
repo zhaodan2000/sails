@@ -43,6 +43,7 @@ module.exports = {
     //根据uniqId搜索task
     mongoService.Find('TaskFolder',{uniqID:uniqID}, function (found_task) {
       if (found_task&&found_task.length>0) {
+        console.log(JSON.stringify(found_task,null,4));
         res.view('task/singleOC',{data:found_task});
       }else{
         res.view('task/singleOC',{data:null});
@@ -51,7 +52,7 @@ module.exports = {
   },
 
   /**
-   * 进入到编辑task页面
+   * 进入到编辑task页面(未用)
    * @param req
    * @param res
      */
@@ -234,10 +235,30 @@ module.exports = {
         found[1]["sequence"]=order_1;
 
         found.forEach(function(record,index){
-          mongoService.Update("TaskCase",record, {uniqID:record.uniqID},function(records){})
+          mongoService.Update("TaskCase",record, {uniqID:record.uniqID},function(records){
+            res.ok();
+          })
         });
       }
     })
+  },
+
+  //删除case, 并调整顺序。
+  deleteCase:function(req,res){
+    var case_uniqid=req.body["uniqID"];
+    if(case_uniqid){
+      console.log(case_uniqid);
+      mongoService.DeleteAndReSortTaskCase({uniqID:case_uniqid}, function(err){
+        if(!err){
+          res.ok();
+        }else{
+          res.fail();
+        }
+      });
+    }else{
+      res.fail();
+    }
+
   },
 
   /**
