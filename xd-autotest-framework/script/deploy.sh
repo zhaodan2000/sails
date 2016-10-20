@@ -14,7 +14,6 @@ function deploy
 	rm -rf $baseop
 	tar zxvf $basedir/$baseop/*.tar.gz
   cd $baseop
-  npm install
   chmod 777 start.sh
   ./start.sh start
 }
