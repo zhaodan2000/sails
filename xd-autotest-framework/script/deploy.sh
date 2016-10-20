@@ -13,7 +13,6 @@ function deploy
 	cd $basedir/$baseop
 	rm -rf $baseop
 	tar zxvf $basedir/$baseop/*.tar.gz
-  cd $baseop
   chmod 777 start.sh
   ./start.sh start
 }
