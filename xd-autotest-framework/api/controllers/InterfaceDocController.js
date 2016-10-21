@@ -12,7 +12,7 @@ module.exports = {
 
   testService:function(req,res){
     mongoService.Find('APIdoc',null,function (records) {
-      res.view('doc/APIdoc', {api_docs:records, curr_doc:records[0]});
+      res.view('doc/APIdoc', {api_docs:records, curr_doc:records[records.length-1]});
     });
   },
 

@@ -239,8 +239,8 @@
         <!--&lt;!&ndash;</form>&ndash;&gt;-->
       <!--</div>-->
     <!--</li>-->
-    <%if(data&&data.length>0) {
-    data.forEach(function(record,index){ %>
+    <%if(data&&data.length>0) {%>
+    <%for(var index=data.length-1;index>0;index--){ var record=data[index];%>
     <li>
       <a href="javascript:void(0)" data-toggle="collapse" data-target="<%='#info' + index%>" style="display:block">
         <i class="fa fa-fw"></i> <%=record.name%><i class="fa fa-fw"></i>
@@ -258,7 +258,8 @@
         <!--</li>-->
       </ul>
     </li>
-    <%})}%>
+    <%}%>
+    <%}%>
   </ul>
 
   <div id="page-wrapper-right" aria-hidden="false" class="right-operation">
