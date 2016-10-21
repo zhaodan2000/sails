@@ -102,6 +102,7 @@ $('a[name="removeOC"]').click(function(){
   if(!uniqid){
     alert("uniqid is null??");
   }else if(confirm("确定从服务器删除这个case吗?")) {
+    $(this).parent().parent().remove();
     $.ajax({
       url: '/oc/deleteOrderCase',
       method: 'POST',
