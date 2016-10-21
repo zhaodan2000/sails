@@ -103,12 +103,12 @@
             </div>
             <div class="form-group">
               <label class="control-label">请求URL</label>
-              <input name="tc_url" class="form-control" required="required" />
+              <input name="tc_url" class="form-control" required="required" disabled="disabled"/>
             </div>
             <div class="form-group">
               <label class="control-label">请求content-type</label>
               <input name="tc_dataType" class="form-control" required="required" />
-              <select class="form-control" name="tc_dataType" style="display: none">
+              <select class="form-control" name="tc_dataType" style="display: none" disabled="disabled">
                 <option value="application/json">application/json</option>
                 <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
                 <option value="application/application/octet-stream">application/application/octet-stream</option>
@@ -123,7 +123,7 @@
             <div class="form-group">
               <label class="control-label">请求method</label>
               <input name="tc_method" class="form-control" required="required" />
-              <select class="form-control" name="tc_method" style="display:none">
+              <select class="form-control" name="tc_method" style="display:none" disabled="disabled">
                 <option value="POST" selected="selected">POST</option>
                 <option value="GET">GET</option>
               </select>
@@ -131,13 +131,13 @@
             <div class="form-group">
               <label class="control-label">是否废弃</label>
               <input name="tc_disabled" class="form-control" required="required" />
-              <select class="col-3 form-control" name="tc_disabled" style="display:none">
+              <select class="col-3 form-control" name="tc_disabled" style="display:none" disabled="disabled">
                 <option value="false">false</option>
                 <option value="true">true</option>
               </select>
               <label class="control-label">开发者</label>
               <input name="tc_dev" class="form-control" required="required" />
-              <select class="col-3 form-control" name="tc_dev" style="display: none" >
+              <select class="col-3 form-control" name="tc_dev" style="display: none" disabled="disabled">
                 <option value="赵聃">赵聃</option>
                 <option value="李德洪">李德洪</option>
                 <option value="周欢">周欢</option>
