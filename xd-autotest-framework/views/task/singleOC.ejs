@@ -38,8 +38,8 @@
                   <a style="cursor: pointer" name="moveUp" uniqid="<%= record.uniqID %>" onclick="move(this,'moveUp')">上移</a>
                   <a style="cursor: pointer" name="moveDown" uniqid="<%= record.uniqID %>" onclick="move(this,'moveDown')">下移</a>
                   <a style="cursor: pointer" name="querySequence" uniqid="<%= record.uniqID %>">查看</a>
-                  <a style="cursor: pointer" name="editAPI" uniqid="<%= record.uniqID %>">编辑</a>
-                  <a style="cursor: pointer" name="removeAPI" uniqid="<%= record.uniqID %>">删除</a>
+                  <a style="cursor: pointer" name="editOC" uniqid="<%= record.uniqID %>">编辑</a>
+                  <a style="cursor: pointer" name="removeOC" uniqid="<%= record.uniqID %>">删除</a>
                   <div style="display: none; float: right">
                     <button name="<%-record.uniqID%>" class="btn btn-xs btn-primary" onclick="runSelectedTask(this.name)">运行</button>
                     <button name="<%-record.uniqID%>" class="btn btn-xs btn-info" onclick="showTaskDetailView(this.name)" >编辑</button>
@@ -247,5 +247,13 @@
       </div>
     </div>
   </div>
-
+  
+  <link href="/xd-autotest-framework/css/jsoneditor.css" rel="stylesheet" type="text/css">
+  <script src="/xd-autotest-framework/js/jsoneditor.js"></script>
   <script src="/xd-autotest-framework/js/task/singleOC.js"></script>
+
+  <script>
+    //定义全局变量, 来保存请求头、请求参数、请求response的jsoneditors.
+    var global_oc_add_header_jsoneditor=null, global_oc_add_param_jsoneditor=null,global_oc_add_response_jsoneditor=null,
+      global_oc_update_header_jsoneditor=null,global_oc_update_param_jsoneditor=null,global_oc_update_response_jsoneditor=null;
+  </script>

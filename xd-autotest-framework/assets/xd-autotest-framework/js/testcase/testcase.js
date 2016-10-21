@@ -124,8 +124,6 @@ $('#update_tc_coll').click(function(){
 /** 弹框添加用例UI **/
 $('#add_tc_ui').click(function () {
    $('#addTCModal').modal();
-
-  console.log("test");
   
   if(!global_case_add_header_jsoneditor){
     //create the json editor: createJSONeditor

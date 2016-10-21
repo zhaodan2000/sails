@@ -2,9 +2,66 @@
  * Created by lyh on 10/17/16.
  */
 
+/** 在UI上添加 jsoneditor 控件 **/
+function createJSONeditor(container_id, json) {
+  //var container = document.getElementById('jsoneditor_queryParams_'+(i+1));
+  var container = document.getElementById(container_id);
+
+  var options = {
+    mode: 'code',
+    modes: ['code', 'form', 'text', 'tree', 'view'], // allowed modes
+    onError: function (err) {
+      alert(err.toString());
+    },
+    onModeChange: function (newMode, oldMode) {
+      console.log('Mode switched from', oldMode, 'to', newMode);
+    }
+  };
+  var editor_temp = new JSONEditor(container, options, json);
+  editor_temp.set(json);
+  return editor_temp;
+};
+
+
 //弹框, 添加顺序用例。
 $('#add_OC_ui').click(function(){
   $('#addOrderTCModal').modal();
+
+  if(!global_oc_add_header_jsoneditor){
+    //create the json editor: createJSONeditor
+    var header_container_id='jsoneditor_header_oc_1';
+    var header_editor = createJSONeditor(header_container_id, {});
+    global_oc_add_header_jsoneditor=header_editor;
+  }
+
+  if(!global_oc_add_param_jsoneditor){
+    var param_container_id='jsoneditor_queryParams_oc_1';
+    var param_editor = createJSONeditor(param_container_id, {});
+    global_oc_add_param_jsoneditor=param_editor;
+  }
+
+  if(!global_oc_add_response_jsoneditor){
+    var response_container_id='jsoneditor_response_oc_1';
+    var response_editor = createJSONeditor(response_container_id, {});
+    global_oc_add_response_jsoneditor=response_editor;
+  }
+
+  //设置header和response默认值。
+  var header_value={
+    "clientType": "android",
+    "version": "1.0.0",
+    "module": "3",
+    "deviceId": "999",
+    "clientIp": "192.168.0.1",
+    "sessionToken": "bb93c10b-7fea-4384-bbeb-8d63e8533b54"
+  };
+  var response_value={
+    "retcode": "0"
+  };
+  global_oc_add_header_jsoneditor.set(header_value);
+  global_oc_add_response_jsoneditor.set(response_value);
+
+
 });
 
 //增加顺序用例。
@@ -14,10 +71,8 @@ $('#btn_add_OC').click(function(){
   $("body.modal-open").toggleClass("modal-open");
 
   var caseName= $('#oc_template').find('input[name="tc_title"]').val();
-  var length=$('tbody').children.length+1;
   console.log(length);
   var orderCase={
-    sequence:length,
     name:caseName,
     uniqID:(new Date().getTime()).toString()
   }
@@ -95,4 +150,24 @@ function exchangeOrder(uniqid_1, uniqid_2){
     }
   });
 
-}
+};
+
+$('a[name="removeOC"]').click(function(){
+  var uniqid=$(this).attr('uniqid');
+  if(!uniqid){
+    alert("uniqid is null??");
+  }else if(confirm("确定从服务器删除这个case吗?")) {
+    $(this).parent().parent().remove();
+    $.ajax({
+      url: '/oc/deleteOrderCase',
+      method: 'POST',
+      data: {uniqID: uniqid},
+      success: function (data) {
+        alert("删除成功");
+      },
+      error: function (data) {
+        alert("删除失败:" + JSON.stringify(data));
+      }
+    });
+  }
+});

@@ -39,7 +39,6 @@ module.exports = {
      */
   selectTask: function (req, res) {
     var uniqID=req.body["uniqID"];
-    console.log(uniqID);
     //根据uniqId搜索task
     mongoService.Find('TaskFolder',{uniqID:uniqID}, function (found_task) {
       if (found_task&&found_task.length>0) {
@@ -51,7 +50,7 @@ module.exports = {
   },
 
   /**
-   * 进入到编辑task页面
+   * 进入到编辑task页面(未用)
    * @param req
    * @param res
      */
@@ -170,13 +169,13 @@ module.exports = {
    * @param res
      */
   addOrderCase: function (req, res) {
-    console.log(req.body);
     var item=req.body["orderCase"];
     var taskFolder_uniqid=req.body["taskFolder_uniqid"];
     if(item&&item.uniqID){
       mongoService.Find('TaskFolder',{uniqID:taskFolder_uniqid},function(found_folder){
         if(found_folder&&found_folder.length>0){
           item["TaskID"]=found_folder[0].id;
+          item['sequence']=found_folder[0].Cases.length+1;
           mongoService.Insert("TaskCase", item, function (records) {
             if (records){
               //success.
@@ -234,10 +233,29 @@ module.exports = {
         found[1]["sequence"]=order_1;
 
         found.forEach(function(record,index){
-          mongoService.Update("TaskCase",record, {uniqID:record.uniqID},function(records){})
+          mongoService.Update("TaskCase",record, {uniqID:record.uniqID},function(records){
+            res.ok();
+          })
         });
       }
     })
+  },
+
+  //删除case, 并调整顺序。
+  deleteCase:function(req,res){
+    var case_uniqid=req.body["uniqID"];
+    if(case_uniqid){
+      mongoService.DeleteAndReSortTaskCase({uniqID:case_uniqid}, function(err){
+        if(!err){
+          res.ok();
+        }else{
+          res.fail();
+        }
+      });
+    }else{
+      res.fail();
+    }
+
   },
 
   /**

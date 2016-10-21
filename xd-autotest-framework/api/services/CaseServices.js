@@ -79,7 +79,6 @@ function configEvent(item, callback) {
 }
 
 /**
- *
  * @param request type is obj
  * @param event  type is array
  * @returns {{id: *, name: *, disabled: *, request: *, event: *}}
