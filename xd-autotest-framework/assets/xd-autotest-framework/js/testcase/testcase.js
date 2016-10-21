@@ -124,7 +124,7 @@ $('#update_tc_coll').click(function(){
 /** 弹框添加用例UI **/
 $('#add_tc_ui').click(function () {
    $('#addTCModal').modal();
-  
+
   if(!global_case_add_header_jsoneditor){
     //create the json editor: createJSONeditor
     var header_container_id='jsoneditor_header_';
@@ -164,6 +164,7 @@ $('#add_tc_ui').click(function () {
 
   var selectElement=document.getElementById('select_tc_coll_apiName');
   selectElement.innerHTML='<option value="" uniqid="">'+'默认'+'</option>';
+  
 
   $.ajax({
     url:'/base/query',

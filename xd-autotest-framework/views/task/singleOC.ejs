@@ -74,11 +74,16 @@
         <div class="modal-body">
           <div id="oc_template" uniqid="" class="form-group" >
             <div class="form-group">
+              <label class="control-label" style="text-align:right">选择文档</label>
+              <select id="select_tc_coll_docName" name="tc_docName" class="form-control" onchange="changeDoc(this)"/>
+              <!--<option value="">text</option>-->
+              </select>
+            </div>
+            <div class="form-group">
               <label class="control-label" style="text-align:right">选择接口</label>
               <select id="select_tc_coll_apiName" name="tc_apiName" class="form-control" onchange="changeAPI()"/>
               <!--<option value="">text</option>-->
               </select>
-              <button id="populate_case" type="button" class="btn btn-info" style="display: none">确定</button>
             </div>
             <div class="form-group">
               <label class="control-label" style="text-align:right">用例名</label>
@@ -247,7 +252,7 @@
       </div>
     </div>
   </div>
-  
+
   <link href="/xd-autotest-framework/css/jsoneditor.css" rel="stylesheet" type="text/css">
   <script src="/xd-autotest-framework/js/jsoneditor.js"></script>
   <script src="/xd-autotest-framework/js/task/singleOC.js"></script>
@@ -256,4 +261,5 @@
     //定义全局变量, 来保存请求头、请求参数、请求response的jsoneditors.
     var global_oc_add_header_jsoneditor=null, global_oc_add_param_jsoneditor=null,global_oc_add_response_jsoneditor=null,
       global_oc_update_header_jsoneditor=null,global_oc_update_param_jsoneditor=null,global_oc_update_response_jsoneditor=null;
+      global_docs_all=null;
   </script>

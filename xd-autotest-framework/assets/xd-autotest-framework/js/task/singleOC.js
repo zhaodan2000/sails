@@ -22,10 +22,7 @@ function createJSONeditor(container_id, json) {
   return editor_temp;
 };
 
-
-//弹框, 添加顺序用例。
-$('#add_OC_ui').click(function(){
-  $('#addOrderTCModal').modal();
+function setJSONEditor(){
 
   if(!global_oc_add_header_jsoneditor){
     //create the json editor: createJSONeditor
@@ -61,8 +58,84 @@ $('#add_OC_ui').click(function(){
   global_oc_add_header_jsoneditor.set(header_value);
   global_oc_add_response_jsoneditor.set(response_value);
 
+};
 
+//重新填充select控件。
+//selectElement 为select的DOM对象。
+//data 为Array对象。
+function fillSelectAPI(selectElementId, data){
+  var selectElement=document.getElementById(selectElementId);
+  selectElement.innerHTML="";
+  for(var i=0;i< data.length; i++ ){
+    var objOption = document.createElement("option");
+    objOption.value= (data[i.toString()]).uniqID;
+    objOption.text=(data[i.toString()]).name;
+    selectElement.options.add(objOption);
+  }
+};
+
+//弹框, 添加顺序用例。
+$('#add_OC_ui').click(function(){
+  $('#addOrderTCModal').modal();
+
+  setJSONEditor();
+
+  $.ajax({
+    url:'/base/query',
+    method:"post",
+    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+    data: {
+      modelType:"APIdoc",
+      uniqID:null
+    },
+    success: function (data) {
+      //给全局变量 global_docs_all 赋值
+      global_docs_all=data;
+      
+      //填充select"选择文档"。
+      fillSelectAPI('select_tc_coll_docName',global_docs_all);
+
+      //填充select"选择接口"。
+      fillSelectAPI('select_tc_coll_apiName', global_docs_all[0].APIdoc_items);
+    },
+    error:function(data){
+
+    }
+  });
 });
+
+function changeDoc(element){
+  // var test=element.options[element.selectedIndex];
+  // console.log(test);
+  // console.log(test.getAttribute("value"));
+
+  //填充select"选择接口"的接口下拉。
+  var selectId='select_tc_coll_apiName';
+  fillSelectAPI(selectId, global_docs_all[element.selectedIndex].APIdoc_items);
+};
+
+
+//新增case UI, 选择接口,则相应地填充字段。
+function changeAPI(){
+  var selector='#oc_template';
+  var selectIndex=document.getElementById("select_tc_coll_apiName").selectedIndex ;
+  if(selectIndex<0) return ;
+
+  $(selector).find('input[name="tc_title"]').val(global_docs_all[selectIndex.toString()].name);
+  $(selector).find('input[name="tc_desc"]').val(global_docs_all[selectIndex.toString()].description);
+  $(selector).find('input[name="tc_url"]').val(global_docs_all[selectIndex.toString()].url);
+  $(selector).find('input[name="tc_dataType"]').val(global_docs_all[selectIndex.toString()].dataType);//find("option[text='"+global_doc_apis[selectIndex.toString()].dataType+"']").attr("selected","selected");
+  $(selector).find('input[name="tc_disabled"]').val(global_docs_all[selectIndex.toString()].disabled);//find("option[value='"+global_doc_apis[selectIndex.toString()].disabled+"']").attr("selected","selected");
+  $(selector).find('input[name="tc_dev"]').val(global_docs_all[selectIndex.toString()].dev);//find("option[value='"+global_doc_apis[selectIndex.toString()].dev+"']").attr("selected","selected");
+  $(selector).find('input[name="tc_method"]').val(global_docs_all[selectIndex.toString()].method);//find("option[value='"+global_doc_apis[selectIndex.toString()].dev+"']").attr("selected","selected");
+  $(selector).find('textarea[name="tc_prescript"]').val(global_docs_all[selectIndex.toString()].prescript);
+  $(selector).find('textarea[name="tc_testscript"]').val(global_docs_all[selectIndex.toString()].testscript);
+  $(selector).attr('api_uniqid',global_docs_all[selectIndex.toString()].uniqID);
+
+  global_oc_add_header_jsoneditor.set(global_docs_all[selectIndex.toString()].header);
+  global_oc_add_param_jsoneditor.set(global_docs_all[selectIndex.toString()].queryParams);
+  global_oc_add_response_jsoneditor.set(global_docs_all[selectIndex.toString()].response);
+}
 
 //增加顺序用例。
 $('#btn_add_OC').click(function(){
