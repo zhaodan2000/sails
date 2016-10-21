@@ -626,14 +626,12 @@ module.exports={
   //删除某个orderCase, 并调整sequence顺序。
   DeleteAndReSortTaskCase:function(dic,callback){
     TaskCase.find(dic).exec(function(err, records){
-      console.log(records);
       if(records&&records.length>0){
         TaskCase.find({sequence:{'>':records[0].sequence}}).exec(function(err, gt_records){
           if(gt_records){
-            console.log("gt_records");
-            console.log(gt_records);
             gt_records.forEach(function(record,index){
-              TaskCase.update({uniqID:record.uniqID},{sequence:(--record["sequence"])});
+              TaskCase.update({uniqID:record.uniqID},{sequence:(record.sequence-1)}, function(err, updated){
+              });
             });
           }
         });

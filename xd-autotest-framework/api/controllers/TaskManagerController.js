@@ -39,11 +39,9 @@ module.exports = {
      */
   selectTask: function (req, res) {
     var uniqID=req.body["uniqID"];
-    console.log(uniqID);
     //根据uniqId搜索task
     mongoService.Find('TaskFolder',{uniqID:uniqID}, function (found_task) {
       if (found_task&&found_task.length>0) {
-        console.log(JSON.stringify(found_task,null,4));
         res.view('task/singleOC',{data:found_task});
       }else{
         res.view('task/singleOC',{data:null});
@@ -171,13 +169,13 @@ module.exports = {
    * @param res
      */
   addOrderCase: function (req, res) {
-    console.log(req.body);
     var item=req.body["orderCase"];
     var taskFolder_uniqid=req.body["taskFolder_uniqid"];
     if(item&&item.uniqID){
       mongoService.Find('TaskFolder',{uniqID:taskFolder_uniqid},function(found_folder){
         if(found_folder&&found_folder.length>0){
           item["TaskID"]=found_folder[0].id;
+          item['sequence']=found_folder[0].Cases.length+1;
           mongoService.Insert("TaskCase", item, function (records) {
             if (records){
               //success.
@@ -247,7 +245,6 @@ module.exports = {
   deleteCase:function(req,res){
     var case_uniqid=req.body["uniqID"];
     if(case_uniqid){
-      console.log(case_uniqid);
       mongoService.DeleteAndReSortTaskCase({uniqID:case_uniqid}, function(err){
         if(!err){
           res.ok();

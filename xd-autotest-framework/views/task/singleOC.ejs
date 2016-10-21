@@ -247,5 +247,13 @@
       </div>
     </div>
   </div>
-
+  
+  <link href="/xd-autotest-framework/css/jsoneditor.css" rel="stylesheet" type="text/css">
+  <script src="/xd-autotest-framework/js/jsoneditor.js"></script>
   <script src="/xd-autotest-framework/js/task/singleOC.js"></script>
+
+  <script>
+    //定义全局变量, 来保存请求头、请求参数、请求response的jsoneditors.
+    var global_oc_add_header_jsoneditor=null, global_oc_add_param_jsoneditor=null,global_oc_add_response_jsoneditor=null,
+      global_oc_update_header_jsoneditor=null,global_oc_update_param_jsoneditor=null,global_oc_update_response_jsoneditor=null;
+  </script>
