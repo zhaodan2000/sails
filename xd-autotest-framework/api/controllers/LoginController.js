@@ -1,6 +1,6 @@
 var mysqlService=require("../services/mysqlService");
 var crypto = require("crypto");
-var lodash=require("lodash");
+var _=require("lodash");
 /**
  * HomeController
  *
@@ -14,11 +14,15 @@ module.exports = {
   doLogin : function(req, res) {
     var username=req.body.username;
     var password=req.body.password;
+    if( _.isEmpty(username) || _.isEmpty(password)){
+      return  res.redirect('/login');
+    }
+
     var user={
       user_name:username
     }
     mysqlService.Find("User",user,function(records){
-      if(!lodash.isEmpty(records)) {
+      if(!_.isEmpty(records)) {
         if (records[0] == null) {
           req.session.authenticated = false;
           return res.redirect("/login");

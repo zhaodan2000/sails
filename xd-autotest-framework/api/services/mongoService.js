@@ -327,7 +327,7 @@ module.exports={
         break;
 
       case "APIdoc":
-        APIdoc.find(dic).populate('APIdoc_items').exec(function(err,records){
+        APIdoc.find(dic).populate('APIdoc_items',{sort:'createdAt ASC'}).exec(function(err,records){
           if (!err) {
             // console.log("find %s records success!", modelType);
             callback(records);
