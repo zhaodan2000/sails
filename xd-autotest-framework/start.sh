@@ -1,6 +1,6 @@
 #!/bin/bash
 BASE=`pwd`
-DIR_TMP=.runtime
+DIR_TMP=/var/autotest-framework/runtime
 PID_FILE=$DIR_TMP/pid.file
 RETVAL=0
 mkdir -p $DIR_TMP
