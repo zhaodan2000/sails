@@ -14,6 +14,10 @@ module.exports = {
   doLogin : function(req, res) {
     var username=req.body.username;
     var password=req.body.password;
+    if(!username || !password){
+      return  res.redirect('/login');
+    }
+
     var user={
       user_name:username
     }
