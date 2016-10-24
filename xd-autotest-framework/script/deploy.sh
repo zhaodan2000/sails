@@ -11,7 +11,7 @@ function init_env
 function deploy
 {
 	cd $basedir/$baseop
-	tar zxvf $basedir/$baseop/*.tar.gz
+	tar zxf $basedir/$baseop/*.tar.gz
   chmod 777 start.sh
    ./start.sh stop
    sleep 2
