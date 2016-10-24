@@ -9,6 +9,7 @@ var markdown = require('markdown-js');
 //var markdown=require('markdown-to-html');
 var fs=require('fs');
 var path = require('path');
+require('../utils/string');
 
 module.exports = {
 
@@ -45,7 +46,7 @@ module.exports = {
             var docItem = found[0].APIdoc_items[i];
             data += '\r\n' + (i + 1) + '. ' + docItem.name;
             data += '\r\n\t* **请求url**';
-            data += '\r\n\t\t* ' + docItem.url;
+            data += '\r\n\t\t* ' + docItem.url.replaceAll('_','\\_');
             data += '\r\n\t* **请求方式method**';
             data += '\r\n\t\t* ' + docItem.method;
             data += '\r\n\t* **接口是否废弃**';
