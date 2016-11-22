@@ -12,9 +12,9 @@ function deploy
 {
 	cd $basedir/$baseop
 	tar zxf $basedir/$baseop/*.tar.gz
-  chmod 777 start.sh
+  chmod u+x start.sh
    ./start.sh stop
-   sleep 2
+   sleep 6
   ./start.sh start
 }
 

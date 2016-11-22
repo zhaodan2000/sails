@@ -1,6 +1,6 @@
 #!/bin/bash
 BASE=`pwd`
-DIR_TMP=.runtime
+DIR_TMP=/tmp/autotest-framework/runtime
 PID_FILE=$DIR_TMP/pid.file
 RETVAL=0
 mkdir -p $DIR_TMP
@@ -51,6 +51,7 @@ case "$1" in
         ;;
     restart|reload)
         stop
+        sleep 6
         start
         RETVAL=$?
         ;;
