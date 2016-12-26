@@ -23,7 +23,15 @@ module.exports = {
       type: 'String',
       required: true
     },
-  },
+    createdAt:{
+      type: 'String',
+      required: false
+    },
+    updatedAt:{
+      type:'String',
+      required:false
+    }
+  }
 };
 
 
